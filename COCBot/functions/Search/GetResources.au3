@@ -96,7 +96,7 @@ Func GetResources($bLog = True, $pMatchMode = -1) ;Reads resources
 
 			$searchTH = checkTownHallADV2()
 
-			;2nd attempt
+#cs			;2nd attempt
 			If $searchTH = "-" Then ; retry with autoit search after $iDelayVillageSearch5 seconds
 				If _Sleep($iDelayGetResources5) Then Return
 				SetLog("2nd attempt to detect the TownHall!", $COLOR_RED)
@@ -109,6 +109,7 @@ Func GetResources($bLog = True, $pMatchMode = -1) ;Reads resources
 				If $debugImageSave = 1 Then DebugImageSave("GetResources_NoTHFound2try_", False)
 				THSearch()
 			EndIf
+#ce
 			If SearchTownHallLoc() = False And $searchTH <> "-" Then
 				$THLoc = "In"
 			ElseIf $searchTH <> "-" Then
