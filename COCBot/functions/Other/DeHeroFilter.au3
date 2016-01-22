@@ -40,8 +40,6 @@ Func DeHeroFilter()
 
 	If $HeroFilter = 1 Then
 	   $iCmbSearchMode = 0
-	Else
-	   $iCmbSearchMode = 2
 	EndIf
 
 EndFunc
