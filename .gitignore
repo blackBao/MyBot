@@ -4,6 +4,7 @@
 /.project
 *.ini
 *.log
+*.png
 *.orig
 *.jpg
 *.exe
