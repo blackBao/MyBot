@@ -114,11 +114,14 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 		Case 3 ;All sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			SetLog("Attacking on all sides", $COLOR_BLUE)
 			$nbSides = 4
-		Case 4 ;DE Side - Live Base only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		Case 4 ;FFF ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			SetLog("Attacking four finger fight style", $COLOR_BLUE)
+			$nbSides = 5
+		Case 5 ;DE Side - Live Base only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			SetLog("Attacking on Dark Elixir Side.", $COLOR_BLUE)
 			$nbSides = 1
-			If Not ($iChkRedArea[$iMatchMode]) Then GetBuildingEdge($eSideBuildingDES) ; Get DE Storage side when Redline is not used.
-		Case 5 ;TH Side - Live Base only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			If NOT ($iChkRedArea[$iMatchMode]) Then GetBuildingEdge($eSideBuildingDES) ; Get DE Storage side when Redline is not used.
+		Case 6 ;TH Side - Live Base only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			SetLog("Attacking on Town Hall Side.", $COLOR_BLUE)
 			$nbSides = 1
 			If Not ($iChkRedArea[$iMatchMode]) Then GetBuildingEdge($eSideBuildingTH) ; Get Townhall side when Redline is not used.
@@ -127,7 +130,7 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	If _Sleep($iDelayalgorithm_AllTroops2) Then Return
 
 	; $ListInfoDeploy = [Troop, No. of Sides, $WaveNb, $MaxWaveNb, $slotsPerEdge]
-	If $iMatchMode = $LB And $iChkDeploySettings[$LB] = 4 Then ; Customise DE side wave deployment here
+	If $iMatchMode = $LB And $iChkDeploySettings[$LB] = 5 Then ; Customise DE side wave deployment here
 		Local $listInfoDeploy[13][5] = [[$eGiant, $nbSides, 1, 1, 2] _
 				, [$eWall, $nbSides, 1, 1, 2] _
 				, [$eBarb, $nbSides, 1, 2, 2] _
@@ -142,6 +145,20 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 				, [$eArch, $nbSides, 3, 3, 2] _
 				, [$eGobl, $nbSides, 1, 1, 1] _
 				]
+				ElseIf $nbSides = 5 Then
+		If $debugSetlog =1 Then SetLog("listdeploy fourfinger for attack", $COLOR_PURPLE)
+		Local $listInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+			    , [$eBarb, $nbSides, 1, 1, 0] _
+			    , [$eWall, $nbSides, 1, 1, 1] _
+			    , [$eArch, $nbSides, 1, 1, 0] _
+			    , [$eGobl, $nbSides, 1, 2, 0] _
+			    , ["CC", 1, 1, 1, 1] _
+			    , [$eHogs, $nbSides, 1, 1, 1] _
+			    , [$eWiza, $nbSides, 1, 1, 0] _
+			    , [$eMini, $nbSides, 1, 1, 0] _
+			    , [$eGobl, $nbSides, 2, 2, 0] _
+			    , ["HEROES", 1, 2, 1, 1] _
+			    ]
 	Else
 		If $debugSetlog = 1 Then SetLog("listdeploy standard for attack", $COLOR_PURPLE)
 		Local $listInfoDeploy[13][5] = [[$eGiant, $nbSides, 1, 1, 2] _

@@ -51,7 +51,7 @@ Func chkTimeStopAtk2()
 EndFunc   ;==>chkTimeStopAtk2
 
 Func chkDESideEB()
-	If _GUICtrlComboBox_GetCurSel($cmbABDeploy) = 4 Then
+	If _GUICtrlComboBox_GetCurSel($cmbABDeploy) = 5 Then
 		GUICtrlSetState($chkDESideEB, $GUI_ENABLE)
 		If GUICtrlRead($chkDESideEB) = $GUI_CHECKED Then
 			For $i = $txtDELowEndMin To $lblDEEndAq
@@ -67,6 +67,13 @@ Func chkDESideEB()
 			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
 	EndIf
+	If _GUICtrlComboBox_GetCurSel($cmbDBDeploy) = 4 Then
+		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_DISABLE)
+		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_UNCHECKED)
+	Else
+		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_ENABLE)
+	EndIf
+
 EndFunc		;==>chkDESideEB
 
 
