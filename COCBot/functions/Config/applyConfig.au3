@@ -1608,7 +1608,61 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkUseAttackABCSV, $GUI_UNCHECKED)
 	EndIf
 	chkUseAttackABCSV()
+	;Others Settings--------------------------------------------------------------------------
+	If $ichkSwitchDonate = 1 Then
+		GUICtrlSetState($chkSwitchDonate, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkSwitchDonate, $GUI_UNCHECKED)
+	EndIf
 
+	If $ichkMultyFarming = 1 Then
+		GUICtrlSetState($chkMultyFarming, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkMultyFarming, $GUI_UNCHECKED)
+	 EndIf
+
+   If $ichkSmartLightSpell = 1 Then
+		GUICtrlSetState($chkSmartLightSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkSmartLightSpell, $GUI_UNCHECKED)
+	EndIf
+	SmartLightSpell()
+	If $ichkTrainLightSpell = 1 Then
+		GUICtrlSetState($chkTrainLightSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainLightSpell, $GUI_UNCHECKED)
+	EndIf
+	autoLightSpell()
+	GUICtrlSetData($txtMinDark, $itxtMinDark)
+
+	If $ichkTrainLightSpell = 1 Then
+		GUICtrlSetState($chkTrainLightSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainLightSpell, $GUI_UNCHECKED)
+	EndIf
+	If $ichkDrillZapTH = 1 Then
+		GUICtrlSetState($chkDrillZapTH, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDrillZapTH, $GUI_UNCHECKED)
+	EndIf
+
+	If $ichkDeKingFilter = 1 Then
+		GUICtrlSetState($chkDeKingFilter, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDeKingFilter, $GUI_UNCHECKED)
+	EndIf
+
+	If $ichkDeWardenFilter = 1 Then
+		GUICtrlSetState($chkDeWardenFilter, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDeWardenFilter, $GUI_UNCHECKED)
+	EndIf
+
+	If $ichkDeQueenFilter = 1 Then
+		GUICtrlSetState($chkDeQueenFilter, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDeQueenFilter, $GUI_UNCHECKED)
+	EndIf
 
 	; Reenabling window redraw
 	If $bRedrawAtExit Then SetRedrawBotWindow(True)

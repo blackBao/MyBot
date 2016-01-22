@@ -163,6 +163,11 @@
 #include "functions\Other\KillProcess.au3"
 #include "functions\Other\LaunchConsole.au3"
 #include "functions\Other\ADB.au3"
+#include "functions\Other\SwitchAccount.au3"
+#include "functions\Other\DetectAccount.au3"
+#include "functions\Other\SwitchDonate.au3"
+#include "functions\Other\SettingSwitch.au3"
+#include "functions\Other\DeHeroFilter.au3"
 
 #include "functions\Pixels\_CaptureRegion.au3"
 #include "functions\Pixels\_ColorCheck.au3"
@@ -190,12 +195,17 @@
 ;#include "functions\Read Text\Obsolete\getTrophy.au3"
 ;#include "functions\Read Text\Obsolete\getString.au3"
 
+#include "functions\SmartZap\DEDrillSearch.au3"
+#include "functions\SmartZap\DEDropSmartSpell.au3"
+#include "functions\SmartZap\DrillZapSpell.au3"
+
 #include "functions\Search\CompareResources.au3"
 #include "functions\Search\GetResources.au3"
 #include "functions\Search\PrepareSearch.au3"
 #include "functions\Search\VillageSearch.au3"
 #include "functions\Search\CheckZoomOut.au3"
 #include "functions\Search\SearchTownHallloc.au3"
+;#include "functions\Search\CheckHeroAvailable.au3"
 
 #include "functions\Village\BoostBarracks.au3"
 #include "functions\Village\BotDetectFirstTime.au3"

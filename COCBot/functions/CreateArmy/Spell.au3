@@ -26,7 +26,7 @@ Func BrewSpells()
 		; Spell Creation
 		; Normal Spell Factory
 
-		If $numFactorySpellAvaiables = 1 And ($LightningSpellComp > 0 Or $RageSpellComp > 0 Or $HealSpellComp > 0) Then
+		If $numFactorySpellAvaiables = 1 And ($LightningSpellComp > 0 Or $RageSpellComp > 0 Or $HealSpellComp > 0 Or $JumpSpellComp > 0 Or $FreezeSpellComp > 0) Then
 			$iBarrHere = 0
 			While Not (isSpellFactory())
 				If Not (IsTrainPage()) Then Return
@@ -102,12 +102,56 @@ Func BrewSpells()
 						Setlog("Already done Rage Spell(s)")
 					EndIf
 				EndIf
+				If $JumpSpellComp > 0 Then ; Jump Spells
+					$TempJumpSpell = Number(getBarracksTroopQuantity(175 + 107 * 3, 296 + $midOffsetY))
+					Local $JumpSpell = $JumpSpellComp - ($CurJumpSpell + $TempJumpSpell)
+					If $debugSetlog = 1 Then SetLog("Making Jump Spell: " & $JumpSpell)
+					If _sleep($iDelayTrain2) Then Return
+					If $TempJumpSpell = 0 Then
+						If _ColorCheck(_GetPixelColor(560, 375 + $midOffsetY, True), Hex(0xFFFFFF, 6), 20) = False Then
+							setlog("Not enough Elixir to create Spell", $COLOR_RED)
+							Return
+						ElseIf _ColorCheck(_GetPixelColor(200, 346 + $midOffsetY, True), Hex(0x414141, 6), 20) Then
+							setlog("Spell Factory Full", $COLOR_RED)
+							Return
+						Else
+							If $JumpSpell > 0 Then
+								GemClick(510, 354 + $midOffsetY, $JumpSpell, $iDelayTrain7, "#0290")
+								SetLog("Created " & $JumpSpell & " Jump Spell(s)", $COLOR_BLUE)
+							EndIf
+						EndIf
+					Else
+						Setlog("Already done Jump Spell(s)")
+					EndIf
+				EndIf
+				If $FreezeSpellComp > 0 Then ; Freeze Spells
+					$TempFreezeSpell = Number(getBarracksTroopQuantity(175 + 107 * 4, 296 + $midOffsetY))
+					Local $FreezeSpell = $FreezeSpellComp - ($CurFreezeSpell + $TempFreezeSpell)
+					If $debugSetlog = 1 Then SetLog("Making Freeze Spell: " & $FreezeSpell)
+					If _sleep($iDelayTrain2) Then Return
+					If $TempFreezeSpell = 0 Then
+						If _ColorCheck(_GetPixelColor(667, 375 + $midOffsetY, True), Hex(0xFFFFFF, 6), 20) = False Then
+							setlog("Not enough Elixir to create Spell", $COLOR_RED)
+							Return
+						ElseIf _ColorCheck(_GetPixelColor(200, 346 + $midOffsetY, True), Hex(0x414141, 6), 20) Then
+							setlog("Spell Factory Full", $COLOR_RED)
+							Return
+						Else
+							If $FreezeSpell > 0 Then
+								GemClick(626, 354 + $midOffsetY, $FreezeSpell, $iDelayTrain7, "#0290")
+								SetLog("Created " & $FreezeSpell & " Freeze Spell(s)", $COLOR_BLUE)
+							EndIf
+						EndIf
+					Else
+						Setlog("Already done Freeze Spell(s)")
+					EndIf
+				EndIf
 			Else
 				SetLog("Spell Factory not found...", $COLOR_BLUE)
 			EndIf
 		EndIf
 
-		If $numFactoryDarkSpellAvaiables = 1 And ($PoisonSpellComp > 0 Or $HasteSpellComp > 0) Then
+		If $numFactoryDarkSpellAvaiables = 1 And ($PoisonSpellComp > 0 Or $EarthquakeSpellComp > 0 Or $HasteSpellComp > 0) Then
 			$iBarrHere = 0
 			While Not (isDarkSpellFactory())
 				If Not (IsTrainPage()) Then Return
@@ -140,6 +184,30 @@ Func BrewSpells()
 						Setlog("Already done Poison Spell(s)")
 					EndIf
 				EndIf
+
+				If $EarthquakeSpellComp > 0 Then ; Earth Spells
+                    $TempEarthSpell = Number(getBarracksTroopQuantity(175 + 107 * 1, 296 + $midOffsetY))
+                    Local $EarthSpell = $EarthquakeSpellComp - ($CurEarthSpell + $TempEarthSpell)
+                    If $debugSetlog = 1 Then SetLog("Making Earth Spell: " & $EarthSpell)
+                    If _sleep($iDelayTrain2) Then Return
+                    If $TempEarthSpell = 0 Then
+                        If _sleep($iDelayTrain2) Then Return
+                        If _ColorCheck(_GetPixelColor(346, 375 + $midOffsetY, True), Hex(0xFFFFFF, 6), 20) = False Then ; black pixel in number 5
+                            setlog("Not enough Elixir to create Spell", $COLOR_RED)
+                            Return
+                        ElseIf _ColorCheck(_GetPixelColor(200, 346 + $midOffsetY, True), Hex(0x414141, 6), 20) Then
+                            setlog("Spell Factory Full", $COLOR_RED)
+                            Return
+                        Else
+                            If $EarthSpell > 0 Then
+                                GemClick(334, 354 + $midOffsetY, $EarthSpell, $iDelayTrain7, "#0290")
+                                SetLog("Created " & $EarthSpell & " Earth Spell(s)", $COLOR_BLUE)
+                            EndIf
+                        EndIf
+					Else
+                        Setlog("Already done Earth Spell(s)")
+                    EndIf
+                EndIf
 
 				If $HasteSpellComp > 0 Then ; Haste Spells
 					$TempHasteSpell = Number(getBarracksTroopQuantity(175 + 107 * 2, 296 + $midOffsetY))

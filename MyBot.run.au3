@@ -161,6 +161,9 @@ Func runBot() ;Bot that runs everything in order
 			If $RequestScreenshot = 1 Then PushMsg("RequestScreenshot")
 			If _Sleep($iDelayRunBot3) Then Return
 			VillageReport()
+			If $ichkMultyFarming = 1 Then
+			   DetectAccount()
+			EndIf
 			If $OutOfGold = 1 And (Number($iGoldCurrent) >= Number($itxtRestartGold)) Then ; check if enough gold to begin searching again
 				$OutOfGold = 0 ; reset out of gold flag
 				Setlog("Switching back to normal after no gold to search ...", $COLOR_RED)
@@ -218,6 +221,10 @@ Func runBot() ;Bot that runs everything in order
 			BoostWarden()
 				If $Restart = True Then ContinueLoop
 			RequestCC()
+				If $ichkSwitchDonate = 1 Then
+					SetLog("Change Account For Donate")
+					SwitchDonate()
+				EndIf
 				If _Sleep($iDelayRunBot1) Then Return
 				checkMainScreen(False) ; required here due to many possible exits
 				If $Restart = True Then ContinueLoop
@@ -276,9 +283,24 @@ Func runBot() ;Bot that runs everything in order
 			EndIf
 			If _Sleep($iDelayRunBot5) Then Return
 			If $Restart = True Then ContinueLoop
-		EndIf
+		 EndIf
+		 If $ichkMultyFarming = 1 Then
+			   SetLog("Multy Farming Mode Activated", $COLOR_Green)
+			If $iVillageName = "Main" Then
+			   SwitchSecond()
+			   _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
+			   cmbProfile()
+			   $RunState = True
+			   $fullArmy = True
+			ElseIf $iVillageName = "Second" Then
+			   SwitchMain()
+			   _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
+			   cmbProfile()
+			   $RunState = True
+			EndIf
+		 EndIf
 	WEnd
-EndFunc   ;==>runBot
+EndFunc    ;==>runBot
 
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
@@ -362,6 +384,7 @@ Func AttackMain() ;Main control for attack functions
 		checkMainScreen(False)
 		If $Restart = True Then Return
 	EndIf
+	DeHeroFilter()
 	If Number($iTrophyCurrent) > Number($iTxtMaxTrophy) Then ;If current trophy above max trophy, try drop first
 		DropTrophy()
 		$Is_ClientSyncError = False ; reset OOS flag to prevent looping.

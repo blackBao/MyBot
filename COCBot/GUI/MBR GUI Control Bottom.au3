@@ -202,14 +202,14 @@ Func btnStart()
 		GUICtrlSetState($chkBackground, $GUI_DISABLE)
 
 		For $i = $FirstControlToHide To $LastControlToHide ; Save state of all controls on tabs
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert or $i= $tabAttackCSV Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert or $i= $tabAttackCSV or $i= $tabOthers Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
 			$iPrevState[$i] = GUICtrlGetState($i)
 		Next
 		For $i = $FirstControlToHide To $LastControlToHide ; Disable all controls in 1 go on all tabs
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert or $i=$tabAttackCSV Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert or $i=$tabAttackCSV or $i= $tabOthers Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
@@ -270,7 +270,7 @@ Func btnStop()
 		SetRedrawBotWindow(False)
 
 		For $i = $FirstControlToHide To $LastControlToHide ; Restore previous state of controls
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabEndBattle Or $i = $tabExpert Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabEndBattle Or $i = $tabExpert Or $i= $tabOthers Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider
@@ -602,4 +602,38 @@ Func btnTestDonate()
 		DonateCC()
 		SETLOG("DONATE TEST..................STOP")
 	$RunState = False
+EndFunc
+
+ Func btnTestDev()
+   local $test = 0, $test2 = 0
+   ;check townhall && deadbase
+   LoadTHImage()
+   LoadElixirImage()
+   LoadElixirImage75Percent()
+   LoadElixirImage50Percent()
+   Zoomout()
+
+   If $debugBuildingPos = 0 Then
+      $test =1
+      $debugBuildingPos=1
+   EndIf
+   SETLOG("DEADBASE CHECK..................")
+   $dbBase = checkDeadBase()
+   SETLOG("TOWNHALL CHECK..................")
+   $searchTH = checkTownhallADV2()
+   If $test = 1 Then $debugBuildingPos=0
+
+   ;Test CSV Attack
+   If $makeIMGCSV = 0 Then
+      $test2 = 1
+      $debugBuildingPos=1
+      $makeIMGCSV=1
+   EndIf
+   $scmbDBScriptName = "De Side attack" ;Name of your csv file without extension
+   $ichkUseAttackDBCSV = 1
+   $scmbABScriptName = "De Side attack" ;Name of your csv file without extension
+   $ichkUseAttackABCSV = 1
+   Algorithm_AttackCSV(True) ; $testAttack = True, Its the function to make debug.
+
+   If $test2 = 1 Then $makeIMGCSV=0
 EndFunc
