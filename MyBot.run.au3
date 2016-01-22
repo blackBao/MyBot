@@ -388,7 +388,9 @@ Func AttackMain() ;Main control for attack functions
 		checkMainScreen(False)
 		If $Restart = True Then Return
 	EndIf
-	DeHeroFilter()
+	If _GUICtrlComboBox_GetCurSel($CmbSearchMode) > 0 Then
+		DeHeroFilter()
+	EndIf
 	If Number($iTrophyCurrent) > Number($iTxtMaxTrophy) Then ;If current trophy above max trophy, try drop first
 		DropTrophy()
 		$Is_ClientSyncError = False ; reset OOS flag to prevent looping.
