@@ -201,6 +201,10 @@ Func runBot() ;Bot that runs everything in order
 				If _Sleep($iDelayRunBot3) Then Return
 				If $Restart = True Then ContinueLoop
 			DonateCC()
+				If $ichkTrainLightSpell = 1 Then
+					SetLog("Auto Train Lighting Spell")
+					DrillZapSpell() ; Drill Zap
+				EndIf
 				If _Sleep($iDelayRunBot1) Then Return
 				checkMainScreen(False) ; required here due to many possible exits
 				If $Restart = True Then ContinueLoop

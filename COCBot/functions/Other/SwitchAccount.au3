@@ -70,7 +70,7 @@ Func LoadMain() ;Load Main Account
 				SetLog("Insert CONFIRM To Text Box ", $COLOR_blue)
 				Sleep(1500)
 				ControlSend($Title, "", "", "{LSHIFT DOWN}{C DOWN}{C UP}{O DOWN}{O UP}{N DOWN}{N UP}{F DOWN}{F UP}{I DOWN}{I UP}{R DOWN}{R UP}{M DOWN}{M UP}{LSHIFT UP}") ;Enter  Confirm  txt
-				Sleep(1500)
+				Sleep(2000)
 				Click(521, 198) ;Click Confirm
 			Else
 				Click(521, 198) ;Click Confirm
@@ -150,7 +150,7 @@ Func LoadSecond() ; Load Second Account
 				SetLog("Insert CONFIRM To Text Box ", $COLOR_blue)
 				Sleep(1500)
 				ControlSend($Title, "", "", "{LSHIFT DOWN}{C DOWN}{C UP}{O DOWN}{O UP}{N DOWN}{N UP}{F DOWN}{F UP}{I DOWN}{I UP}{R DOWN}{R UP}{M DOWN}{M UP}{LSHIFT UP}") ;Enter  Confirm  txt
-				Sleep(1500)
+				Sleep(2000)
 				Click(521, 198) ;Click Confirm
 			Else
 				Click(521, 198) ;Click Confirm
