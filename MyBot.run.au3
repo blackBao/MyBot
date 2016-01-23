@@ -268,6 +268,12 @@ Func runBot() ;Bot that runs everything in order
 			Else
 				SetLog("Restarted after Out of Sync Error: Attack Now", $COLOR_BLUE)
 			EndIf
+			If $ichkDeKingFilter = 1 Or $ichkDeWardenFilter = 1 Or $ichkDeQueenFilter = 1 Then
+				If IsMainPage() Then Click($aArmyTrainButton[0], $aArmyTrainButton[1], 1, 0, "#0293")
+				GetArmyCapacity()
+				getArmyHeroCount()
+				ClickP($aAway, 2, $iDelayTrain5, "#0291");
+			EndIf
 			If _Sleep($iDelayRunBot3) Then Return
 			;  OCR read current Village Trophies when OOS restart maybe due PB or else DropTrophy skips one attack cycle after OOS
 			$iTrophyCurrent = getTrophyMainScreen($aTrophies[0], $aTrophies[1])
