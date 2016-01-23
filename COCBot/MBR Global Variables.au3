@@ -350,7 +350,9 @@ Global $THusedWarden = 0
 Global $TrainSpecial = 1 ;0=Only trains after atk. Setting is automatic
 Global $cBarbarian = 0, $cArcher = 0, $cGoblin = 0, $cGiant = 0, $cWallbreaker = 0, $cWizard = 0, $cBalloon = 0, $cDragon = 0, $cPekka = 0, $cMinion = 0, $cHogs = 0, $cValkyrie = 0, $cGolem = 0, $cWitch = 0, $cLavaHound = 0
 ;Troop types
-Global Enum $eBarb, $eArch, $eGiant, $eGobl, $eWall, $eBall, $eWiza, $eHeal, $eDrag, $ePekk, $eMini, $eHogs, $eValk, $eGole, $eWitc, $eLava, $eKing, $eQueen, $eWarden, $eCastle, $eLSpell, $eHSpell, $eRSpell, $eJSpell, $eFSpell, $ePSpell, $eESpell, $eHaSpell
+Global Enum $eBarb, $eArch, $eGiant, $eGobl, $eWall, $eBall, $eWiza, $eHeal, $eDrag, $ePekk, $eMini, $eHogs, $eValk, $eGole, $eWitc, $eLava, $eKing, $eQueen, $eWarden, $eCastle, $eLSpell, $eHSpell, $eRSpell, $eJSpell, $eFSpell, $ePSpell, $eESpell, $eHaSpell, $eCCSpell
+Global $lastDarkSpell = -1
+Global $CCSpellType
 ;wall
 Global $WallCost
 Global $WallX = 0, $WallY = 0
@@ -856,6 +858,9 @@ Global $DarkLow
 Global $DESideEB, $DELowEndMin, $DisableOtherEBO
 Global $DEEndAq, $DEEndBk, $DEEndOneStar
 Global $SpellDP[2] = [0, 0]; Spell drop point for DE attack
+Global $DeDeployType[24],$DeDeployPosition[24]
+Global $DeDeployEmptyString = "--------------------" ;20 -'s
+global $kind, $aDeployButtonPositions, $unitText
 
 ;Attack SCV
 Global $PixelMine[0]

@@ -17,7 +17,7 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
-Func DropTroop($troop, $nbSides, $number, $slotsPerEdge = 0, $indexToAttack = -1)
+Func DropTroop($troop, $nbSides, $number, $slotsPerEdge = 0, $indexToAttack = -1, $overrideSmartDeploy = -1)
 
 	If isProblemAffect(True) Then Return
 	$nameFunc = "[DropTroop]"
@@ -25,7 +25,7 @@ Func DropTroop($troop, $nbSides, $number, $slotsPerEdge = 0, $indexToAttack = -1
 	debugRedArea("troop : [" & $troop & "] / nbSides : [" & $nbSides & "] / number : [" & $number & "] / slotsPerEdge [" & $slotsPerEdge & "]")
 
 
-	If ($iChkRedArea[$iMatchMode]) Then
+	If ($iChkRedArea[$iMatchMode]) And $overrideSmartDeploy = -1 Then
 		If $slotsPerEdge = 0 Or $number < $slotsPerEdge Then $slotsPerEdge = $number
 		If _Sleep($iDelayDropTroop1) Then Return
 		SelectDropTroop($troop) ;Select Troop

@@ -1545,6 +1545,16 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "Others", "DeQueenFilter", 0)
 	EndIf
 
+	;Options Settings--------------------------------------------------------------------------
+    For $i = 1 to 24
+	   If GUICtrlRead(Eval("cmbDeDeploy" & StringRight("0" & $i,2))) <> $DeDeployEmptyString Then
+	      IniWrite($config, "options", "DeDeployType" & $i,_GUICtrlComboBox_GetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)))-1)
+	   Else
+		  IniWrite($config, "options", "DeDeployType" & $i,$DeDeployEmptyString)
+	   EndIf
+	   IniWrite($config, "options", "DeDeployPosition" & $i,GUICtrlRead(Eval("txtDeStyle" & StringRight("0" & $i,2))))
+    Next
+
 	If $hFile <> -1 Then FileClose($hFile)
 
 EndFunc   ;==>saveConfig

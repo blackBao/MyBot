@@ -631,6 +631,12 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkDeWardenFilter = IniRead($config, "Others", "DeWardenFilter", "0")
 		$ichkDeQueenFilter = IniRead($config, "Others", "DeQueenFilter", "0")
 
+		;Options Settings--------------------------------------------------------------------------
+		For $i = 1 to 24
+		   $DeDeployType[$i-1] = IniRead($config, "options", "DeDeployType" & $I, $DeDeployEmptyString)
+		   $DeDeployPosition[$i-1] = IniRead($config, "options", "DeDeployPosition" & $I, "0")
+        Next
+
 	Else
 		Return False
 	EndIf
