@@ -197,7 +197,6 @@
 
 #include "functions\SmartZap\DEDrillSearch.au3"
 #include "functions\SmartZap\DEDropSmartSpell.au3"
-#include "functions\SmartZap\DrillZapSpell.au3"
 
 #include "functions\Search\CompareResources.au3"
 #include "functions\Search\GetResources.au3"
