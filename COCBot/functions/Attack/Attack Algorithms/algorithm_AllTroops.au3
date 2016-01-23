@@ -130,23 +130,31 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	If _Sleep($iDelayalgorithm_AllTroops2) Then Return
 
 	; $ListInfoDeploy = [Troop, No. of Sides, $WaveNb, $MaxWaveNb, $slotsPerEdge]
-	If $iMatchMode = $LB And $iChkDeploySettings[$LB] = 5 Then ; Customise DE side wave deployment here
-		Local $listInfoDeploy[13][5] = [[$eGiant, $nbSides, 1, 1, 2] _
-				, [$eWall, $nbSides, 1, 1, 2] _
-				, [$eBarb, $nbSides, 1, 2, 2] _
-				, [$eArch, $nbSides, 1, 3, 3] _
-				, [$eBarb, $nbSides, 2, 2, 2] _
-				, [$eArch, $nbSides, 2, 3, 3] _
-				, ["CC", 1, 1, 1, 1] _
-				, ["HEROES", 1, 2, 1, 0] _
-				, [$eHogs, $nbSides, 1, 1, 1] _
-				, [$eWiza, $nbSides, 1, 1, 0] _
-				, [$eMini, $nbSides, 1, 1, 0] _
-				, [$eArch, $nbSides, 3, 3, 2] _
-				, [$eGobl, $nbSides, 1, 1, 1] _
-				]
-				ElseIf $nbSides = 5 Then
-		If $debugSetlog =1 Then SetLog("listdeploy fourfinger for attack", $COLOR_PURPLE)
+	If $iMatchMode = $LB And $iChkDeploySettings[$LB] >= 5 Then ; Customise DE side wave deployment here
+		If $debugSetlog = 1 Then SetLog("List Deploy for Customized Side attack", $COLOR_PURPLE)
+
+        Local $listInfoDeploy[24][5]
+        Local $waveCount,$waveNumber
+        Local $deploystring
+
+        for $i = 0 to 23
+            $listInfoDeploy[$i][0] = String($DeDeployType[$i])
+            $listInfoDeploy[$i][1] = $nbSides
+                $waveCount = 0
+            $waveNumber = 0
+            for $j = 0 to 23
+               If string($DeDeployType[$i])=string($DeDeployType[$j]) Then
+                  $waveCount = $waveCount + 1
+                  If $j<=$i Then
+                     $waveNumber = $waveNumber +1
+                  EndIf
+               EndIf
+            Next
+            $listInfoDeploy[$i][2] = $waveNumber
+            $listInfoDeploy[$i][3] = $waveCount
+            $listInfoDeploy[$i][4] = $DeDeployPosition[$i]
+        Next
+		ElseIf $nbSides = 5 Then
 		Local $listInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
 			    , [$eBarb, $nbSides, 1, 1, 0] _
 			    , [$eWall, $nbSides, 1, 1, 1] _
@@ -184,7 +192,11 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	$DeployHeroesPosition[0] = -1
 	$DeployHeroesPosition[1] = -1
 
-	LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
+	If $iMatchMode = $LB And $iChkDeploySettings[$LB] = 5 Then
+       LaunchSideAttack($listInfoDeploy, $CC, $King, $Queen, $Warden)
+    Else
+       LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
+    EndIf
 
 	If _Sleep($iDelayalgorithm_AllTroops4) Then Return
 	SetLog("Dropping left over troops", $COLOR_BLUE)

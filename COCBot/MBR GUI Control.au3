@@ -59,6 +59,7 @@ AtkLogHead()
 #include "GUI\MBR GUI Control Tab Expert.au3"
 #include "GUI\MBR GUI Control Tab Stats.au3"
 #include "GUI\MBR GUI Control Tab Others.au3"
+#include "GUI\MBR GUI Control Tab Options.au3"
 #include "GUI\MBR GUI Control Collectors.au3"
 
 

@@ -1666,6 +1666,15 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	Else
 		GUICtrlSetState($chkDeQueenFilter, $GUI_UNCHECKED)
 	EndIf
+	;Options Settings--------------------------------------------------------------------------
+	For $i = 1 to 24
+	  	GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])
+		If $DeDeployType[$i-1] <> $DeDeployEmptyString Then
+			_GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployType[$i-1]+1)
+		 Else
+			_GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployEmptyString)
+		 EndIf
+    Next
 
 	; Reenabling window redraw
 	If $bRedrawAtExit Then SetRedrawBotWindow(True)

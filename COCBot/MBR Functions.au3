@@ -67,6 +67,8 @@
 #include "functions\Attack\Troops\CheckHeroesHealth.au3"
 #include "functions\Attack\Troops\dropCC.au3"
 #include "functions\Attack\Troops\dropHeroes.au3"
+#include "functions\Attack\Troops\dropSpell.au3"
+#include "functions\Attack\Troops\dropEarth.au3"
 #include "functions\Attack\Troops\DropOnEdge.au3"
 #include "functions\Attack\Troops\DropOnEdges.au3"
 #include "functions\Attack\Troops\GetXPosOfArmySlot.au3"
@@ -78,7 +80,9 @@
 #include "functions\Attack\Troops\ReadTroopQuantity.au3"
 #include "functions\Attack\Troops\SelectDropTroop.au3"
 #include "functions\Attack\Troops\SetSleep.au3"
-
+#include "functions\Attack\Troops\unitInfo.au3"
+#include "functions\Attack\Troops\SideAttack.au3"
+#include "functions\Attack\Troops\dropUnit.au3"
 #include "functions\CreateArmy\_TrainMoveBtn.au3"
 #include "functions\CreateArmy\BarracksStatus.au3"
 #include "functions\CreateArmy\CheckFullArmy.au3"
@@ -197,7 +201,6 @@
 
 #include "functions\SmartZap\DEDrillSearch.au3"
 #include "functions\SmartZap\DEDropSmartSpell.au3"
-#include "functions\SmartZap\DrillZapSpell.au3"
 
 #include "functions\Search\CompareResources.au3"
 #include "functions\Search\GetResources.au3"

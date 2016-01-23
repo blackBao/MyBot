@@ -201,10 +201,6 @@ Func runBot() ;Bot that runs everything in order
 				If _Sleep($iDelayRunBot3) Then Return
 				If $Restart = True Then ContinueLoop
 			DonateCC()
-				If $ichkTrainLightSpell = 1 Then
-					SetLog("Auto Train Lighting Spell")
-					DrillZapSpell() ; Drill Zap
-				EndIf
 				If _Sleep($iDelayRunBot1) Then Return
 				checkMainScreen(False) ; required here due to many possible exits
 				If $Restart = True Then ContinueLoop
@@ -272,6 +268,12 @@ Func runBot() ;Bot that runs everything in order
 			Else
 				SetLog("Restarted after Out of Sync Error: Attack Now", $COLOR_BLUE)
 			EndIf
+			If $ichkDeKingFilter = 1 Or $ichkDeWardenFilter = 1 Or $ichkDeQueenFilter = 1 Then
+				If IsMainPage() Then Click($aArmyTrainButton[0], $aArmyTrainButton[1], 1, 0, "#0293")
+				GetArmyCapacity()
+				getArmyHeroCount()
+				ClickP($aAway, 2, $iDelayTrain5, "#0291");
+			EndIf
 			If _Sleep($iDelayRunBot3) Then Return
 			;  OCR read current Village Trophies when OOS restart maybe due PB or else DropTrophy skips one attack cycle after OOS
 			$iTrophyCurrent = getTrophyMainScreen($aTrophies[0], $aTrophies[1])
@@ -292,14 +294,14 @@ Func runBot() ;Bot that runs everything in order
 			   SetLog("Multy Farming Mode Activated", $COLOR_Green)
 			If $iVillageName = "Main" Then
 			   SwitchSecond()
-			   _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
-			   cmbProfile()
+;~			   _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
+;~			   cmbProfile()
 			   $RunState = True
 			   $fullArmy = True
 			ElseIf $iVillageName = "Second" Then
 			   SwitchMain()
-			   _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
-			   cmbProfile()
+;~			   _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
+;~			   cmbProfile()
 			   $RunState = True
 			EndIf
 		 EndIf

@@ -58,7 +58,7 @@ EndFunc   ;==>cmbProfile
 
 Func txtVillageName()
 	$iVillageName = GUICtrlRead($txtVillageName)
-	If $iVillageName = "" Then $iVillageName = "MyVillage"
+	If $iVillageName = "" Then $iVillageName = "Main"
 	GUICtrlSetData($grpVillage, GetTranslated(13, 21, "Village") & ": " & $iVillageName)
 	GUICtrlSetData($OrigPushB, $iVillageName)
 	GUICtrlSetData($txtVillageName, $iVillageName)

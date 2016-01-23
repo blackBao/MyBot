@@ -57,6 +57,45 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 			If $troopKind <> -1 Then SetLog("-*-" & NameOfTroop($atkTroops[$i][0]) & " " & $atkTroops[$i][1], $COLOR_GREEN)
 		EndIf
 	Next
+	If $lastDarkSpell <> -1 Then
+        If $debugSetlog = 1 Then Setlog("Looking for 2nd dark spell")
+        If $debugSetlog = 1 Then SetLog("Lastdarkspell: "&$lastDarkSpell)
+        If $debugSetlog = 1 Then Setlog("Captureregion start: "&GetXPosofArmySLot($lastDarkSpell,68))
+        _WinAPI_DeleteObject($hBitmapFirst)
+        $hBitmapFirst = _CaptureRegion2(GetXPosofArmySLot($lastDarkSpell,68), 571 + $bottomOffsetY, 859, 671 + $bottomOffsetY)
+        If _Sleep($iDelayPrepareAttack1) Then Return
+        Local $result = DllCall($hFuncLib, "str", "searchIdentifyTroop", "ptr", $hBitmapFirst)
+        If $debugSetlog = 1 Then Setlog("DLL Troopsbar list #2: " & $result[0], $COLOR_PURPLE)
+        Local $aTroopDataList = StringSplit($result[0], "#")
+        Local $aTemp[12][3]
+        If $result[0] <> "" Then
+            For $i = 1 To $aTroopDataList[0]
+                Local $troopData = StringSplit($aTroopDataList[$i], "|", $STR_NOCOUNT)
+                Local $xCoord = Number(StringSplit($troopData[1], "-", $STR_NOCOUNT)[0])
+                Local $slotIndex = GetSlotIndexFromXPos($xCoord)
+                $aTemp[$slotIndex][1] = Number($troopData[2])
+                Switch $troopData[0]
+                    Case "PoisonSpell"
+                        $CCSpellType = $ePSpell
+                        $atkTroops[$i+$lastDarkSpell][0] = $eCCSpell
+                        $atkTroops[$i+$lastDarkSpell][1] = 1
+                        SetLog("-*-" & "CC Spell(Poison)" & " " & 1, $COLOR_GREEN)
+                    Case "EarthquakeSpell"
+                        $CCSpellType = $eESpell
+                        $atkTroops[$i+$lastDarkSpell][0] = $eCCSpell
+                        $atkTroops[$i+$lastDarkSpell][1] = 1
+                        SetLog("-*-" & "CC Spell(Earthquake)" & " " & 1, $COLOR_GREEN)
+                    Case "HasteSpell"
+                        $CCSpellType = $eHaSpell
+                        $atkTroops[$i+$lastDarkSpell][0] = $eCCSpell
+                        $atkTroops[$i+$lastDarkSpell][1] = 1
+                        SetLog("-*-" & "CC Spell(Haste)" & " " & 1, $COLOR_GREEN)
+                    EndSwitch
+            Next
+
+            If $debugSetlog = 1 Then SetLog("CCSpelltype " &$CCSpellType)
+        EndIf
+    EndIf
 EndFunc   ;==>PrepareAttack
 
 Func IsTroopToBeUsed($pMatchMode, $pTroopType)

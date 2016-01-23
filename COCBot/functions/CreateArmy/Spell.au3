@@ -21,8 +21,12 @@ Func BrewSpells()
 
 	If $iTotalCountSpell = 0 Then Return
 
-	If $CurSFactory < $TotalSFactory Then ;  If not full the Spell Factory then try to make spells
-
+	If $CurSFactory < $TotalSFactory  Or $ichkTrainLightSpell = 1 Then ;  If not full the Spell Factory then try to make spells
+		;Auto Train Lightning, create 2 lightning spells
+			If $ichkTrainLightSpell = 1 Then
+				$LightningSpellComp = $CurLightningSpell + 2
+				SetLog("Auto Train Lighting Spell")
+			EndIf
 		; Spell Creation
 		; Normal Spell Factory
 
