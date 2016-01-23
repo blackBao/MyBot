@@ -451,7 +451,10 @@ Func readConfig() ;Reads config and sets it to the variables
 		$LightningSpellComp = IniRead($config, "Spells", "LightningSpell", "0")
 		$RageSpellComp = IniRead($config, "Spells", "RageSpell", "0")
 		$HealSpellComp = IniRead($config, "Spells", "HealSpell", "0")
+		$JumpSpellComp  = IniRead($config, "Spells", "JumpSpell", "0")
+		$FreezeSpellComp  = IniRead($config, "Spells", "FreezeSpell", "0")
 		$PoisonSpellComp = IniRead($config, "Spells", "PoisonSpell", "0")
+		$EarthquakeSpellComp  = IniRead($config, "Spells", "EarthquakeSpell", "0")
 		$HasteSpellComp = IniRead($config, "Spells", "HasteSpell", "0")
 		$iTotalCountSpell = IniRead($config, "Spells", "SpellFactory", "0")
 
