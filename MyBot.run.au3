@@ -294,14 +294,14 @@ Func runBot() ;Bot that runs everything in order
 			   SetLog("Multy Farming Mode Activated", $COLOR_Green)
 			If $iVillageName = "Main" Then
 			   SwitchSecond()
-			   _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
-			   cmbProfile()
+;~			   _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
+;~			   cmbProfile()
 			   $RunState = True
 			   $fullArmy = True
 			ElseIf $iVillageName = "Second" Then
 			   SwitchMain()
-			   _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
-			   cmbProfile()
+;~			   _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
+;~			   cmbProfile()
 			   $RunState = True
 			EndIf
 		 EndIf
