@@ -14,17 +14,6 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-Global $maxElixirLevel = 6
-Global $ElixirImages0, $ElixirImages1, $ElixirImages2, $ElixirImages3, $ElixirImages4, $ElixirImages5, $ElixirImages6
-Global $ElixirImagesStat0, $ElixirImagesStat1, $ElixirImagesStat2, $ElixirImagesStat3, $ElixirImagesStat4, $ElixirImagesStat5, $ElixirImagesStat6
-
-Global $ElixirImages0_75percent, $ElixirImages1_75percent, $ElixirImages2_75percent, $ElixirImages3_75percent, $ElixirImages4_75percent, $ElixirImages5_75percent, $ElixirImages6_75percent
-Global $ElixirImagesStat0_75percent, $ElixirImagesStat1_75percent, $ElixirImagesStat2_75percent, $ElixirImagesStat3_75percent, $ElixirImagesStat4_75percent, $ElixirImagesStat5_75percent, $ElixirImagesStat6_75percent
-
-Global $ElixirImages0_50percent, $ElixirImages1_50percent, $ElixirImages2_50percent, $ElixirImages3_50percent, $ElixirImages4_50percent, $ElixirImages5_50percent, $ElixirImages6_50percent
-Global $ElixirImagesStat0_50percent, $ElixirImagesStat1_50percent, $ElixirImagesStat2_50percent, $ElixirImagesStat3_50percent, $ElixirImagesStat4_50percent, $ElixirImagesStat5_50percent, $ElixirImagesStat6_50percent
-
-
 Func LoadElixirImage()
 
 	Local $x
@@ -51,14 +40,14 @@ Func LoadElixirImage()
 		;assign value at ElixirImages0... ElixirImages6 if $x it's not empty
 		If UBound($x) Then Assign("ElixirImages" & $t, $x)
 		;code to debug in console if need
-;~ 		For $i = 0 To UBound(Eval("ElixirImages" & $t)) - 1
-;~ 			ConsoleWrite("$ElixirImages" & $t & "[" & $i & "]:" & Execute("$ElixirImages" & $t & "[" & $i & "]") & @CRLF)
-;~ 		Next
+		For $i = 0 To UBound(Eval("ElixirImages" & $t)) - 1
+			ConsoleWrite("$ElixirImages" & $t & "[" & $i & "]:" & Execute("$ElixirImages" & $t & "[" & $i & "]") & @CRLF)
+		Next
 
 		;make stats array and put values = 0
-		For $i = 0 To UBound($x) - 1
-			$x[$i] = "0"
-		Next
+;~ 		For $i = 0 To UBound($x) - 1
+;~ 			$x[$i] = "0"
+;~ 		Next
 		If UBound($x) Then Assign("ElixirImagesStat" & $t, $x)
 
 		;read from ini file stats values
@@ -96,14 +85,14 @@ Func LoadElixirImage75Percent()
 		;assign value at ElixirImages0... ElixirImages6 if $x it's not empty
 		If UBound($x) Then Assign("ElixirImages" & $t & "_75percent", $x)
 		;code to debug in console if need
-;~ 		For $i = 0 To UBound(Eval("ElixirImages" & $t & "_75percent")) - 1
-;~ 			ConsoleWrite("$ElixirImages" & $t & "_75percent" & "[" & $i & "]:" & Execute("$ElixirImages" & $t & "_75percent" & "[" & $i & "]") & @CRLF)
-;~ 		Next
+		For $i = 0 To UBound(Eval("ElixirImages" & $t & "_75percent")) - 1
+			ConsoleWrite("$ElixirImages" & $t & "_75percent" & "[" & $i & "]:" & Execute("$ElixirImages" & $t & "_75percent" & "[" & $i & "]") & @CRLF)
+		Next
 
 		;make stats array and put values = 0
-		For $i = 0 To UBound($x) - 1
-			$x[$i] = "0"
-		Next
+;~ 		For $i = 0 To UBound($x) - 1
+;~ 			$x[$i] = "0"
+;~ 		Next
 		If UBound($x) Then Assign("ElixirImagesStat" & $t & "_75percent", $x)
 
 		;read from ini file stats values
@@ -145,9 +134,9 @@ Func LoadElixirImage50Percent()
 		Next
 
 		;make stats array and put values = 0
-		For $i = 0 To UBound($x) - 1
-			$x[$i] = "0"
-		Next
+;~ 		For $i = 0 To UBound($x) - 1
+;~ 			$x[$i] = "0"
+;~ 		Next
 		If UBound($x) Then Assign("ElixirImagesStat" & $t & "_50percent", $x)
 
 		;read from ini file stats values
@@ -345,6 +334,7 @@ Func ZombieSearch2($limit = 0, $tolerancefix = 0)
 						Assign("ElixirImagesStat" & $t & "_50percent", $tempvect)
 						;------------------
 						$ZombieFound = True
+						SaveStatChkDeadBase()
 						ExitLoop (2)
 					Else
 						ContinueLoop
@@ -397,6 +387,7 @@ Func ZombieSearch2($limit = 0, $tolerancefix = 0)
 							Assign("ElixirImagesStat" & $t & "_75percent", $tempvect)
 							;------------------
 							$ZombieFound = True
+							SaveStatChkDeadBase()
 							ExitLoop (2)
 						Else
 							ContinueLoop
@@ -450,6 +441,7 @@ Func ZombieSearch2($limit = 0, $tolerancefix = 0)
 							Assign("ElixirImagesStat" & $t, $tempvect)
 							;------------------
 							$ZombieFound = True
+							SaveStatChkDeadBase()
 							ExitLoop (2)
 						Else
 							ContinueLoop
