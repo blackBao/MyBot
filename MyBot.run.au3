@@ -271,7 +271,7 @@ Func runBot() ;Bot that runs everything in order
 			Else
 				SetLog("Restarted after Out of Sync Error: Attack Now", $COLOR_BLUE)
 			EndIf
-			If $ichkDeKingFilter = 1 Or $ichkDeWardenFilter = 1 Or $ichkDeQueenFilter = 1 Then
+			If $ichkDeKingFilter = 1 Or $ichkDeWardenFilter = 1 Or $ichkDeQueenFilter = 1 Or $LBAQFilter = 1 Or $LBBKFilter = 1 Then
 				If IsMainPage() Then Click($aArmyTrainButton[0], $aArmyTrainButton[1], 1, 0, "#0293")
 				GetArmyCapacity()
 				getArmyHeroCount()
