@@ -1518,6 +1518,41 @@ Func saveConfig() ;Saves the controls settings to the config
 	Else
 		IniWrite($config, "Others", "TrainLightSpell", "0")
 	EndIf
+	If GUICtrlRead($chkTrainHealSpell) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "TrainHealSpell", "1")
+	Else
+		IniWrite($config, "Others", "TrainHealSpell", "0")
+	EndIf
+	If GUICtrlRead($chkTrainRageSpell) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "TrainRageSpell", "1")
+	Else
+		IniWrite($config, "Others", "TrainRageSpell", "0")
+	EndIf
+	If GUICtrlRead($chkTrainJumpSpell) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "TrainJumpSpell", "1")
+	Else
+		IniWrite($config, "Others", "TrainJumpSpell", "0")
+	EndIf
+	If GUICtrlRead($chkTrainFreezeSpell) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "TrainFreezeSpell", "1")
+	Else
+		IniWrite($config, "Others", "TrainFreezeSpell", "0")
+	EndIf
+	If GUICtrlRead($chkTrainPoisonSpell) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "TrainPoisonSpell", "1")
+	Else
+		IniWrite($config, "Others", "TrainPoisonSpell", "0")
+	EndIf
+	If GUICtrlRead($chkTrainEarthquakeSpell) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "TrainEarthquakeSpell", "1")
+	Else
+		IniWrite($config, "Others", "TrainEarthquakeSpell", "0")
+	EndIf
+	If GUICtrlRead($chkTrainHasteSpell) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "TrainHasteSpell", "1")
+	Else
+		IniWrite($config, "Others", "TrainHasteSpell", "0")
+	EndIf
 
 	IniWrite($config, "Others", "txtMinDark", GUICtrlRead($txtMinDark))
 
@@ -1543,6 +1578,69 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "Others", "DeQueenFilter", 1)
 	Else
 		IniWrite($config, "Others", "DeQueenFilter", 0)
+	EndIf
+
+
+	IniWrite($config, "Others", "SkipCentreDE", _GUICtrlComboBox_GetCurSel($cmbSkipCentreDE))
+	IniWrite($config, "Others", "SkipUndetectedDE", _GUICtrlComboBox_GetCurSel($cmbSkipUndetectedDE))
+
+	IniWrite($config, "Others", "ABMeetGEHero", _GUICtrlComboBox_GetCurSel($cmbABMeetGEHero))
+
+	If GUICtrlRead($chkABMeetDEHero) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "ABMeetDEHero", 1)
+	Else
+		IniWrite($config, "Others", "ABMeetDEHero", 0)
+	EndIf
+
+	If GUICtrlRead($chkABMeetTrophyHero) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "ABMeetTrophyHero", 1)
+	Else
+		IniWrite($config, "Others", "ABMeetTrophyHero", 0)
+	EndIf
+
+	If GUICtrlRead($chkABMeetTHHero) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "ABMeetTHHero", 1)
+	Else
+		IniWrite($config, "Others", "ABMeetTHHero", 0)
+	EndIf
+
+	If GUICtrlRead($chkABMeetTHOHero) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "ABMeetTHOHero", 1)
+	Else
+		IniWrite($config, "Others", "ABMeetTHOHero", 0)
+	EndIf
+
+	If GUICtrlRead($chkABWeakBaseHero) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "ABWeakBaseHero", 1)
+	Else
+		IniWrite($config, "Others", "ABWeakBaseHero", 0)
+	EndIf
+
+	If GUICtrlRead($chkABMeetOneHero) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "ABMeetOneHero", 1)
+	Else
+		IniWrite($config, "Others", "ABMeetOneHero", 0)
+	EndIf
+
+	IniWrite($config, "Others", "ABsearchGoldHero", GUICtrlRead($txtABMinGoldHero))
+	IniWrite($config, "Others", "ABsearchElixirHero", GUICtrlRead($txtABMinElixirHero))
+	IniWrite($config, "Others", "ABsearchGoldPlusElixirHero", GUICtrlRead($txtABMinGoldPlusElixirHero))
+	IniWrite($config, "Others", "ABsearchDarkHero", GUICtrlRead($txtABMinDarkElixirHero))
+	IniWrite($config, "Others", "ABsearchTrophyHero", GUICtrlRead($txtABMinTrophyHero))
+	IniWrite($config, "Others", "ABTHLevelHero", _GUICtrlComboBox_GetCurSel($cmbABTHHero))
+	IniWrite($config, "Others", "ABWeakMortarHero", _GUICtrlComboBox_GetCurSel($cmbABWeakMortarHero))
+	IniWrite($config, "Others", "ABWeakWizTowerHero", _GUICtrlComboBox_GetCurSel($cmbABWeakWizTowerHero))
+
+	If GUICtrlRead($chkLBBKFilter) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "LBBKFilter", 1)
+	Else
+		IniWrite($config, "Others", "LBBKFilter", 0)
+	EndIf
+
+	If GUICtrlRead($chkLBAQFilter) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "LBAQFilter", 1)
+	Else
+		IniWrite($config, "Others", "LBAQFilter", 0)
 	EndIf
 
 	;Options Settings--------------------------------------------------------------------------

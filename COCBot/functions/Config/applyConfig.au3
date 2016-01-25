@@ -1642,19 +1642,9 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkSmartLightSpell, $GUI_UNCHECKED)
 	EndIf
 	SmartLightSpell()
-	If $ichkTrainLightSpell = 1 Then
-		GUICtrlSetState($chkTrainLightSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainLightSpell, $GUI_UNCHECKED)
-	EndIf
-	autoLightSpell()
+
 	GUICtrlSetData($txtMinDark, $itxtMinDark)
 
-	If $ichkTrainLightSpell = 1 Then
-		GUICtrlSetState($chkTrainLightSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainLightSpell, $GUI_UNCHECKED)
-	EndIf
 	If $ichkDrillZapTH = 1 Then
 		GUICtrlSetState($chkDrillZapTH, $GUI_CHECKED)
 	Else
@@ -1678,6 +1668,119 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	Else
 		GUICtrlSetState($chkDeQueenFilter, $GUI_UNCHECKED)
 	EndIf
+
+	;;;Auto train
+	If $ichkTrainLightSpell = 1 Then
+		GUICtrlSetState($chkTrainLightSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainLightSpell, $GUI_UNCHECKED)
+	EndIf
+	AutoTrainSpell()
+	If $ichkTrainHealSpell = 1 Then
+		GUICtrlSetState($chkTrainHealSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainHealSpell, $GUI_UNCHECKED)
+	EndIf
+	If $ichkTrainRageSpell = 1 Then
+		GUICtrlSetState($chkTrainRageSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainRageSpell, $GUI_UNCHECKED)
+	EndIf
+	If $ichkTrainJumpSpell = 1 Then
+		GUICtrlSetState($chkTrainJumpSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainJumpSpell, $GUI_UNCHECKED)
+	EndIf
+	If $ichkTrainFreezeSpell =  1 Then
+		  GUICtrlSetState($chkTrainFreezeSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainFreezeSpell, $GUI_UNCHECKED)
+	EndIf
+	If $ichkTrainPoisonSpell = 1 Then
+		GUICtrlSetState($chkTrainPoisonSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainPoisonSpell, $GUI_UNCHECKED)
+	EndIf
+	If $ichkTrainEarthquakeSpell = 1 Then
+		GUICtrlSetState($chkTrainEarthquakeSpell, $GUI_CHECKED)
+	Else
+      GUICtrlSetState($chkTrainEarthquakeSpell, $GUI_UNCHECKED)
+	EndIf
+	If $ichkTrainHasteSpell = 1 Then
+		GUICtrlSetState($chkTrainHasteSpell, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrainHasteSpell, $GUI_UNCHECKED)
+	EndIf
+
+
+	;Hero Filters
+	_GUICtrlComboBox_SetCurSel($cmbSkipCentreDE, $iSkipCentreDE)
+	_GUICtrlComboBox_SetCurSel($cmbSkipUndetectedDE, $iSkipUndetectedDE)
+
+	_GUICtrlComboBox_SetCurSel($cmbABMeetGEHero, $iCmbMeetGEHero)
+
+	If $iChkMeetDEHero = 1 Then
+		GUICtrlSetState($chkABMeetDEHero, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkABMeetDEHero, $GUI_UNCHECKED)
+	EndIf
+	chkABMeetDEHero()
+
+	If $iChkMeetTrophyHero = 1 Then
+		GUICtrlSetState($chkABMeetTrophyHero, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkABMeetTrophyHero, $GUI_UNCHECKED)
+	EndIf
+	chkABMeetTrophyHero()
+
+	If $iChkMeetTHHero = 1 Then
+		GUICtrlSetState($chkABMeetTHHero, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkABMeetTHHero, $GUI_UNCHECKED)
+	EndIf
+	chkABMeetTHHero()
+
+	If $iChkMeetTHOHero = 1 Then
+		GUICtrlSetState($chkABMeetTHOHero, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkABMeetTHOHero, $GUI_UNCHECKED)
+	EndIf
+
+	If $iChkWeakBaseHero = 1 Then
+		GUICtrlSetState($chkABWeakBaseHero, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkABWeakBaseHero, $GUI_UNCHECKED)
+	EndIf
+	chkABWeakBaseHero()
+
+	If $iChkMeetOneHero = 1 Then
+		GUICtrlSetState($chkABMeetOneHero, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkABMeetOneHero, $GUI_UNCHECKED)
+	EndIf
+
+	GUICtrlSetData($txtABMinGoldHero, $iMinGoldHero)
+	GUICtrlSetData($txtABMinElixirHero, $iMinElixirHero)
+	GUICtrlSetData($txtABMinGoldPlusElixirHero, $iMinGoldPlusElixirHero)
+	GUICtrlSetData($txtABMinDarkElixirHero, $iMinDarkHero)
+	GUICtrlSetData($txtABMinTrophyHero, $iMinTrophyHero)
+
+	_GUICtrlComboBox_SetCurSel($cmbABTHHero, $iCmbTHHero)
+	$iMaxTHHero = $THText[$iCmbTHHero]
+	_GUICtrlComboBox_SetCurSel($cmbABWeakMortarHero, $iCmbWeakMortarHero)
+	_GUICtrlComboBox_SetCurSel($cmbABWeakWizTowerHero, $iCmbWeakWizTowerHero)
+
+	If $LBBKFilter = 1 Then
+		GUICtrlSetState($chkLBBKFilter, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkLBBKFilter, $GUI_UNCHECKED)
+	EndIf
+	If $LBAQFilter = 1 Then
+		GUICtrlSetState($chkLBAQFilter, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkLBAQFilter, $GUI_UNCHECKED)
+	EndIf
+
 	;Options Settings--------------------------------------------------------------------------
 	For $i = 1 to 24
 	  	GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])

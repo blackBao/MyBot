@@ -985,7 +985,6 @@ Global $ichkMultyFarming
 
 ;ZAp Drill
 Global $ichkSmartLightSpell
-global $ichkTrainLightSpell
 Global $iDrills[4][4] = [[-1, -1, -1, -1], [-1, -1, -1, -1], [-1, -1, -1, -1], [-1, -1, -1, -1]] ; [LocX, LocY, BldgLvl, Quantity=filled by other functions]
 Global $smartZapGain = 0
 Global $NumLTSpellsUsed = 0
@@ -1011,3 +1010,12 @@ Global $cmbTroopComp
 Global $ichkDeKingFilter
 Global $ichkDeWardenFilter
 Global $ichkDeQueenFilter
+
+;Auto Train Spell
+global $ichkTrainLightSpell, $ichkTrainHealSpell, $ichkTrainRageSpell, $ichkTrainJumpSpell, $ichkTrainFreezeSpell, $ichkTrainPoisonSpell, $ichkTrainEarthquakeSpell, $ichkTrainHasteSpell
+
+;Hero Healing Filter
+Global $LBsave[17], $LBHeroFilter, $LBAQFilter, $LBBKFilter, $iSkipCentreDE, $iSkipUndetectedDE, $DECorepix = 15
+Global 	$iCmbMeetGEHero, $iChkMeetDEHero, $iChkMeetTrophyHero, $iChkMeetTHHero, $iChkMeetTHOHero, $iChkWeakBaseHero, $iChkMeetOneHero, $iEnableAfterCountHero, $iMinGoldHero
+Global $iMinElixirHero, $iMinGoldPlusElixirHero,$iMinDarkHero, $iMinTrophyHero, $iCmbTHHero, $iCmbWeakMortarHero, $iCmbWeakWizTowerHero, $iMaxTHHero
+Global $THString

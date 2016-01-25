@@ -621,7 +621,6 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkMultyFarming = IniRead($config, "Others", "MultyFarming", "0")
 
 		$ichkSmartLightSpell = IniRead($config, "Others", "SmartLightSpell", "0")
-		$ichkTrainLightSpell = IniRead($config, "Others", "TrainLightSpell", "0")
 		$itxtMinDark = IniRead($config, "Others", "txtMinDark", "1000")
 		$ichkDrillZapTH = IniRead($config, "Others", "chkDrillZapTH", "0")
 		$useFFBarchST = IniRead($config, "Others", "ChkSTFFBarch", "0")
@@ -630,6 +629,38 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkDeKingFilter = IniRead($config, "Others", "DeKingFilter", "0")
 		$ichkDeWardenFilter = IniRead($config, "Others", "DeWardenFilter", "0")
 		$ichkDeQueenFilter = IniRead($config, "Others", "DeQueenFilter", "0")
+
+		$ichkTrainLightSpell = IniRead($config, "Others", "TrainLightSpell", "0")
+		$ichkTrainHealSpell = IniRead($config, "Others", "TrainHealSpell", "0")
+		$ichkTrainRageSpell = IniRead($config, "Others", "TrainRageSpell", "0")
+		$ichkTrainJumpSpell = IniRead($config, "Others", "TrainJumpSpell", "0")
+		$ichkTrainFreezeSpell = IniRead($config, "Others", "TrainFreezeSpell", "0")
+		$ichkTrainPoisonSpell = IniRead($config, "Others", "TrainPoisonSpell", "0")
+		$ichkTrainEarthquakeSpell = IniRead($config, "Others", "TrainEarthquakeSpell", "0")
+		$ichkTrainHasteSpell = IniRead($config, "Others", "TrainHasteSpell", "0")
+
+;Hero Filter Settings.
+		$iSkipCentreDE = IniRead($config, "Others", "SkipCentreDE", "0")
+		$iSkipUndetectedDE = IniRead($config, "Others", "SkipUndetectedDE", "0")
+		$iCmbMeetGEHero = IniRead($config, "Others", "ABMeetGEHero", "2")
+		$iChkMeetDEHero = IniRead($config, "Others", "ABMeetDEHero", "0")
+		$iChkMeetTrophyHero = IniRead($config, "Others", "ABMeetTrophyHero", "0")
+		$iChkMeetTHHero = IniRead($config, "Others", "ABMeetTHHero", "0")
+		$iChkMeetTHOHero = IniRead($config, "Others", "ABMeetTHOHero", "0")
+		$iChkWeakBaseHero = IniRead($config, "Others", "ABWeakBaseHero", "0")
+		$iChkMeetOneHero = IniRead($config, "Others", "ABMeetOneHero", "0")
+
+		$iMinGoldHero = IniRead($config, "Others", "ABsearchGoldHero", "80000")
+		$iMinElixirHero = IniRead($config, "Others", "ABsearchElixirHero", "80000")
+		$iMinGoldPlusElixirHero = IniRead($config, "Others", "ABsearchGoldPlusElixirHero", "160000")
+		$iMinDarkHero = IniRead($config, "Others", "ABsearchDarkHero", "0")
+		$iMinTrophyHero = IniRead($config, "Others", "ABsearchTrophyHero", "0")
+		$iCmbTHHero = IniRead($config, "Others", "ABTHLevelHero", "0")
+		$iCmbWeakMortarHero = IniRead($config, "Others", "ABWeakMortarHero", "5")
+		$iCmbWeakWizTowerHero = IniRead($config, "Others", "ABWeakWizTowerHero", "4")
+
+		$LBBKFilter = IniRead($config, "Others", "LBBKFilter", "1")
+		$LBAQFilter = IniRead($config, "Others", "LBAQFilter", "1")
 
 		;Options Settings--------------------------------------------------------------------------
 		For $i = 1 to 24

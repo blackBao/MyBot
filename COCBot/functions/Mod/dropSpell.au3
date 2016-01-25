@@ -25,7 +25,6 @@ Func dropSpell($x, $y, $spell) ;Drop Spell
              Click(GetXPosOfArmySlot($i, 68), 595 + $bottomOffsetY,1,0,"#0094") ;Select spell
            ;Click(68 + (72 * $i), 595) ;Select spell (FIXME: add debug info)
            If _Sleep(500) Then Return
-			SetLog(" Dropping Normal spell" & $i, $COLOR_RED)
            Click($x, $y) ; drop it (FIXME: add debug info)
            exitloop
         Endif

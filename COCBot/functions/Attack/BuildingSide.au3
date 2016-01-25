@@ -86,6 +86,23 @@ Func BuildingXY($TypeBuilding = $eSideBuildingDES)
 	EndIf
 EndFunc   ;==>BuildingXY
 
+Func CheckfoundorcoreDE()
+	BuildingXY()
+	If $iSkipUndetectedDE = 1 Or ($iSkipUndetectedDE = 2 And $LBHeroFilter = 1) Then
+		If $BuildingLoc = 0 Then
+			SetLog("DE Storage Not Located, Skipping ", $COLOR_BLUE)
+			Return False
+		EndIf
+	EndIf
+	If $BuildingLoc = 1 And ($iSkipCentreDE = 1 Or ($iSkipCentreDE = 2 And $LBHeroFilter = 1))  Then
+		If $BuildingLocy < ($DECorepix + 313) And $BuildingLocy > ($DECorepix - 313) And $BuildingLocx < ($DECorepix + 430) And $BuildingLocx > ($DECorepix - 430) Then
+			SetLog("DE Storage Located in Core, Skipping", $COLOR_BLUE)
+			Return False
+		EndIf
+	EndIf
+	Return True
+EndFunc	   ;==>CheckfoundorcoreDE
+
 Func DELow()
 	Local $DarkE = ""
 	Local $Dchk = 0

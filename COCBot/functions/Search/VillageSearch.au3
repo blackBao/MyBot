@@ -195,11 +195,28 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 			EndIf
 			ExitLoop
 		ElseIf $match[$LB] And Not $dbBase Then
-			SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
-			SetLog("      " & "Live Base Found!", $COLOR_GREEN, "Lucida Console", 7.5)
-			$logwrited = True
-			$iMatchMode = $LB
-			ExitLoop
+			If $iChkDeploySettings[$LB] = 5 And ($iSkipUndetectedDE > 0 Or $iSkipCentreDE > 0) Then
+			   If CheckfoundorcoreDE() = True Then
+			      SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
+			      SetLog("      " & "DE Side Base Found!", $COLOR_GREEN, "Lucida Console", 7.5)
+			      $logwrited = True
+			      $iMatchMode = $LB
+			      $DESideFound = True
+			      ExitLoop
+				EndIf
+			ElseIf $iChkDeploySettings[$LB] = 5 Then
+			    SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
+				SetLog(_PadStringCenter(" DE Side Base Found! ", 50, "~"), $COLOR_GREEN, "Lucida Console", 7.5)
+				$iMatchMode = $LB
+				$DESideFound = True
+				ExitLoop
+			 Else
+				SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
+				SetLog("      " & "Live Base Found!", $COLOR_GREEN, "Lucida Console", 7.5)
+				$logwrited = True
+				$iMatchMode = $LB
+				ExitLoop
+			EndIf
 		ElseIf $match[$LB] Or $match[$DB] Then
 			If $OptBullyMode = 1 And ($SearchCount >= $ATBullyMode) Then
 				If $SearchTHLResult = 1 Then

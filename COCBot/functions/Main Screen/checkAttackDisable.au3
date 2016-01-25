@@ -35,21 +35,6 @@ Func checkAttackDisable($iSource, $Result = "")
 					Setlog("Attacking disabled, Personal Break detected...", $COLOR_RED)
 					If _CheckPixel($aSurrenderButton, $bCapturePixel) Then ; village search requires end battle 1s, so check for surrender/endbattle button
 						ReturnHome(False, False) ;If End battle is available
-					If $ichkMultyFarming = 1 Then
-						   SetLog("Multy Farming Mode Activated", $COLOR_Green)
-						   If $iVillageName = "Main" Then
-							  SwitchSecond()
-							  _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
-							  cmbProfile()
-							  $RunState = True
-							  $fullArmy = True
-						   ElseIf $iVillageName = "Second" Then
-							  SwitchMain()
-							  _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
-							  cmbProfile()
-							  $RunState = True
-						   EndIf
-						EndIf
 					Else
 						CloseCoC()
 					EndIf
@@ -69,18 +54,6 @@ Func checkAttackDisable($iSource, $Result = "")
 				If StringInStr($Result, "been") <> 0 Or StringInStr($Result, "after") <> 0 Or StringInStr($Result, "have") <> 0 Then ; verify we have right text string, 'after' added for Personal Break
 					Setlog("Online too long, Personal Break detected....", $COLOR_RED)
 					checkMainScreen()
-					If $ichkMultyFarming = 1 Then
-						SetLog("Change Account for Take-A-Break detected", $COLOR_MAROON)
-					    If $iVillageName = "Main" Then
-						   SwitchSecond()
-						   $RunState = True
-						   $fullArmy = True
-						ElseIf $iVillageName = "Second" Then
-						   SwitchMain()
-						   $RunState = True
-						   Return False
-						EndIf
-					EndIf
 				Else
 					If $debugSetlog = 1 Then Setlog("wrong text string", $COLOR_PURPLE)
 					Return ; exit function, wrong string found
@@ -103,7 +76,21 @@ Func checkAttackDisable($iSource, $Result = "")
 	$Restart = True ; Set flag to restart the process at the bot main code when it returns
 
 	Setlog("Time for break, exit now..", $COLOR_BLUE)
-
+	If $ichkMultyFarming = 1 Then
+		SetLog("Multy Farming Mode Activated, For Time for break...", $COLOR_Green)
+		If $iVillageName = "Main" Then
+			SwitchSecond()
+			_GUICtrlComboBox_SetCurSel($cmbProfile, 1)
+			cmbProfile()
+			$RunState = True
+			$fullArmy = True
+			ElseIf $iVillageName = "Second" Then
+			SwitchMain()
+			_GUICtrlComboBox_SetCurSel($cmbProfile, 0)
+			cmbProfile()
+			$RunState = True
+		EndIf
+	Else
 	; Find and wait for the confirmation of exit "okay" button
 	Local $i = 0 ; Reset Loop counter
 	While 1
@@ -126,6 +113,6 @@ Func checkAttackDisable($iSource, $Result = "")
 
 	; CoC is closed >>
 	WaitnOpenCoC(20000, True) ; close CoC for 20 seconds to ensure server logoff, True=call checkmainscreen to clean up if needed
-
+	EndIf
 EndFunc   ;==>checkAttackDisable
 

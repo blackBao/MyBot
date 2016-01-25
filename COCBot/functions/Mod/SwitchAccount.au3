@@ -14,14 +14,15 @@
 ; ===============================================================================================================================
 
 ;;;;;;;##### Main Account #####;;;;;;;
+Global $iSwCount = 0
 Func SwitchMain()
 	waitMainScreen()
+	Train()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
 
 	SelectMain()
-	LoadMain()
 
 	While 1
 		waitMainScreen()
@@ -35,10 +36,11 @@ Func SwitchMain()
 EndFunc   ;==>SwitchMain
 
 Func SelectMain()
+	Local $iLoopCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
-
+	$iSwCount += 1
 	While 1
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 
@@ -49,7 +51,21 @@ Func SelectMain()
 			CheckOK()
 			ExitLoop
 		EndIf
+	$iLoopCount += 1
+	ConsoleWrite($iLoopCount & @CRLF)
+	If $iLoopCount > 1000 Then
+		SelectMain()
+		ExitLoop
+	EndIf
 	WEnd
+	If $iSwCount > 4 Then
+		SetLog(" Exit Now ...Cancel change account")
+		Click(437, 399 + $midOffsetY) ;Click  Disconn
+		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+	Else
+	    LoadMain()
+	EndIf
+
 EndFunc   ;==>SelectMain
 
 Func LoadMain() ;Load Main Account
@@ -82,7 +98,6 @@ Func LoadMain() ;Load Main Account
 		ConsoleWrite($iLoopCount & @CRLF)
 		If $iLoopCount > 1500 Then
 			SelectMain()
-			LoadMain()
 			ExitLoop
 		EndIf
 	WEnd
@@ -91,13 +106,12 @@ EndFunc   ;==>LoadMain
 ;;;;;;;##### Second Account#####;;;;;;;
 Func SwitchSecond()
 	waitMainScreen()
+	Train()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
 
 	SelectSecond()
-
-	LoadSecond()
 
 	While 1
 		waitMainScreen()
@@ -111,11 +125,13 @@ EndFunc   ;==>SwitchSecond
 
 
 Func SelectSecond()
+	Local $iLoopCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 
 	While 1
+		$iSwCount += 1
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
 			SetLog("Second Account Selected", $COLOR_blue)
@@ -125,15 +141,26 @@ Func SelectSecond()
 			CheckOK()
 			ExitLoop
 		EndIf
-
+		$iLoopCount += 1
+		ConsoleWrite($iLoopCount & @CRLF)
+		If $iLoopCount > 1000 Then
+			SelectSecond()
+			ExitLoop
+		EndIf
 	WEnd
+	If $iSwCount > 4 Then
+		SetLog(" Exit Now ...Cancel change account")
+		Click(437, 399 + $midOffsetY) ;Click  Disconn
+		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+	Else
+	    LoadSecond()
+	EndIf
 
 EndFunc   ;==>SelectSecond
 
 
 Func LoadSecond() ; Load Second Account
 	Local $iLoopCount = 0
-
 	While 1
 		Local $Message = _PixelSearch(487, 387, 492, 391, Hex(0xE8E8E0, 6), 0);load pixel
 		If IsArray($Message) Then
@@ -162,7 +189,6 @@ Func LoadSecond() ; Load Second Account
 		ConsoleWrite($iLoopCount & @CRLF)
 		If $iLoopCount > 1500 Then
 			SelectSecond()
-			LoadSecond()
 			ExitLoop
 		EndIf
 
@@ -196,6 +222,4 @@ Func CheckOK()
 	Next
 	If $DebugSetLog = 1 Then SetLog("Cannot find OK Button", $COLOR_PURPLE)
 	If _Sleep(500) Then Return
-	checkMainScreen(False) ; check for screen errors while function was running
-
 EndFunc   ;==>CheckOK Button

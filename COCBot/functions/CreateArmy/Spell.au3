@@ -21,11 +21,35 @@ Func BrewSpells()
 
 	If $iTotalCountSpell = 0 Then Return
 
-	If $CurSFactory < $TotalSFactory  Or $ichkTrainLightSpell = 1 Then ;  If not full the Spell Factory then try to make spells
+	If $CurSFactory < $TotalSFactory  Or $ichkTrainLightSpell = 1  Or $ichkTrainHealSpell = 1 Or $ichkTrainRageSpell = 1 Or $ichkTrainJumpSpell = 1 Or $ichkTrainFreezeSpell = 1 Or $ichkTrainPoisonSpell = 1 Or $ichkTrainEarthquakeSpell = 1 Or $ichkTrainHasteSpell = 1 Then ;  If not full the Spell Factory then try to make spells
 		;Auto Train Lightning, create 2 lightning spells
 			If $ichkTrainLightSpell = 1 Then
-				$LightningSpellComp = $CurLightningSpell + 2
+				$LightningSpellComp = $CurLightningSpell + 1
 				SetLog("Auto Train Lighting Spell")
+			EndIf
+			If $ichkTrainHealSpell = 1 Then
+				$HealSpellComp = $CurHealSpell + 1
+				SetLog("Auto Train Heal Spell")
+			EndIf
+			If $ichkTrainRageSpell = 1 Then
+				$RageSpellComp = $CurRageSpell + 1
+				SetLog("Auto Train Rage Spell")
+			EndIf
+			If $ichkTrainJumpSpell = 1 Then
+				$JumpSpellComp = $CurJumpSpell + 1
+				SetLog("Auto Train Jump Spell")
+			EndIf
+			If $ichkTrainFreezeSpell = 1 Then
+				$FreezeSpellComp = $CurFreezeSpell + 1
+				SetLog("Auto Train Freeze Spell")
+			EndIf
+			If $ichkTrainPoisonSpell = 1 Then
+				$PoisonSpellComp = $CurPoisonSpell + 1
+				SetLog("Auto Train poison Spell")
+			EndIf
+			If $ichkTrainEarthquakeSpell = 1 Then
+				$EarthquakeSpellComp = $CurEarthSpell + 1
+				SetLog("Auto Train Heal Spell")
 			EndIf
 		; Spell Creation
 		; Normal Spell Factory
