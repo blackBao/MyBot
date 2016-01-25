@@ -48,6 +48,7 @@ $bm2 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\temp.bmp")
 	  _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
 	  cmbProfile()
    ElseIf CompareBitmaps($bm3, $bm2) Then
+	  SetLog("Second account Detected...", $COLOR_GREEN)
 	  _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
 	  cmbProfile()
    Else

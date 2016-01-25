@@ -30,7 +30,7 @@ Func SwitchMain()
 	WEnd
 
 	$RunState = True
-	FileDelete((@ScriptDir & "\images\Main.bmp"))
+;~	FileDelete((@ScriptDir & "\images\Main.bmp"))
 	DetectAccount()
 	$fullArmy = False
 EndFunc   ;==>SwitchMain
@@ -53,7 +53,7 @@ Func SelectMain()
 		EndIf
 	$iLoopCount += 1
 	ConsoleWrite($iLoopCount & @CRLF)
-	If $iLoopCount > 1000 Then
+	If $iLoopCount > 5000 Then
 		SelectMain()
 		ExitLoop
 	EndIf
@@ -118,7 +118,7 @@ Func SwitchSecond()
 		ExitLoop
 	WEnd
 	$RunState = True
-	FileDelete((@ScriptDir & "\images\Second.bmp"))
+;~	FileDelete((@ScriptDir & "\images\Second.bmp"))
 	DetectAccount()
 EndFunc   ;==>SwitchSecond
 
@@ -129,9 +129,8 @@ Func SelectSecond()
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
-
+	$iSwCount += 1
 	While 1
-		$iSwCount += 1
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
 			SetLog("Second Account Selected", $COLOR_blue)
@@ -143,7 +142,7 @@ Func SelectSecond()
 		EndIf
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
-		If $iLoopCount > 1000 Then
+		If $iLoopCount > 5000 Then
 			SelectSecond()
 			ExitLoop
 		EndIf
