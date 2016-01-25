@@ -14,13 +14,13 @@
 ; ===============================================================================================================================
 
 ;;;;;;;##### Main Account #####;;;;;;;
-Global $iSwCount = 0
+Global $iSwCount
 Func SwitchMain()
 	waitMainScreen()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
-
+	$iSwCount = 0
 	SelectMain()
 
 	While 1
@@ -29,34 +29,30 @@ Func SwitchMain()
 	WEnd
 
 	$RunState = True
-;~	FileDelete((@ScriptDir & "\images\Main.bmp"))
+	FileDelete((@ScriptDir & "\images\Main.bmp"))
 	DetectAccount()
 	$fullArmy = False
 EndFunc   ;==>SwitchMain
 
 Func SelectMain()
-	Local $iLoopCount = 0
+;~	Local $iLoopCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
-	While 1
+;~	While 1
+	Sleep(5000)
+	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
-
 		If IsArray($Message) Then
 			SetLog("Main account selected", $COLOR_blue)
 			Click($Message[0], $Message[1] + 63 + $midOffsetY) ;Select Main account
 			Sleep(2000)
 			CheckOK()
-			ExitLoop
+;~			ExitLoop
 		EndIf
-	$iLoopCount += 1
-	ConsoleWrite($iLoopCount & @CRLF)
-	If $iLoopCount > 5000 Then
-		SelectMain()
-		ExitLoop
-	EndIf
-	WEnd
+
+;~	WEnd
 	If $iSwCount > 3 Then
 		SetLog(" Exit Now ...Cancel change account")
 		Click(437, 399 + $midOffsetY) ;Click  Disconn
@@ -67,7 +63,14 @@ Func SelectMain()
 	Else
 	    LoadMain()
 	EndIf
-
+#Cs
+	$iLoopCount += 1
+	ConsoleWrite($iLoopCount & @CRLF)
+	If $iLoopCount > 5000 Then
+		SelectMain()
+;~		ExitLoop
+	EndIf
+#ce
 EndFunc   ;==>SelectMain
 
 Func LoadMain() ;Load Main Account
@@ -111,6 +114,7 @@ Func SwitchSecond()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
+	$iSwCount = 0
 
 	SelectSecond()
 
@@ -119,19 +123,21 @@ Func SwitchSecond()
 		ExitLoop
 	WEnd
 	$RunState = True
-;~	FileDelete((@ScriptDir & "\images\Second.bmp"))
+	FileDelete((@ScriptDir & "\images\Second.bmp"))
 	DetectAccount()
 EndFunc   ;==>SwitchSecond
 
 
 
 Func SelectSecond()
-	Local $iLoopCount = 0
+;~	Local $iLoopCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
-	While 1
+;~	While 1
+	Sleep(5000)
+	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
 			SetLog("Second Account Selected", $COLOR_blue)
@@ -139,15 +145,15 @@ Func SelectSecond()
 			Click($Message[0], $Message[1] + 112 + $midOffsetY) ;Select Second account
 			Sleep(2000)
 			CheckOK()
-			ExitLoop
+;~			ExitLoop
 		EndIf
-		$iLoopCount += 1
+#cs		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
 		If $iLoopCount > 5000 Then
 			SelectSecond()
 			ExitLoop
 		EndIf
-	WEnd
+#ce	WEnd
 	If $iSwCount > 3 Then
 		SetLog(" Exit Now ...Cancel change account")
 		Click(437, 399 + $midOffsetY) ;Click  Disconn

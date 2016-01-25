@@ -23,6 +23,14 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 		If DirGetSize(@ScriptDir & "\Zombies\") = -1 Then DirCreate(@ScriptDir & "\Zombies\")
 	EndIf
 
+	If $iCmbSearchMode > 0 and ($LBAQFilter = 1 Or $LBBKFilter = 1) Then
+			If $Is_ClientSyncError = True  And $LBHeroFilter = 0 Then
+				SetLog("Client Sync error Heros already confirmed awake. Skipping Check ", $COLOR_BLUE)
+			Else
+				LiveRoyalFilter()
+		   EndIf
+	  EndIf
+
 	If $Is_ClientSyncError = False Then
 		For $i = 0 To $iModeCount - 1
 			$iAimGold[$i] = $iMinGold[$i]

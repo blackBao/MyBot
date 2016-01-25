@@ -396,7 +396,7 @@ Func AttackMain() ;Main control for attack functions
 	EndIf
 	If _GUICtrlComboBox_GetCurSel($CmbSearchMode) > 0 Then
 		DeHeroFilter()
-		LiveRoyalFilter()
+;~		LiveRoyalFilter()
 	EndIf
 	If Number($iTrophyCurrent) > Number($iTxtMaxTrophy) Then ;If current trophy above max trophy, try drop first
 		DropTrophy()
