@@ -17,7 +17,6 @@
 Global $iSwCount = 0
 Func SwitchMain()
 	waitMainScreen()
-	Train()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
@@ -109,7 +108,6 @@ EndFunc   ;==>LoadMain
 ;;;;;;;##### Second Account#####;;;;;;;
 Func SwitchSecond()
 	waitMainScreen()
-	Train()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
