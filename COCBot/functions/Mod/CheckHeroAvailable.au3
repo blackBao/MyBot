@@ -1,5 +1,9 @@
 Func LiveRoyalFilter()
 
+		If $LBHeroFilter = 1 Then
+			RevertRoyalFilter()
+		EndIf
+
 		If $LBAQFilter = 1 And $ArcherQueenAvailable = 0 Then ;Checking for aq if aq filter enabled.
 			SetLog("Live Base Hero Healing Mode Enabled", $COLOR_BLUE)
 			$LBHeroFilter = 1

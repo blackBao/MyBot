@@ -164,6 +164,7 @@ Func runBot() ;Bot that runs everything in order
 			;    checkMainScreen(False)
 			;    If $Restart = True Then ContinueLoop
 			;EndIf
+			If $ichkMultyFarming = 1 Then DetectAccount()
 			If $RequestScreenshot = 1 Then PushMsg("RequestScreenshot")
 			If _Sleep($iDelayRunBot3) Then Return
 			VillageReport()
