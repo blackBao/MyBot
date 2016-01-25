@@ -58,10 +58,13 @@ Func SelectMain()
 		ExitLoop
 	EndIf
 	WEnd
-	If $iSwCount > 4 Then
+	If $iSwCount > 3 Then
 		SetLog(" Exit Now ...Cancel change account")
 		Click(437, 399 + $midOffsetY) ;Click  Disconn
 		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+	ElseIf IsMainPage() Then
+		Setlog("Change account cancel")
+		Return True
 	Else
 	    LoadMain()
 	EndIf
@@ -147,10 +150,13 @@ Func SelectSecond()
 			ExitLoop
 		EndIf
 	WEnd
-	If $iSwCount > 4 Then
+	If $iSwCount > 3 Then
 		SetLog(" Exit Now ...Cancel change account")
 		Click(437, 399 + $midOffsetY) ;Click  Disconn
 		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+	ElseIf IsMainPage() Then
+		Setlog("Change account cancel")
+		Return True
 	Else
 	    LoadSecond()
 	EndIf
