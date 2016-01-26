@@ -1717,6 +1717,12 @@ Func saveConfig() ;Saves the controls settings to the config
 	EndIf
 	IniWrite($config, "profiles", "cmbTrophyMinProfile", _GUICtrlComboBox_GetCurSel($cmbTrophyMinProfile))
 	IniWrite($config, "profiles", "txtMinTrophyAmount", GUICtrlRead($txtMinTrophyAmount))
+;;;;;builder idle
+	If GUICtrlRead($chkAlertBuilderIdle) = $GUI_CHECKED Then
+		IniWrite($config, "pushbullet", "AlertBuilderIdle", 1)
+	Else
+		IniWrite($config, "pushbullet", "AlertBuilderIdle", 0)
+	EndIf
 
 	If $hFile <> -1 Then FileClose($hFile)
 

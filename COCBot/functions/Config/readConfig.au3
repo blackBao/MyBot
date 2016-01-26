@@ -696,7 +696,8 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkTrophySwitchMin = IniRead($config, "profiles", "chkTrophySwitchMin", "0")
 		$icmbTrophyMinProfile = IniRead($config, "profiles", "cmbTrophyMinProfile", "0")
 		$itxtMinTrophyAmount = IniRead($config, "profiles", "txtMinTrophyAmount", "1000")
-
+;;;;;builder idle
+		$ichkAlertBuilderIdle = IniRead($config, "pushbullet", "AlertBuilderIdle", "0")
 	Else
 		Return False
 	EndIf

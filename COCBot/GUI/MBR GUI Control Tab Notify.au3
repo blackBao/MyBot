@@ -40,7 +40,7 @@ Func chkPBenabled()
 		GUICtrlSetState($chkDeleteOldPushes, $GUI_ENABLE)
 		GUICtrlSetState($btnDeletePBmessages, $GUI_ENABLE)
 		GUICtrlSetState($chkAlertPBCampFull, $GUI_ENABLE)
-
+		GUICtrlSetState($chkAlertBuilderIdle, $GUI_ENABLE)
 		If $ichkDeleteOldPushes = 1 Then
 			GUICtrlSetState($cmbHoursPushBullet, $GUI_ENABLE)
 		EndIf
@@ -62,7 +62,7 @@ Func chkPBenabled()
 		GUICtrlSetState($chkDeleteOldPushes, $GUI_DISABLE)
 		GUICtrlSetState($btnDeletePBmessages, $GUI_DISABLE)
 		GUICtrlSetState($chkAlertPBCampFull, $GUI_DISABLE)
-
+		GUICtrlSetState($chkAlertBuilderIdle, $GUI_DISABLE)
 		GUICtrlSetState($cmbHoursPushBullet, $GUI_DISABLE)
 
 	EndIf
