@@ -35,24 +35,21 @@ Local $x = 30, $y = 150
 			$sTxtHours = GetTranslated(7,25, "Hours")
 			GUICtrlSetData(-1, "-|1 " & GetTranslated(7,24, "Hour") & "|2 " & $sTxtHours & "|3 " & $sTxtHours & "|4 " & $sTxtHours & "|5 " & $sTxtHours & "|6 " & $sTxtHours & "|7 " & $sTxtHours & "|8 " & $sTxtHours & "|9 " & $sTxtHours & "|10 " & $sTxtHours & "|11 " & $sTxtHours & "|12 " & $sTxtHours& "|13 " & $sTxtHours & "|14 " & $sTxtHours & "|15 " & $sTxtHours & "|16 " & $sTxtHours & "|17 " & $sTxtHours & "|18 " & $sTxtHours & "|19 " & $sTxtHours & "|20 " & $sTxtHours & "|21 " & $sTxtHours & "|22 " & $sTxtHours & "|23 " & $sTxtHours & "|24 " & $sTxtHours, "-")
 			GUICtrlSetState (-1, $GUI_DISABLE)
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-Local $x = 30, $y = 205
-	$grpProfiles = GUICtrlCreateGroup(GetTranslated(7,26, "Switch Profiles"), $x - 20, $y - 20, 225, 45)
-		$y -=5
+	Local $x = 30, $y = 205
+		$grpProfiles = GUICtrlCreateGroup(GetTranslated(7,26, "Switch Profiles"), $x - 20, $y - 20, 225, 45)
+		;$y -=5
 		;$lblProfile = GUICtrlCreateLabel(GetTranslated(7,27, "Current Profile") & ":", $x, $y, -1, -1)
 		;$y += 15
-		$cmbProfile = GUICtrlCreateCombo("01", $x - 3, $y, 40, 18, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+		$cmbRecSetting = GUICtrlCreateCombo("Custom", $x -3, $y -3, 100, 18, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 		$txtTip = GetTranslated(7,28, "Use this to switch to a different profile")& @CRLF & GetTranslated(7,29, "Your profiles can be found in") & ": " & @CRLF & $sProfilePath
 		GUICtrlSetTip(-1, $txtTip)
-		GUICtrlSetData(-1, "02|03|04|05|06", "01")
-		GUICtrlSetOnEvent(-1, "cmbProfile")
-		$txtVillageName = GUICtrlCreateInput(GetTranslated(7,30, "MyVillage"), $x + 47, $y, 130, 20, BitOR($SS_CENTER, $ES_AUTOHSCROLL))
-		GUICtrlSetLimit (-1, 100, 0)
-		GUICtrlSetFont(-1, 9, 400, 1)
-		GUICtrlSetTip(-1, GetTranslated(7,31, "Your village/profile's name"))
-		GUICtrlSetOnEvent(-1, "txtVillageName")
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
+		GUICtrlSetData(-1, "TH Snipe |TH 8 (G + E) |TH 8(G + E + DE)|TH 8 (DE)|TH 9 (G + E) |TH 9 (G + E + DE) |TH 9 (DE) |TH 10 (G + E) |TH 10 (G + E + DE) |TH 10 (DE)", "Custom")
+		;GUICtrlSetOnEvent(-1, "cmbRecSetting")
+		$btnConfirmRecSetting = GUICtrlCreateButton ("Confirm", $x +120, $y -3, 65, 20)
+		$txtTip = "Apply your selected settings with this button."
+		GUICtrlSetTip(-1, $txtTip)
+		GUICtrlSetOnEvent(-1, "btnConfirmRecSetting")
 
 Local $x = 260, $y = 205
 	$grpLanguages = GUICtrlCreateGroup(GetTranslated(7,32, "GUI Language"), $x - 20, $y - 20, 220, 45)
@@ -65,7 +62,6 @@ Local $x = 260, $y = 205
 
 		GUICtrlSetData(-1, "English", "English") ;default set english language
 		GUICtrlSetOnEvent(-1, "cmbLanguage")
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 Local $x = 30, $y = 253
 	$grpMisc = GUICtrlCreateGroup(GetTranslated(7,90, "Rearm, Collect, Clear"), $x -20, $y - 20 , 225, 115)
@@ -77,7 +73,6 @@ Local $x = 30, $y = 253
 			GUICtrlSetTip(-1, GetTranslated(7,35, "Check this to automatically Rearm Traps, Reload Xbows and Infernos (if any) in your Village."))
 			GUICtrlSetOnEvent(-1, "chkTrap")
 			_ArrayConcatenate($G, $D)
-	;GUICtrlCreateGroup("", -99, -99, 1, 1)
 	$y += 28
 	;Local $x = 30, $y = 335
 	;$grpCollect = GUICtrlCreateGroup(GetTranslated(7,92, "Collecting Resources"), $x - 20, $y - 20 , 225, 60)
@@ -88,7 +83,6 @@ Local $x = 30, $y = 253
 			$txtTip = GetTranslated(7,37, "Check this to automatically collect the Village's Resources") & @CRLF & GetTranslated(7,38, "from Gold Mines, Elixir Collectors and Dark Elixir Drills.")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState(-1, $GUI_CHECKED)
-	;GUICtrlCreateGroup("", -99, -99, 1, 1)
 	$y += 28
 	;Local $x = 30, $y = 400
 	;$grpTombstones = GUICtrlCreateGroup(GetTranslated(7,93, "Clear Tombstones"), $x - 20, $y - 20 , 225, 55)
@@ -97,7 +91,6 @@ Local $x = 30, $y = 253
 			$txtTip = GetTranslated(7,40, "Check this to automatically clear tombstones after enemy attack.")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState(-1, $GUI_UNCHECKED)
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	Local $x = 30, $y = 371
 	$grpRestartMins = GUICtrlCreateGroup(GetTranslated(7,41, "Resume Bot"), $x - 20, $y - 20 , 225, 89)
@@ -123,7 +116,6 @@ Local $x = 30, $y = 253
 			$txtTip = GetTranslated(7,45, "Minimum Dark Elixir value for the bot to resume attacking after halting because of low dark elixir.")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 6)
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	Local $x = 260, $y = 253
 	$grpTrophy = GUICtrlCreateGroup(GetTranslated(7,46, "Trophy Settings"), $x - 20, $y - 20, 220, 88)
@@ -157,7 +149,6 @@ Local $x = 30, $y = 253
 			GUICtrlSetLimit(-1, 2)
 			GUICtrlSetState (-1, $GUI_DISABLE)
 		$lblDTArmypercent = GUICtrlCreateLabel(GetTranslated(7,98, "%"), $x + 130, $y + 2, -1, -1)
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	Local $x = 260, $y = 343
 	$grpTimeWakeUp = GUICtrlCreateGroup(GetTranslated(7,54, "Remote Device"), $x - 20, $y - 20 , 220, 42)
@@ -169,7 +160,6 @@ Local $x = 30, $y = 253
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 3)
 		$lblTimeWakeUpSec = GUICtrlCreateLabel(GetTranslated(7,57, "sec."), $x + 165, $y + 2, -1, -1)
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	Local $x = 260, $y = 388
 	$grpVSDelay = GUICtrlCreateGroup(GetTranslated(7,58, "Village Search Delay"), $x - 20, $y - 20, 220, 72)
@@ -202,7 +192,6 @@ Local $x = 30, $y = 253
 			GUICtrlSetLimit(-1, 12, 0) ; change max/min value
 			GUICtrlSetData(-1, 0) ; default value
 			GUICtrlSetOnEvent(-1, "sldMaxVSDelay")
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	Local $x = 30, $y = 462
 	$grpLocateBuildings = GUICtrlCreateGroup(GetTranslated(7,67, "Locate Manually"), $x - 20, $y - 20, 450, 65)
@@ -266,5 +255,4 @@ Local $x = 30, $y = 253
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "btnResetBuilding")
 		GUICtrlCreateGroup("", -99, -99, 1, 1)
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
 GUICtrlCreateTabItem("")

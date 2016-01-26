@@ -58,22 +58,6 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		$txtTip = "The amount of Lightning Spells Used in zapping."
 	    GUICtrlSetTip(-1, $txtTip)
 
-	Local $x = 30, $y = 215
-		$grpProfiles = GUICtrlCreateGroup(GetTranslated(7,26, "Switch Profiles"), $x - 20, $y - 20, 225, 55)
-		;$y -=5
-		;$lblProfile = GUICtrlCreateLabel(GetTranslated(7,27, "Current Profile") & ":", $x, $y, -1, -1)
-		;$y += 15
-		$cmbRecSetting = GUICtrlCreateCombo("Custom", $x, $y, 100, 18, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-		$txtTip = GetTranslated(7,28, "Use this to switch to a different profile")& @CRLF & GetTranslated(7,29, "Your profiles can be found in") & ": " & @CRLF & $sProfilePath
-		GUICtrlSetTip(-1, $txtTip)
-		GUICtrlSetData(-1, "TH Snipe |TH 8 (G + E) |TH 8(G + E + DE)|TH 8 (DE)|TH 9 (G + E) |TH 9 (G + E + DE) |TH 9 (DE) |TH 10 (G + E) |TH 10 (G + E + DE) |TH 10 (DE)", "Custom")
-		;GUICtrlSetOnEvent(-1, "cmbRecSetting")
-		$btnConfirmRecSetting = GUICtrlCreateButton ("Confirm", $x +120, $y, 65, 20)
-		$txtTip = "Apply your selected settings with this button."
-		GUICtrlSetTip(-1, $txtTip)
-		GUICtrlSetOnEvent(-1, "btnConfirmRecSetting")
-
-
 	Local $x = 260, $y = 215
 		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 175, 55)
 			GUICtrlCreateIcon($pIconLib, $eIcnKing, $x, $y, 24, 24)
@@ -96,7 +80,7 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			$chkDeWardenFilter = GUICtrlCreateCheckbox("", $x + 30, $y,17, 17)
 				GUICtrlSetTip(-1, $txtTip)
 				GUICtrlSetOnEvent(-1, "LBHeroFilter")
-	Local $x = 30, $y = 270
+	Local $x = 30, $y = 215
 		$grpAutoTrainSpell = GUICtrlCreateGroup("Auto Train Spell", $x - 20, $y - 20, 225, 85)
 			GUICtrlCreateIcon($pIconLib, $eIcnLightSpell, $x, $y, 24, 24)
 				$txtTip = GetTranslated(14,39, -1)
@@ -155,11 +139,6 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		$btnNormalSwitch = GUICtrlCreateButton("Advanced Filters", $x - 15, $y - 5, 90, 35)
 			IF $btnColor then GUICtrlSetBkColor(-1, 0xDB4D4D)
 			GUICtrlSetOnEvent($btnNormalSwitch, "hidehero")
-		GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-
-
-
 
 	Local $x = 30, $y = 150
 	$grpSkipCentreDE = GUICtrlCreateGroup("Skip Centre DE", $x - 20, $y - 20, 170, 55)
@@ -170,7 +149,7 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			GUICtrlSetData(-1, "Always Attack Centre DE|Always Skip Centre DE|Skip When BK/AQ Sleeping", "Always Attack Centre DE")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState (-1, $GUI_HIDE)
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 
 	$x = 205
 	$grpSkipUndetectedDE = GUICtrlCreateGroup("Skip Undetected DE", $x - 20, $y - 20, 170, 55)

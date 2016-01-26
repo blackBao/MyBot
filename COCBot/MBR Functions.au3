@@ -245,3 +245,4 @@
 #include "functions\Mod\SideAttack.au3"
 #include "functions\Mod\dropUnit.au3"
 #include "functions\Mod\unitInfo.au3"
+#include "functions\Mod\ProfileSwitch.au3"
