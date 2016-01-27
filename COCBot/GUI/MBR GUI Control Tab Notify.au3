@@ -14,8 +14,8 @@
 ; ===============================================================================================================================
 
 Func PushBulletRemoteControl()
-	If GUICtrlRead($chkPBenabled) = $GUI_CHECKED And GUICtrlRead($chkPBRemote) = $GUI_CHECKED Then _RemoteControl()
-EndFunc   ;==>PushBulletRemoteControl
+	If $pEnabled And $pRemote Then _RemoteControl()
+ EndFunc   ;==>PushBulletRemoteControl
 
 Func PushBulletDeleteOldPushes()
 	If $pEnabled = 1 And $ichkDeleteOldPushes = 1 Then _DeleteOldPushes() ; check every 30 min if must to delete old pushbullet messages, increase delay time for anti ban pushbullet

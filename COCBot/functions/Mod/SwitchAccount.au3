@@ -14,24 +14,55 @@
 ; ===============================================================================================================================
 
 ;;;;;;;##### Main Account #####;;;;;;;
-Global $iSwCount
+Global $iSwCount, $iconfirm
 Func SwitchMain()
+	$iConfirm = 0
 	waitMainScreen()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
 	$iSwCount = 0
-	SelectMain()
 
-	While 1
+	SelectMain()
 		waitMainScreen()
-		ExitLoop
-	WEnd
 
 	$RunState = True
-	FileDelete((@ScriptDir & "\images\Main.bmp"))
-	DetectAccount()
+	If $iConfirm = 1 Then
+		FileDelete((@ScriptDir & "\images\Main.bmp"))
+		DetectAccount()
+	EndIf
 	$fullArmy = False
+	Local $iLoopCount = 0
+	While 1
+		Local $Message = _PixelSearch(487, 387, 492, 391, Hex(0xE8E8E0, 6), 0);load pixel
+		If IsArray($Message) Then
+			SetLog("Load Main account", $COLOR_blue)
+			Click(512, 433) ;Click Load Button
+			Sleep(1000)
+
+			Local $Message = _PixelSearch(470, 249 + $midOffsetY, 478, 255 + $midOffsetY, Hex(0xE8E8E0, 6), 0)
+			If IsArray($Message) Then
+				$iConfirm = 1
+				Click(521, 198) ;Click Confirm
+				Sleep(1500)
+				Click(339, 215) ;Click Confirm txtbox
+				SetLog("Insert CONFIRM To Text Box ", $COLOR_blue)
+				Sleep(1500)
+				ControlSend($Title, "", "", "{LSHIFT DOWN}{C DOWN}{C UP}{O DOWN}{O UP}{N DOWN}{N UP}{F DOWN}{F UP}{I DOWN}{I UP}{R DOWN}{R UP}{M DOWN}{M UP}{LSHIFT UP}") ;Enter  Confirm  txt
+				Sleep(2000)
+				Click(521, 198) ;Click Confirm
+			Else
+				Click(521, 198) ;Click Confirm
+			EndIf
+			ExitLoop
+		EndIf
+
+		$iLoopCount += 1
+		ConsoleWrite($iLoopCount & @CRLF)
+		If $iLoopCount > 1000 Then
+			ExitLoop
+		EndIf
+	WEnd
 EndFunc   ;==>SwitchMain
 
 Func SelectMain()
@@ -41,7 +72,7 @@ Func SelectMain()
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
 ;~	While 1
-	Sleep(5000)
+	Sleep(10000)
 	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
@@ -85,6 +116,7 @@ Func LoadMain() ;Load Main Account
 
 			Local $Message = _PixelSearch(470, 249 + $midOffsetY, 478, 255 + $midOffsetY, Hex(0xE8E8E0, 6), 0)
 			If IsArray($Message) Then
+				$iConfirm = 1
 				Click(521, 198) ;Click Confirm
 				Sleep(1500)
 				Click(339, 215) ;Click Confirm txtbox
@@ -110,6 +142,7 @@ EndFunc   ;==>LoadMain
 
 ;;;;;;;##### Second Account#####;;;;;;;
 Func SwitchSecond()
+	$iConfirm = 0
 	waitMainScreen()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
@@ -117,14 +150,46 @@ Func SwitchSecond()
 	$iSwCount = 0
 
 	SelectSecond()
-
-	While 1
 		waitMainScreen()
-		ExitLoop
-	WEnd
+
 	$RunState = True
-	FileDelete((@ScriptDir & "\images\Second.bmp"))
-	DetectAccount()
+	If $iConfirm = 1 Then
+		FileDelete((@ScriptDir & "\images\Second.bmp"))
+		DetectAccount()
+	EndIf
+	Local $iLoopCount = 0
+	While 1
+		Local $Message = _PixelSearch(487, 387, 492, 391, Hex(0xE8E8E0, 6), 0);load pixel
+		If IsArray($Message) Then
+			SetLog("Load Second account", $COLOR_blue)
+			Sleep(1500)
+			Click(512, 433) ;Click Load Button
+			Sleep(1000)
+
+			Local $Message = _PixelSearch(470, 249 + $midOffsetY, 478, 255 + $midOffsetY, Hex(0xE8E8E0, 6), 0)
+			If IsArray($Message) Then
+				$iConfirm = 1
+				Click(521, 198) ;Click Confirm
+				Sleep(1500)
+				Click(339, 215) ;Click Confirm txtbox
+				SetLog("Insert CONFIRM To Text Box ", $COLOR_blue)
+				Sleep(1500)
+				ControlSend($Title, "", "", "{LSHIFT DOWN}{C DOWN}{C UP}{O DOWN}{O UP}{N DOWN}{N UP}{F DOWN}{F UP}{I DOWN}{I UP}{R DOWN}{R UP}{M DOWN}{M UP}{LSHIFT UP}") ;Enter  Confirm  txt
+				Sleep(2000)
+				Click(521, 198) ;Click Confirm
+			Else
+				Click(521, 198) ;Click Confirm
+			EndIf
+			ExitLoop
+		EndIf
+
+		$iLoopCount += 1
+		ConsoleWrite($iLoopCount & @CRLF)
+		If $iLoopCount > 1000 Then
+			ExitLoop
+		EndIf
+
+	WEnd
 EndFunc   ;==>SwitchSecond
 
 
@@ -136,7 +201,7 @@ Func SelectSecond()
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
 ;~	While 1
-	Sleep(5000)
+	Sleep(10000)
 	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
@@ -180,6 +245,7 @@ Func LoadSecond() ; Load Second Account
 
 			Local $Message = _PixelSearch(470, 249 + $midOffsetY, 478, 255 + $midOffsetY, Hex(0xE8E8E0, 6), 0)
 			If IsArray($Message) Then
+				$iConfirm = 1
 				Click(521, 198) ;Click Confirm
 				Sleep(1500)
 				Click(339, 215) ;Click Confirm txtbox
