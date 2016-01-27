@@ -76,21 +76,7 @@ Func checkAttackDisable($iSource, $Result = "")
 	$Restart = True ; Set flag to restart the process at the bot main code when it returns
 
 	Setlog("Time for break, exit now..", $COLOR_BLUE)
-	If $ichkMultyFarming = 1 Then
-		SetLog("Multy Farming Mode Activated, For Time for break...", $COLOR_Green)
-		If $iVillageName = "Main" Then
-			SwitchSecond()
-			_GUICtrlComboBox_SetCurSel($cmbProfile, 1)
-			cmbProfile()
-			$RunState = True
-			$fullArmy = True
-			ElseIf $iVillageName = "Second" Then
-			SwitchMain()
-			_GUICtrlComboBox_SetCurSel($cmbProfile, 0)
-			cmbProfile()
-			$RunState = True
-		EndIf
-	Else
+
 	; Find and wait for the confirmation of exit "okay" button
 	Local $i = 0 ; Reset Loop counter
 	While 1
@@ -113,6 +99,6 @@ Func checkAttackDisable($iSource, $Result = "")
 
 	; CoC is closed >>
 	WaitnOpenCoC(20000, True) ; close CoC for 20 seconds to ensure server logoff, True=call checkmainscreen to clean up if needed
-	EndIf
+
 EndFunc   ;==>checkAttackDisable
 
