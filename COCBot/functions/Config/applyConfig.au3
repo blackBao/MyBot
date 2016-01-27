@@ -502,6 +502,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkAlertPBCampFull, $GUI_UNCHECKED)
 	EndIf
 
+
 	;	If $iUnbreakableMode = 1 Then
 	;		GUICtrlSetState($chkUnbreakable, $GUI_CHECKED)
 	;	Else
@@ -1624,6 +1625,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkUseAttackABCSV, $GUI_UNCHECKED)
 	EndIf
 	chkUseAttackABCSV()
+
 	;Others Settings--------------------------------------------------------------------------
 	If $ichkSwitchDonate = 1 Then
 		GUICtrlSetState($chkSwitchDonate, $GUI_CHECKED)

@@ -89,7 +89,6 @@ Func cmbLogImpl($ApplyConfig)
 			ControlMove($frmBot, "", $txtAtkLog, $x, $y, $w, $h * 2 + $iDividerHeight)
 			GUICtrlSetState($divider, $GUI_HIDE);ControlHide($frmBot, "", $divider)
 	EndSwitch
-	tabMain()
 EndFunc   ;==>cmbLogImpl
 
 Func MoveDivider()

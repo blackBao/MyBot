@@ -67,13 +67,6 @@ Func chkDESideEB()
 			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
 	EndIf
-	If _GUICtrlComboBox_GetCurSel($cmbDBDeploy) = 4 Then
-		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_DISABLE)
-		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_UNCHECKED)
-	Else
-		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_ENABLE)
-	EndIf
-
 EndFunc		;==>chkDESideEB
 
 

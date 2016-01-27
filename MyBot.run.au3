@@ -295,7 +295,7 @@ Func runBot() ;Bot that runs everything in order
 			EndIf
 			If _Sleep($iDelayRunBot5) Then Return
 			If $Restart = True Then ContinueLoop
-		 EndIf
+		    EndIf
 		 If $ichkMultyFarming = 1 Then
 			   SetLog("Multy Farming Mode Activated", $COLOR_Green)
 			If $iVillageName = "Main" Then
