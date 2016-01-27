@@ -39,7 +39,7 @@ EndIf
 #include "COCBot\MBR Global Variables.au3"
 
 $sBotVersion = "v5.1.3" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
-$sBotTitle = "MODv1.3 My Bot " & $sBotVersion & " "
+$sBotTitle = "My Bot " & $sBotVersion & " "
 
 Opt("WinTitleMatchMode", 3) ; Window Title exact match mode
 #include "COCBot\functions\Main Screen\Android.au3"
