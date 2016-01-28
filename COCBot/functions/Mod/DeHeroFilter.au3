@@ -14,7 +14,6 @@
 ; ===============================================================================================================================
 Func DeHeroFilter()
 	Local $HeroFilter = 0
-
 	If $ichkDeKingFilter = 1 And $BarbarianKingAvailable = 0 Then
 			SetLog("Active Hero Filter: No Barbarian King Available.. Attack Dead base only  ", $COLOR_PURPLE)
 			$HeroFilter = 1
@@ -24,7 +23,7 @@ Func DeHeroFilter()
 	ElseIf $ichkDeQueenFilter = 1 And $ArcherQueenAvailable = 0 Then
 			SetLog("Active Hero Filter: No Archer Queen Available.. Attack Dead base only  ", $COLOR_PURPLE)
 			$HeroFilter = 1
-	Else
+	ElseIf ($ichkDeQueenFilter = 1 And $ArcherQueenAvailable = 1) Or ($ichkDeWardenFilter = 1 And $GrandWardenAvailable = 1) Or ($ichkDeKingFilter = 1 And $BarbarianKingAvailable = 1) Then
 		SetLog("DeActive Hero Filter.. ", $COLOR_PURPLE)
 		$HeroFilter = 0
 	EndIf
@@ -38,10 +37,9 @@ Func DeHeroFilter()
 				GUICtrlSetState($chkABEarthquakeSpellCSV, $GUI_UNCHECKED)
 			EndIf
 
-	If $HeroFilter = 1 Then
+	If $HeroFilter = 1 And $iCmbSearchMode = 2 Then
 	   $iCmbSearchMode = 0
-	Else
-	   $iCmbSearchMode = 2
+	ElseIf $HeroFilter = 0 And $iCmbSearchMode = 0 Then
+		$iCmbSearchMode = 2
 	EndIf
-
 EndFunc
