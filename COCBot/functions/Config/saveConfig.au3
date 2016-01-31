@@ -1644,6 +1644,16 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "Others", "LBAQFilter", 0)
 	EndIf
 
+	;save troops option
+	If GUICtrlRead($chkChangeFF) = $GUI_CHECKED Then
+		IniWrite($config, "options", "ChkSTFFBarch", 1)
+	Else
+		IniWrite($config, "options", "ChkSTFFBarch", 0)
+	EndIf
+
+	IniWrite($config, "options", "txtTHpercentCollectors", GUICtrlRead($txtTHpercentCollectors))
+
+
 	;Options Settings--------------------------------------------------------------------------
     For $i = 1 to 24
 	   If GUICtrlRead(Eval("cmbDeDeploy" & StringRight("0" & $i,2))) <> $DeDeployEmptyString Then

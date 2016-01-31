@@ -1028,3 +1028,7 @@ Global $ichkTrophySwitchMax, $itxtMaxTrophyAmount, $icmbTrophyMaxProfile, $ichkT
 ;builder idle
 Global $ichkAlertBuilderIdle
 Global $iReportIdleBuilder = 0
+
+Global $useFFBarchST,$percentCollectors
+Global $saveTroops = 0
+Global $countFindPixCloser = 0, $countCollectorexposed = 0

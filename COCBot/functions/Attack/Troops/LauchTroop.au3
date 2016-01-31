@@ -52,6 +52,8 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 	Local $listListInfoDeployTroopPixel[0]
 	Local $pixelRandomDrop[2]
 	Local $pixelRandomDropcc[2]
+	$countFindPixCloser = 0
+	$countCollectorexposed = 0
 
 	If ($iChkRedArea[$iMatchMode] = 1) Then
 		For $i = 0 To UBound($listInfoDeploy) - 1
@@ -95,6 +97,49 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 				$listListInfoDeployTroopPixel[$waveNb - 1] = $listInfoDeployTroopPixel
 			EndIf
 		Next
+		if $useFFBarchST = 1 then
+
+		Setlog ("There are " & $countCollectorexposed & " collector(s) near RED LINE out of " & Ubound($PixelNearCollector) & " collectors")
+
+;		if _Sleep(1000) then return
+
+		if ($countCollectorexposed/Ubound($PixelNearCollector)*100) < $percentCollectors then
+
+		SetLog("Change the Attack Strategy to De side attack!...")
+		GetBuildingEdge($eSideBuildingDES)
+		$nbSides = 1
+;		if _Sleep(500) then return
+	$iMatchMode = $LB
+	$iChkDeploySettings[$LB] = 5
+		Local $DElistInfoDeploy[24][5]
+        Local $waveCount,$waveNumber
+        Local $deploystring
+
+        for $i = 0 to 23
+            $DElistInfoDeploy[$i][0] = String($DeDeployType[$i])
+            $DElistInfoDeploy[$i][1] = $nbSides
+                $waveCount = 0
+            $waveNumber = 0
+            for $j = 0 to 23
+               If string($DeDeployType[$i])=string($DeDeployType[$j]) Then
+                  $waveCount = $waveCount + 1
+                  If $j<=$i Then
+                     $waveNumber = $waveNumber +1
+                  EndIf
+               EndIf
+            Next
+            $DElistInfoDeploy[$i][2] = $waveNumber
+            $DElistInfoDeploy[$i][3] = $waveCount
+            $DElistInfoDeploy[$i][4] = $DeDeployPosition[$i]
+        Next
+
+		LaunchSideAttack($DElistInfoDeploy, $CC, $King, $Queen, $Warden)
+
+		Return
+
+		Endif
+
+		EndIf
 
 		If (($iChkSmartAttack[$iMatchMode][0] = 1 Or $iChkSmartAttack[$iMatchMode][1] = 1 Or $iChkSmartAttack[$iMatchMode][2] = 1) And UBound($PixelNearCollector) = 0) Then
 			SetLog("Error, no pixel found near collector => Normal attack near red line")
@@ -261,7 +306,6 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 				EndIf
 			EndIf
 		Next
-
 	EndIf
 	Return True
 EndFunc   ;==>LaunchTroop2

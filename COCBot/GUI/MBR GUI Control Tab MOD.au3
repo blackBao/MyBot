@@ -246,3 +246,15 @@ Func chkLBBKFilter()
 		Next
 	EndIf
 EndFunc   ;==>chkLBBKFilter
+
+Func chkChangeFF()
+	If GUICtrlRead($chkChangeFF) = $GUI_CHECKED Then
+		For $i = $txtTHpercentCollectors To $lblChangeFF
+			GUICtrlSetState($i, $GUI_ENABLE)
+		Next
+	Else
+		For $i = $txtTHpercentCollectors To $lblChangeFF
+		GUICtrlSetState($i, $GUI_DISABLE)
+		Next
+	EndIf
+EndFunc

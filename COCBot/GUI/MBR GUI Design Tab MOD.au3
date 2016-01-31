@@ -58,6 +58,18 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		$txtTip = "The amount of Lightning Spells Used in zapping."
 	    GUICtrlSetTip(-1, $txtTip)
 
+		Local $x = 260, $y = 275
+	  $grpSaveTroops = GUICtrlCreateGroup("Dead Base", $x, $y - 20, 130, 65)
+		$chkChangeFF = GUICtrlCreateCheckbox("Use De Side Attack", $x + 10, $y - 5, -1, -1)
+			$txtTip = "Change to De Side Attack if less than % of collectors near RED LINE."
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetOnEvent(-1, "$chkChangeFF")
+		$txtTHpercentCollectors = GUICtrlCreateInput("80", $x + 10, $y + 17, 35, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetLimit(-1, 100)
+		$lblChangeFF = GUICtrlCreateLabel("% collectors.", $x + 50, $y + 20, -1, -1)
+		   	GUICtrlSetTip(-1, $txtTip)
+
 	Local $x = 260, $y = 215
 		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 175, 55)
 			GUICtrlCreateIcon($pIconLib, $eIcnKing, $x, $y, 24, 24)

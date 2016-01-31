@@ -1784,6 +1784,14 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkLBAQFilter, $GUI_UNCHECKED)
 	EndIf
 
+	If $useFFBarchST = 1 Then
+		GUICtrlSetState($chkChangeFF, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkChangeFF, $GUI_UNCHECKED)
+	EndIf
+
+	GUICtrlSetData($txtTHpercentCollectors, $percentCollectors)
+
 	;Options Settings--------------------------------------------------------------------------
 	For $i = 1 to 24
 	  	GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])

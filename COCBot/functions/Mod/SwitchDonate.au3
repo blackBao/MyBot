@@ -30,7 +30,7 @@ Func SwitchDonate()
 			ExitLoop
 			WEnd
 			SwitchMain()
-			ElseIf $iVillageName = "Second" Then
+		ElseIf $iVillageName = "Second" Then
 			SwitchMain()
 			$RunState = True
          While 1

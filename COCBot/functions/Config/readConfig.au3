@@ -663,6 +663,10 @@ Func readConfig() ;Reads config and sets it to the variables
 		$LBBKFilter = IniRead($config, "Others", "LBBKFilter", "1")
 		$LBAQFilter = IniRead($config, "Others", "LBAQFilter", "1")
 
+		$useFFBarchST = IniRead($config, "options", "ChkSTFFBarch", "0")
+		$percentCollectors = IniRead($config, "options", "txtTHpercentCollectors", "80")
+
+
 		;Options Settings--------------------------------------------------------------------------
 		For $i = 1 to 24
 		   $DeDeployType[$i-1] = IniRead($config, "options", "DeDeployType" & $I, $DeDeployEmptyString)
