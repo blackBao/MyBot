@@ -298,6 +298,7 @@ Func runBot() ;Bot that runs everything in order
 		    EndIf
 		 If $ichkMultyFarming = 1 Then
 			   SetLog("Multy Farming Mode Activated", $COLOR_Green)
+			   RequestCC()
 			If $iVillageName = "Main" Then
 			   SwitchSecond()
 ;~			   _GUICtrlComboBox_SetCurSel($cmbProfile, 1)

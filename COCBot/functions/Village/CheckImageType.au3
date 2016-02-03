@@ -37,5 +37,5 @@ Func CheckImageType()
 	LoadElixirImage() ; Load Elixir images
 	LoadElixirImage75Percent(); Load Elixir images full at 75%
 	LoadElixirImage50Percent(); Load Elixir images full at 50%
-
+	LoadDefImage();Load defence image
 EndFunc   ;==>CheckImageType

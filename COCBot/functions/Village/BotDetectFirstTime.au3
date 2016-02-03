@@ -144,16 +144,19 @@ Func BotDetectFirstTime()
 		SetLog("Verifying your Mines/Collectors/Drills ...wait ...")
 		;$PixelMineHere = GetLocationItem("getLocationMineExtractor")
 		$PixelMineHere = GetLocationMine()
-		If UBound($PixelMineHere) > 0 Then
-			SetLog("Total No. of Gold Mines: " & UBound($PixelMineHere))
-		EndIf
+;~ 		If UBound($PixelMineHere) > 0 Then
+;~ 			SetLog("Total No. of Gold Mines: " & UBound($PixelMineHere))
+;~ 		EndIf
+		local $goldminexx = 0
 		For $i = 0 To UBound($PixelMineHere) - 1
 			If isInsideDiamond($PixelMineHere[$i]) Then
+				$goldminexx +=1
 				$pixel = $PixelMineHere[$i]
 				$listResourceLocation = $listResourceLocation & $pixel[0] & ";" & $pixel[1] & "|"
 				If $debugSetlog = 1 Then SetLog("- Gold Mine " & $i + 1 & ": (" & $pixel[0] & "," & $pixel[1] & ")", $COLOR_PURPLE)
 			EndIf
 		Next
+		SetLog("Total No. of Gold Mines: " & $goldminexx )
 		If _Sleep($iDelayBotDetectFirstTime1) Then Return
 		;$PixelElixirHere = GetLocationItem("getLocationElixirExtractor")
 		$PixelElixirHere = GetLocationElixir()

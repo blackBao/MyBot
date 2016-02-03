@@ -62,7 +62,7 @@ AtkLogHead()
 #include "GUI\MBR GUI Control Tab MOD.au3"
 #include "GUI\MBR GUI Control Tab Options.au3"
 #include "GUI\MBR GUI Control Collectors.au3"
-
+#include "GUI\MBR GUI Control Def.au3"
 
 ; Accelerator Key, more responsive than buttons in run-mode
 Local $aAccelKeys[1][2] = [["{ESC}", $btnStop]]

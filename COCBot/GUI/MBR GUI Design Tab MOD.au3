@@ -58,19 +58,19 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		$txtTip = "The amount of Lightning Spells Used in zapping."
 	    GUICtrlSetTip(-1, $txtTip)
 
-		Local $x = 260, $y = 275
-	  $grpSaveTroops = GUICtrlCreateGroup("Dead Base", $x, $y - 20, 130, 65)
-		$chkChangeFF = GUICtrlCreateCheckbox("Use De Side Attack", $x + 10, $y - 5, -1, -1)
+		Local $x = 30, $y = 270
+	  $grpDeadbasefilter = GUICtrlCreateGroup("Dead Base Filter", $x -20, $y - 20, 130, 65)
+		$chkChangeFF = GUICtrlCreateCheckbox("Use De Side Attack", $x -5, $y - 5, -1, -1)
 			$txtTip = "Change to De Side Attack if less than % of collectors near RED LINE."
 			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetOnEvent(-1, "$chkChangeFF")
-		$txtTHpercentCollectors = GUICtrlCreateInput("80", $x + 10, $y + 17, 35, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			GUICtrlSetOnEvent(-1, "chkChangeFF")
+		$txtTHpercentCollectors = GUICtrlCreateInput("80", $x -5, $y + 17, 35, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 100)
-		$lblChangeFF = GUICtrlCreateLabel("% collectors.", $x + 50, $y + 20, -1, -1)
+		$lblChangeFF = GUICtrlCreateLabel("% collectors.", $x + 35, $y + 20, -1, -1)
 		   	GUICtrlSetTip(-1, $txtTip)
 
-	Local $x = 260, $y = 215
+	Local $x = 30, $y = 215
 		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 175, 55)
 			GUICtrlCreateIcon($pIconLib, $eIcnKing, $x, $y, 24, 24)
 				$txtTip = "Check this to Filter De Side Attack If No available King And Attack Dead Base Only"
@@ -92,7 +92,7 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			$chkDeWardenFilter = GUICtrlCreateCheckbox("", $x + 30, $y,17, 17)
 				GUICtrlSetTip(-1, $txtTip)
 				GUICtrlSetOnEvent(-1, "LBHeroFilter")
-	Local $x = 30, $y = 215
+	Local $x = 210, $y = 215
 		$grpAutoTrainSpell = GUICtrlCreateGroup("Auto Train Spell", $x - 20, $y - 20, 225, 85)
 			GUICtrlCreateIcon($pIconLib, $eIcnLightSpell, $x, $y, 24, 24)
 				$txtTip = GetTranslated(14,39, -1)

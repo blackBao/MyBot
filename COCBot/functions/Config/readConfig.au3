@@ -201,6 +201,8 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ScreenshotLootInfo = IniRead($config, "attack", "ScreenshotLootInfo", "0")
 
 		;Attack Adv. Settings--------------------------------------------------------------------------
+		readdefConfig()
+		applydefConfig()
 		$ichkAttackNow = IniRead($config, "advanced", "AttackNow", "0")
 		$iAttackNowDelay = IniRead($config, "advanced", "attacknowdelay", "3")
 
@@ -222,10 +224,13 @@ Func readConfig() ;Reads config and sets it to the variables
 		$iMinElixir[$TS] = IniRead($config, "search", "TSsearchElixir", "80000")
 		$iMinGoldPlusElixir[$TS] = IniRead($config, "search", "TSsearchGoldPlusElixir", "160000")
 		$iMinDark[$TS] = IniRead($config, "search", "TSsearchDark", "600")
+		$ichkMeetDE[$TS] = IniRead($config, "advanced", "TSMeetDE", "0")
+		$ichkMeetOne[$TS] = IniRead($config, "advanced", "TSMeetOne", "0")
 		$iCmbMeetGE[$TS] = IniRead($config, "search", "TSMeetGE", "1")
+		$icmbDetectTrapedTH= IniRead($config, "advanced", "DetectTrapedTH", "1")
 
 		$PushToken = IniRead($config, "advanced", "AccountToken", "")
-
+		$PushToken2 = IniRead($config, "advanced", "AccountToken2", "")
 		$iAlertPBVillage = IniRead($config, "advanced", "AlertPBVillage", "0")
 		$iLastAttack = IniRead($config, "advanced", "AlertPBLastAttack", "0")
 
@@ -245,6 +250,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		$iUnBrkMaxElixir = IniRead($config, "advanced", "maxUnBrkelixir", "600000")
 		$iUnBrkMaxDark = IniRead($config, "advanced", "maxUnBrkdark", "10000")
 
+		$iCmbTsSearchMode = IniRead($config, "advanced", "TsSearchMode", "2")
 		;atk their king
 		;atk their queen
 
@@ -504,6 +510,7 @@ Func readConfig() ;Reads config and sets it to the variables
 
 		;PushBullet Settings ---------------------------------------------
 		$PushToken = IniRead($config, "pushbullet", "AccountToken", "")
+		$PushToken2 = IniRead($config, "pushbullet", "AccountToken2", "")
 		$iOrigPushB = IniRead($config, "pushbullet", "OrigPushB", "")
 
 		$iAlertPBVillage = IniRead($config, "pushbullet", "AlertPBVillage", "0")
@@ -512,6 +519,7 @@ Func readConfig() ;Reads config and sets it to the variables
 
 
 		$pEnabled = IniRead($config, "pushbullet", "PBEnabled", "0")
+		$pEnabled2 = IniRead($config, "pushbullet", "PBEnabled2", "0")
 		$pRemote = IniRead($config, "pushbullet", "PBRemote", "0")
 		$iDeleteAllPushes = IniRead($config, "pushbullet", "DeleteAllPBPushes", "0")
 		$pMatchFound = IniRead($config, "pushbullet", "AlertPBVMFound", "0")

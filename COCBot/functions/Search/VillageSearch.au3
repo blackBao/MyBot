@@ -98,7 +98,7 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 		If $OptBullyMode = 1 And Not ($Is_SearchLimit) Then SetLog("THBully Combo @" & $ATBullyMode & " SearchCount, " & $YourTHText)
 
 		If $chkATH = 1 Then $chkATHText = " Attack TH Outside "
-		If $OptTrophyMode = 1 Then $OptTrophyModeText = "THSnipe Combo, " & $THaddtiles & " Tile(s), "
+		If $OptTrophyMode = 1 Then $OptTrophyModeText = "THSnipe Combo, " & $THaddtiles & " Tile(s), " & GUICtrlRead($cmbTsSearchMode)
 		If ($OptTrophyMode = 1 Or $chkATH = 1) And Not ($Is_SearchLimit) Then SetLog($OptTrophyModeText & $chkATHText & $txtAttackTHType)
 	EndIf
 
@@ -238,7 +238,8 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 		EndIf
 
 		If _Sleep($iDelayRespond) Then Return
-		If $OptTrophyMode = 1 Then ;Enables Combo Mode Settings
+		If $OptTrophyMode = 1 And $match[$TS] Then ;Enables Combo Mode Settings
+			If $iCmbTSSearchMode = 2 Or ($iCmbTSSearchMode = 0 and $dbBase) OR ($iCmbTSSearchMode = 1 and Not $dbBase) Then
 			If SearchTownHallLoc() And IsSearchModeActive($TS) Then ; attack this base anyway because outside TH found to snipe
 				If CompareResources($TS) Then
 					SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
@@ -251,7 +252,7 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 				EndIf
 			EndIf
 		EndIf
-
+		EndIf
 		If _Sleep($iDelayRespond) Then Return
 		If $match[$DB] And Not $dbBase Then
 			$noMatchTxt &= ", Not a " & $sModeText[$DB]

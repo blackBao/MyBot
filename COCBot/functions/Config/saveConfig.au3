@@ -452,6 +452,20 @@ Func saveConfig() ;Saves the controls settings to the config
 	IniWrite($config, "search", "TSsearchGoldPlusElixir", GUICtrlRead($txtTSMinGoldPlusElixir))
 	IniWrite($config, "search", "TSsearchDark", GUICtrlRead($txtTSMinDarkElixir))
 
+	If GUICtrlRead($chkTSMeetDE) = $GUI_CHECKED Then
+		IniWrite($config, "advanced", "TSMeetDE", 1)
+	Else
+		IniWrite($config, "advanced", "TSMeetDE", 0)
+	EndIf
+
+	If GUICtrlRead($chkTSMeetOne) = $GUI_CHECKED Then
+		IniWrite($config, "advanced", "TSMeetOne", 1)
+	Else
+		IniWrite($config, "advanced", "TSMeetOne", 0)
+	EndIf
+	IniWrite($config, "advanced", "TsSearchMode", _GUICtrlComboBox_GetCurSel($cmbTsSearchMode))
+	IniWrite($config, "advanced", "DetectTrapedTH", _GUICtrlComboBox_GetCurSel($cmbDetectTrapedTH))
+
 	If GUICtrlRead($chkUseKingTH) = $GUI_CHECKED Then
 		IniWrite($config, "advanced", "UseKingTH", 1)
 	Else
@@ -1040,6 +1054,7 @@ Func saveConfig() ;Saves the controls settings to the config
 
 	;PushBullet Settings----------------------------------------
 	IniWrite($config, "pushbullet", "AccountToken", GUICtrlRead($PushBTokenValue))
+	IniWrite($config, "pushbullet", "AccountToken2", GUICtrlRead($PushBTokenValue2))
 	IniWrite($config, "pushbullet", "OrigPushB", GUICtrlRead($txtVillageName))
 
 	If GUICtrlRead($chkAlertPBVillage) = $GUI_CHECKED Then
@@ -1058,6 +1073,11 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "pushbullet", "PBEnabled", 1)
 	Else
 		IniWrite($config, "pushbullet", "PBEnabled", 0)
+	 EndIf
+	 	If GUICtrlRead($chkPBenabled2) = $GUI_CHECKED Then
+		IniWrite($config, "pushbullet", "PBEnabled2", 1)
+	Else
+		IniWrite($config, "pushbullet", "PBEnabled2", 0)
 	EndIf
 
 	If GUICtrlRead($chkPBRemote) = $GUI_CHECKED Then
@@ -1508,6 +1528,11 @@ Func saveConfig() ;Saves the controls settings to the config
 	Else
 		IniWrite($config, "Others", "MultyFarming", 0)
 	EndIf
+	If GUICtrlRead($chkDrillZapTH) = $GUI_CHECKED Then
+		IniWrite($config, "Others", "chkDrillZapTH", "1")
+	Else
+		IniWrite($config, "Others", "chkDrillZapTH", "0")
+	EndIf
 
 	If GUICtrlRead($chkSmartLightSpell) = $GUI_CHECKED Then
 		IniWrite($config, "Others", "SmartLightSpell", "1")
@@ -1556,12 +1581,6 @@ Func saveConfig() ;Saves the controls settings to the config
 	EndIf
 
 	IniWrite($config, "Others", "txtMinDark", GUICtrlRead($txtMinDark))
-
-	If GUICtrlRead($chkDrillZapTH) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "chkDrillZapTH", "1")
-	Else
-		IniWrite($config, "Others", "chkDrillZapTH", "0")
-	 EndIf
 
 	If GUICtrlRead($chkDeKingFilter) = $GUI_CHECKED Then
 		IniWrite($config, "Others", "DeKingFilter", 1)

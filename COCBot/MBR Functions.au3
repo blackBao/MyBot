@@ -245,3 +245,5 @@
 #include "functions\Mod\dropUnit.au3"
 #include "functions\Mod\unitInfo.au3"
 #include "functions\Mod\ProfileSwitch.au3"
+#include "functions\trappedth\TrappedTownhall.au3"
+#include "functions\trappedth\checkDefense.au3"

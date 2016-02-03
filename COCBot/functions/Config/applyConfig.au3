@@ -433,6 +433,22 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkTSEnableAfter, $GUI_UNCHECKED)
 	EndIf
 	chkTSEnableAfter()
+
+	If $ichkMeetOne[$TS] = 1 Then
+		GUICtrlSetState($chkTSMeetOne, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTSMeetOne, $GUI_UNCHECKED)
+	EndIf
+
+	If $ichkMeetDE[$TS] = 1 Then
+		GUICtrlSetState($chkTSMeetDE, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTSMeetDE, $GUI_UNCHECKED)
+	EndIf
+chkTSMeetDE()
+
+
+
 	GUICtrlSetData($txtTSEnableAfter, $iEnableAfterCount[$TS])
 	GUICtrlSetData($txtTSMinGold, $iMinGold[$TS])
 	GUICtrlSetData($txtTSMinElixir, $iMinElixir[$TS])
@@ -440,7 +456,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	GUICtrlSetData($txtTSMinDarkElixir, $iMinDark[$TS])
 	_GUICtrlComboBox_SetCurSel($cmbTSMeetGE, $iCmbMeetGE[$TS])
 	cmbTSGoldElixir()
-
+	_GUICtrlComboBox_SetCurSel($cmbDetectTrapedTH, $icmbDetectTrapedTH)
 	If $ichkUseKingTH = 1 Then
 		GUICtrlSetState($chkUseKingTH, $GUI_CHECKED)
 	ElseIf $ichkUseKingTH = 0 Then
@@ -516,7 +532,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	GUICtrlSetData($txtUnBrkMaxElixir, $iUnBrkMaxElixir)
 	GUICtrlSetData($txtUnBrkMaxDark, $iUnBrkMaxDark)
 	chkUnbreakable()
-
+	_GUICtrlComboBox_SetCurSel($cmbTsSearchMode, $iCmbTsSearchMode)
 	;attk their king
 	;attk their queen
 
@@ -977,6 +993,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	;PushBullet-----------------------------------------------------------------------------
 
 	GUICtrlSetData($PushBTokenValue, $PushToken)
+	GUICtrlSetData($PushBTokenValue2, $PushToken2)
 	GUICtrlSetData($OrigPushB, $iOrigPushB)
 
 ;~ 	If $iOrigPushB = "" Then
@@ -1003,6 +1020,13 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	ElseIf $pEnabled = 0 Then
 		GUICtrlSetState($chkPBenabled, $GUI_UNCHECKED)
 		chkPBenabled()
+	 EndIf
+	 	If $pEnabled2 = 1 Then
+		GUICtrlSetState($chkPBenabled2, $GUI_CHECKED)
+		chkPBenabled2()
+	ElseIf $pEnabled2 = 0 Then
+		GUICtrlSetState($chkPBenabled2, $GUI_UNCHECKED)
+		chkPBenabled2()
 	EndIf
 
 	If $pRemote = 1 Then
@@ -1638,8 +1662,13 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	Else
 		GUICtrlSetState($chkMultyFarming, $GUI_UNCHECKED)
 	 EndIf
+	If $ichkDrillZapTH = 1 Then
+		GUICtrlSetState($chkDrillZapTH, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDrillZapTH, $GUI_UNCHECKED)
+	EndIf
 
-   If $ichkSmartLightSpell = 1 Then
+	If $ichkSmartLightSpell = 1 Then
 		GUICtrlSetState($chkSmartLightSpell, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkSmartLightSpell, $GUI_UNCHECKED)
@@ -1647,12 +1676,6 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	SmartLightSpell()
 
 	GUICtrlSetData($txtMinDark, $itxtMinDark)
-
-	If $ichkDrillZapTH = 1 Then
-		GUICtrlSetState($chkDrillZapTH, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDrillZapTH, $GUI_UNCHECKED)
-	EndIf
 
 	If $ichkDeKingFilter = 1 Then
 		GUICtrlSetState($chkDeKingFilter, $GUI_CHECKED)

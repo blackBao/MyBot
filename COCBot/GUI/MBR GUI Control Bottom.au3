@@ -42,8 +42,8 @@ Func Initiate()
 			$sTimer = TimerInit()
 		EndIf
 
-	AndroidBotStartEvent() ; signal android that bot is now running
-	If Not $RunState Then Return
+	    AndroidBotStartEvent() ; signal android that bot is now running
+	    If Not $RunState Then Return
 
 ;		$RunState = True
 
@@ -218,7 +218,7 @@ Func btnStart()
 			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
 
- 		$RunState = True
+		$RunState = True
 	    SetRedrawBotWindow(True)
 
 	    WinGetAndroidHandle()
@@ -242,7 +242,7 @@ Func btnStart()
 		Else  ; If Android is not open, then wait for it to open
 			OpenAndroid()
 			;If @error Then GUICtrlSetState($btnStart, $GUI_DISABLE)  ; Disable start button, force bot close/open by user.
-		EndIf
+	    EndIf
 
 	EndIf
 EndFunc   ;==>btnStart
@@ -611,18 +611,29 @@ Func btnTestDonate()
 	$RunState = False
 EndFunc
 
- Func btnTestDev()
-   ;Test CSV Attack
-   If $makeIMGCSV = 0 Then
-      $test2 = 1
-      $debugBuildingPos=1
-      $makeIMGCSV=1
-   EndIf
-   $scmbDBScriptName = "De Side attack" ;Name of your csv file without extension
-   $ichkUseAttackDBCSV = 1
-   $scmbABScriptName = "De Side attack" ;Name of your csv file without extension
-   $ichkUseAttackABCSV = 1
-   Algorithm_AttackCSV(True) ; $testAttack = True, Its the function to make debug.
+Func btnTesttrap()
+	LoadTHImage() ; Load TH images
+	checkTownhallADV2()
+	LoadDefImage();Load defence image
+	$searchDef = checkDefense()
+	SetLog($searchDef)
 
-   If $test2 = 1 Then $makeIMGCSV=0
+	local $EditedImage
+
+	$EditedImage = $hBitmap
+
+	Local $hGraphic = _GDIPlus_ImageGetGraphicsContext($EditedImage)
+	Local $hPen = _GDIPlus_PenCreate(0xFFFF0000, 2) ;create a pencil Color FF0000/RED
+
+	_GDIPlus_GraphicsDrawRect($hGraphic, $Defx , $Defy , 10, 10, $hPen)
+
+	Local $Date = @YEAR & "-" & @MON & "-" & @MDAY
+	Local $Time = @HOUR & "." & @MIN & "." & @SEC
+ 	Local $filename = string($Date & "_" & $Time & $ImageInfooo & $ImageInfoo & " def_" & $abcd & ".png")
+
+	Setlog(" _GDIPlus_ImageSaveToFile", $COLOR_PURPLE)
+	_GDIPlus_ImageSaveToFile($EditedImage, $dirTemp & $filename)
+	_GDIPlus_PenDispose($hPen)
+    _GDIPlus_GraphicsDispose($hGraphic)
+
 EndFunc

@@ -16,7 +16,8 @@
 Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	If $debugSetlog = 1 Then Setlog("algorithm_AllTroops", $COLOR_PURPLE)
 	SetSlotSpecialTroops()
-
+	Global $nocollector = 0
+	Global $SST =0
 	If _Sleep($iDelayalgorithm_AllTroops1) Then Return
 
 	If $iMatchMode = $TS Then
@@ -64,31 +65,54 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 			Global $PixelElixir[0]
 			Global $PixelDarkElixir[0]
 			Global $PixelNearCollector[0]
+
 			; If drop troop near gold mine
 			If ($iChkSmartAttack[$iMatchMode][0] = 1) Then
 				$PixelMine = GetLocationMine()
+				local $PixelMinex = 0
 				If (IsArray($PixelMine)) Then
+					For $i = 0 To UBound($PixelMine) - 1
+						If isInsideDiamond($PixelMine[$i]) Then
+						$PixelMinex +=1
+						EndIf
+					Next
 					_ArrayAdd($PixelNearCollector, $PixelMine)
 				EndIf
+				SetLog("[" & $PixelMinex & "] Gold Mines")
 			EndIf
+
 			; If drop troop near elixir collector
 			If ($iChkSmartAttack[$iMatchMode][1] = 1) Then
 				$PixelElixir = GetLocationElixir()
+				local $PixelElixirx = 0
 				If (IsArray($PixelElixir)) Then
+					For $i = 0 To UBound($PixelElixir) - 1
+						If isInsideDiamond($PixelElixir[$i]) Then
+						$PixelElixirx +=1
+						EndIf
+					Next
 					_ArrayAdd($PixelNearCollector, $PixelElixir)
 				EndIf
+				SetLog("[" & $PixelElixirx & "] Elixir Collectors")
 			EndIf
+
 			; If drop troop near dark elixir drill
 			If ($iChkSmartAttack[$iMatchMode][2] = 1) Then
 				$PixelDarkElixir = GetLocationDarkElixir()
+				local $PixelDarkElixirx = 0
 				If (IsArray($PixelDarkElixir)) Then
+					For $i = 0 To UBound($PixelDarkElixir) - 1
+						If isInsideDiamond($PixelDarkElixir[$i]) Then
+						$PixelDarkElixirx +=1
+						EndIf
+					Next
 					_ArrayAdd($PixelNearCollector, $PixelDarkElixir)
 				EndIf
+				SetLog("[" & $PixelDarkElixirx & "] Dark Elixir Drill/s")
 			EndIf
+
+
 			SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
-			SetLog("[" & UBound($PixelMine) & "] Gold Mines")
-			SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
-			SetLog("[" & UBound($PixelDarkElixir) & "] Dark Elixir Drill/s")
 			$iNbrOfDetectedMines[$iMatchMode] += UBound($PixelMine)
 			$iNbrOfDetectedCollectors[$iMatchMode] += UBound($PixelElixir)
 			$iNbrOfDetectedDrills[$iMatchMode] += UBound($PixelDarkElixir)
@@ -199,20 +223,21 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
     EndIf
 
 	If _Sleep($iDelayalgorithm_AllTroops4) Then Return
-	SetLog("Dropping left over troops", $COLOR_BLUE)
-	For $x = 0 To 1
-		PrepareAttack($iMatchMode, True) ;Check remaining quantities
-		For $i = $eBarb To $eLava ; lauch all remaining troops
-			;If $i = $eBarb Or $i = $eArch Then
-			LauchTroop($i, $nbSides, 0, 1)
-			CheckHeroesHealth()
-			;Else
-			;	 LauchTroop($i, $nbSides, 0, 1, 2)
-			;EndIf
-			If _Sleep($iDelayalgorithm_AllTroops5) Then Return
-		Next
-	Next
-
+	    If $nocollector = 0 then
+			SetLog("Dropping left over troops", $COLOR_BLUE)
+			For $x = 0 To 1
+				PrepareAttack($iMatchMode, True) ;Check remaining quantities
+				For $i = $eBarb To $eLava ; lauch all remaining troops
+					;If $i = $eBarb Or $i = $eArch Then
+					LauchTroop($i, $nbSides, 0, 1)
+					CheckHeroesHealth()
+					;Else
+					;	 LauchTroop($i, $nbSides, 0, 1, 2)
+					;EndIf
+					If _Sleep($iDelayalgorithm_AllTroops5) Then Return
+				Next
+			Next
+		EndIf
 	;Activate KQ's power
 	If ($checkKPower Or $checkQPower) And $iActivateKQCondition = "Manual" Then
 		SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating Hero abilities", $COLOR_BLUE)

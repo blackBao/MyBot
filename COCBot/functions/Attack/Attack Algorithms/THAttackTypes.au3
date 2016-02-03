@@ -16,6 +16,11 @@
 Func SwitchAttackTHType()
 	$THusedKing = 0
 	$THusedQueen = 0
+	   	If $TrappedAllIn = True Then
+		$TrappedAllIn = False
+		AttackTrappedTHAllIn()
+		Return
+	EndIf
 ;~ 	Switch $icmbAttackTHType
 ;~ 		Case 0
 ;~ 			AttackTHSmartBarch()

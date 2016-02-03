@@ -221,7 +221,7 @@ Global $ScreenshotLootInfo = False
 Global $AlertSearch = True
 Global $iChkAttackNow, $iAttackNowDelay, $bBtnAttackNowPressed = False
 Global $PushToken = ""
-
+Global $PushToken2 = ""
 Global Enum $DB, $LB, $TS, $TB, $DT ; DeadBase, LiveBase, TownhallSnipe, TownhallBully, DropTrophy
 Global $iModeCount = 3
 Global $iMatchMode ; 0 Dead / 1 Live / 2 TH Snipe / 3 TH Bully / 4 Drop Trophy
@@ -235,10 +235,15 @@ $sModeText[$DT] = "Drop Trophy"
 ;PushBullet---------------------------------------------------------------
 Global $PBRemoteControlInterval = 60000 ; 60 secs
 Global $PBDeleteOldPushesInterval = 1800000 ; 30 mins
+global $access_token2
+Global $first = 0
+global $chat_id2 = 0
+Global $lastremote = 0
 Global $iOrigPushB
 Global $iLastAttack
 Global $iAlertPBVillage
 Global $pEnabled
+Global $pEnabled2
 Global $pRemote
 Global $pMatchFound
 Global $pLastRaidImg
@@ -294,7 +299,7 @@ Global $bSearchMode = False
 Global $Is_ClientSyncError = False ;If true means while searching Client Out Of Sync error occurred.
 Global $searchGold, $searchElixir, $searchDark, $searchTrophy, $searchTH ;Resources of bases when searching
 Global $SearchGold2 = 0, $SearchElixir2 = 0, $iStuck = 0, $iNext = 0
-Global $iCmbSearchMode
+Global $iCmbSearchMode, $iCmbTsSearchMode
 Global $iMinGold[$iModeCount], $iMinElixir[$iModeCount], $iMinGoldPlusElixir[$iModeCount], $iMinDark[$iModeCount], $iMinTrophy[$iModeCount], $iMaxTH[$iModeCount], $iEnableAfterCount[$iModeCount], $iCmbWeakMortar[$iModeCount], $iCmbWeakWizTower[$iModeCount] ; Minimum Resources conditions
 Global $iAimGold[$iModeCount], $iAimElixir[$iModeCount], $iAimGoldPlusElixir[$iModeCount], $iAimDark[$iModeCount], $iAimTrophy[$iModeCount], $iAimTHtext[$iModeCount] ; Aiming Resource values
 Global $iChkSearchReduction
@@ -363,7 +368,8 @@ Global $ichkUseHSpellsTH = 0
 Global $THusedKing = 0
 Global $THusedQueen = 0
 Global $THusedWarden = 0
-
+global $icmbDetectTrapedTH
+$TrappedAllIn = False
 
 Global $TrainSpecial = 1 ;0=Only trains after atk. Setting is automatic
 Global $cBarbarian = 0, $cArcher = 0, $cGoblin = 0, $cGiant = 0, $cWallbreaker = 0, $cWizard = 0, $cBalloon = 0, $cDragon = 0, $cPekka = 0, $cMinion = 0, $cHogs = 0, $cValkyrie = 0, $cGolem = 0, $cWitch = 0, $cLavaHound = 0
@@ -1030,5 +1036,10 @@ Global $ichkAlertBuilderIdle
 Global $iReportIdleBuilder = 0
 
 Global $useFFBarchST,$percentCollectors
-Global $saveTroops = 0
 Global $countFindPixCloser = 0, $countCollectorexposed = 0
+
+;trap TH
+Global $Defx = 0, $Defy = 0
+Global $ImageInfoo = Execute("$THImages" & $t & "[" & $i & "]")
+Global $ImageInfooo = String("TH" & $THText[$t] & "-")
+global $abcd = Execute("$DefImages" & $t & "["& $i & "]")
