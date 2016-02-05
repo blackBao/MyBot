@@ -1,5 +1,4 @@
 ; #FUNCTION# ====================================================================================================================
-
 ; Name ..........: DEDrillSearch
 ; Description ...: Searches for the DE Drills in base, and returns; X&Y location, Bldg Level
 ; Syntax ........: DEDrillSearch([$bReTest = False])
@@ -35,7 +34,7 @@ Func DEDrillSearch($bReTest = False)
 	$listPixelByLevel = StringSplit($result[0], "~") ; split each building into array
 	If UBound($listPixelByLevel) > 1 Then ; check for more than 1 bldg and proper split a part
 		$NumDEDrill = UBound($listPixelByLevel) - 1
-		SetLog("Total No. of Dark Elixir Drills = " & $NumDEDrill, $COLOR_FUCHSIA)
+		SetLog("Total No. of Dark Elixir Drills found = " & $NumDEDrill, $COLOR_FUCHSIA)
 		If $debugsetlog = 1 Then
 			For $ii = 0 To $listPixelByLevel[0]
 				Setlog("Drill search $listPixelByLevel[" & $ii & "] = " & $listPixelByLevel[$ii], $COLOR_PURPLE) ;Debug
@@ -85,14 +84,3 @@ Func DEDrillSearch($bReTest = False)
 	EndIf
 	Return $aDrills
 EndFunc   ;==>DEDrillSearch
-
-#cs ----------------------------------------------------------------------------
-   AutoIt Version: 3.3.6.1
-   This file was made to software CoCgameBot v2.0
-   Author:         KnowJack - (modified by drei3000)
-
-   Script Function: Locates DE Drills and returns their locations and levels
-CoCgameBot is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
-CoCgameBot is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-You should have received a copy of the GNU General Public License along with CoCgameBot.  If not, see ;<http://www.gnu.org/licenses/>.
-#ce ----------------------------------------------------------------------------

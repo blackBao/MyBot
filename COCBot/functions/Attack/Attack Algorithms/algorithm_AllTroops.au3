@@ -16,8 +16,7 @@
 Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	If $debugSetlog = 1 Then Setlog("algorithm_AllTroops", $COLOR_PURPLE)
 	SetSlotSpecialTroops()
-	Global $nocollector = 0
-	Global $SST =0
+
 	If _Sleep($iDelayalgorithm_AllTroops1) Then Return
 
 	If $iMatchMode = $TS Then
@@ -65,54 +64,37 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 			Global $PixelElixir[0]
 			Global $PixelDarkElixir[0]
 			Global $PixelNearCollector[0]
-
 			; If drop troop near gold mine
 			If ($iChkSmartAttack[$iMatchMode][0] = 1) Then
 				$PixelMine = GetLocationMine()
-				local $PixelMinex = 0
 				If (IsArray($PixelMine)) Then
-					For $i = 0 To UBound($PixelMine) - 1
-						If isInsideDiamond($PixelMine[$i]) Then
-						$PixelMinex +=1
-						EndIf
-					Next
-					_ArrayAdd($PixelNearCollector, $PixelMine)
+					If isInsideDiamond($PixelMine) Then
+						_ArrayAdd($PixelNearCollector, $PixelMine)
+					EndIf
 				EndIf
-				SetLog("[" & $PixelMinex & "] Gold Mines")
 			EndIf
-
 			; If drop troop near elixir collector
 			If ($iChkSmartAttack[$iMatchMode][1] = 1) Then
 				$PixelElixir = GetLocationElixir()
-				local $PixelElixirx = 0
 				If (IsArray($PixelElixir)) Then
-					For $i = 0 To UBound($PixelElixir) - 1
-						If isInsideDiamond($PixelElixir[$i]) Then
-						$PixelElixirx +=1
-						EndIf
-					Next
-					_ArrayAdd($PixelNearCollector, $PixelElixir)
+					If isInsideDiamond($PixelElixir) Then
+						_ArrayAdd($PixelNearCollector, $PixelElixir)
+					EndIf
 				EndIf
-				SetLog("[" & $PixelElixirx & "] Elixir Collectors")
 			EndIf
-
 			; If drop troop near dark elixir drill
 			If ($iChkSmartAttack[$iMatchMode][2] = 1) Then
 				$PixelDarkElixir = GetLocationDarkElixir()
-				local $PixelDarkElixirx = 0
 				If (IsArray($PixelDarkElixir)) Then
-					For $i = 0 To UBound($PixelDarkElixir) - 1
-						If isInsideDiamond($PixelDarkElixir[$i]) Then
-						$PixelDarkElixirx +=1
-						EndIf
-					Next
-					_ArrayAdd($PixelNearCollector, $PixelDarkElixir)
+					If isInsideDiamond($PixelDarkElixir) Then
+						_ArrayAdd($PixelNearCollector, $PixelDarkElixir)
+					EndIf
 				EndIf
-				SetLog("[" & $PixelDarkElixirx & "] Dark Elixir Drill/s")
 			EndIf
-
-
 			SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
+			SetLog("[" & UBound($PixelMine) & "] Gold Mines")
+			SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
+			SetLog("[" & UBound($PixelDarkElixir) & "] Dark Elixir Drill/s")
 			$iNbrOfDetectedMines[$iMatchMode] += UBound($PixelMine)
 			$iNbrOfDetectedCollectors[$iMatchMode] += UBound($PixelElixir)
 			$iNbrOfDetectedDrills[$iMatchMode] += UBound($PixelDarkElixir)
@@ -178,10 +160,11 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
             $listInfoDeploy[$i][3] = $waveCount
             $listInfoDeploy[$i][4] = $DeDeployPosition[$i]
         Next
-		ElseIf $nbSides = 5 Then
+	ElseIf $nbSides = 5 Then
+		If $debugSetlog = 1 Then SetLog("List Deploy for Four Fingger attack", $COLOR_PURPLE)
 		Local $listInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
 			    , [$eBarb, $nbSides, 1, 1, 0] _
-			    , [$eWall, $nbSides, 1, 1, 1] _
+			    , [$eWall, $nbSides, 1, 1, 2] _
 			    , [$eArch, $nbSides, 1, 1, 0] _
 			    , [$eGobl, $nbSides, 1, 2, 0] _
 			    , ["CC", 1, 1, 1, 1] _
@@ -216,14 +199,13 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	$DeployHeroesPosition[0] = -1
 	$DeployHeroesPosition[1] = -1
 
-	If $iMatchMode = $LB And $iChkDeploySettings[$LB] = 5 Then
+	If $iMatchMode = $LB And $iChkDeploySettings[$LB] >= 5 Then
        LaunchSideAttack($listInfoDeploy, $CC, $King, $Queen, $Warden)
     Else
        LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
     EndIf
 
 	If _Sleep($iDelayalgorithm_AllTroops4) Then Return
-	    If $nocollector = 0 then
 			SetLog("Dropping left over troops", $COLOR_BLUE)
 			For $x = 0 To 1
 				PrepareAttack($iMatchMode, True) ;Check remaining quantities
@@ -237,7 +219,6 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 					If _Sleep($iDelayalgorithm_AllTroops5) Then Return
 				Next
 			Next
-		EndIf
 	;Activate KQ's power
 	If ($checkKPower Or $checkQPower) And $iActivateKQCondition = "Manual" Then
 		SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating Hero abilities", $COLOR_BLUE)

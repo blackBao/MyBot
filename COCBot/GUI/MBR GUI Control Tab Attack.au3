@@ -19,14 +19,14 @@ Func chkDBSmartAttackRedArea()
 		For $i = $lblDBSmartDeploy To $picDBAttackNearDarkElixirDrill
 			GUICtrlSetState($i, $GUI_SHOW)
 		Next
-		GUICtrlSetState($chkChangeFF, $GUI_ENABLE)
+;		GUICtrlSetState($chkChangeFF, $GUI_ENABLE)
 	Else
 		$iChkRedArea[$DB] = 0
 		For $i = $lblDBSmartDeploy To $picDBAttackNearDarkElixirDrill
 			GUICtrlSetState($i, $GUI_HIDE)
 		Next
-		GUICtrlSetState($chkChangeFF, $GUI_DISABLE)
-		GUICtrlSetState($chkChangeFF, $GUI_UNCHECKED)
+;		GUICtrlSetState($chkChangeFF, $GUI_DISABLE)
+;		GUICtrlSetState($chkChangeFF, $GUI_UNCHECKED)
 	EndIf
 EndFunc   ;==>chkDBSmartAttackRedArea
 

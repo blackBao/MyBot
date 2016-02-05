@@ -49,7 +49,7 @@ If $aCmdLine[0] < 2 Then
 	If Not $FoundRunningAndroid Then DetectInstalledAndroid()
 EndIf
 ; Update Bot title
-$sBotTitle = $sBotTitle & "(" & ($AndroidInstance <> "" ? $AndroidInstance : $Android) & ")"
+$sBotTitle = $sBotTitle & "(" & ($AndroidInstance <> "" ? $AndroidInstance : $Android) & ") Mod v1.3.4"
 
 If $bBotLaunchOption_Restart = True Then
    If CloseRunningBot($sBotTitle) = True Then
@@ -274,12 +274,13 @@ Func runBot() ;Bot that runs everything in order
 			Else
 				SetLog("Restarted after Out of Sync Error: Attack Now", $COLOR_BLUE)
 			EndIf
-			If $ichkDeKingFilter = 1 Or $ichkDeWardenFilter = 1 Or $ichkDeQueenFilter = 1 Or $LBAQFilter = 1 Or $LBBKFilter = 1 Then
+;~			If $ichkDeKingFilter = 1 Or $ichkDeWardenFilter = 1 Or $ichkDeQueenFilter = 1 Or $LBAQFilter = 1 Or $LBBKFilter = 1 Then
 				If IsMainPage() Then Click($aArmyTrainButton[0], $aArmyTrainButton[1], 1, 0, "#0293")
 				GetArmyCapacity()
 				getArmyHeroCount()
+				getArmySpellCount()
 				ClickP($aAway, 2, $iDelayTrain5, "#0291");
-			EndIf
+;~			EndIf
 			If _Sleep($iDelayRunBot3) Then Return
 			;  OCR read current Village Trophies when OOS restart maybe due PB or else DropTrophy skips one attack cycle after OOS
 			$iTrophyCurrent = getTrophyMainScreen($aTrophies[0], $aTrophies[1])

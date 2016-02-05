@@ -937,10 +937,6 @@ Global $aLanguage[1][1] ;undimmed language array
 ;images
 Global $iDetectedImageType = 0
 
-Global $iDeadBase75percent = 1
-Global $iDeadBase75percentStartLevel = 4
-
-
 ;attackCSV
 Global $scmbDBScriptName = "Barch four fingers"
 Global $scmbABScriptName = "Barch four fingers"
