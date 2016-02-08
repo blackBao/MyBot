@@ -34,8 +34,8 @@ Func getArmySpellCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 		$CurJumpSpell = 0
 		$CurFreezeSpell = 0
 		$CurPoisonSpell = 0
-		$CurHasteSpell = 0
 		$CurEarthSpell = 0
+		$CurHasteSpell = 0
 
 		For $i = 0 To 4 ; 5 visible slots in ArmyoverView window
 			If $debugSetlog = 1 Then Setlog(" Slot : " & $i + 1, $COLOR_PURPLE)
@@ -68,13 +68,13 @@ Func getArmySpellCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 				$CurPoisonSpell = $SpellQ
 				Setlog(" - No. of PoisonSpell: " & $SpellQ)
 			EndIf
-			If $FullTemp = "Haste" Then
-				$CurHasteSpell = $SpellQ
-				Setlog(" - No. of HasteSpell: " & $SpellQ)
-			EndIf
 			If $FullTemp = "Earth" Then
 				$CurEarthSpell = $SpellQ
 				Setlog(" - No. of EarthquakeSpell: " & $SpellQ)
+			EndIf
+			If $FullTemp = "Haste" Then
+				$CurHasteSpell = $SpellQ
+				Setlog(" - No. of HasteSpell: " & $SpellQ)
 			EndIf
 			If $FullTemp = "" And $debugSetlog = 1 Then
 				Setlog(" - was not detected anything in slot: " & $i + 1, $COLOR_PURPLE)

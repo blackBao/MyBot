@@ -52,8 +52,8 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 	Local $listListInfoDeployTroopPixel[0]
 	Local $pixelRandomDrop[2]
 	Local $pixelRandomDropcc[2]
-	$countFindPixCloser = 0
-	$countCollectorexposed = 0
+	Global $countFindPixCloser = 0
+	Global $countCollectorexposed = 0
 
 	If ($iChkRedArea[$iMatchMode] = 1) Then
 		For $i = 0 To UBound($listInfoDeploy) - 1
@@ -97,19 +97,27 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 				$listListInfoDeployTroopPixel[$waveNb - 1] = $listInfoDeployTroopPixel
 			EndIf
 		Next
-		If $useFFBarchST = 1 Then
-			$iChkRedArea[$iMatchMode] = 0
-			$nbSides = 5
-			Setlog ("There are " & $countCollectorexposed & " collector(s) near RED LINE out of " & Ubound($PixelNearCollector) & " collectors")
+		If $iSmartDeadBase = 1 Then
 
-			If ($countCollectorexposed/Ubound($PixelNearCollector)*100) < $percentCollectors Then
+			Setlog ("There are " & $countCollectorexposed & " collector(s) near RED LINE of " & Ubound($PixelNearCollector) & " collectors")
 
-				SetLog("Change the Attack Strategy to De side attack!...", $COLOR_BLUE)
+			If ($countCollectorexposed/Ubound($PixelNearCollector)*100) < $SmartCollectors Then
+
 ;~				If _Sleep(500) Then Return
-				GetBuildingEdge($eSideBuildingDES)
+				If $iChkSmartDB < 1 Then
+					SetLog("Change Side Attack to Collector side attack!...", $COLOR_BLUE)
+					FindSideColl()
+				ElseIf $iChkSmartDB = 1 Then
+					SetLog("Change Side Attack to De side attack!...", $COLOR_BLUE)
+					GetBuildingEdge($eSideBuildingDES)
+				ElseIf $iChkSmartDB = 2 Then
+					SetLog("Change Side Attack to TH side attack!...", $COLOR_BLUE)
+					GetBuildingEdge($eSideBuildingTH)
+				EndIf
+
 				$nbSides = 1
-;~				$iMatchMode = $LB
-;~  			$iChkDeploySettings[$LB] = 5
+				$iMatchMode = $LB
+				$iChkDeploySettings[$LB] = 5
 				Local $DElistInfoDeploy[24][5]
 				Local $waveCount,$waveNumber
 				Local $deploystring
@@ -137,6 +145,8 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 			Return
 
 			Endif
+			$iChkRedArea[$iMatchMode] = 0
+			$nbSides = 5
 		Local $FFlistInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
 			    , [$eBarb, $nbSides, 1, 1, 0] _
 			    , [$eWall, $nbSides, 1, 1, 2] _

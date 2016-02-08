@@ -33,9 +33,9 @@ Func DEDropSmartSpell()
 	If $debugsetlog = 1 Then SetLog("Search Mode: "&$iCmbSearchMode, $COLOR_PURPLE)
 ;	If $iCmbSearchMode <> 0 Then Return False
     If $iCmbSearchMode = 0 Then
-		ElseIf $iCmbSearchMode = 1 Then
+	ElseIf $iCmbSearchMode = 1 Then
 	    If _Sleep(1000) Then Return
-	  EndIf
+	EndIf
 
 	; Get Drill locations and info
 	$aDarkDrills = DEDrillSearch()
@@ -62,7 +62,7 @@ Func DEDropSmartSpell()
 
 	; Offset the number of spells to align with townhall lvl
 	Local $spellAdjust = -1
-	If $iTownHallLevel = 10 Then
+	If $iTownHallLevel = 10 Or $iTownHallLevel =11 Then
 		$spellAdjust = 0
 	ElseIf $iTownHallLevel = 9 Then
 		$spellAdjust = 1

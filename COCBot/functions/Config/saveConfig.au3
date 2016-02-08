@@ -1516,162 +1516,165 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "attackCSV", "EnableScriptAB", 0)
 	EndIf
 
-	;Others Settings--------------------------------------------------------------------------
+;MOD Settings--------------------------------------------------------------------------
 	If GUICtrlRead($chkSwitchDonate) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "SwitchDonate", 1)
+		IniWrite($config, "MOD", "SwitchDonate", 1)
 	Else
-		IniWrite($config, "Others", "SwitchDonate", 0)
+		IniWrite($config, "MOD", "SwitchDonate", 0)
 	EndIf
 
 	If GUICtrlRead($chkMultyFarming) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "MultyFarming", 1)
+		IniWrite($config, "MOD", "MultyFarming", 1)
 	Else
-		IniWrite($config, "Others", "MultyFarming", 0)
+		IniWrite($config, "MOD", "MultyFarming", 0)
 	EndIf
+
+	IniWrite($config, "MOD", "Account", GUICtrlRead($Account))
+
 	If GUICtrlRead($chkDrillZapTH) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "chkDrillZapTH", "1")
+		IniWrite($config, "MOD", "chkDrillZapTH", "1")
 	Else
-		IniWrite($config, "Others", "chkDrillZapTH", "0")
+		IniWrite($config, "MOD", "chkDrillZapTH", "0")
 	EndIf
 
 	If GUICtrlRead($chkSmartLightSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "SmartLightSpell", "1")
+		IniWrite($config, "MOD", "SmartLightSpell", "1")
 	Else
-		IniWrite($config, "Others", "SmartLightSpell", "0")
+		IniWrite($config, "MOD", "SmartLightSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainLightSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainLightSpell", "1")
+		IniWrite($config, "MOD", "TrainLightSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainLightSpell", "0")
+		IniWrite($config, "MOD", "TrainLightSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainHealSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainHealSpell", "1")
+		IniWrite($config, "MOD", "TrainHealSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainHealSpell", "0")
+		IniWrite($config, "MOD", "TrainHealSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainRageSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainRageSpell", "1")
+		IniWrite($config, "MOD", "TrainRageSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainRageSpell", "0")
+		IniWrite($config, "MOD", "TrainRageSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainJumpSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainJumpSpell", "1")
+		IniWrite($config, "MOD", "TrainJumpSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainJumpSpell", "0")
+		IniWrite($config, "MOD", "TrainJumpSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainFreezeSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainFreezeSpell", "1")
+		IniWrite($config, "MOD", "TrainFreezeSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainFreezeSpell", "0")
+		IniWrite($config, "MOD", "TrainFreezeSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainPoisonSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainPoisonSpell", "1")
+		IniWrite($config, "MOD", "TrainPoisonSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainPoisonSpell", "0")
+		IniWrite($config, "MOD", "TrainPoisonSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainEarthquakeSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainEarthquakeSpell", "1")
+		IniWrite($config, "MOD", "TrainEarthquakeSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainEarthquakeSpell", "0")
+		IniWrite($config, "MOD", "TrainEarthquakeSpell", "0")
 	EndIf
 	If GUICtrlRead($chkTrainHasteSpell) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "TrainHasteSpell", "1")
+		IniWrite($config, "MOD", "TrainHasteSpell", "1")
 	Else
-		IniWrite($config, "Others", "TrainHasteSpell", "0")
+		IniWrite($config, "MOD", "TrainHasteSpell", "0")
 	EndIf
 
-	IniWrite($config, "Others", "txtMinDark", GUICtrlRead($txtMinDark))
+	IniWrite($config, "MOD", "txtMinDark", GUICtrlRead($txtMinDark))
 
 	If GUICtrlRead($chkDeKingFilter) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "DeKingFilter", 1)
+		IniWrite($config, "MOD", "DeKingFilter", 1)
 	Else
-		IniWrite($config, "Others", "DeKingFilter", 0)
+		IniWrite($config, "MOD", "DeKingFilter", 0)
 	EndIf
 
 	If GUICtrlRead($chkDeWardenFilter) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "DeWardenFilter", 1)
+		IniWrite($config, "MOD", "DeWardenFilter", 1)
 	Else
-		IniWrite($config, "Others", "DeWardenFilter", 0)
+		IniWrite($config, "MOD", "DeWardenFilter", 0)
 	EndIf
 
 	If GUICtrlRead($chkDeQueenFilter) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "DeQueenFilter", 1)
+		IniWrite($config, "MOD", "DeQueenFilter", 1)
 	Else
-		IniWrite($config, "Others", "DeQueenFilter", 0)
+		IniWrite($config, "MOD", "DeQueenFilter", 0)
 	EndIf
 
 
-	IniWrite($config, "Others", "SkipCentreDE", _GUICtrlComboBox_GetCurSel($cmbSkipCentreDE))
-	IniWrite($config, "Others", "SkipUndetectedDE", _GUICtrlComboBox_GetCurSel($cmbSkipUndetectedDE))
+	IniWrite($config, "MOD", "SkipCentreDE", _GUICtrlComboBox_GetCurSel($cmbSkipCentreDE))
+	IniWrite($config, "MOD", "SkipUndetectedDE", _GUICtrlComboBox_GetCurSel($cmbSkipUndetectedDE))
 
-	IniWrite($config, "Others", "ABMeetGEHero", _GUICtrlComboBox_GetCurSel($cmbABMeetGEHero))
+	IniWrite($config, "MOD", "ABMeetGEHero", _GUICtrlComboBox_GetCurSel($cmbABMeetGEHero))
 
 	If GUICtrlRead($chkABMeetDEHero) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "ABMeetDEHero", 1)
+		IniWrite($config, "MOD", "ABMeetDEHero", 1)
 	Else
-		IniWrite($config, "Others", "ABMeetDEHero", 0)
+		IniWrite($config, "MOD", "ABMeetDEHero", 0)
 	EndIf
 
 	If GUICtrlRead($chkABMeetTrophyHero) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "ABMeetTrophyHero", 1)
+		IniWrite($config, "MOD", "ABMeetTrophyHero", 1)
 	Else
-		IniWrite($config, "Others", "ABMeetTrophyHero", 0)
+		IniWrite($config, "MOD", "ABMeetTrophyHero", 0)
 	EndIf
 
 	If GUICtrlRead($chkABMeetTHHero) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "ABMeetTHHero", 1)
+		IniWrite($config, "MOD", "ABMeetTHHero", 1)
 	Else
-		IniWrite($config, "Others", "ABMeetTHHero", 0)
+		IniWrite($config, "MOD", "ABMeetTHHero", 0)
 	EndIf
 
 	If GUICtrlRead($chkABMeetTHOHero) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "ABMeetTHOHero", 1)
+		IniWrite($config, "MOD", "ABMeetTHOHero", 1)
 	Else
-		IniWrite($config, "Others", "ABMeetTHOHero", 0)
+		IniWrite($config, "MOD", "ABMeetTHOHero", 0)
 	EndIf
 
 	If GUICtrlRead($chkABWeakBaseHero) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "ABWeakBaseHero", 1)
+		IniWrite($config, "MOD", "ABWeakBaseHero", 1)
 	Else
-		IniWrite($config, "Others", "ABWeakBaseHero", 0)
+		IniWrite($config, "MOD", "ABWeakBaseHero", 0)
 	EndIf
 
 	If GUICtrlRead($chkABMeetOneHero) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "ABMeetOneHero", 1)
+		IniWrite($config, "MOD", "ABMeetOneHero", 1)
 	Else
-		IniWrite($config, "Others", "ABMeetOneHero", 0)
+		IniWrite($config, "MOD", "ABMeetOneHero", 0)
 	EndIf
 
-	IniWrite($config, "Others", "ABsearchGoldHero", GUICtrlRead($txtABMinGoldHero))
-	IniWrite($config, "Others", "ABsearchElixirHero", GUICtrlRead($txtABMinElixirHero))
-	IniWrite($config, "Others", "ABsearchGoldPlusElixirHero", GUICtrlRead($txtABMinGoldPlusElixirHero))
-	IniWrite($config, "Others", "ABsearchDarkHero", GUICtrlRead($txtABMinDarkElixirHero))
-	IniWrite($config, "Others", "ABsearchTrophyHero", GUICtrlRead($txtABMinTrophyHero))
-	IniWrite($config, "Others", "ABTHLevelHero", _GUICtrlComboBox_GetCurSel($cmbABTHHero))
-	IniWrite($config, "Others", "ABWeakMortarHero", _GUICtrlComboBox_GetCurSel($cmbABWeakMortarHero))
-	IniWrite($config, "Others", "ABWeakWizTowerHero", _GUICtrlComboBox_GetCurSel($cmbABWeakWizTowerHero))
+	IniWrite($config, "MOD", "ABsearchGoldHero", GUICtrlRead($txtABMinGoldHero))
+	IniWrite($config, "MOD", "ABsearchElixirHero", GUICtrlRead($txtABMinElixirHero))
+	IniWrite($config, "MOD", "ABsearchGoldPlusElixirHero", GUICtrlRead($txtABMinGoldPlusElixirHero))
+	IniWrite($config, "MOD", "ABsearchDarkHero", GUICtrlRead($txtABMinDarkElixirHero))
+	IniWrite($config, "MOD", "ABsearchTrophyHero", GUICtrlRead($txtABMinTrophyHero))
+	IniWrite($config, "MOD", "ABTHLevelHero", _GUICtrlComboBox_GetCurSel($cmbABTHHero))
+	IniWrite($config, "MOD", "ABWeakMortarHero", _GUICtrlComboBox_GetCurSel($cmbABWeakMortarHero))
+	IniWrite($config, "MOD", "ABWeakWizTowerHero", _GUICtrlComboBox_GetCurSel($cmbABWeakWizTowerHero))
 
 	If GUICtrlRead($chkLBBKFilter) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "LBBKFilter", 1)
+		IniWrite($config, "MOD", "LBBKFilter", 1)
 	Else
-		IniWrite($config, "Others", "LBBKFilter", 0)
+		IniWrite($config, "MOD", "LBBKFilter", 0)
 	EndIf
 
 	If GUICtrlRead($chkLBAQFilter) = $GUI_CHECKED Then
-		IniWrite($config, "Others", "LBAQFilter", 1)
+		IniWrite($config, "MOD", "LBAQFilter", 1)
 	Else
-		IniWrite($config, "Others", "LBAQFilter", 0)
+		IniWrite($config, "MOD", "LBAQFilter", 0)
 	EndIf
 
 	;save troops option
-	If GUICtrlRead($chkChangeFF) = $GUI_CHECKED Then
-		IniWrite($config, "options", "ChkSTFFBarch", 1)
+	If GUICtrlRead($SmartDeadBase) = $GUI_CHECKED Then
+		IniWrite($config, "MOD", "SmartDeadBase", 1)
 	Else
-		IniWrite($config, "options", "ChkSTFFBarch", 0)
+		IniWrite($config, "MOD", "SmartDeadBase", 0)
 	EndIf
 
-	IniWrite($config, "options", "txtTHpercentCollectors", GUICtrlRead($txtTHpercentCollectors))
-
+	IniWrite($config, "MOD", "txtSmartCollectors", GUICtrlRead($txtSmartCollectors))
+	IniWrite($config, "MOD", "SmartDB", _GUICtrlComboBox_GetCurSel($cmbSmartDB))
 
 	;Options Settings--------------------------------------------------------------------------
     For $i = 1 to 24

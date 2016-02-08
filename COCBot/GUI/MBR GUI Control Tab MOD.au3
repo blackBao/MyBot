@@ -33,7 +33,12 @@ Func MultiFarming()
 	EndIf
 EndFunc   ;==>MultiFarming
 
-  Func SmartLightSpell()
+Func Account()
+	$iAccount = GUICtrlRead($Account)
+	IniWrite($config, "MOD", "Account", $iAccount)
+EndFunc
+
+Func SmartLightSpell()
 	If GUICtrlRead($chkSmartLightSpell) = $GUI_CHECKED Then
 		GUICtrlSetState($txtMinDark, $GUI_ENABLE)
 		$ichkSmartLightSpell = 1
@@ -54,7 +59,7 @@ EndFunc
 
 Func txtMinDark()
 	$itxtMinDark = GUICtrlRead($txtMinDark)
-	IniWrite($config, "options", "txtMinDark", $itxtMinDark)
+	IniWrite($config, "MOD", "txtMinDark", $itxtMinDark)
 EndFunc
 
  Func btnConfirmRecSetting()
@@ -247,14 +252,64 @@ Func chkLBBKFilter()
 	EndIf
 EndFunc   ;==>chkLBBKFilter
 
-Func chkChangeFF()
-	If GUICtrlRead($chkChangeFF) = $GUI_CHECKED Then
-		For $i = $txtTHpercentCollectors To $lblChangeFF
+Func SmartDeadBase()
+	If GUICtrlRead($SmartDeadBase) = $GUI_CHECKED Then
+		For $i = $txtSmartCollectors To $cmbSmartDB
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
+		GUICtrlSetState($chkDBRandomSpeedAtk, $GUI_CHECKED)
+		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_CHECKED)
+		GUICtrlSetState($chkDbAttackNearGoldMine, $GUI_CHECKED)
+		GUICtrlSetState($chkDBAttackNearElixirCollector, $GUI_CHECKED)
+		GUICtrlSetState($chkUseAttackDBCSV, $GUI_UNCHECKED)
+		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
+			GUICtrlSetState($i, $GUI_DISABLE)
+		Next
+		For $i = $lblDBSmartDeploy To $picDBAttackNearDarkElixirDrill
+			GUICtrlSetState($i, $GUI_HIDE)
+		Next
+		For $i = $grpDeadBaseDeployCSV To $chkDBHasteSpellCSV
+			GUICtrlSetState($i, $GUI_DISABLE)
+		Next
 	Else
-		For $i = $txtTHpercentCollectors To $lblChangeFF
+		For $i = $txtSmartCollectors To $cmbSmartDB
 		GUICtrlSetState($i, $GUI_DISABLE)
 		Next
+		GUICtrlSetState($chkDBRandomSpeedAtk, $GUI_UNCHECKED)
+		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_UNCHECKED)
+		GUICtrlSetState($chkDbAttackNearGoldMine, $GUI_UNCHECKED)
+		GUICtrlSetState($chkDBAttackNearElixirCollector, $GUI_UNCHECKED)
+		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
+			GUICtrlSetState($i, $GUI_ENABLE)
+		Next
+		For $i = $grpDeadBaseDeployCSV To $chkDBHasteSpellCSV
+			GUICtrlSetState($i, $GUI_ENABLE)
+		Next
+	EndIf
+EndFunc ;====> SmartDeadBase
+
+#cs Func MakeAccount()
+	$RunState = True
+		_CaptureRegion(157,339, 200, 18)
+		Local $hBMP_Cropped = _GDIPlus_BitmapCloneArea($hBitmap, 157, 339,  200, 18)
+		Local $hHBMP_Cropped = _GDIPlus_BitmapCreateHBITMAPFromBitmap($hBMP_Cropped)
+	If Not FileExists(@ScriptDir & "\images\Accmain.bmp") Then
+		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Accmain.bmp")
+	EndIf
+	Sleep(1500)
+	If Not FileExists(@ScriptDir & "\images\AccSecond.bmp") Then
+		_CaptureRegion(157,385, 200, 18)
+		Local $hBMP_Cropped = _GDIPlus_BitmapCloneArea($hBitmap, 157, 385,  200, 18)
+		Local $hHBMP_Cropped = _GDIPlus_BitmapCreateHBITMAPFromBitmap($hBMP_Cropped)
+		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\AccSecond.bmp")
+	EndIf
+	Sleep(1500)
+	If Not FileExists(@ScriptDir & "\images\Ok.bmp") Then
+		_CaptureRegion(532,487, 200, 18)
+		Local $hBMP_Cropped = _GDIPlus_BitmapCloneArea($hBitmap,532,487,  200, 18)
+		Local $hHBMP_Cropped = _GDIPlus_BitmapCreateHBITMAPFromBitmap($hBMP_Cropped)
+		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Ok.bmp")
+	$RunState = False
 	EndIf
 EndFunc
+#ce

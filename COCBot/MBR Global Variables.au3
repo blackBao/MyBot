@@ -983,6 +983,7 @@ EndIf
 ;Multy Farming
 Global $ichkSwitchDonate
 Global $ichkMultyFarming
+Global $iAccount
 
 ;ZAp Drill
 Global $ichkSmartLightSpell
@@ -1031,8 +1032,11 @@ Global $ichkTrophySwitchMax, $itxtMaxTrophyAmount, $icmbTrophyMaxProfile, $ichkT
 Global $ichkAlertBuilderIdle
 Global $iReportIdleBuilder = 0
 
-Global $useFFBarchST,$percentCollectors
-Global $countFindPixCloser = 0, $countCollectorexposed = 0
+;Smart Dead Base
+Global $iSmartDeadBase,$SmartCollectors
+Global $iChkSmartDB
+Global $SideTopLeft, $SideBottomLeft, $SideTopRight, $SideBottomRight
+Global $countFindPixCloser, $countCollectorexposed
 
 ;trap TH
 Global $Defx = 0, $Defy = 0

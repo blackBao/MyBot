@@ -17,17 +17,24 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 	;;;;;;;;;;;;;;;;;
     ;;; Mult-Farming
     ;;;;;;;;;;;;;;;;;
-	Local $x = 30, $y = 150
-	$grpMultyFarming = GUICtrlCreateGroup("Multi-Farming Mode", $x - 20, $y - 20, 180, 65)
-		$chkSwitchDonate = GUICtrlCreateCheckbox("Switch Account and Donate", $x - 5, $y - 5, -1, -1)
+	Local $x = 215, $y = 215
+	$grpMultyFarming = GUICtrlCreateGroup("Multi-Farming Mode", $x - 20, $y - 20, 120, 60)
+		$chkSwitchDonate = GUICtrlCreateCheckbox("Switch and Donate", $x - 5, $y - 5, -1, -1)
 			$txtTip = "Will switch account and Donate, then switch back"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "SwitchAndDonate")
-	$y += 20
-		$chkMultyFarming = GUICtrlCreateCheckbox("Multi-Farming Mode", $x - 5, $y, -1 , -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+			GUICtrlSetState(-1, $GUI_HIDE)
+			$chkMultyFarming = GUICtrlCreateCheckbox("Multi-Farming", $x - 5, $y -5, -1 , -1)
 			$txtTip = "Will switch account and attack, then switch back"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "MultiFarming")
+	$y += 15
+		$Account = GUICtrlCreateInput("4", $x +65, $y +3, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetLimit(-1, 4)
+		$lblSmartDBcol = GUICtrlCreateLabel("How Many", $x -5, $y + 5, -1, -1)
+		   	GUICtrlSetTip(-1, $txtTip)
 
     Local $x = 215, $y = 150
     $grpStatsMisc = GUICtrlCreateGroup("Smart Zap Drill", $x - 20, $y - 20, 155, 65)
@@ -58,20 +65,27 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		$txtTip = "The amount of Lightning Spells Used in zapping."
 	    GUICtrlSetTip(-1, $txtTip)
 
-		Local $x = 30, $y = 270
-	  $grpDeadbasefilter = GUICtrlCreateGroup("Dead Base Filter", $x -20, $y - 20, 130, 65)
-		$chkChangeFF = GUICtrlCreateCheckbox("Use De Side Attack", $x -5, $y - 5, -1, -1)
-			$txtTip = "Change to De Side Attack if less than % of collectors near RED LINE."
+	Local $x = 30, $y = 150
+	  $grpDeadbasefilter = GUICtrlCreateGroup("Smart Dead Base", $x -20, $y - 20, 180, 65)
+		$SmartDeadBase = GUICtrlCreateCheckbox("Use Side Attack", $x -5, $y - 5, -1, -1)
+			$txtTip = "Change to Side Attack if less than % of collectors near RED LINE."
 			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetOnEvent(-1, "chkChangeFF")
-		$txtTHpercentCollectors = GUICtrlCreateInput("80", $x -5, $y + 17, 35, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			GUICtrlSetOnEvent(-1, "SmartDeadBase")
+		$txtSmartCollectors = GUICtrlCreateInput("80", $x +110, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 100)
-		$lblChangeFF = GUICtrlCreateLabel("% collectors.", $x + 35, $y + 20, -1, -1)
+;			GUICtrlSetState(-1, $GUI_DISABLE)
+		$lblSmartDBcol = GUICtrlCreateLabel("% coll", $x + 130, $y -5, -1, -1)
 		   	GUICtrlSetTip(-1, $txtTip)
+		$y += 15
+		$lblSmartDBDeploy = GUICtrlCreateLabel(GetTranslated(3,3, -1) & ":", $x, $y + 5, -1, -1)
+		$cmbSmartDB = GUICtrlCreateCombo("", $x + 55, $y +2, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+			$txtTip = "Sellect Side attack"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetData(-1,"Collector Side|DE Side|TH Side", "Collector Side")
 
 	Local $x = 30, $y = 215
-		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 175, 55)
+		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 180, 60)
 			GUICtrlCreateIcon($pIconLib, $eIcnKing, $x, $y, 24, 24)
 				$txtTip = "Check this to Filter De Side Attack If No available King And Attack Dead Base Only"
 				GUICtrlSetTip(-1, $txtTip)
@@ -92,7 +106,7 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			$chkDeWardenFilter = GUICtrlCreateCheckbox("", $x + 30, $y,17, 17)
 				GUICtrlSetTip(-1, $txtTip)
 				GUICtrlSetOnEvent(-1, "LBHeroFilter")
-	Local $x = 210, $y = 215
+	Local $x = 30, $y = 275
 		$grpAutoTrainSpell = GUICtrlCreateGroup("Auto Train Spell", $x - 20, $y - 20, 225, 85)
 			GUICtrlCreateIcon($pIconLib, $eIcnLightSpell, $x, $y, 24, 24)
 				$txtTip = GetTranslated(14,39, -1)

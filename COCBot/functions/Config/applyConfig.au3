@@ -23,7 +23,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	SetRedrawBotWindow(False)
 
 	If $iVillageName = "" Then
-		GUICtrlSetData($txtVillageName, "MyVillage")
+		GUICtrlSetData($txtVillageName, "Main")
 	Else
 		GUICtrlSetData($txtVillageName, $iVillageName)
 	EndIf
@@ -1661,7 +1661,9 @@ chkTSMeetDE()
 		GUICtrlSetState($chkMultyFarming, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkMultyFarming, $GUI_UNCHECKED)
-	 EndIf
+	EndIf
+	GUICtrlSetData($Account, $iAccount)
+
 	If $ichkDrillZapTH = 1 Then
 		GUICtrlSetState($chkDrillZapTH, $GUI_CHECKED)
 	Else
@@ -1738,7 +1740,6 @@ chkTSMeetDE()
 		GUICtrlSetState($chkTrainHasteSpell, $GUI_UNCHECKED)
 	EndIf
 
-
 	;Hero Filters
 	_GUICtrlComboBox_SetCurSel($cmbSkipCentreDE, $iSkipCentreDE)
 	_GUICtrlComboBox_SetCurSel($cmbSkipUndetectedDE, $iSkipUndetectedDE)
@@ -1807,14 +1808,14 @@ chkTSMeetDE()
 		GUICtrlSetState($chkLBAQFilter, $GUI_UNCHECKED)
 	EndIf
 
-	If $useFFBarchST = 1 Then
-		GUICtrlSetState($chkChangeFF, $GUI_CHECKED)
+	If $iSmartDeadBase = 1 Then
+		GUICtrlSetState($SmartDeadBase, $GUI_CHECKED)
 	Else
-		GUICtrlSetState($chkChangeFF, $GUI_UNCHECKED)
+		GUICtrlSetState($SmartDeadBase, $GUI_UNCHECKED)
 	EndIf
 
-	GUICtrlSetData($txtTHpercentCollectors, $percentCollectors)
-
+	GUICtrlSetData($txtSmartCollectors, $SmartCollectors)
+	_GUICtrlComboBox_SetCurSel($cmbSmartDB, $iChkSmartDB)
 	;Options Settings--------------------------------------------------------------------------
 	For $i = 1 to 24
 	  	GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])

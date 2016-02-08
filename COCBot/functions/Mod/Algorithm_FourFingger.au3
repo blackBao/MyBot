@@ -1,0 +1,191 @@
+; #FUNCTION# ====================================================================================================================
+; Name ..........: Algorithm_FourFingger
+; Description ...:
+; Syntax ........: Algorithm_FourFingger()
+; Parameters ....: None
+; Return values .: None
+; Author ........: Lakereng (2016)
+; Modified ......:
+; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2016
+;                  MyBot is distributed under the terms of the GNU GPL
+; Related .......:
+; Link ..........: https://github.com/MyBotRun/MyBot/wiki
+; Example .......: No
+; ===============================================================================================================================
+Func Algorithm_FourFingger()
+	Global $countFindPixCloser = 0
+	Global $countCollectorexposed = 0
+	$nbSides = 5
+	$iChkDeploySettings[$DB] = 4
+	If $debugSetlog = 1 Then Setlog("Algorithm_FourFingger", $COLOR_PURPLE)
+	SetSlotSpecialTroops()
+
+	If _Sleep($iDelayalgorithm_AllTroops1) Then Return
+
+		Local $hTimer = TimerInit()
+		_WinAPI_DeleteObject($hBitmapFirst)
+		$hBitmapFirst = _CaptureRegion2()
+		_GetRedArea()
+
+			SetLog("Locating Mines, Collectors & Drills", $COLOR_BLUE)
+			$hTimer = TimerInit()
+			Global $PixelMine[0]
+			Global $PixelElixir[0]
+			Global $PixelDarkElixir[0]
+			Global $PixelNearCollector[0]
+			Global $PixelNearCollectorx[0]
+			Global $PixelElixirTrue[0]
+			Global $SideTopLeft = 0
+			Global $SideBottomLeft = 0
+			Global $SideTopRight = 0
+			Global $SideBottomRight = 0
+			Local $PixelMinex = 0
+
+				$PixelMine = GetLocationMine()
+				If (IsArray($PixelMine)) Then
+					For $i = 0 To UBound($PixelMine) - 1
+						$PixelElixircheck = $PixelMine[$i]
+						If isInsideDiamond($PixelElixircheck) Then
+							$PixelMinex +=1
+							ReDim $PixelElixirTrue[$PixelMinex]
+							$PixelElixirTrue[$PixelMinex - 1] = $PixelElixircheck
+						EndIf
+					Next
+					For $i = 0 To UBound($PixelElixirTrue) - 1
+						$pixel = $PixelElixirTrue[$i]
+						If isResourceDiamond($pixel) Then
+							If $pixel[0] <= $InternalArea[2][0] Then
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopLeft += 1
+								Else
+									$SideBottomLeft += 1
+								EndIf
+							Else
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopRight += 1
+								Else
+									$SideBottomRight += 1
+								EndIf
+							EndIf
+						EndIf
+					Next
+					_ArrayAdd($PixelNearCollector, $PixelElixirTrue)
+					_ArrayAdd($PixelNearCollectorx, $PixelElixirTrue)
+				EndIf
+
+				$PixelElixir = GetLocationElixir()
+				If (IsArray($PixelElixir)) Then
+					If isInsideDiamond($PixelElixir) Then
+						_ArrayAdd($PixelNearCollector, $PixelElixir)
+					EndIf
+					For $i = 0 To UBound($PixelElixir) - 1
+						$pixel = $PixelElixir[$i]
+						If isInsideDiamond($pixel) Then
+							If $pixel[0] <= $InternalArea[2][0] Then
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopLeft += 1
+								Else
+									$SideBottomLeft += 1
+								EndIf
+							Else
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopRight += 1
+								Else
+									$SideBottomRight += 1
+								EndIf
+							EndIf
+						EndIf
+					Next
+				EndIf
+
+				$PixelDarkElixir = GetLocationDarkElixir()
+				CleanRedArea($PixelDarkElixir)
+				If (IsArray($PixelDarkElixir)) Then
+					For $i = 0 To UBound($PixelDarkElixir) - 1
+						$pixel = $PixelDarkElixir[$i]
+						If isInsideDiamond($pixel) Then
+							If $pixel[0] <= $InternalArea[2][0] Then
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopLeft += 1
+								Else
+									$SideBottomLeft += 1
+								EndIf
+							Else
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopRight += 1
+								Else
+									$SideBottomRight += 1
+								EndIf
+							EndIf
+						EndIf
+					Next
+				EndIf
+
+;~				$PixelDarkElixir = GetLocationDarkElixir()
+;~				If (IsArray($PixelDarkElixir)) Then
+;~					If isInsideDiamond($PixelDarkElixir) Then
+;~						_ArrayAdd($PixelNearCollector, $PixelDarkElixir)
+;~					EndIf
+;~				EndIf
+
+			SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
+			SetLog("[" & UBound($PixelNearCollectorx) & "] Gold Mines")
+			SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
+			$iNbrOfDetectedMines[$iMatchMode] += UBound($PixelElixirTrue)
+			$iNbrOfDetectedCollectors[$iMatchMode] += UBound($PixelElixir)
+			UpdateStats()
+
+	SetLog("Attacking four finger fight style", $COLOR_BLUE)
+	If $debugSetlog = 1 Then SetLog("List Deploy for Four Fingger attack", $COLOR_PURPLE)
+		Local $listInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+			    , [$eBarb, $nbSides, 1, 1, 0] _
+			    , [$eWall, $nbSides, 1, 1, 2] _
+			    , [$eArch, $nbSides, 1, 1, 0] _
+			    , [$eGobl, $nbSides, 1, 2, 0] _
+			    , ["CC", 1, 1, 1, 1] _
+			    , [$eHogs, $nbSides, 1, 1, 1] _
+			    , [$eWiza, $nbSides, 1, 1, 0] _
+			    , [$eMini, $nbSides, 1, 1, 0] _
+			    , [$eGobl, $nbSides, 2, 2, 0] _
+			    , ["HEROES", 1, 2, 1, 1] _
+			    ]
+
+	$isCCDropped = False
+	$DeployCCPosition[0] = -1
+	$DeployCCPosition[1] = -1
+	$isHeroesDropped = False
+	$DeployHeroesPosition[0] = -1
+	$DeployHeroesPosition[1] = -1
+
+	LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
+
+
+	If _Sleep($iDelayalgorithm_AllTroops4) Then Return
+			SetLog("Dropping left over troops", $COLOR_BLUE)
+			For $x = 0 To 1
+				PrepareAttack($DB, True)
+				For $i = $eBarb To $eLava
+					LauchTroop($i, $nbSides, 0, 1)
+					CheckHeroesHealth()
+					If _Sleep($iDelayalgorithm_AllTroops5) Then Return
+				Next
+			Next
+	;Activate KQ's power
+	If ($checkKPower Or $checkQPower) And $iActivateKQCondition = "Manual" Then
+		SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating Hero abilities", $COLOR_BLUE)
+		If _Sleep($delayActivateKQ) Then Return
+		If $checkKPower Then
+			SetLog("Activating King's power", $COLOR_BLUE)
+			SelectDropTroop($King)
+			$checkKPower = False
+		EndIf
+		If $checkQPower Then
+			SetLog("Activating Queen's power", $COLOR_BLUE)
+			SelectDropTroop($Queen)
+			$checkQPower = False
+		EndIf
+	EndIf
+
+	SetLog("Finished Attacking, waiting for the battle to end")
+
+EndFunc

@@ -302,15 +302,25 @@ Func runBot() ;Bot that runs everything in order
 			   RequestCC()
 			If $iVillageName = "Main" Then
 			   SwitchSecond()
-;~			   _GUICtrlComboBox_SetCurSel($cmbProfile, 1)
-;~			   cmbProfile()
 			   $RunState = True
 			   $fullArmy = True
 			ElseIf $iVillageName = "Second" Then
-			   SwitchMain()
-;~			   _GUICtrlComboBox_SetCurSel($cmbProfile, 0)
-;~			   cmbProfile()
 			   $RunState = True
+				If $iAccount = "3" Or $iAccount = "4" Then
+					SwitchTree()
+				Else
+					SwitchMain()
+				EndIf
+			ElseIf $iVillageName = "Tree" Then
+				$RunState = True
+				If $iAccount = "4" Then
+					SwitchFour()
+				Else
+					SwitchMain()
+				EndIf
+			ElseIf $iVillageName = "Four" Then
+				$RunState = True
+				SwitchMain()
 			EndIf
 		 EndIf
 	WEnd
@@ -430,6 +440,8 @@ Func Attack() ;Selects which algorithm
 	SetLog(" ====== Start Attack ====== ", $COLOR_GREEN)
 	If  ($iMatchMode = $DB and $ichkUseAttackDBCSV = 1) or ($iMatchMode = $LB and $ichkUseAttackABCSV = 1) Then
 		Algorithm_AttackCSV()
+	ElseIf $iMatchMode = $DB And $iSmartDeadBase = 1 Then
+		Algorithm_FourFingger()
 	Else
 		algorithm_AllTroops()
 	EndIf
