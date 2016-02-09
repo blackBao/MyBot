@@ -15,29 +15,31 @@
 
  Func DetectAccount()
 
-checkMainScreen()
 	While 1
 		ZoomOut()
 	ExitLoop
 	WEnd
 	Sleep (2000)
 
-_CaptureRegion(0, 0, 200, 18)
+_CaptureRegion()
 
 Local $hBMP_Cropped = _GDIPlus_BitmapCloneArea($hBitmap, 0, 0,  200, 18)
 Local $hHBMP_Cropped = _GDIPlus_BitmapCreateHBITMAPFromBitmap($hBMP_Cropped)
+SetLog("test 1")
 if  Not FileExists(@ScriptDir & "\images\Multyfarming\main.bmp") Then
 	 _GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\main.bmp")
 Elseif  Not FileExists(@ScriptDir & "\images\Multyfarming\Second.bmp") Then
 	 _GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\Second.bmp")
-Elseif  Not FileExists(@ScriptDir & "\images\Multyfarming\Tree.bmp") And ($iAccount = "3" Or $iAccount = "4") Then
-	 _GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\Tree.bmp")
-Elseif  Not FileExists(@ScriptDir & "\images\Multyfarming\Four.bmp") And $iAccount = "4" Then
-	 _GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\Four.bmp")
+Elseif  Not FileExists(@ScriptDir & "\images\Multyfarming\Third.bmp") And ($iAccount = "3" Or $iAccount = "4") Then
+SetLog("test 2")
+	 _GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\Third.bmp")
+Elseif  Not FileExists(@ScriptDir & "\images\Multyfarming\Fourth.bmp") And $iAccount = "4" Then
+SetLog("test 3")
+	 _GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\Fourth.bmp")
 EndIf
 
 if FileExists(@ScriptDir & "\images\Multyfarming\temp.bmp") Then
-   FileDelete((@ScriptDir & "\images\Multyfarming\temp.bmp"))
+   FileDelete(@ScriptDir & "\images\Multyfarming\temp.bmp")
 EndIf
 
 	  _GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\temp.bmp")
@@ -46,8 +48,8 @@ EndIf
 $bm1 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\main.bmp")
 $bm3 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\Second.bmp")
 $bm2 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\temp.bmp")
-$bm4 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\Tree.bmp")
-$bm5 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\Four.bmp")
+$bm4 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\Third.bmp")
+$bm5 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\Fourth.bmp")
 
 	If CompareBitmaps($bm1, $bm2) Then
 		SetLog("Main account Detected...", $COLOR_GREEN)
@@ -57,12 +59,12 @@ $bm5 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\Four.bmp")
 		SetLog("Second account Detected...", $COLOR_GREEN)
 		_GUICtrlComboBox_SetCurSel($cmbProfile, 1)
 		cmbProfile()
-	ElseIf CompareBitmaps($bm4, $bm2) And ($iAccount = "3" Or $iAccount = "4") Then
-		SetLog("Tree account Detected...", $COLOR_GREEN)
+	ElseIf CompareBitmaps($bm4, $bm2) Then
+		SetLog("Third account Detected...", $COLOR_GREEN)
 		_GUICtrlComboBox_SetCurSel($cmbProfile, 2)
 		cmbProfile()
-	ElseIf CompareBitmaps($bm5, $bm2) And $iAccount = "4" Then
-		SetLog("Four account Detected...", $COLOR_GREEN)
+	ElseIf CompareBitmaps($bm5, $bm2) Then
+		SetLog("Fourth account Detected...", $COLOR_GREEN)
 		_GUICtrlComboBox_SetCurSel($cmbProfile, 3)
 		cmbProfile()
 	Else
@@ -150,18 +152,18 @@ Func MakeAccount()
 		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\AccSecond.bmp")
 	EndIf
 	Sleep(1500)
-	If Not FileExists(@ScriptDir & "\images\Multyfarming\AccTree.bmp") And ($iAccount = "3" Or $iAccount = "4") Then
+	If Not FileExists(@ScriptDir & "\images\Multyfarming\AccThird.bmp") And ($iAccount = "3" Or $iAccount = "4") Then
 
 		Local $hBMP_Cropped = _GDIPlus_BitmapCloneArea($hBitmap, 155, 431,  200, 18)
 		Local $hHBMP_Cropped = _GDIPlus_BitmapCreateHBITMAPFromBitmap($hBMP_Cropped)
-		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\AccTree.bmp")
+		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\AccThird.bmp")
 	EndIf
 	Sleep(1500)
-	If Not FileExists(@ScriptDir & "\images\Multyfarming\AccFour.bmp") And $iAccount = "4" Then
+	If Not FileExists(@ScriptDir & "\images\Multyfarming\AccFourth.bmp") And $iAccount = "4" Then
 
 		Local $hBMP_Cropped = _GDIPlus_BitmapCloneArea($hBitmap, 155, 477,  200, 18)
 		Local $hHBMP_Cropped = _GDIPlus_BitmapCreateHBITMAPFromBitmap($hBMP_Cropped)
-		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\AccFour.bmp")
+		_GDIPlus_ImageSaveToFile($hBMP_Cropped, @ScriptDir & "\images\Multyfarming\AccFourth.bmp")
 	EndIf
 	Sleep(1500)
 	If Not FileExists(@ScriptDir & "\images\Multyfarming\Ok.bmp") And $iAccount = "4" Then

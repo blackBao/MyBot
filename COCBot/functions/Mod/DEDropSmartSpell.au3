@@ -28,6 +28,10 @@ Func DEDropSmartSpell()
 	;Get Dark Elixir value, if no DE value exists, exit.
 	$searchDark = checkDE()
 	If $searchDark = False Then Return False
+	If ($searchDark < Number($itxtMinDark)) Then
+        SetLog ("Dark Elixir Is below minimum Value")
+        Return
+		EndIf
 
 	; Check match mode
 	If $debugsetlog = 1 Then SetLog("Search Mode: "&$iCmbSearchMode, $COLOR_PURPLE)

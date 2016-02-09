@@ -641,11 +641,11 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkTrainLightSpell = IniRead($config, "MOD", "TrainLightSpell", "0")
 		$ichkTrainHealSpell = IniRead($config, "MOD", "TrainHealSpell", "0")
 		$ichkTrainRageSpell = IniRead($config, "MOD", "TrainRageSpell", "0")
-		$ichkTrainJumpSpell = IniRead($config, "MOD", "TrainJumpSpell", "0")
+;~		$ichkTrainJumpSpell = IniRead($config, "MOD", "TrainJumpSpell", "0")
 		$ichkTrainFreezeSpell = IniRead($config, "MOD", "TrainFreezeSpell", "0")
 		$ichkTrainPoisonSpell = IniRead($config, "MOD", "TrainPoisonSpell", "0")
 		$ichkTrainEarthquakeSpell = IniRead($config, "MOD", "TrainEarthquakeSpell", "0")
-		$ichkTrainHasteSpell = IniRead($config, "MOD", "TrainHasteSpell", "0")
+;~		$ichkTrainHasteSpell = IniRead($config, "MOD", "TrainHasteSpell", "0")
 
 ;Hero Filter Settings.
 		$iSkipCentreDE = IniRead($config, "MOD", "SkipCentreDE", "0")
@@ -673,7 +673,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		$iSmartDeadBase = IniRead($config, "MOD", "SmartDeadBase", "0")
 		$SmartCollectors = IniRead($config, "MOD", "txtSmartCollectors", "80")
 		$iChkSmartDB = IniRead($config, "MOD", "SmartDB", "0")
-
+		$SmartNear = IniRead($config, "MOD", "txtSmartNear", "51")
 		;Options Settings--------------------------------------------------------------------------
 		For $i = 1 to 24
 		   $DeDeployType[$i-1] = IniRead($config, "options", "DeDeployType" & $I, $DeDeployEmptyString)

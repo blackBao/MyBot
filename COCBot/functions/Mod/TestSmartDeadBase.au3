@@ -1,7 +1,7 @@
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: Algorithm_FourFingger
+; Name ..........: TEst Smart Dead Base
 ; Description ...:
-; Syntax ........: Algorithm_FourFingger()
+; Syntax ........: TestSmartDeadBase()
 ; Parameters ....: None
 ; Return values .: None
 ; Author ........: Lakereng (2016)
@@ -12,22 +12,11 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
-Func Algorithm_FourFingger()
+Func TestSmartDeadBase()
 	Global $countFindPixCloser = 0
 	Global $countCollectorexposed = 0
 	$nbSides = 5
-	$iChkDeploySettings[$DB] = 4
-	$iChkRedArea[$DB] = 1
-	$iChkSmartAttack[$DB][0] = 1
-	$iChkSmartAttack[$DB][1] = 1
-	$ichkDBRandomSpeedAtk = 1
-	CheckDebug()
-	If $debugSetlog = 1 Then Setlog("Algorithm_FourFingger", $COLOR_PURPLE)
-	SetSlotSpecialTroops()
-
-	If _Sleep($iDelayalgorithm_AllTroops1) Then Return
-
-		Local $hTimer = TimerInit()
+	Local $hTimer = TimerInit()
 		_WinAPI_DeleteObject($hBitmapFirst)
 		$hBitmapFirst = _CaptureRegion2()
 		_GetRedArea()
@@ -102,46 +91,13 @@ Func Algorithm_FourFingger()
 						EndIf
 					Next
 				EndIf
-#cs
-				$PixelDarkElixir = GetLocationDarkElixir()
-				CleanRedArea($PixelDarkElixir)
-				If (IsArray($PixelDarkElixir)) Then
-					For $i = 0 To UBound($PixelDarkElixir) - 1
-						$pixel = $PixelDarkElixir[$i]
-						If isInsideDiamond($pixel) Then
-							If $pixel[0] <= $InternalArea[2][0] Then
-								If $pixel[1] <= $InternalArea[0][1] Then
-									$SideTopLeft += 1
-								Else
-									$SideBottomLeft += 1
-								EndIf
-							Else
-								If $pixel[1] <= $InternalArea[0][1] Then
-									$SideTopRight += 1
-								Else
-									$SideBottomRight += 1
-								EndIf
-							EndIf
-						EndIf
-					Next
-				EndIf
-#ce
-;~				$PixelDarkElixir = GetLocationDarkElixir()
-;~				If (IsArray($PixelDarkElixir)) Then
-;~					If isInsideDiamond($PixelDarkElixir) Then
-;~						_ArrayAdd($PixelNearCollector, $PixelDarkElixir)
-;~					EndIf
-;~				EndIf
 
 			SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
 			SetLog("[" & UBound($PixelNearCollectorx) & "] Gold Mines")
 			SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
-			$iNbrOfDetectedMines[$iMatchMode] += UBound($PixelElixirTrue)
-			$iNbrOfDetectedCollectors[$iMatchMode] += UBound($PixelElixir)
-			UpdateStats()
+			SetLog("Attacking four finger fight style", $COLOR_BLUE)
 
-	SetLog("Attacking four finger fight style", $COLOR_BLUE)
-	If $debugSetlog = 1 Then SetLog("List Deploy for Four Fingger attack", $COLOR_PURPLE)
+		 SetLog("List Deploy for Test Smart Dead Base", $COLOR_PURPLE)
 		Local $listInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
 			    , [$eBarb, $nbSides, 1, 1, 0] _
 			    , [$eWall, $nbSides, 1, 1, 2] _
@@ -155,63 +111,63 @@ Func Algorithm_FourFingger()
 			    , ["HEROES", 1, 2, 1, 1] _
 			    ]
 
-	$isCCDropped = False
-	$DeployCCPosition[0] = -1
-	$DeployCCPosition[1] = -1
-	$isHeroesDropped = False
-	$DeployHeroesPosition[0] = -1
-	$DeployHeroesPosition[1] = -1
+		ReadResource($listInfoDeploy, $CC, $King, $Queen, $Warden)
 
-	LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
+EndFunc
 
+Func ReadResource($listInfoDeploy, $CC, $King, $Queen, $Warden)
+	Local $listListInfoDeployTroopPixel[0]
+	Local $pixelRandomDrop[2]
+	Local $pixelRandomDropcc[2]
+	Global $countFindPixCloser = 0
+	Global $countCollectorexposed = 0
 
-	If _Sleep($iDelayalgorithm_AllTroops4) Then Return
-			SetLog("Dropping left over troops", $COLOR_BLUE)
-			For $x = 0 To 1
-				PrepareAttack($DB, True)
-				For $i = $eBarb To $eLava
-					LauchTroop($i, $nbSides, 0, 1)
-					CheckHeroesHealth()
-					If _Sleep($iDelayalgorithm_AllTroops5) Then Return
+		For $i = 0 To UBound($listInfoDeploy) - 1
+			Local $troop = -1
+			Local $troopNb = 0
+			Local $name = ""
+			$troopKind = $listInfoDeploy[$i][0]
+			$nbSides = $listInfoDeploy[$i][1]
+			$waveNb = $listInfoDeploy[$i][2]
+			$maxWaveNb = $listInfoDeploy[$i][3]
+			$slotsPerEdge = $listInfoDeploy[$i][4]
+			If $debugSetlog = 1 Then SetLog("**ListInfoDeploy row " & $i & ": USE " & $troopKind & " SIDES " & $nbSides & " WAVE " & $waveNb & " XWAVE " & $maxWaveNb & " SLOTXEDGE " & $slotsPerEdge, $COLOR_PURPLE)
+			If (IsNumber($troopKind)) Then
+				For $j = 0 To UBound($atkTroops) - 1 ; identify the position of this kind of troop
+					If $atkTroops[$j][0] = $troopKind Then
+						$troop = $j
+						$troopNb = Ceiling($atkTroops[$j][1] / $maxWaveNb)
+						Local $plural = 0
+						If $troopNb > 1 Then $plural = 1
+						$name = NameOfTroop($troopKind, $plural)
+					EndIf
 				Next
-			Next
-	;Activate KQ's power
-	If ($checkKPower Or $checkQPower) And $iActivateKQCondition = "Manual" Then
-		SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating Hero abilities", $COLOR_BLUE)
-		If _Sleep($delayActivateKQ) Then Return
-		If $checkKPower Then
-			SetLog("Activating King's power", $COLOR_BLUE)
-			SelectDropTroop($King)
-			$checkKPower = False
-		EndIf
-		If $checkQPower Then
-			SetLog("Activating Queen's power", $COLOR_BLUE)
-			SelectDropTroop($Queen)
-			$checkQPower = False
-		EndIf
-	EndIf
+			EndIf
+			If ($troop <> -1 And $troopNb > 0) Or IsString($troopKind) Then
+				Local $listInfoDeployTroopPixel
+				If (UBound($listListInfoDeployTroopPixel) < $waveNb) Then
+					ReDim $listListInfoDeployTroopPixel[$waveNb]
+					Local $newListInfoDeployTroopPixel[0]
+					$listListInfoDeployTroopPixel[$waveNb - 1] = $newListInfoDeployTroopPixel
+				EndIf
+				$listInfoDeployTroopPixel = $listListInfoDeployTroopPixel[$waveNb - 1]
 
-	DisableDebug()
-	SetLog("Finished Attacking, waiting for the battle to end")
-
-EndFunc
-
-Func CheckDebug()
-	If FileExists(@ScriptDir & "\LakerengDebug.txt") Then
-		$debugSearchArea = 1
-		$debugRedArea = 1
-		$debugSetlog = 1
-		$debugImageSave = 1
-		$debugBuildingPos = 1
-	EndIf
-EndFunc
-
-Func DisableDebug()
-	If FileExists(@ScriptDir & "\LakerengDebug.txt") Then
-		$debugSearchArea = 0
-		$debugRedArea = 0
-		$debugSetlog = 0
-		$debugImageSave = 0
-		$debugBuildingPos = 0
+				ReDim $listInfoDeployTroopPixel[UBound($listInfoDeployTroopPixel) + 1]
+				If (IsString($troopKind)) Then
+					Local $arrCCorHeroes[1] = [$troopKind]
+					$listInfoDeployTroopPixel[UBound($listInfoDeployTroopPixel) - 1] = $arrCCorHeroes
+				Else
+					Local $infoDropTroop = DropTroop2($troop, $nbSides, $troopNb, $slotsPerEdge, $name)
+					$listInfoDeployTroopPixel[UBound($listInfoDeployTroopPixel) - 1] = $infoDropTroop
+				EndIf
+				$listListInfoDeployTroopPixel[$waveNb - 1] = $listInfoDeployTroopPixel
+			EndIf
+		Next
+	Setlog("There are " & $countCollectorexposed & " collector(s) near RED LINE of " & Ubound($PixelNearCollector) & " collectors")
+	If _Sleep(1000) Then Return
+	If ($countCollectorexposed/Ubound($PixelNearCollector)*100) <= $SmartCollectors Then
+		Setlog("you setting of Collector " & $SmartCollectors & "%  And near RED LINE " & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "%",  $COLOR_RED )
+		If _Sleep(500) Then Return
+		SetLog("Change Side Attack to Collector side attack!...", $COLOR_BLUE)
 	EndIf
 EndFunc

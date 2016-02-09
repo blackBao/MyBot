@@ -61,9 +61,10 @@ Func _FindPixelCloser($arrPixel, $pixel, $nb = 1)
 	Next
 	If $iSmartDeadBase = 1 Then
 		If $countFindPixCloser < UBound($PixelNearCollector) Then
-	            Local $DistancePixeltoPixCLoser = Sqrt(($PixelCloser[0]-$pixel[0])^2 + ($PixelCloser[1] - $pixel[1])^2)
-			;setlog("Distance is " & $DistancePixeltoPixCLoser)
-			If $DistancePixeltoPixCLoser < 51 Then $countCollectorexposed += 1
+			Local $DistancePixeltoPixCLoser = Sqrt(($PixelCloser[0]-$pixel[0])^2 + ($PixelCloser[1] - $pixel[1])^2)
+			If $debugSetlog = 1 Then SetLog("the resource of " & $PixelCloser[0] & "-" & $PixelCloser[1] & " Distance is " & $DistancePixeltoPixCLoser, $COLOR_PURPLE)
+			If $DistancePixeltoPixCLoser < $SmartNear Then $countCollectorexposed += 1
+			If $debugSetlog = 1 Then SetLog("your near setting in " & $SmartNear)
 			$countFindPixCloser += 1
 		EndIf
 	EndIf

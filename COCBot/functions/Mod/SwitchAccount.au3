@@ -72,11 +72,9 @@ Func SelectMain()
 	$iSwCount += 1
 	While 1
 		Sleep(1000)
-
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
 			CheckMain() ;Select Main account
-			Sleep(2000)
 			CheckOK()
 			ExitLoop
 		EndIf
@@ -196,7 +194,7 @@ Func SelectSecond()
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
 	While 1
-	Sleep(10000)
+	Sleep(1000)
 	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
@@ -264,26 +262,26 @@ Func LoadSecond() ; Load Second Account
 
 EndFunc   ;==>LoadSecond
 
-;;;;;;;##### Tree Account#####;;;;;;;
-Func SwitchTree()
+;;;;;;;##### Third Account#####;;;;;;;
+Func SwitchThird()
 	$iConfirm = 0
 	waitMainScreen()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
 
-	SelectTree()
+	SelectThird()
 		waitMainScreen()
 
 	$RunState = True
 	If $iConfirm = 1 Then
-		FileDelete((@ScriptDir & "\images\Multyfarming\Tree.bmp"))
+		FileDelete((@ScriptDir & "\images\Multyfarming\Third.bmp"))
 	EndIf
 	Local $iLoopCount = 0
 	While 1
 		Local $Message = _PixelSearch(487, 387, 492, 391, Hex(0xE8E8E0, 6), 0);load pixel
 		If IsArray($Message) Then
-			SetLog("Load Tree account", $COLOR_blue)
+			SetLog("Load Third account", $COLOR_blue)
 			Sleep(1500)
 			Click(512, 433) ;Click Load Button
 			Sleep(1000)
@@ -312,9 +310,9 @@ Func SwitchTree()
 		EndIf
 
 	WEnd
-EndFunc   ;==>SwitchTree
+EndFunc   ;==>SwitchThird
 
-Func SelectTree()
+Func SelectThird()
 	Local $iLoopCount = 0
 	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
@@ -322,19 +320,19 @@ Func SelectTree()
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
 	While 1
-	Sleep(10000)
+	Sleep(1000)
 	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
-			CheckTree()
+			CheckThird()
 			Sleep(2000)
 			CheckOK()
 			ExitLoop
 		EndIf
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
-		If $iLoopCount > 5000 Then
-			SelectTree()
+		If $iLoopCount > 2000 Then
+			SelectThird()
 			ExitLoop
 		EndIf
 	WEnd
@@ -347,18 +345,18 @@ Func SelectTree()
 		Setlog("Change account cancel")
 		Return True
 	Else
-	    LoadTree()
+	    LoadThird()
 	EndIf
 
-EndFunc   ;==>SelectTree
+EndFunc   ;==>SelectThird
 
 
-Func LoadTree() ; Load Tree Account
+Func LoadThird() ; Load Third Account
 	Local $iLoopCount = 0
 	While 1
 		Local $Message = _PixelSearch(487, 387, 492, 391, Hex(0xE8E8E0, 6), 0);load pixel
 		If IsArray($Message) Then
-			SetLog("Load Tree account", $COLOR_blue)
+			SetLog("Load Third account", $COLOR_blue)
 			Sleep(1500)
 			Click(512, 433) ;Click Load Button
 			Sleep(1000)
@@ -383,34 +381,34 @@ Func LoadTree() ; Load Tree Account
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
 		If $iLoopCount > 1500 Then
-			SelectTree()
+			SelectThird()
 			ExitLoop
 		EndIf
 
 	WEnd
 
-EndFunc   ;==>LoadTree
+EndFunc   ;==>LoadThird
 
-;;;;;;;##### Four Account#####;;;;;;;
-Func SwitchFour()
+;;;;;;;##### Fourth Account#####;;;;;;;
+Func SwitchFourth()
 	$iConfirm = 0
 	waitMainScreen()
 	Send("{CapsLock off}")
 	Click(830, 590) ;Click Switch
 	Sleep(1000)
 
-	SelectFour()
+	SelectFourth()
 		waitMainScreen()
 
 	$RunState = True
 	If $iConfirm = 1 Then
-		FileDelete((@ScriptDir & "\images\Multyfarming\Four.bmp"))
+		FileDelete((@ScriptDir & "\images\Multyfarming\Fourth.bmp"))
 	EndIf
 	Local $iLoopCount = 0
 	While 1
 		Local $Message = _PixelSearch(487, 387, 492, 391, Hex(0xE8E8E0, 6), 0);load pixel
 		If IsArray($Message) Then
-			SetLog("Load Four account", $COLOR_blue)
+			SetLog("Load Fourth account", $COLOR_blue)
 			Sleep(1500)
 			Click(512, 433) ;Click Load Button
 			Sleep(1000)
@@ -439,9 +437,9 @@ Func SwitchFour()
 		EndIf
 
 	WEnd
-EndFunc   ;==>SwitchFour
+EndFunc   ;==>SwitchFourth
 
-Func SelectFour()
+Func SelectFourth()
 	Local $iLoopCount = 0
 	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
@@ -449,19 +447,19 @@ Func SelectFour()
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
 	While 1
-	Sleep(10000)
+	Sleep(1000)
 	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
-			CheckFour()
+			CheckFourth()
 			Sleep(2000)
 			CheckOK()
 			ExitLoop
 		EndIf
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
-		If $iLoopCount > 5000 Then
-			SelectFour()
+		If $iLoopCount > 2000 Then
+			SelectFourth()
 			ExitLoop
 		EndIf
 	WEnd
@@ -474,17 +472,17 @@ Func SelectFour()
 		Setlog("Change account cancel")
 		Return True
 	Else
-	    LoadFour()
+	    LoadFourth()
 	EndIf
 
-EndFunc   ;==>SelectFour
+EndFunc   ;==>SelectFourth
 
-Func LoadFour() ; Load Four Account
+Func LoadFourth() ; Load Fourth Account
 	Local $iLoopCount = 0
 	While 1
 		Local $Message = _PixelSearch(487, 387, 492, 391, Hex(0xE8E8E0, 6), 0);load pixel
 		If IsArray($Message) Then
-			SetLog("Load Four account", $COLOR_blue)
+			SetLog("Load Fourth account", $COLOR_blue)
 			Sleep(1500)
 			Click(512, 433) ;Click Load Button
 			Sleep(1000)
@@ -509,13 +507,13 @@ Func LoadFour() ; Load Four Account
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
 		If $iLoopCount > 1500 Then
-			SelectFour()
+			SelectFourth()
 			ExitLoop
 		EndIf
 
 	WEnd
 
-EndFunc   ;==>LoadFour
+EndFunc   ;==>LoadFourth
 
 Func CheckOK()
 
@@ -595,54 +593,54 @@ Func CheckSecond()
 	If _Sleep(500) Then Return
 EndFunc   ;==>CheckSecond
 
-Func CheckTree()
+Func CheckThird()
 
-	Local $AccTreeX, $AccTreeY
-	$AccTree = @ScriptDir & "\images\Multyfarming\AccTree.bmp"
-	If Not FileExists($AccTree) Then Return False
-	$AccTreeLoc = 0
+	Local $AccThirdX, $AccThirdY
+	$AccThird = @ScriptDir & "\images\Multyfarming\AccThird.bmp"
+	If Not FileExists($AccThird) Then Return False
+	$AccThirdLoc = 0
 	_CaptureRegion()
 	If _Sleep(500) Then Return
-	For $AccTreeTol = 0 To 20
-		If $AccTreeLoc = 0 Then
-			$AccTreeX = 0
-			$AccTreeY = 0
-			$AccTreeLoc = _ImageSearch($AccTree, 1, $AccTreeX, $AccTreeY, $AccTreeTol)
-			If $AccTreeLoc = 1 Then
-				SetLog("Found Tree Account ", $COLOR_GREEN)
-				If $DebugSetLog = 1 Then SetLog("Tree Account found (" & $AccTreeX & "," & $AccTreeY & ") tolerance:" & $AccTreeTol, $COLOR_PURPLE)
-				Click($AccTreeX, $AccTreeY,1,0,"#0120")
+	For $AccThirdTol = 0 To 20
+		If $AccThirdLoc = 0 Then
+			$AccThirdX = 0
+			$AccThirdY = 0
+			$AccThirdLoc = _ImageSearch($AccThird, 1, $AccThirdX, $AccThirdY, $AccThirdTol)
+			If $AccThirdLoc = 1 Then
+				SetLog("Found Third Account ", $COLOR_GREEN)
+				If $DebugSetLog = 1 Then SetLog("Third Account found (" & $AccThirdX & "," & $AccThirdY & ") tolerance:" & $AccThirdTol, $COLOR_PURPLE)
+				Click($AccThirdX, $AccThirdY,1,0,"#0120")
 				If _Sleep(500) Then Return
 				Return True
 			EndIf
 		EndIf
 	Next
-	If $DebugSetLog = 1 Then SetLog("Cannot find Tree Account", $COLOR_PURPLE)
+	If $DebugSetLog = 1 Then SetLog("Cannot find Third Account", $COLOR_PURPLE)
 	If _Sleep(500) Then Return
-EndFunc   ;==>CheckTree
+EndFunc   ;==>CheckThird
 
-Func CheckFour()
+Func CheckFourth()
 
-	Local $AccFourX, $AccFourY
-	$AccFour = @ScriptDir & "\images\Multyfarming\AccFour.bmp"
-	If Not FileExists($AccFour) Then Return False
-	$AccFourLoc = 0
+	Local $AccFourthX, $AccFourthY
+	$AccFourth = @ScriptDir & "\images\Multyfarming\AccFourth.bmp"
+	If Not FileExists($AccFourth) Then Return False
+	$AccFourthLoc = 0
 	_CaptureRegion()
 	If _Sleep(500) Then Return
-	For $AccFourTol = 0 To 20
-		If $AccFourLoc = 0 Then
-			$AccFourX = 0
-			$AccFourY = 0
-			$AccFourLoc = _ImageSearch($AccFour, 1, $AccFourX, $AccFourY, $AccFourTol)
-			If $AccFourLoc = 1 Then
-				SetLog("Found Four Account ", $COLOR_GREEN)
-				If $DebugSetLog = 1 Then SetLog("Four Account found (" & $AccFourX & "," & $AccFourY & ") tolerance:" & $AccFourTol, $COLOR_PURPLE)
-				Click($AccFourX, $AccFourY,1,0,"#0120")
+	For $AccFourthTol = 0 To 20
+		If $AccFourthLoc = 0 Then
+			$AccFourthX = 0
+			$AccFourthY = 0
+			$AccFourthLoc = _ImageSearch($AccFourth, 1, $AccFourthX, $AccFourthY, $AccFourthTol)
+			If $AccFourthLoc = 1 Then
+				SetLog("Found Fourth Account ", $COLOR_GREEN)
+				If $DebugSetLog = 1 Then SetLog("Fourth Account found (" & $AccFourthX & "," & $AccFourthY & ") tolerance:" & $AccFourthTol, $COLOR_PURPLE)
+				Click($AccFourthX, $AccFourthY,1,0,"#0120")
 				If _Sleep(500) Then Return
 				Return True
 			EndIf
 		EndIf
 	Next
-	If $DebugSetLog = 1 Then SetLog("Cannot find Four Account", $COLOR_PURPLE)
+	If $DebugSetLog = 1 Then SetLog("Cannot find Fourth Account", $COLOR_PURPLE)
 	If _Sleep(500) Then Return
-EndFunc   ;==>CheckFour
+EndFunc   ;==>CheckFourth

@@ -298,8 +298,6 @@ Func runBot() ;Bot that runs everything in order
 			If $Restart = True Then ContinueLoop
 		    EndIf
 		 If $ichkMultyFarming = 1 Then
-			   SetLog("Multy Farming Mode Activated", $COLOR_Green)
-			   RequestCC()
 			If $iVillageName = "Main" Then
 			   SwitchSecond()
 			   $RunState = True
@@ -307,18 +305,18 @@ Func runBot() ;Bot that runs everything in order
 			ElseIf $iVillageName = "Second" Then
 			   $RunState = True
 				If $iAccount = "3" Or $iAccount = "4" Then
-					SwitchTree()
+					SwitchThird()
 				Else
 					SwitchMain()
 				EndIf
-			ElseIf $iVillageName = "Tree" Then
+			ElseIf $iVillageName = "Third" Then
 				$RunState = True
 				If $iAccount = "4" Then
-					SwitchFour()
-				Else
+					SwitchFourth()
+				ElseIf $iAccount = "3" Then
 					SwitchMain()
 				EndIf
-			ElseIf $iVillageName = "Four" Then
+			ElseIf $iVillageName = "Fourth" Then
 				$RunState = True
 				SwitchMain()
 			EndIf

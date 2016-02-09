@@ -28,8 +28,12 @@ EndFunc   ;==>SwitchAndDonate
 Func MultiFarming()
 	If GUICtrlRead($chkMultyFarming) = $GUI_CHECKED Then
 		$ichkMultyFarming = 1
+		GUICtrlSetState($Account, $GUI_ENABLE)
+		GUICtrlSetState($lblmultyAcc, $GUI_ENABLE)
 	Else
 		$ichkMultyFarming = 0
+		GUICtrlSetState($Account, $GUI_DISABLE)
+		GUICtrlSetState($lblmultyAcc, $GUI_DISABLE)
 	EndIf
 EndFunc   ;==>MultiFarming
 
@@ -106,11 +110,11 @@ Func autoTrainSpell()
 	  Else
       $ichkTrainRageSpell = 0
 	EndIf
-	If GUICtrlRead($chkTrainJumpSpell) = $GUI_CHECKED Then
-	  $ichkTrainJumpSpell = 1
-	  Else
-      $ichkTrainJumpSpell = 0
-	EndIf
+;~	If GUICtrlRead($chkTrainJumpSpell) = $GUI_CHECKED Then
+;~	  $ichkTrainJumpSpell = 1
+;~	  Else
+;~	  $ichkTrainJumpSpell = 0
+;~	EndIf
 	If GUICtrlRead($chkTrainFreezeSpell) = $GUI_CHECKED Then
 	  $ichkTrainFreezeSpell = 1
 	  Else
@@ -126,17 +130,17 @@ Func autoTrainSpell()
 	  Else
       $ichkTrainEarthquakeSpell = 0
 	EndIf
-	If GUICtrlRead($chkTrainHasteSpell) = $GUI_CHECKED Then
-	  $ichkTrainHasteSpell = 1
-	  Else
-      $ichkTrainHasteSpell = 0
-	EndIf
+;~	If GUICtrlRead($chkTrainHasteSpell) = $GUI_CHECKED Then
+;~	  $ichkTrainHasteSpell = 1
+;~	  Else
+;~    $ichkTrainHasteSpell = 0
+;~	EndIf
 EndFunc
 
 Func hidehero()
 	GUICtrlSetState($btnHeroSwitch, $GUI_SHOW)
 	GUICtrlSetState($btnNormalSwitch, $GUI_HIDE)
-	For $i = $grpMultyFarming To $chkTrainHasteSpell
+	For $i = $grpMultyFarming To $chkTrainEarthquakeSpell
 		GUICtrlSetState($i, $GUI_HIDE)
 	Next
 	For $i = $grpSkipCentreDE To $cmbABMeetGEHero
@@ -155,7 +159,7 @@ Func hideAdvanced()
 	For $i = $grpSkipCentreDE To $chkABMeetOneHero
 		GUICtrlSetState($i, $GUI_HIDE)
 	Next
-	For $i = $grpMultyFarming To $chkTrainHasteSpell
+	For $i = $grpMultyFarming To $chkTrainEarthquakeSpell
 		GUICtrlSetState($i, $GUI_SHOW)
 	Next
 	cmbSearchMode()
@@ -254,31 +258,29 @@ EndFunc   ;==>chkLBBKFilter
 
 Func SmartDeadBase()
 	If GUICtrlRead($SmartDeadBase) = $GUI_CHECKED Then
-		For $i = $txtSmartCollectors To $cmbSmartDB
+		For $i = $cmbSmartDB To $txtSmartNear
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
-		GUICtrlSetState($chkDBRandomSpeedAtk, $GUI_CHECKED)
-		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_CHECKED)
-		GUICtrlSetState($chkDbAttackNearGoldMine, $GUI_CHECKED)
-		GUICtrlSetState($chkDBAttackNearElixirCollector, $GUI_CHECKED)
-		GUICtrlSetState($chkUseAttackDBCSV, $GUI_UNCHECKED)
+		$iChkRedArea[$DB] = 1
+		$iChkSmartAttack[$DB][0] = 1
+		$iChkSmartAttack[$DB][1] = 1
+		$iChkSmartAttack[$DB][2] = 1
+		$ichkDBRandomSpeedAtk = 1
 		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
 			GUICtrlSetState($i, $GUI_DISABLE)
-		Next
-		For $i = $lblDBSmartDeploy To $picDBAttackNearDarkElixirDrill
-			GUICtrlSetState($i, $GUI_HIDE)
 		Next
 		For $i = $grpDeadBaseDeployCSV To $chkDBHasteSpellCSV
 			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
 	Else
-		For $i = $txtSmartCollectors To $cmbSmartDB
+		For $i = $cmbSmartDB To $txtSmartNear
 		GUICtrlSetState($i, $GUI_DISABLE)
 		Next
-		GUICtrlSetState($chkDBRandomSpeedAtk, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBSmartAttackRedArea, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDbAttackNearGoldMine, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBAttackNearElixirCollector, $GUI_UNCHECKED)
+		$iChkRedArea[$DB] = 0
+		$iChkSmartAttack[$DB][0] = 0
+		$iChkSmartAttack[$DB][1] = 0
+		$iChkSmartAttack[$DB][2] = 0
+		$ichkDBRandomSpeedAtk = 0
 		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
@@ -287,6 +289,14 @@ Func SmartDeadBase()
 		Next
 	EndIf
 EndFunc ;====> SmartDeadBase
+Func SmartNear()
+	$SmartNear = GUICtrlRead($txtSmartNear)
+	IniWrite($config, "MOD", "txtSmartNear", $SmartNear)
+EndFunc
+Func SmartCollectors()
+	$SmartCollectors = GUICtrlRead($txtSmartCollectors)
+	IniWrite($config, "MOD", "txtSmartCollectors", $SmartCollectors)
+EndFunc
 
 #cs Func MakeAccount()
 	$RunState = True

@@ -18,7 +18,8 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
     ;;; Mult-Farming
     ;;;;;;;;;;;;;;;;;
 	Local $x = 215, $y = 215
-	$grpMultyFarming = GUICtrlCreateGroup("Multi-Farming Mode", $x - 20, $y - 20, 120, 60)
+	$grpMultyFarming = GUICtrlCreateGroup("Multi-Farming", $x - 20, $y - 20, 100, 70)
+	$x -= 10
 		$chkSwitchDonate = GUICtrlCreateCheckbox("Switch and Donate", $x - 5, $y - 5, -1, -1)
 			$txtTip = "Will switch account and Donate, then switch back"
 			GUICtrlSetTip(-1, $txtTip)
@@ -30,11 +31,13 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "MultiFarming")
 	$y += 15
-		$Account = GUICtrlCreateInput("4", $x +65, $y +3, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$Account = GUICtrlCreateInput("4", $x +50, $y +3, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 4)
-		$lblSmartDBcol = GUICtrlCreateLabel("How Many", $x -5, $y + 5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$lblmultyAcc = GUICtrlCreateLabel("How Many:", $x -5, $y + 5, -1, -1)
 		   	GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetState(-1, $GUI_DISABLE)
 
     Local $x = 215, $y = 150
     $grpStatsMisc = GUICtrlCreateGroup("Smart Zap Drill", $x - 20, $y - 20, 155, 65)
@@ -64,28 +67,40 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		GUICtrlSetColor(-1,0x279B61)
 		$txtTip = "The amount of Lightning Spells Used in zapping."
 	    GUICtrlSetTip(-1, $txtTip)
-
-	Local $x = 30, $y = 150
-	  $grpDeadbasefilter = GUICtrlCreateGroup("Smart Dead Base", $x -20, $y - 20, 180, 65)
-		$SmartDeadBase = GUICtrlCreateCheckbox("Use Side Attack", $x -5, $y - 5, -1, -1)
+;~~ Smart Dead Base
+	Local $x = 30, $y = 215
+	  $grpDeadbasefilter = GUICtrlCreateGroup("Smart Dead Base", $x -20, $y - 20, 180, 70)
+		$SmartDeadBase = GUICtrlCreateCheckbox("Attack On:", $x -5, $y - 5, -1, -1)
 			$txtTip = "Change to Side Attack if less than % of collectors near RED LINE."
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "SmartDeadBase")
-		$txtSmartCollectors = GUICtrlCreateInput("80", $x +110, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
-			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetLimit(-1, 100)
-;			GUICtrlSetState(-1, $GUI_DISABLE)
-		$lblSmartDBcol = GUICtrlCreateLabel("% coll", $x + 130, $y -5, -1, -1)
-		   	GUICtrlSetTip(-1, $txtTip)
-		$y += 15
-		$lblSmartDBDeploy = GUICtrlCreateLabel(GetTranslated(3,3, -1) & ":", $x, $y + 5, -1, -1)
-		$cmbSmartDB = GUICtrlCreateCombo("", $x + 55, $y +2, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+;		$lblSmartDBDeploy = GUICtrlCreateLabel(GetTranslated(3,3, -1) & ":", $x, $y + 5, -1, -1)
+		$cmbSmartDB = GUICtrlCreateCombo("", $x + 75, $y - 7, 80, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			$txtTip = "Sellect Side attack"
 			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetData(-1,"Collector Side|DE Side|TH Side", "Collector Side")
+			GUICtrlSetData(-1,"Mine Side|DE Side|TH Side", "Mine Side")
 
-	Local $x = 30, $y = 215
-		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 180, 60)
+		$y += 25
+		$lblSmartDBcol = GUICtrlCreateLabel("collector:", $x + 85, $y -5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$txtSmartCollectors = GUICtrlCreateInput("80", $x +130, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			$txtTip = "if less % of collectors near RED LINE. change to side attack"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetLimit(-1, 100)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+			GUICtrlSetOnEvent(-1, "SmartCollectors")
+		$lblSmartDBPerc = GUICtrlCreateLabel("%", $x + 150, $y -5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$lblSmartDBNear = GUICtrlCreateLabel("Near RED Line:", $x -15, $y -5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$txtSmartNear = GUICtrlCreateInput("51", $x +60, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			$txtTip = "setting Near RED LINE Of Collector. Default is 51"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetLimit(-1, 10)
+			GUICtrlSetOnEvent(-1, "SmartNear")
+			GUICtrlSetState(-1, $GUI_DISABLE)
+	Local $x = 30, $y = 150
+		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 180, 65)
 			GUICtrlCreateIcon($pIconLib, $eIcnKing, $x, $y, 24, 24)
 				$txtTip = "Check this to Filter De Side Attack If No available King And Attack Dead Base Only"
 				GUICtrlSetTip(-1, $txtTip)
@@ -106,8 +121,8 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			$chkDeWardenFilter = GUICtrlCreateCheckbox("", $x + 30, $y,17, 17)
 				GUICtrlSetTip(-1, $txtTip)
 				GUICtrlSetOnEvent(-1, "LBHeroFilter")
-	Local $x = 30, $y = 275
-		$grpAutoTrainSpell = GUICtrlCreateGroup("Auto Train Spell", $x - 20, $y - 20, 225, 85)
+	Local $x = 310, $y = 208
+		$grpAutoTrainSpell = GUICtrlCreateGroup("Auto Train Spell", $x - 10, $y - 13, 160, 70)
 			GUICtrlCreateIcon($pIconLib, $eIcnLightSpell, $x, $y, 24, 24)
 				$txtTip = GetTranslated(14,39, -1)
 				GUICtrlSetTip(-1, $txtTip)
@@ -126,11 +141,11 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			$chkTrainRageSpell = GUICtrlCreateCheckbox("", $x + 30, $y, 17, 17)
 				GUICtrlSetTip(-1, $txtTip)
 			$x +=50
-				GUICtrlCreateIcon($pIconLib, $eIcnJumpSpell , $x, $y, 24, 24)
-				$txtTip =GetTranslated(14,42, -1)
-				GUICtrlSetTip(-1, $txtTip)
-			$chkTrainJumpSpell = GUICtrlCreateCheckbox("", $x + 30, $y, 17, 17)
-				GUICtrlSetTip(-1, $txtTip)
+;~				GUICtrlCreateIcon($pIconLib, $eIcnJumpSpell , $x, $y, 24, 24)
+;~				$txtTip =GetTranslated(14,42, -1)
+;~				GUICtrlSetTip(-1, $txtTip)
+;~			$chkTrainJumpSpell = GUICtrlCreateCheckbox("", $x + 30, $y, 17, 17)
+;~				GUICtrlSetTip(-1, $txtTip)
 			$y += 27
 			$x -= 150
 			GUICtrlCreateIcon($pIconLib, $eIcnFreezeSpell , $x, $y, 24, 24)
@@ -150,12 +165,12 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 				GUICtrlSetTip(-1, $txtTip)
 			$chkTrainEarthquakeSpell = GUICtrlCreateCheckbox("", $x + 30, $y, 17, 17)
 				GUICtrlSetTip(-1, $txtTip)
-			$x +=50
-				GUICtrlCreateIcon($pIconLib, $eIcnHasteSpell, $x, $y, 24, 24)
-				$txtTip =GetTranslated(14,46, -1)
-				GUICtrlSetTip(-1, $txtTip)
-			$chkTrainHasteSpell = GUICtrlCreateCheckbox("", $x + 30, $y, 17, 17)
-				GUICtrlSetTip(-1, $txtTip)
+;~			$x +=50
+;~				GUICtrlCreateIcon($pIconLib, $eIcnHasteSpell, $x, $y, 24, 24)
+;~				$txtTip =GetTranslated(14,46, -1)
+;~				GUICtrlSetTip(-1, $txtTip)
+;~			$chkTrainHasteSpell = GUICtrlCreateCheckbox("", $x + 30, $y, 17, 17)
+;~				GUICtrlSetTip(-1, $txtTip)
 	Local $x = 380, $y = 150
 		$grpHeroFilterSwitch = GUICtrlCreateGroup("Advanced Search", $x - 20, $y - 20, 100, 55)
 		$btnHeroSwitch = GUICtrlCreateButton("Normal Filters", $x - 15, $y - 5, 90, 35)

@@ -1714,11 +1714,11 @@ chkTSMeetDE()
 	Else
 		GUICtrlSetState($chkTrainRageSpell, $GUI_UNCHECKED)
 	EndIf
-	If $ichkTrainJumpSpell = 1 Then
-		GUICtrlSetState($chkTrainJumpSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainJumpSpell, $GUI_UNCHECKED)
-	EndIf
+;~	If $ichkTrainJumpSpell = 1 Then
+;~		GUICtrlSetState($chkTrainJumpSpell, $GUI_CHECKED)
+;~	Else
+;~		GUICtrlSetState($chkTrainJumpSpell, $GUI_UNCHECKED)
+;~	EndIf
 	If $ichkTrainFreezeSpell =  1 Then
 		  GUICtrlSetState($chkTrainFreezeSpell, $GUI_CHECKED)
 	Else
@@ -1734,11 +1734,11 @@ chkTSMeetDE()
 	Else
       GUICtrlSetState($chkTrainEarthquakeSpell, $GUI_UNCHECKED)
 	EndIf
-	If $ichkTrainHasteSpell = 1 Then
-		GUICtrlSetState($chkTrainHasteSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainHasteSpell, $GUI_UNCHECKED)
-	EndIf
+;~	If $ichkTrainHasteSpell = 1 Then
+;~		GUICtrlSetState($chkTrainHasteSpell, $GUI_CHECKED)
+;~	Else
+;~		GUICtrlSetState($chkTrainHasteSpell, $GUI_UNCHECKED)
+;~	EndIf
 
 	;Hero Filters
 	_GUICtrlComboBox_SetCurSel($cmbSkipCentreDE, $iSkipCentreDE)
@@ -1810,11 +1810,20 @@ chkTSMeetDE()
 
 	If $iSmartDeadBase = 1 Then
 		GUICtrlSetState($SmartDeadBase, $GUI_CHECKED)
+		$iChkRedArea[$DB] = 1
+		$iChkSmartAttack[$DB][0] = 1
+		$iChkSmartAttack[$DB][1] = 1
+		$ichkDBRandomSpeedAtk = 1
 	Else
 		GUICtrlSetState($SmartDeadBase, $GUI_UNCHECKED)
+		$iChkRedArea[$DB] = 0
+		$iChkSmartAttack[$DB][0] = 0
+		$iChkSmartAttack[$DB][1] = 0
+		$ichkDBRandomSpeedAtk = 0
 	EndIf
 
 	GUICtrlSetData($txtSmartCollectors, $SmartCollectors)
+	GUICtrlSetData($txtSmartNear, $SmartNear)
 	_GUICtrlComboBox_SetCurSel($cmbSmartDB, $iChkSmartDB)
 	;Options Settings--------------------------------------------------------------------------
 	For $i = 1 to 24

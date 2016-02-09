@@ -1557,11 +1557,11 @@ Func saveConfig() ;Saves the controls settings to the config
 	Else
 		IniWrite($config, "MOD", "TrainRageSpell", "0")
 	EndIf
-	If GUICtrlRead($chkTrainJumpSpell) = $GUI_CHECKED Then
-		IniWrite($config, "MOD", "TrainJumpSpell", "1")
-	Else
-		IniWrite($config, "MOD", "TrainJumpSpell", "0")
-	EndIf
+;~	If GUICtrlRead($chkTrainJumpSpell) = $GUI_CHECKED Then
+;~		IniWrite($config, "MOD", "TrainJumpSpell", "1")
+;~	Else
+;~		IniWrite($config, "MOD", "TrainJumpSpell", "0")
+;~	EndIf
 	If GUICtrlRead($chkTrainFreezeSpell) = $GUI_CHECKED Then
 		IniWrite($config, "MOD", "TrainFreezeSpell", "1")
 	Else
@@ -1577,11 +1577,11 @@ Func saveConfig() ;Saves the controls settings to the config
 	Else
 		IniWrite($config, "MOD", "TrainEarthquakeSpell", "0")
 	EndIf
-	If GUICtrlRead($chkTrainHasteSpell) = $GUI_CHECKED Then
-		IniWrite($config, "MOD", "TrainHasteSpell", "1")
-	Else
-		IniWrite($config, "MOD", "TrainHasteSpell", "0")
-	EndIf
+;~	If GUICtrlRead($chkTrainHasteSpell) = $GUI_CHECKED Then
+;~		IniWrite($config, "MOD", "TrainHasteSpell", "1")
+;~	Else
+;~		IniWrite($config, "MOD", "TrainHasteSpell", "0")
+;~	EndIf
 
 	IniWrite($config, "MOD", "txtMinDark", GUICtrlRead($txtMinDark))
 
@@ -1674,6 +1674,7 @@ Func saveConfig() ;Saves the controls settings to the config
 	EndIf
 
 	IniWrite($config, "MOD", "txtSmartCollectors", GUICtrlRead($txtSmartCollectors))
+	IniWrite($config, "MOD", "txtSmartNear", GUICtrlRead($txtSmartNear))
 	IniWrite($config, "MOD", "SmartDB", _GUICtrlComboBox_GetCurSel($cmbSmartDB))
 
 	;Options Settings--------------------------------------------------------------------------

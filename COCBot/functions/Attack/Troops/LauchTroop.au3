@@ -98,12 +98,11 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 			EndIf
 		Next
 		If $iSmartDeadBase = 1 Then
-
-			Setlog ("There are " & $countCollectorexposed & " collector(s) near RED LINE of " & Ubound($PixelNearCollector) & " collectors")
-
-			If ($countCollectorexposed/Ubound($PixelNearCollector)*100) < $SmartCollectors Then
-
-;~				If _Sleep(500) Then Return
+			Setlog("There are " & $countCollectorexposed & " collector(s) near RED LINE of " & Ubound($PixelNearCollector) & " collectors")
+			If _Sleep(1000) Then Return
+			If ($countCollectorexposed/Ubound($PixelNearCollector)*100) <= $SmartCollectors Then
+				Setlog("you setting of Collector " & $SmartCollectors & "%  And near RED LINE " & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "%",  $COLOR_RED )
+				If _Sleep(500) Then Return
 				If $iChkSmartDB < 1 Then
 					SetLog("Change Side Attack to Collector side attack!...", $COLOR_BLUE)
 					FindSideColl()

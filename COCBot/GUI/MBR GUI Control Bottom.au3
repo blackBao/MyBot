@@ -637,3 +637,21 @@ Func btnTesttrap()
     _GDIPlus_GraphicsDispose($hGraphic)
 
 EndFunc
+
+Func btnTestSmartDeadBase()
+	$RunState = True
+	SETLOG("Test Smart DeadBase..................START")
+	$iMatchMode = $DB
+	$iChkRedArea[$DB] = 1
+	$iSmartDeadBase = 1
+	$iChkSmartAttack[$DB][0] = 1
+	$iChkSmartAttack[$DB][1] = 1
+	$iChkSmartAttack[$DB][2] = 1
+	saveconfig()
+	readconfig()
+	applyconfig()
+	TestSmartDeadBase()
+	FindSideColl()
+	SETLOG("Test Smart DeadBase..................END")
+	$RunState = False
+EndFunc

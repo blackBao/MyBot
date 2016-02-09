@@ -1033,7 +1033,7 @@ Global $ichkAlertBuilderIdle
 Global $iReportIdleBuilder = 0
 
 ;Smart Dead Base
-Global $iSmartDeadBase,$SmartCollectors
+Global $iSmartDeadBase, $SmartCollectors, $SmartNear
 Global $iChkSmartDB
 Global $SideTopLeft, $SideBottomLeft, $SideTopRight, $SideBottomRight
 Global $countFindPixCloser, $countCollectorexposed

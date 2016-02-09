@@ -135,7 +135,7 @@ $grpVillage = GUICtrlCreateGroup(GetTranslated(13,21, "Village"), $x - 20, $y - 
  	$btnTestVillage = GUICtrlCreateButton("TEST BUTTON", $x + 90 , $y -25, -1, -1)
 ;~ 		GUICtrlSetOnEvent(-1, "btnTestDeadBase")
 ;~  		GUICtrlSetOnEvent(-1, "btnTestDonate")
-		GUICtrlSetOnEvent(-1, "btnTesttrap")
+		GUICtrlSetOnEvent(-1, "btnTestSmartDeadBase")
 		GUICtrlSetState(-1, $GUI_HIDE)
 
 
