@@ -1677,6 +1677,13 @@ Func saveConfig() ;Saves the controls settings to the config
 	IniWrite($config, "MOD", "txtSmartNear", GUICtrlRead($txtSmartNear))
 	IniWrite($config, "MOD", "SmartDB", _GUICtrlComboBox_GetCurSel($cmbSmartDB))
 
+; CoCStats
+	If GUICtrlRead($chkCoCStats) = $GUI_CHECKED Then
+		IniWrite($config, "MOD", "chkCoCStats", "1")
+	Else
+		IniWrite($config, "MOD", "chkCoCStats", "0")
+	EndIf
+	IniWrite($config, "MOD", "txtAPIKey", GUICtrlRead($txtAPIKey))
 	;Options Settings--------------------------------------------------------------------------
     For $i = 1 to 24
 	   If GUICtrlRead(Eval("cmbDeDeploy" & StringRight("0" & $i,2))) <> $DeDeployEmptyString Then

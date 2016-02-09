@@ -1043,3 +1043,8 @@ Global $Defx = 0, $Defy = 0
 Global $ImageInfoo = Execute("$THImages" & $t & "[" & $i & "]")
 Global $ImageInfooo = String("TH" & $THText[$t] & "-")
 global $abcd = Execute("$DefImages" & $t & "["& $i & "]")
+
+; CoCStats
+Global $ichkCoCStats = 0
+Global $stxtAPIKey = ""
+Global $MyApiKey = ""

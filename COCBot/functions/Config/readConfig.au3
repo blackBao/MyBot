@@ -671,9 +671,14 @@ Func readConfig() ;Reads config and sets it to the variables
 		$LBAQFilter = IniRead($config, "MOD", "LBAQFilter", "1")
 
 		$iSmartDeadBase = IniRead($config, "MOD", "SmartDeadBase", "0")
-		$SmartCollectors = IniRead($config, "MOD", "txtSmartCollectors", "80")
+		$SmartCollectors = IniRead($config, "MOD", "txtSmartCollectors", "20")
 		$iChkSmartDB = IniRead($config, "MOD", "SmartDB", "0")
 		$SmartNear = IniRead($config, "MOD", "txtSmartNear", "51")
+
+		; CoCStats
+		$ichkCoCStats = IniRead($config, "MOD", "chkCoCStats", "0")
+		$stxtAPIKey = IniRead($config, "MOD", "txtAPIKey", "")
+
 		;Options Settings--------------------------------------------------------------------------
 		For $i = 1 to 24
 		   $DeDeployType[$i-1] = IniRead($config, "options", "DeDeployType" & $I, $DeDeployEmptyString)

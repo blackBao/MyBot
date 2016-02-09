@@ -248,6 +248,7 @@
 #include "functions\Mod\FindSideColl.au3"
 #include "functions\Mod\Algorithm_FourFingger.au3"
 #include "functions\Mod\TestSmartDeadBase.au3"
+#include "functions\Mod\CoCStats.com.au3"
 
 #include "functions\trappedth\TrappedTownhall.au3"
 #include "functions\trappedth\checkDefense.au3"
