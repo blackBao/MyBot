@@ -24,7 +24,6 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			$txtTip = "Will switch account and Donate, then switch back"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "SwitchAndDonate")
-			GUICtrlSetState(-1, $GUI_DISABLE)
 			GUICtrlSetState(-1, $GUI_HIDE)
 			$chkMultyFarming = GUICtrlCreateCheckbox("Multi-Farming", $x - 5, $y -5, -1 , -1)
 			$txtTip = "Will switch account and attack, then switch back"
@@ -34,10 +33,8 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		$Account = GUICtrlCreateInput("4", $x +50, $y +3, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 4)
-			GUICtrlSetState(-1, $GUI_DISABLE)
 		$lblmultyAcc = GUICtrlCreateLabel("How Many:", $x -5, $y + 5, -1, -1)
 		   	GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetState(-1, $GUI_DISABLE)
 
     Local $x = 215, $y = 150
     $grpStatsMisc = GUICtrlCreateGroup("Smart Zap Drill", $x - 20, $y - 20, 155, 65)
@@ -82,23 +79,33 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 
 		$y += 25
 		$lblSmartDBcol = GUICtrlCreateLabel("collector:", $x + 85, $y -5, -1, -1)
-			GUICtrlSetState(-1, $GUI_DISABLE)
-		$txtSmartCollectors = GUICtrlCreateInput("80", $x +130, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$txtSmartCollectors = GUICtrlCreateInput("20", $x +130, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$txtTip = "if less % of collectors near RED LINE. change to side attack"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 100)
-			GUICtrlSetState(-1, $GUI_DISABLE)
 			GUICtrlSetOnEvent(-1, "SmartCollectors")
 		$lblSmartDBPerc = GUICtrlCreateLabel("%", $x + 150, $y -5, -1, -1)
-			GUICtrlSetState(-1, $GUI_DISABLE)
 		$lblSmartDBNear = GUICtrlCreateLabel("Near RED Line:", $x -15, $y -5, -1, -1)
-			GUICtrlSetState(-1, $GUI_DISABLE)
 		$txtSmartNear = GUICtrlCreateInput("51", $x +60, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$txtTip = "setting Near RED LINE Of Collector. Default is 51"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 10)
 			GUICtrlSetOnEvent(-1, "SmartNear")
-			GUICtrlSetState(-1, $GUI_DISABLE)
+
+	Local $x = 15, $y = 265
+		$grpCoCStats = GUICtrlCreateGroup("", $x, $y, 445, 35)
+	$y += 10
+		$chkCoCStats = GUICtrlCreateCheckbox("CoCStats Activate", $x+5 , $y , -1, -1)
+			$txtTip = "Activate sending raid results to CoCStats.com"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetOnEvent(-1, "chkCoCStats")
+	$x += 130
+		$lblAPIKey = GUICtrlCreateLabel("API Key :", $x, $y+5 , -1, 21, $SS_LEFT)
+			$txtAPIKey = GUICtrlCreateInput("", $x + 40, $y , 270, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER))
+			$txtTip = "Join in CoCStats.com and input API Key here"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetOnEvent(-1, "txtAPIKey")
+
 	Local $x = 30, $y = 150
 		$grpDesideFilter = GUICtrlCreateGroup("DE Side Filter", $x - 20, $y - 20, 180, 65)
 			GUICtrlCreateIcon($pIconLib, $eIcnKing, $x, $y, 24, 24)

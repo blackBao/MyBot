@@ -1825,6 +1825,18 @@ chkTSMeetDE()
 	GUICtrlSetData($txtSmartCollectors, $SmartCollectors)
 	GUICtrlSetData($txtSmartNear, $SmartNear)
 	_GUICtrlComboBox_SetCurSel($cmbSmartDB, $iChkSmartDB)
+
+	; CoCStats
+	If $ichkCoCStats = 1 Then
+		GUICtrlSetState($chkCoCStats, $GUI_CHECKED)
+		GUICtrlSetState($txtAPIKey, $GUI_ENABLE)
+	Else
+		GUICtrlSetState($chkCoCStats, $GUI_UNCHECKED)
+		GUICtrlSetState($txtAPIKey, $GUI_DISABLE)
+	EndIf
+	GUICtrlSetData($txtAPIKey, $stxtAPIKey)
+	chkCoCStats()
+	txtAPIKey()
 	;Options Settings--------------------------------------------------------------------------
 	For $i = 1 to 24
 	  	GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])

@@ -261,11 +261,6 @@ Func SmartDeadBase()
 		For $i = $cmbSmartDB To $txtSmartNear
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
-		$iChkRedArea[$DB] = 1
-		$iChkSmartAttack[$DB][0] = 1
-		$iChkSmartAttack[$DB][1] = 1
-		$iChkSmartAttack[$DB][2] = 1
-		$ichkDBRandomSpeedAtk = 1
 		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
 			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
@@ -276,11 +271,6 @@ Func SmartDeadBase()
 		For $i = $cmbSmartDB To $txtSmartNear
 		GUICtrlSetState($i, $GUI_DISABLE)
 		Next
-		$iChkRedArea[$DB] = 0
-		$iChkSmartAttack[$DB][0] = 0
-		$iChkSmartAttack[$DB][1] = 0
-		$iChkSmartAttack[$DB][2] = 0
-		$ichkDBRandomSpeedAtk = 0
 		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
@@ -297,6 +287,23 @@ Func SmartCollectors()
 	$SmartCollectors = GUICtrlRead($txtSmartCollectors)
 	IniWrite($config, "MOD", "txtSmartCollectors", $SmartCollectors)
 EndFunc
+
+Func txtAPIKey()
+   $stxtAPIKey  = GUICtrlRead($txtAPIKey)
+   IniWrite($config, "Stats", "txtAPIKey", $stxtAPIKey)
+   $MyApiKey = $stxtAPIKey
+EndFunc ;==> txtAPIKey
+
+ Func chkCoCStats()
+   If GUICtrlRead($chkCoCStats) = $GUI_CHECKED Then
+	  $ichkCoCStats = 1
+	  GUICtrlSetState($txtAPIKey, $GUI_ENABLE)
+   Else
+	  $ichkCoCStats = 0
+	  GUICtrlSetState($txtAPIKey, $GUI_DISABLE)
+EndIf
+IniWrite($config, "Stats", "chkCoCStats",$ichkCoCStats)
+EndFunc ;==> chkCoCStats
 
 #cs Func MakeAccount()
 	$RunState = True
