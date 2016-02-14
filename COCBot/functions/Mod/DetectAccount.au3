@@ -21,7 +21,7 @@
 	WEnd
 	Sleep (2000)
 
-_CaptureRegion()
+	_CaptureRegion()
 
 Local $hBMP_Cropped = _GDIPlus_BitmapCloneArea($hBitmap, 0, 0,  200, 18)
 Local $hHBMP_Cropped = _GDIPlus_BitmapCreateHBITMAPFromBitmap($hBMP_Cropped)
@@ -59,11 +59,11 @@ $bm5 = _GDIPlus_ImageLoadFromFile (@ScriptDir & "\images\Multyfarming\Fourth.bmp
 		SetLog("Second account Detected...", $COLOR_GREEN)
 		_GUICtrlComboBox_SetCurSel($cmbProfile, 1)
 		cmbProfile()
-	ElseIf CompareBitmaps($bm4, $bm2) Then
+	ElseIf ($iAccount = "3" Or $iAccount = "4") And CompareBitmaps($bm4, $bm2) Then
 		SetLog("Third account Detected...", $COLOR_GREEN)
 		_GUICtrlComboBox_SetCurSel($cmbProfile, 2)
 		cmbProfile()
-	ElseIf CompareBitmaps($bm5, $bm2) Then
+	ElseIf $iAccount = "4" And CompareBitmaps($bm5, $bm2) Then
 		SetLog("Fourth account Detected...", $COLOR_GREEN)
 		_GUICtrlComboBox_SetCurSel($cmbProfile, 3)
 		cmbProfile()
@@ -76,6 +76,13 @@ _GDIPlus_ImageDispose($bm2)
 _GDIPlus_ImageDispose($bm3)
 _GDIPlus_ImageDispose($bm4)
 _GDIPlus_ImageDispose($bm5)
+		For $i = $FirstControlToHide To $LastControlToHide ; Disable all controls in 1 go on all tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i = $tabAttackCSV Or $i = $tabMOD Or $i = $tabOptions Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
+			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
+			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
+			If $i = $divider Then ContinueLoop ; exclude divider
+			GUICtrlSetState($i, $GUI_DISABLE)
+		Next
 
 
 

@@ -68,27 +68,21 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 			If ($iChkSmartAttack[$iMatchMode][0] = 1) Then
 				$PixelMine = GetLocationMine()
 				If (IsArray($PixelMine)) Then
-					If isInsideDiamond($PixelMine) Then
-						_ArrayAdd($PixelNearCollector, $PixelMine)
-					EndIf
+					_ArrayAdd($PixelNearCollector, $PixelMine)
 				EndIf
 			EndIf
 			; If drop troop near elixir collector
 			If ($iChkSmartAttack[$iMatchMode][1] = 1) Then
 				$PixelElixir = GetLocationElixir()
 				If (IsArray($PixelElixir)) Then
-					If isInsideDiamond($PixelElixir) Then
-						_ArrayAdd($PixelNearCollector, $PixelElixir)
-					EndIf
+					_ArrayAdd($PixelNearCollector, $PixelElixir)
 				EndIf
 			EndIf
 			; If drop troop near dark elixir drill
 			If ($iChkSmartAttack[$iMatchMode][2] = 1) Then
 				$PixelDarkElixir = GetLocationDarkElixir()
 				If (IsArray($PixelDarkElixir)) Then
-					If isInsideDiamond($PixelDarkElixir) Then
-						_ArrayAdd($PixelNearCollector, $PixelDarkElixir)
-					EndIf
+					_ArrayAdd($PixelNearCollector, $PixelDarkElixir)
 				EndIf
 			EndIf
 			SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")

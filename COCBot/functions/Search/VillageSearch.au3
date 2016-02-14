@@ -99,7 +99,7 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 
 		If $chkATH = 1 Then $chkATHText = " Attack TH Outside "
 		If $OptTrophyMode = 1 Then $OptTrophyModeText = "THSnipe Combo, " & $THaddtiles & " Tile(s), " & GUICtrlRead($cmbTsSearchMode)
-		If ($OptTrophyMode = 1 Or $chkATH = 1) And Not ($Is_SearchLimit) Then SetLog($OptTrophyModeText & $chkATHText & $txtAttackTHType)
+		If ($OptTrophyMode = 1 Or $chkATH = 1) And Not ($Is_SearchLimit) Then SetLog($OptTrophyModeText & " " & $chkATHText & $txtAttackTHType)
 	EndIf
 
 	If Not ($Is_SearchLimit) Then
@@ -173,8 +173,13 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 			Next
 		EndIf
 
+		If $OptTrophyMode = 1 Then
+			$isModeActive[$TS] = True
+			$match[$TS] = CompareResources($TS)
+		EndIf
+
 		If _Sleep($iDelayRespond) Then Return
-		For $i = 0 To $iModeCount - 2
+		For $i = 0 To $iModeCount - 1
 			If ($match[$i] And $iChkWeakBase[$i] = 1 And $iChkMeetOne[$i] <> 1) Or ($isModeActive[$i] And Not $match[$i] And $iChkWeakBase[$i] = 1 And $iChkMeetOne[$i] = 1) Then
 				If IsWeakBase($i) Then
 					$match[$i] = True
@@ -186,7 +191,7 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 		Next
 
 		If _Sleep($iDelayRespond) Then Return
-		If $match[$DB] Or $match[$LB] Then
+		If $match[$DB] Or $match[$LB] Or $match[$TS] Then
 			$dbBase = checkDeadBase()
 		EndIf
 
@@ -424,6 +429,7 @@ Func SearchLimit($iSkipped)
 				Return True
 			EndIf
 		WEnd
+		$Is_SearchLimit = True
 		ReturnHome(False, False) ;If End battle is available
 		$Restart = True ; set force runbot restart flag
 		$Is_ClientSyncError = True ; set OOS flag for fast restart

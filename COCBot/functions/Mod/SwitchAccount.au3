@@ -23,9 +23,9 @@ Func SwitchMain()
 	Sleep(1000)
 
 	SelectMain()
+	If $RunState = False Then Return
 		waitMainScreen()
 
-	$RunState = True
 	If $iConfirm = 1 Then
 		FileDelete((@ScriptDir & "\images\Multyfarming\Main.bmp"))
 	EndIf
@@ -64,12 +64,24 @@ Func SwitchMain()
 EndFunc   ;==>SwitchMain
 
 Func SelectMain()
+	If $RunState = False Then Return
 	Local $iLoopCount = 0
 	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
+	If $iSwCount > 5 Then
+		SetLog(" Exit Now ...Cancel change account")
+		SetLog("PLease make sure image create From png", $COLOR_RED)
+		Click(437, 399 + $midOffsetY) ;Click  Disconn
+		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+		Return
+	ElseIf IsMainPage() Then
+		Setlog("Change account cancel")
+		Return True
+	EndIf
+
 	While 1
 		Sleep(1000)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
@@ -81,21 +93,14 @@ Func SelectMain()
 
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
-		If $iLoopCount > 2000 Then
+		If $iLoopCount > 1500 Then
 			SelectMain()
 			ExitLoop
 		EndIf
 	WEnd
 
-	If $iSwCount > 5 Then
-		SetLog(" Exit Now ...Cancel change account")
-		Click(437, 399 + $midOffsetY) ;Click  Disconn
-		ClickP($aAway, 2, $iDelayTrain5, "#0291")
-	ElseIf IsMainPage() Then
-		Setlog("Change account cancel")
-		Return True
-	Else
-	    LoadMain()
+	If $OkLoc = 1 Then
+		LoadMain()
 	EndIf
 
 EndFunc   ;==>SelectMain
@@ -145,9 +150,9 @@ Func SwitchSecond()
 	Sleep(1000)
 
 	SelectSecond()
+	If $RunState = False Then Return
 		waitMainScreen()
 
-	$RunState = True
 	If $iConfirm = 1 Then
 		FileDelete((@ScriptDir & "\images\Multyfarming\Second.bmp"))
 	EndIf
@@ -187,15 +192,29 @@ Func SwitchSecond()
 EndFunc   ;==>SwitchSecond
 
 Func SelectSecond()
+	If $RunState = False Then Return
 	Local $iLoopCount = 0
 	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
+
+	If $iSwCount > 5 Then
+		SetLog(" Exit Now ...Cancel change account")
+		SetLog("PLease make sure image create From png", $COLOR_RED)
+		Click(437, 399 + $midOffsetY) ;Click  Disconn
+		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+		Return
+	ElseIf IsMainPage() Then
+		Setlog("Change account cancel")
+		Return True
+	EndIf
+
+	SetLog("Please wait account select", $COLOR_GREEN)
+
 	While 1
 	Sleep(1000)
-	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
 			CheckSecond()
@@ -205,21 +224,14 @@ Func SelectSecond()
 		EndIf
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
-		If $iLoopCount > 5000 Then
+		If $iLoopCount > 1500 Then
 			SelectSecond()
 			ExitLoop
 		EndIf
 	WEnd
 	Sleep (500)
-	If $iSwCount > 5 Then
-		SetLog(" Exit Now ...Cancel change account")
-		Click(437, 399 + $midOffsetY) ;Click  Disconn
-		ClickP($aAway, 2, $iDelayTrain5, "#0291")
-	ElseIf IsMainPage() Then
-		Setlog("Change account cancel")
-		Return True
-	Else
-	    LoadSecond()
+	If $OkLoc = 1 Then
+		LoadSecond()
 	EndIf
 
 EndFunc   ;==>SelectSecond
@@ -271,9 +283,9 @@ Func SwitchThird()
 	Sleep(1000)
 
 	SelectThird()
+	If $RunState = False Then Return
 		waitMainScreen()
 
-	$RunState = True
 	If $iConfirm = 1 Then
 		FileDelete((@ScriptDir & "\images\Multyfarming\Third.bmp"))
 	EndIf
@@ -313,15 +325,28 @@ Func SwitchThird()
 EndFunc   ;==>SwitchThird
 
 Func SelectThird()
+	If $RunState = False Then Return
 	Local $iLoopCount = 0
 	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
+
+	If $iSwCount > 5 Then
+		SetLog(" Exit Now ...Cancel change account")
+		SetLog("PLease make sure image create From png", $COLOR_RED)
+		Click(437, 399 + $midOffsetY) ;Click  Disconn
+		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+		Return
+	ElseIf IsMainPage() Then
+		Setlog("Change account cancel")
+		Return True
+	EndIf
+
+	SetLog("Please wait account select", $COLOR_GREEN)
 	While 1
 	Sleep(1000)
-	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
 			CheckThird()
@@ -331,20 +356,13 @@ Func SelectThird()
 		EndIf
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
-		If $iLoopCount > 2000 Then
+		If $iLoopCount > 1500 Then
 			SelectThird()
 			ExitLoop
 		EndIf
 	WEnd
 	Sleep (500)
-	If $iSwCount > 5 Then
-		SetLog(" Exit Now ...Cancel change account")
-		Click(437, 399 + $midOffsetY) ;Click  Disconn
-		ClickP($aAway, 2, $iDelayTrain5, "#0291")
-	ElseIf IsMainPage() Then
-		Setlog("Change account cancel")
-		Return True
-	Else
+	If $OkLoc = 1 Then
 	    LoadThird()
 	EndIf
 
@@ -398,9 +416,9 @@ Func SwitchFourth()
 	Sleep(1000)
 
 	SelectFourth()
+	If $RunState = False Then Return
 		waitMainScreen()
 
-	$RunState = True
 	If $iConfirm = 1 Then
 		FileDelete((@ScriptDir & "\images\Multyfarming\Fourth.bmp"))
 	EndIf
@@ -440,15 +458,28 @@ Func SwitchFourth()
 EndFunc   ;==>SwitchFourth
 
 Func SelectFourth()
+	If $RunState = False Then Return
 	Local $iLoopCount = 0
 	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
 	$iSwCount += 1
+
+	If $iSwCount > 5 Then
+		SetLog(" Exit Now ...Cancel change account")
+		SetLog("PLease make sure image create From png", $COLOR_RED)
+		Click(437, 399 + $midOffsetY) ;Click  Disconn
+		ClickP($aAway, 2, $iDelayTrain5, "#0291")
+		Return
+	ElseIf IsMainPage() Then
+		Setlog("Change account cancel")
+		Return True
+	EndIf
+
+	SetLog("Please wait account select", $COLOR_GREEN)
 	While 1
 	Sleep(1000)
-	SetLog("Please wait account select", $COLOR_GREEN)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
 		If IsArray($Message) Then
 			CheckFourth()
@@ -458,20 +489,13 @@ Func SelectFourth()
 		EndIf
 		$iLoopCount += 1
 		ConsoleWrite($iLoopCount & @CRLF)
-		If $iLoopCount > 2000 Then
+		If $iLoopCount > 1500 Then
 			SelectFourth()
 			ExitLoop
 		EndIf
 	WEnd
 	Sleep (500)
-	If $iSwCount > 5 Then
-		SetLog(" Exit Now ...Cancel change account")
-		Click(437, 399 + $midOffsetY) ;Click  Disconn
-		ClickP($aAway, 2, $iDelayTrain5, "#0291")
-	ElseIf IsMainPage() Then
-		Setlog("Change account cancel")
-		Return True
-	Else
+	If $OkLoc = 1 Then
 	    LoadFourth()
 	EndIf
 

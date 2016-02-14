@@ -15,33 +15,60 @@
 
 Func SwitchDonate()
 		;..............Switch Account & Donate Then Switch Back...................
-		 If $ichkSwitchDonate = 1 Then
-			SetLog("Switching account For Donate", $COLOR_blue)
-			DetectAccount()
+	If $ichkSwitchDonate = 1 Then
+		SetLog("Switching account For Donate", $COLOR_blue)
+		DetectAccount()
 		If $iVillageName = "Main" Then
-
 			SwitchSecond()
 			$RunState = True
-         While 1
-			Collect()
-		 Train()
-         DonateCC()
-			RequestCC()
-			ExitLoop
+			While 1
+				Collect()
+				Train()
+				DonateCC()
+				RequestCC()
+				ExitLoop
 			WEnd
 			SwitchMain()
 		ElseIf $iVillageName = "Second" Then
-			SwitchMain()
+			If $iAccount = "3" Or $iAccount = "4" Then
+				SwitchThird()
+			Else
+				SwitchMain()
+			EndIf
 			$RunState = True
-         While 1
-		 Train()
-         DonateCC()
-			RequestCC()
-			ExitLoop
+			While 1
+				Train()
+				DonateCC()
+				RequestCC()
+				ExitLoop
 			WEnd
 			SwitchSecond()
+		ElseIf $iVillageName = "Third" Then
+			If $iAccount = "4" Then
+				SwitchFourth()
+			ElseIf $iAccount = "3" Then
+				SwitchMain()
 			EndIf
-		If _Sleep(1000) Then Return
+			$RunState = True
+			While 1
+				Train()
+				DonateCC()
+				RequestCC()
+				ExitLoop
+			WEnd
+			SwitchThird()
+		ElseIf $iVillageName = "Fourth" Then
+			$RunState = True
+			SwitchMain()
+			While 1
+				Train()
+				DonateCC()
+				RequestCC()
+				ExitLoop
+			WEnd
+			SwitchFourth()
 		EndIf
+		If _Sleep(1000) Then Return
+	EndIf
 
   EndFunc

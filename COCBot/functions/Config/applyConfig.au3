@@ -1810,16 +1810,8 @@ chkTSMeetDE()
 
 	If $iSmartDeadBase = 1 Then
 		GUICtrlSetState($SmartDeadBase, $GUI_CHECKED)
-		$iChkRedArea[$DB] = 1
-		$iChkSmartAttack[$DB][0] = 1
-		$iChkSmartAttack[$DB][1] = 1
-		$ichkDBRandomSpeedAtk = 1
 	Else
 		GUICtrlSetState($SmartDeadBase, $GUI_UNCHECKED)
-		$iChkRedArea[$DB] = 0
-		$iChkSmartAttack[$DB][0] = 0
-		$iChkSmartAttack[$DB][1] = 0
-		$ichkDBRandomSpeedAtk = 0
 	EndIf
 
 	GUICtrlSetData($txtSmartCollectors, $SmartCollectors)

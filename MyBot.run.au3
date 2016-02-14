@@ -20,7 +20,7 @@
 #pragma compile(ProductName, My Bot)
 
 #pragma compile(ProductVersion, 5.1)
-#pragma compile(FileVersion, 5.1.4)
+#pragma compile(FileVersion, 5.1.5)
 #pragma compile(LegalCopyright, © https://mybot.run)
 #pragma compile(Out, MyBot.run.exe)  ; Required
 
@@ -38,7 +38,7 @@ EndIf
 ;~ ProcessSetPriority(@AutoItPID, $PROCESS_ABOVENORMAL)
 #include "COCBot\MBR Global Variables.au3"
 
-$sBotVersion = "v5.1.4" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
+$sBotVersion = "v5.1.5" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
 $sBotTitle = "My Bot " & $sBotVersion & " "
 
 Opt("WinTitleMatchMode", 3) ; Window Title exact match mode
@@ -296,31 +296,38 @@ Func runBot() ;Bot that runs everything in order
 			EndIf
 			If _Sleep($iDelayRunBot5) Then Return
 			If $Restart = True Then ContinueLoop
-		    EndIf
-		 If $ichkMultyFarming = 1 Then
-			If $iVillageName = "Main" Then
-			   SwitchSecond()
-			   $RunState = True
-			   $fullArmy = True
-			ElseIf $iVillageName = "Second" Then
-			   $RunState = True
-				If $iAccount = "3" Or $iAccount = "4" Then
-					SwitchThird()
-				Else
-					SwitchMain()
-				EndIf
-			ElseIf $iVillageName = "Third" Then
+		EndIf
+			If $ichkMultyFarming = 1 Then
+				SetLog("Multy Farming Mode Active...", $COLOR_RED)
+				SetLog("Please don't PAUSE/STOP BOT before Change Profile", $COLOR_RED)
+				$canRequestCC = True
+				$bDonationEnabled = True
+				RequestCC()
+				$FirstStart = True
 				$RunState = True
-				If $iAccount = "4" Then
-					SwitchFourth()
-				ElseIf $iAccount = "3" Then
+				If $iVillageName = "Main" Then
+					SwitchSecond()
+				ElseIf $iVillageName = "Second" Then
+					If $iAccount = "3" Or $iAccount = "4" Then
+						SwitchThird()
+;						DetectAccount()
+					Else
+						SwitchMain()
+;						DetectAccount()
+					EndIf
+				ElseIf $iVillageName = "Third" Then
+					If $iAccount = "4" Then
+						SwitchFourth()
+;						DetectAccount()
+					ElseIf $iAccount = "3" Then
+						SwitchMain()
+;						DetectAccount()
+					EndIf
+				ElseIf $iVillageName = "Fourth" Then
 					SwitchMain()
+;					DetectAccount()
 				EndIf
-			ElseIf $iVillageName = "Fourth" Then
-				$RunState = True
-				SwitchMain()
 			EndIf
-		 EndIf
 	WEnd
 EndFunc    ;==>runBot
 

@@ -84,7 +84,7 @@ Func DropOnEdge($troop, $edge, $number, $slotsPerEdge = 0, $edge2 = -1, $x = -1,
 			Local $posY = Round($minY + (($maxY - $minY) * $i) / ($slotsPerEdge - 1))
 			Click($posX, $posY, $nbtroopPerSlot,0,"#0108")
 			EndIf
-			
+
 			If $edge2 <> -1 Then ; for 2, 3 and 4 sides attack use 2x dropping
 				If $FourFingers = 5 Then ; if $nbSide = 5
 

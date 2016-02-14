@@ -681,8 +681,8 @@ Func readConfig() ;Reads config and sets it to the variables
 
 		;Options Settings--------------------------------------------------------------------------
 		For $i = 1 to 24
-		   $DeDeployType[$i-1] = IniRead($config, "options", "DeDeployType" & $I, $DeDeployEmptyString)
-		   $DeDeployPosition[$i-1] = IniRead($config, "options", "DeDeployPosition" & $I, "0")
+		   $DeDeployType[$i-1] = IniRead($config, "options", "DeDeployType" & $i, $DeDeployEmptyString)
+		   $DeDeployPosition[$i-1] = IniRead($config, "options", "DeDeployPosition" & $i, "0")
 		Next
 
 		;Profile Switch

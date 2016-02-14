@@ -30,10 +30,19 @@ Func MultiFarming()
 		$ichkMultyFarming = 1
 		GUICtrlSetState($Account, $GUI_ENABLE)
 		GUICtrlSetState($lblmultyAcc, $GUI_ENABLE)
+		For $i = $grpControls To $cmbHoursStop
+			GUICtrlSetState($i, $GUI_DISABLE)
+		Next
+		If GUICtrlRead($chkBotStop) = $GUI_CHECKED Then
+			GUICtrlSetState($chkBotStop, $GUI_UNCHECKED)
+		EndIf
 	Else
 		$ichkMultyFarming = 0
 		GUICtrlSetState($Account, $GUI_DISABLE)
 		GUICtrlSetState($lblmultyAcc, $GUI_DISABLE)
+		For $i = $grpControls To $cmbHoursStop
+			GUICtrlSetState($i, $GUI_ENABLE)
+		Next
 	EndIf
 EndFunc   ;==>MultiFarming
 
