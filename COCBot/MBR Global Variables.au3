@@ -1050,3 +1050,4 @@ Global $stxtAPIKey = ""
 Global $MyApiKey = ""
 
 Global $iChkNoLeague[$iModeCount]
+Global $attackcsv_use_red_line = 1
