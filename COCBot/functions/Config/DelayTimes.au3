@@ -424,3 +424,4 @@ Global Const $iPersonalShield3 = 100
 Global Const $iDelayStarBonus100 = 100
 Global Const $iDelayStarBonus500 = 500
 
+

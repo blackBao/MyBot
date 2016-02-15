@@ -112,6 +112,12 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "search", "DBWeakBase", 0)
 	EndIf
 
+	If GUICtrlRead($chkDBNoLeague) = $GUI_CHECKED Then
+		IniWrite($config, "search", "DBNoLeague", 1)
+	Else
+		IniWrite($config, "search", "DBNoLeague", 0)
+	EndIf
+	
 	If GUICtrlRead($chkDBMeetOne) = $GUI_CHECKED Then
 		IniWrite($config, "search", "DBMeetOne", 1)
 	Else
@@ -167,6 +173,12 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "search", "ABWeakBase", 0)
 	EndIf
 
+	If GUICtrlRead($chkABNoLeague) = $GUI_CHECKED Then
+		IniWrite($config, "search", "ABNoLeague", 1)
+	Else
+		IniWrite($config, "search", "ABNoLeague", 0)
+	EndIf
+	
 	If GUICtrlRead($chkABMeetOne) = $GUI_CHECKED Then
 		IniWrite($config, "search", "ABMeetOne", 1)
 	Else
@@ -988,7 +1000,7 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWrite($config, "upgrade", "UpgradeQueen", "0")
 	EndIf
 
- 	If GUICtrlRead($chkUpgradeWarden) = $GUI_CHECKED Then
+	If GUICtrlRead($chkUpgradeWarden) = $GUI_CHECKED Then
 		IniWrite($config, "upgrade", "UpgradeWarden", "1")
 	Else
 		IniWrite($config, "upgrade", "UpgradeWarden", "0")

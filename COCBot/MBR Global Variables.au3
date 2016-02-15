@@ -1048,3 +1048,5 @@ global $abcd = Execute("$DefImages" & $t & "["& $i & "]")
 Global $ichkCoCStats = 0
 Global $stxtAPIKey = ""
 Global $MyApiKey = ""
+
+Global $iChkNoLeague[$iModeCount]

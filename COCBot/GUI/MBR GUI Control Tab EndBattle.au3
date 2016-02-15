@@ -51,7 +51,7 @@ Func chkTimeStopAtk2()
 EndFunc   ;==>chkTimeStopAtk2
 
 Func chkDESideEB()
-	If _GUICtrlComboBox_GetCurSel($cmbABDeploy) = 4 Then
+	If _GUICtrlComboBox_GetCurSel($cmbABDeploy) = 5 Then
 		GUICtrlSetState($chkABSmartAttackRedArea, $GUI_UNCHECKED)
 		GUICtrlSetState($chkABAttackNearGoldMine, $GUI_UNCHECKED)
 		GUICtrlSetState($chkABAttackNearElixirCollector, $GUI_UnCHECKED)

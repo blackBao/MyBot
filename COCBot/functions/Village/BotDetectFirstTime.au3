@@ -149,7 +149,7 @@ Func BotDetectFirstTime()
 				$pixel = $PixelMineHere[$i]
 				$listResourceLocation = $listResourceLocation & $pixel[0] & ";" & $pixel[1] & "|"
 				If $debugSetlog = 1 Then SetLog("- Gold Mine " & $i + 1 & ": (" & $pixel[0] & "," & $pixel[1] & ")", $COLOR_PURPLE)
- 				$t +=1
+				$t +=1
 			EndIf
 		Next
 		If $t > 0 Then
