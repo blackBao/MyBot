@@ -165,17 +165,11 @@ Func DropTroopFromINI($vectorString, $indexStart, $indexEnd, $qtaMin, $qtaMax, $
 					If $i < $indexStart + $extraunit Then $qty2 += 1
 
 					Switch $troopEnum
-						Case $eBarb To $eArch ; drop normal troops
+						Case $eBarb To $eLava ; drop normal troops
 							If $debug = True Then
 								Setlog("Click( " & $pixel[0] & ", " & $pixel[1] & " , " & $qty2 & ", " & $delayPoint & ",#0666)")
 							Else
 								PureClick($pixel[0], $pixel[1], $qty2, $delayPoint, "#0666")
-							EndIf
-						Case $eGiant To $eLava
-							If $debug = True Then
-								Setlog("Click( " & $pixel[0] & ", " & $pixel[1] & " , " & $qty2 & ", " & $delayPoint & ",#0666)")
-							Else
-								Click($pixel[0], $pixel[1], $qty2, $delayPoint, "#0666")
 							EndIf
 						Case $eKing; drop King
 							If $debug = True Then

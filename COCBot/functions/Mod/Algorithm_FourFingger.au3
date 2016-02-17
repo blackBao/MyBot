@@ -32,7 +32,7 @@ Func Algorithm_FourFingger()
 		$hBitmapFirst = _CaptureRegion2()
 		_GetRedArea()
 
-			SetLog("Locating Mines, Collectors & Drills", $COLOR_BLUE)
+			SetLog("Locating Mines & Collectors", $COLOR_BLUE)
 			$hTimer = TimerInit()
 			Global $PixelMine[0]
 			Global $PixelElixir[0]
