@@ -86,7 +86,6 @@ Func Train()
 	; $CurCamp - quantity of troops existing in ArmyCamp  / $TotalCamp - your total troops capacity
 	; BarracksStatus() - Verifying how many barracks / spells factory exists and if are available to use.
 	; $numBarracksAvaiables returns to be used as the divisor to assign the amount of kind troops each barracks | $TroopName+EBarrack
-	;
 
 	SetLog("Training Troops & Spells", $COLOR_BLUE)
 	If _Sleep($iDelayTrain1) Then Return
@@ -113,7 +112,6 @@ Func Train()
 
 	; CHECK IF NEED TO MAKE TROOPS
 	; Verify the Global variable $TroopName+Comp and return the GUI selected troops by user
-	;
 	If $isNormalBuild = "" Or $FirstStart Then
 		For $i = 0 To UBound($TroopName) - 1
 			If Eval($TroopName[$i] & "Comp") <> "0" Then
@@ -128,7 +126,6 @@ Func Train()
 
 	; CHECK IF NEED TO MAKE DARK TROOPS
 	; Verify the Global variable $TroopDarkName+Comp and return the GUI selected troops by user
-	;
 	If $isDarkBuild = "" Or $FirstStart Then
 		For $i = 0 To UBound($TroopDarkName) - 1
 			If Eval($TroopDarkName[$i] & "Comp") <> "0" Then
@@ -489,6 +486,7 @@ Func Train()
 					TrainClick(546, 425 + $midOffsetY, 3, 10, $FullDrag, $GemDrag, "#0282") ; Dragon
 				Case 9
 					TrainClick(647, 425 + $midOffsetY, 3, 10, $FullPekk, $GemPekk, "#0283") ; Pekka
+				Case 10
 			EndSwitch
 			If $OutOfElixir = 1 Then
 				Setlog("Not enough Elixir to train troops!", $COLOR_RED)
@@ -504,6 +502,69 @@ Func Train()
 			_TrainMoveBtn(+1) ;click Next button
 			If _Sleep($iDelayTrain3) Then ExitLoop
 
+		WEnd
+		; USE DARK BARRACK
+		$iBarrHere = 0
+		$brrDarkNum = 0
+		While isDarkBarrack() = False
+			If Not (IsTrainPage()) Then Return
+			_TrainMoveBtn(+1) ; click Next button
+			$iBarrHere += 1
+			If _Sleep($iDelayTrain3) Then Return
+			If (isDarkBarrack() Or $iBarrHere = 8) Then ExitLoop
+		WEnd
+		While isDarkBarrack()
+			$brrDarkNum += 1
+			If $debugSetlog = 1 Then SetLog("====== Checking available Dark Barrack: " & $brrDarkNum & " ======", $COLOR_PURPLE)
+			
+			If $FirstStart Then ; Delete Troops That is being trained
+				$icount = 0
+				If _ColorCheck(_GetPixelColor(187, 212, True), Hex(0xD30005, 6), 10) Then ; check if the existe more then 6 slots troops on train bar
+					While Not _ColorCheck(_GetPixelColor(573, 212, True), Hex(0xD80001, 6), 10) ; while until appears the Red icon to delete troops
+						_PostMessage_ClickDrag(550, 240, 170, 240, "left", 1000)
+						$icount += 1
+						If _Sleep($iDelayTrain1) Then Return
+						If $icount = 7 Then ExitLoop
+					WEnd
+				EndIf
+				$icount = 0
+				While Not _ColorCheck(_GetPixelColor(599, 202 + $midOffsetY, True), Hex(0xD0D0C0, 6), 20) ; while not disappears  green arrow
+					If Not (IsTrainPage()) Then Return ; exit if no train page
+					Click(568, 177 + $midOffsetY, 10, 0, "#0273") ; Remove Troops in training
+					$icount += 1
+					If $icount = 100 Then ExitLoop
+				WEnd
+				If $debugSetlog = 1 And $icount = 100 Then SetLog("Train warning 9", $COLOR_PURPLE)
+			EndIf
+
+			If _Sleep($iDelayTrain1) Then ExitLoop
+			If Not (IsTrainPage()) Then Return ; exit from train if no train page
+			
+			Switch $darkBarrackTroop[$brrDarkNum - 1]
+				Case 0
+					TrainClick(220, 320 + $midOffsetY, 75, 10, $FullMini, $GemMini, "#0283") ; Minion
+				Case 1
+					TrainClick(331, 320 + $midOffsetY, 75, 10, $FullHogs, $GemHogs, "#0284") ; Hog Rider
+				Case 2         
+					TrainClick(432, 320 + $midOffsetY, 75, 10, $FullValk, $GemValk, "#0285") ; Valkyrie
+				Case 3         
+					TrainClick(546, 320 + $midOffsetY, 15, 10, $FullGole, $GemGole, "#0286") ; Golem
+				Case 4         
+					TrainClick(647, 320 + $midOffsetY, 75, 10, $FullWitc, $GemWitc, "#0287") ; Witch
+				Case 5
+					TrainClick(220, 425 + $midOffsetY, 37, 10, $FullLava, $GemLava, "#0288") ; Lava Hound
+				Case 6
+					; do nothing since no Troop was selected
+			EndSwitch
+			If $OutOfElixir = 1 Then
+				Setlog("Not enough Dark Elixir to train troops!", $COLOR_RED)
+				Setlog("Will train Elixir troops only...", $COLOR_RED)
+			EndIf
+			If _Sleep($iDelayTrain2) Then ExitLoop
+			If Not (IsTrainPage()) Then Return
+			If $brrDarkNum >= $numDarkBarracksAvaiables Then ExitLoop ; make sure no more infinite loop
+			_TrainMoveBtn(+1) ; click Next button
+			If _Sleep($iDelayTrain3) Then ExitLoop
 		WEnd
 		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; End Train Barrack Mode ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -534,7 +595,7 @@ Func Train()
 				$icount = 0
 				While Not _ColorCheck(_GetPixelColor(593, 200 + $midOffsetY, True), Hex(0xD0D0C0, 6), 20) ; while not disappears  green arrow
 					If Not (IsTrainPage()) Then Return ;exit if no train page
-					Click(568, 177 + $midOffsetY, 10, 0, "#0284") ; Remove Troops in training
+					Click(568, 177 + $midOffsetY, 10, 0, "#0273") ; Remove Troops in training
 					$icount += 1
 					If $icount = 100 Then ExitLoop
 				WEnd
@@ -798,8 +859,8 @@ Func Train()
 				EndIf
 				$icount = 0
 				While Not _ColorCheck(_GetPixelColor(599, 202 + $midOffsetY, True), Hex(0xD0D0C0, 6), 20) ; while not disappears  green arrow
-					If Not (IsTrainPage()) Then Return ;exit if no train page
-					Click(568, 177 + $midOffsetY, 10, 0, "#0287") ; Remove Troops in training
+					If Not (IsTrainPage()) Then Return ; exit if no train page
+					Click(568, 177 + $midOffsetY, 10, 0, "#0273") ; Remove Troops in training
 					$icount += 1
 					If $icount = 100 Then ExitLoop
 				WEnd
@@ -968,7 +1029,7 @@ Func Train()
 						EndIf
 						$icount = 0
 						While _ColorCheck(_GetPixelColor(599, 202 + $midOffsetY, True), Hex(0xa8d070, 6), 20) ; While Green Arrow is there, delete
-							Click(568, 177 + $midOffsetY, 5, 0, "#0288") ; Remove Troops in training
+							Click(568, 177 + $midOffsetY, 5, 0, "#0273") ; Remove Troops in training
 							$icount += 1
 							If $icount = 100 Then ExitLoop
 						WEnd

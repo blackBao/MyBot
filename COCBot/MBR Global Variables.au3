@@ -564,6 +564,7 @@ Global $CurSFactory = 0
 Global $barrackPos[4][2] ;Positions of each barracks
 
 Global $barrackTroop[5] ;Barrack troop set
+Global $darkBarrackTroop[2] ; Dark Barrack troop set
 Global $ArmyPos[2] = [-1, -1]
 
 ;Other Settings
@@ -709,10 +710,8 @@ Global $isHeroesDropped = False
 Global $DeployCCPosition[2] = [-1, -1]
 Global $DeployHeroesPosition[2] = [-1, -1]
 
-
 ;Debug CLick
 Global $debugClick = 0
-
 
 Global $DESTOLoc = ""
 
@@ -742,7 +741,6 @@ Global $picUpgradeType[6], $txtUpgradeX[6], $txtUpgradeY[6], $chkbxUpgrade[6], $
 Global $ichkbxUpgrade[6], $itxtUpgrMinGold, $itxtUpgrMinElixir, $txtUpgrMinDark, $itxtUpgrMinDark
 Global $chkSaveWallBldr, $iSaveWallBldr
 Global $pushLastModified = 0
-
 
 ;UpgradeTroops
 Global $aLabPos[2] = [-1, -1]
@@ -895,7 +893,6 @@ Global $PixelNearCollectorBottomLeft[0]
 Global $PixelNearCollectorTopRight[0]
 Global $PixelNearCollectorBottomRight[0]
 Global $darkelixirStoragePos
-
 
 ;Snipe While Train
 Global $isSnipeWhileTrain = False

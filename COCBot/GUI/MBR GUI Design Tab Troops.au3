@@ -64,35 +64,47 @@ $tabTroops = GUICtrlCreateTabItem(GetTranslated(1,1, "Troops"))
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$x += 150
-	$grpBarrackMode = GUICtrlCreateGroup(GetTranslated(1,15, "Barrack Mode"), $x - 20, $y -20, 150, 123)
+	$grpBarrackMode = GUICtrlCreateGroup(GetTranslated(1,15, "Barrack Mode"), $x - 20, $y -20, 150, 156)
 		$lblBarrack1 = GUICtrlCreateLabel("1:", $x - 5, $y + 5, -1, -1)
 		$cmbBarrack1 = GUICtrlCreateCombo("", $x + 10, $y, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			$txtTip = GetTranslated(1,16, "Set the Troops to make in Barrack")
 			GUICtrlSetTip(-1, $txtTip & " 1.")
-			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas, $sTxtBarbarians)
+			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas & "|N/A", $sTxtBarbarians)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$y += 2
+		$y += 1
 		$lblBarrack2 = GUICtrlCreateLabel("2:", $x - 5, $y + 26, -1, -1)
 		$cmbBarrack2 = GUICtrlCreateCombo("", $x + 10, $y + 21, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetTip(-1, $txtTip & " 2.")
-			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas, $sTxtArchers)
+			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas & "|N/A", $sTxtArchers)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$y += 2
+		$y += 1
 		$lblBarrack3 = GUICtrlCreateLabel("3:", $x - 5, $y + 47, -1, -1)
 		$cmbBarrack3 = GUICtrlCreateCombo("", $x + 10, $y + 42, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetTip(-1, $txtTip & " 3.")
-			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas, $sTxtArchers)
+			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas & "|N/A", $sTxtArchers)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$y += 2
+		$y += 1
 		$lblBarrack4 = GUICtrlCreateLabel("4:", $x - 5, $y + 68, -1, -1)
 		$cmbBarrack4 = GUICtrlCreateCombo("", $x + 10, $y + 63, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetTip(-1, $txtTip & " 4.")
-			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas, $sTxtGoblins)
+			GUICtrlSetData(-1, $sTxtBarbarians & "|" & $sTxtArchers & "|" & $sTxtGiants & "|" & $sTxtGoblins & "|" & $sTxtWallBreakers & "|" & $sTxtBalloons & "|" & $sTxtWizards & "|" & $sTxtHealers &"|" & $sTxtDragons & "|" & $sTxtPekkas & "|N/A", $sTxtGoblins)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$y += 1
+		$lblDarkBarrack1 = GUICtrlCreateLabel("5:", $x - 5, $y + 89, -1, -1)
+		$cmbDarkBarrack1 = GUICtrlCreateCombo("", $x + 10, $y + 84, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+			GUICtrlSetTip(-1, $txtTip & " 5. (Dark)")
+			GUICtrlSetData(-1, $sTxtMinions & "|" & $sTxtHogRiders & "|" & $sTxtValkyries & "|" & $sTxtGolems & "|" & $sTxtWitches & "|" & $sTxtLavaHounds & "|N/A", $sTxtMinions)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$y += 1
+		$lblDarkBarrack2 = GUICtrlCreateLabel("6:", $x - 5, $y + 110, -1, -1)
+		$cmbDarkBarrack2 = GUICtrlCreateCombo("", $x + 10, $y + 105, 100, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+			GUICtrlSetTip(-1, $txtTip & " 6. (Dark)")
+			GUICtrlSetData(-1, $sTxtMinions & "|" & $sTxtHogRiders & "|" & $sTxtValkyries & "|" & $sTxtGolems & "|" & $sTxtWitches & "|" & $sTxtLavaHounds & "|N/A", $sTxtMinions)
 			GUICtrlSetState(-1, $GUI_DISABLE)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	$y += 112
-	$grpRaidComp = GUICtrlCreateGroup(GetTranslated(1,27, "Army Strength"), $x - 20, $y - 15, 150, 52)
+	$y += 148
+	$grpRaidComp = GUICtrlCreateGroup(GetTranslated(1,27, "Army Strength"), $x - 20, $y - 15, 150, 48)
 		$y += 10
 		GUICtrlCreateIcon ($pIconLib, $eIcnBldgTarget, $x - 10, $y - 8, 24, 24)
 		$lblFullTroop = GUICtrlCreateLabel(GetTranslated(1,28, "'Full' Camps="),$x + 20, $y , -1, 17)
@@ -252,8 +264,8 @@ $tabTroops = GUICtrlCreateTabItem(GetTranslated(1,1, "Troops"))
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$x += 150
-	$y = 330
-	$grpDarkTroops = GUICtrlCreateGroup(GetTranslated(1,47, "Add. Dark Troops"), $x - 20, $y - 20, 150, 195)
+	$y = 358
+	$grpDarkTroops = GUICtrlCreateGroup(GetTranslated(1,47, "Add. Dark Troops"), $x - 20, $y - 20, 150, 168)
 		GUICtrlCreateIcon ($pIconLib, $eIcnMinion, $x - 10, $y - 5, 24, 24)
 		$lblMinion = GUICtrlCreateLabel($sTxtMinions & ":", $x + 18, $y, -1, -1)
 		$txtNumMini = GUICtrlCreateInput("0", $x + 85, $y - 3, 30, -1, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER))

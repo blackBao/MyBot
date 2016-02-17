@@ -33,7 +33,8 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
 
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
@@ -61,7 +62,8 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
 
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
@@ -89,7 +91,9 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
 			Next
@@ -116,7 +120,9 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
 			Next
@@ -145,7 +151,9 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
 			Next
@@ -179,7 +187,9 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
 			Next
@@ -211,7 +221,9 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
 			Next
@@ -240,7 +252,9 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
 			Next
@@ -279,25 +293,29 @@ Func SetComboTroopComp()
 			GUICtrlSetState($cmbBarrack2, $GUI_ENABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_ENABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_ENABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_ENABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_DISABLE)
 			Next
 			For $i = 0 To UBound($TroopDarkName) - 1
-				GUICtrlSetState(Eval("txtNum" & $TroopDarkName[$i]), $GUI_ENABLE)
+				GUICtrlSetState(Eval("txtNum" & $TroopDarkName[$i]), $GUI_DISABLE)
+			Next
+			For $i = 0 To UBound($TroopName) - 1
+				_GUICtrlEdit_SetReadOnly(Eval("txtNum" & $TroopName[$i]), True)
 			Next
 			For $i = 0 To UBound($TroopDarkName) - 1
-				_GUICtrlEdit_SetReadOnly(Eval("txtNum" & $TroopDarkName[$i]), False)
-			Next
-			For $i = 0 To UBound($TroopDarkName) - 1
-				GUICtrlSetData(Eval("txtNum" & $TroopDarkName[$i]), Eval($TroopDarkName[$i] & "Comp"))
+				_GUICtrlEdit_SetReadOnly(Eval("txtNum" & $TroopDarkName[$i]), True)
 			Next
 		Case 9
 			GUICtrlSetState($cmbBarrack1, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack2, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack3, $GUI_DISABLE)
 			GUICtrlSetState($cmbBarrack4, $GUI_DISABLE)
-			;GUICtrlSetState($txtCapacity, $GUI_ENABLE)
+			GUICtrlSetState($cmbDarkBarrack1, $GUI_DISABLE)
+			GUICtrlSetState($cmbDarkBarrack2, $GUI_DISABLE)
+			
 			For $i = 0 To UBound($TroopName) - 1
 				GUICtrlSetState(Eval("txtNum" & $TroopName[$i]), $GUI_ENABLE)
 			Next

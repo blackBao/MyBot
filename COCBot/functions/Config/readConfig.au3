@@ -451,6 +451,10 @@ Func readConfig() ;Reads config and sets it to the variables
 			$barrackTroop[$i] = IniRead($config, "troop", "troop" & $i + 1, "0")
 		Next
 
+		; 2 Dark Barracks
+		$darkBarrackTroop[0] = IniRead($config, "troop", "darktroop1", "0")
+		$darkBarrackTroop[1] = IniRead($config, "troop", "darktroop2", "0")
+
 		$fulltroop = IniRead($config, "troop", "fullTroop", "100")
 
 		$isldTrainITDelay = IniRead($config, "troop", "TrainITDelay", "20")

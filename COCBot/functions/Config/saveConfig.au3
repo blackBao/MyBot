@@ -896,6 +896,9 @@ Func saveConfig() ;Saves the controls settings to the config
 	IniWrite($config, "troop", "troop3", _GUICtrlComboBox_GetCurSel($cmbBarrack3))
 	IniWrite($config, "troop", "troop4", _GUICtrlComboBox_GetCurSel($cmbBarrack4))
 
+	IniWrite($config, "troop", "darktroop1", _GUICtrlComboBox_GetCurSel($cmbDarkBarrack1))
+	IniWrite($config, "troop", "darktroop2", _GUICtrlComboBox_GetCurSel($cmbDarkBarrack2))
+
 	IniWrite($config, "troop", "fulltroop", GUICtrlRead($txtFullTroop))
 	IniWrite($config, "troop", "TrainITDelay", GUICtrlRead($sldTrainITDelay))
 
