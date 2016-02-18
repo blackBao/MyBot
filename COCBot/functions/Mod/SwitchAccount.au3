@@ -14,7 +14,9 @@
 ; ===============================================================================================================================
 
 ;;;;;;;##### Main Account #####;;;;;;;
-Global $iSwCount, $iconfirm
+Global $iconfirm
+Global $iSwCount = 0
+
 Func SwitchMain()
 	$iConfirm = 0
 	waitMainScreen()
@@ -66,7 +68,6 @@ EndFunc   ;==>SwitchMain
 Func SelectMain()
 	If $RunState = False Then Return
 	Local $iLoopCount = 0
-	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
@@ -85,9 +86,13 @@ Func SelectMain()
 	While 1
 		Sleep(1000)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
+		Local $Message1 = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0xF5F5F5, 6), 0)
 		If IsArray($Message) Then
 			CheckMain() ;Select Main account
 			CheckOK()
+			ExitLoop
+		ElseIf IsArray($Message1) Then
+			CheckMain() ;Select Main account
 			ExitLoop
 		EndIf
 
@@ -194,7 +199,6 @@ EndFunc   ;==>SwitchSecond
 Func SelectSecond()
 	If $RunState = False Then Return
 	Local $iLoopCount = 0
-	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
@@ -216,10 +220,14 @@ Func SelectSecond()
 	While 1
 	Sleep(1000)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
+		Local $Message1 = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0xF5F5F5, 6), 0)
 		If IsArray($Message) Then
 			CheckSecond()
-			Sleep(2000)
+			Sleep(1000)
 			CheckOK()
+			ExitLoop
+		ElseIf IsArray($Message1) Then
+			CheckSecond()
 			ExitLoop
 		EndIf
 		$iLoopCount += 1
@@ -326,7 +334,6 @@ EndFunc   ;==>SwitchThird
 
 Func SelectThird()
 	If $RunState = False Then Return
-	Local $iLoopCount = 0
 	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
@@ -341,17 +348,21 @@ Func SelectThird()
 		Return
 	ElseIf IsMainPage() Then
 		Setlog("Change account cancel")
-		Return True
+		Return
 	EndIf
 
 	SetLog("Please wait account select", $COLOR_GREEN)
 	While 1
 	Sleep(1000)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
+		Local $Message1 = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0xF5F5F5, 6), 0)
 		If IsArray($Message) Then
 			CheckThird()
 			Sleep(2000)
 			CheckOK()
+			ExitLoop
+		ElseIf IsArray($Message1) Then
+			CheckThird()
 			ExitLoop
 		EndIf
 		$iLoopCount += 1
@@ -460,7 +471,6 @@ EndFunc   ;==>SwitchFourth
 Func SelectFourth()
 	If $RunState = False Then Return
 	Local $iLoopCount = 0
-	Local $iSwCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect
@@ -481,10 +491,14 @@ Func SelectFourth()
 	While 1
 	Sleep(1000)
 		Local $Message = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0x689F38, 6), 0)
+		Local $Message1 = _PixelSearch(164, 45 + $midOffsetY, 166, 281 + $midOffsetY, Hex(0xF5F5F5, 6), 0)
 		If IsArray($Message) Then
 			CheckFourth()
 			Sleep(2000)
 			CheckOK()
+			ExitLoop
+		ElseIf IsArray($Message1) Then
+			CheckFourth()
 			ExitLoop
 		EndIf
 		$iLoopCount += 1
