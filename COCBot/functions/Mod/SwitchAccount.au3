@@ -104,7 +104,7 @@ Func SelectMain()
 		EndIf
 	WEnd
 
-	If $OkLoc = 1 Then
+	If $AccmainLoc = 1 Then
 		LoadMain()
 	EndIf
 
@@ -238,7 +238,7 @@ Func SelectSecond()
 		EndIf
 	WEnd
 	Sleep (500)
-	If $OkLoc = 1 Then
+	If $AccSecondLoc = 1 Then
 		LoadSecond()
 	EndIf
 
@@ -373,7 +373,7 @@ Func SelectThird()
 		EndIf
 	WEnd
 	Sleep (500)
-	If $OkLoc = 1 Then
+	If $AccThirdLoc = 1 Then
 	    LoadThird()
 	EndIf
 
@@ -509,7 +509,7 @@ Func SelectFourth()
 		EndIf
 	WEnd
 	Sleep (500)
-	If $OkLoc = 1 Then
+	If $AccFourthLoc = 1 Then
 	    LoadFourth()
 	EndIf
 
