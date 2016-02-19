@@ -980,7 +980,7 @@ EndIf
 ;Multy Farming
 Global $ichkSwitchDonate
 Global $ichkMultyFarming
-Global $iAccount, $OkLoc
+Global $iAccount, $OkLoc, $AccFourthLoc, $AccThirdLoc, $AccSecondLoc, $AccmainLoc
 
 ;ZAp Drill
 Global $ichkSmartLightSpell
