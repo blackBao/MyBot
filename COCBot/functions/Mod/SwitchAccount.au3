@@ -15,8 +15,6 @@
 
 ;;;;;;;##### Main Account #####;;;;;;;
 Global $iconfirm
-Global $iSwCount = 0
-
 Func SwitchMain()
 	$iConfirm = 0
 	waitMainScreen()

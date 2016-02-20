@@ -978,6 +978,7 @@ If $aCmdLine[0] > 1 Then
 EndIf
 
 ;Multy Farming
+Global $iSwCount
 Global $ichkSwitchDonate
 Global $ichkMultyFarming
 Global $iAccount, $OkLoc, $AccFourthLoc, $AccThirdLoc, $AccSecondLoc, $AccmainLoc

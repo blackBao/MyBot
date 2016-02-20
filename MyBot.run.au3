@@ -305,6 +305,7 @@ Func runBot() ;Bot that runs everything in order
 				RequestCC()
 				$FirstStart = True
 				$RunState = True
+				$iSwCount = 0
 				If $iVillageName = "Main" Then
 					SwitchSecond()
 				ElseIf $iVillageName = "Second" Then
