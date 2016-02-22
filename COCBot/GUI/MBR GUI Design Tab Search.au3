@@ -161,16 +161,12 @@ $tabSearch = GUICtrlCreateTabItem(GetTranslated(2,1, "Search"))
 		$picDBWeakWizTower = GUICtrlCreateIcon($pIconLib, $eIcnWizTower, $x + 131, $y - 2, 24, 24)
 			GUICtrlSetTip(-1, $txtTip)
 		$y += 21
-		$chkDBNoLeague = GUICtrlCreateCheckbox("No League", $x, $y, -1, -1)
-			$txtTip ="Search for a base that has no league."
-			GUICtrlSetTip(-1, $txtTip)
-		$btnConfigureCollectors = GUICtrlCreateButton(GetTranslated(2,100, "Collectors..."), $x +80, $y + 2, 90,20)
-			GUICtrlSetOnEvent(-1, "btnConfigureCollectors")
-		$y += 21
 		$chkDBMeetOne = GUICtrlCreateCheckbox(GetTranslated(2,44, "Meet One Then Attack"), $x, $y, -1, -1)
 			$txtTip = GetTranslated(2,45, "Just meet only ONE of the above conditions, then Attack.")
 			GUICtrlSetTip(-1, $txtTip)
-
+		$y += 21
+        $btnConfigureCollectors = GUICtrlCreateButton(GetTranslated(2,100, "Configure Collectors..."), $x, $y, 180,20)
+			GUICtrlSetOnEvent(-1, "btnConfigureCollectors")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	Local $x = 260, $y = 210
@@ -286,10 +282,6 @@ $tabSearch = GUICtrlCreateTabItem(GetTranslated(2,1, "Search"))
 			GUICtrlSetData(-1, "-|Lvl 1|Lvl 2|Lvl 3|Lvl 4|Lvl 5|Lvl 6|Lvl 7|Lvl 8|Lvl 9", "Lvl 4")
 			GUICtrlSetState(-1, $GUI_DISABLE)
 		$picABWeakWizTower = GUICtrlCreateIcon($pIconLib, $eIcnWizTower, $x + 131, $y - 2, 24, 24)
-			GUICtrlSetTip(-1, $txtTip)
-		$y += 21
-		$chkABNoLeague = GUICtrlCreateCheckbox("No League", $x, $y, -1, -1)
-			$txtTip ="Search for a base that has no league."
 			GUICtrlSetTip(-1, $txtTip)
 		$y += 21
 		$chkABMeetOne = GUICtrlCreateCheckbox(GetTranslated(2,44, "Meet One Then Attack"), $x, $y, -1, -1)

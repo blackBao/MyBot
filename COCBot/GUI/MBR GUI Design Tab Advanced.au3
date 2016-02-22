@@ -68,37 +68,32 @@
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 3)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-	;	$y +=22
-		$lblminArmyCapacityTHSnipe = GUICtrlCreateLabel(GetTranslated(4,20, "Army Capacity %") & ":", $x - 10, $y + 4, 177, -1, $SS_LEFT)
+		$y +=22
+		$lblminArmyCapacityTHSnipe = GUICtrlCreateLabel(GetTranslated(4,20, "Min Army Capacity % to start Snipe") & ":", $x - 10, $y + 4, 177, -1, $SS_RIGHT)
 			$txtTip = GetTranslated(4,21, "Minimum Army Capacity to start Snipe.")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$txtminArmyCapacityTHSnipe = GUICtrlCreateInput("35", $x + 80, $y, 25, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$txtminArmyCapacityTHSnipe = GUICtrlCreateInput("35", $x + 170, $y, 25, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 2)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$y +=23
+		$y +=27
 		$chkTrophyMode = GUICtrlCreateCheckbox(GetTranslated(4,23, "Snipe Combo"), $x-10, $y, -1, -1)
 			$txtTip = GetTranslated(4,24, "Adds the TH Snipe combination to the current search settings. (Example: Deadbase OR TH Snipe)")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "chkSnipeMode")
-		$lblTHaddtiles = GUICtrlCreateLabel(GetTranslated(4,16, "Add Tiles") & ":", $x + 67, $y + 4, 100, -1, $SS_RIGHT)
+		$y+= 25
+		$lblTHadd = GUICtrlCreateLabel(GetTranslated(4,25, "Add") & ":", $x -10, $y+5, -1, 17, $SS_RIGHT)
 		    $txtTip = GetTranslated(4,26, "Enter how many 'Grass' 1x1 tiles the TH may be from the Base edges to be seen as a TH Outside.") & @CRLF & GetTranslated(4,27, "Ex: (0) tiles; TH must be exactly at the edge. (4) tiles: TH may be 4 tiles farther from edges and closer to the center of the village.") & @CRLF & GetTranslated(4,28, "If the TH is farther away then the No. of tiles set, the base will be skipped.")
 			GUICtrlSetTip(-1, $txtTip)
-		$txtTHaddtiles = GUICtrlCreateInput("2", $x + 170, $y, 25, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$lblTHaddtiles = GUICtrlCreateLabel(GetTranslated(4,29, "tile(s) from Base Edges"), $x + 57, $y+5, -1, 17)
+		    GUICtrlSetTip(-1, $txtTip)
+		$txtTHaddtiles = GUICtrlCreateInput("2", $x + 26, $y + 1, 25, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 1)
 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$y+= 20
-		$lblTsSearchMode = GUICtrlCreateLabel("Search Mode:", $x - 10, $y+5, -1, 17)
-			$txtTip = "Only Deadbases: full collectors. Most loot outside of village." & @CRLF & _
-					  "Only LiveBases: full storages. Most loot inside of village." & @CRLF & "Dual Mode: Search for both, whatever comes first is attacked."
-		    GUICtrlSetTip(-1, $txtTip)
-		$cmbTsSearchMode = GUICtrlCreateCombo("", $x + 60 , $y+1, 135, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-			GUICtrlSetData(-1, "Only DeadBases|Only LiveBases|Both Dead & LiveBases", "Only DeadBases")
-			GUICtrlSetTip(-1, $txtTip)
 
-		$x += 15
+		$x += 18
 		$y += 25
 		$chkTSEnableAfter = GUICtrlCreateCheckbox(GetTranslated(4,99, "Delay Start"), $x, $y, -1, -1)
 			$txtTip = GetTranslated(4,100, "Search for a TH Snipe after this No. of searches, start searching for Live Bases first..")
@@ -165,29 +160,7 @@
 		$picTSMinDarkElixir = GUICtrlCreateIcon($pIconLib, $eIcnDark, $x + 131, $y, 16, 16)
 			GUICtrlSetTip(-1, $txtTip)
 
-
-		$y += 21
-		    $chkTSMeetOne = GUICtrlCreateCheckbox(GetTranslated(4,116, "Meet One"), $x, $y, -1, -1)
-			$txtTip = GetTranslated(2,45, "Just meet only ONE of the above conditions, then Attack.")
-			GUICtrlSetTip(-1, $txtTip)
- 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$x += 90
-			$btnConfigureDef = GUICtrlCreateButton(GetTranslated(4,117, "majeur Trap..."), $x, $y, 75,20)
-			GUICtrlSetOnEvent(-1, "btnConfigureDef")
-			GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-		;Trapped Th GUI
-		 $y+= 25
-		 $x -= 105
-	     $lblDetectTrapedTH = GUICtrlCreateLabel("Trapped TH ", $x -10 , $y + 5, -1, 17, $SS_LEFT)
-         $cmbDetectTrapedTH = GUICtrlCreateCombo("",  $x + 80, $y, 120, 21, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-	     GUICtrlSetData(-1, "1:Dont Detect|2:Attack All In|3:Skip base", "1:Dont Detect")
-	     GUICtrlSetOnEvent(-1, "chkSnipeMode")
-	     GUICtrlSetState(-1, $GUI_DISABLE)
-
-
-
-
+		$x -= 18
 		$y += 30
 ;~ 		$lblAttackTHType = GUICtrlCreateLabel(GetTranslated(4,30, "Attack TH Type") & ":", $x - 8 , $y + 5 , -1, 17, $SS_RIGHT)
 ;~ 		$cmbAttackTHType = GUICtrlCreateCombo("",  $x + 80, $y, 120, 21, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
@@ -200,7 +173,7 @@
 ;~             $txtTip = "SMARTBARCH • Barbs/Archers" & @CRLF & "BAM • Barbs/Archers/Minions" & @CRLF & "EXTREME • Use All troops" & @CRLF & "GBARCH • Giants/Barbs/Archers"& @CRLF & "CUSTOM • Make your own strategy!"
 ;~ 			GUICtrlSetTip(-1, $txtTip)
 ;~ 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$lblAttackTHType = GUICtrlCreateLabel(GetTranslated(4,30, "Attack TH Type") & ":", $x - 18 , $y + 5 , 90, -1, $SS_RIGHT)
+		$lblAttackTHType = GUICtrlCreateLabel(GetTranslated(4,30, "Attack TH Type") & ":", $x - 15 , $y + 5 , 90, -1, $SS_RIGHT)
 		$cmbAttackTHType = GUICtrlCreateCombo("",  $x + 80, $y, 120, 21, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetData(-1, "")
             $txtTip = GetTranslated(4,98, "You can add/edit attack editing csv settings files in THSnipe folder")
@@ -216,7 +189,8 @@
 ;~ 			$txtTip = GetTranslated(4,44, "Select your strategy to deploy troops when the TH is detected on the Bottom of the screen!") & @CRLF & GetTranslated(4,45, "Zoomed in â€¢ Zoom in first, then Attack from bottom.") & @CRLF & GetTranslated(4,46, "On Sides â€¢ Try to get the TH from the left and right without zooming in, your troops may pick another target!")
 ;~ 			GUICtrlSetTip(-1, $txtTip)
 ;~ 			GUICtrlSetState(-1, $GUI_DISABLE)
-		;$y += 22
+		$y -= 30
+		$y += 30
 		GUICtrlCreateIcon($pIconLib, $eIcnKing, $x - 16 , $y, 24, 24)
 		$chkUseKingTH = GUICtrlCreateCheckbox(GetTranslated(4,47, "Use King"), $x + 12 , $y+1, -1, -1)
 			$txtTip = GetTranslated(4,48, "Use King when Attacking TH Snipe") & @CRLF & GetTranslated(4,49, "Will be deployed in First wave")

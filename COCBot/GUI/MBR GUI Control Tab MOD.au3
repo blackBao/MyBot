@@ -74,11 +74,11 @@ Func txtMinDark()
 	$itxtMinDark = GUICtrlRead($txtMinDark)
 	IniWrite($config, "MOD", "txtMinDark", $itxtMinDark)
 EndFunc
-
+#cs
  Func btnConfirmRecSetting()
 	switchRecSetting()
  EndFunc ;btnConfirmRecSetting
-
+#ce
  Func LBHeroFilter()
 	If GUICtrlRead($chkDeKingFilter) = $GUI_CHECKED Then
 	  $ichkDeKingFilter = 1

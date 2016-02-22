@@ -328,6 +328,7 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 				EndIf
 			EndIf
 		Next
+
 	EndIf
 	Return True
 EndFunc   ;==>LaunchTroop2

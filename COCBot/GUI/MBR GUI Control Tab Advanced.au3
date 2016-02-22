@@ -124,9 +124,6 @@ Func chkSnipeMode()
 		GUICtrlSetState($chkUseRSpellsTH, $GUI_ENABLE)
 		GUICtrlSetState($chkUseHSpellsTH, $GUI_ENABLE)
 		GUICtrlSetState($chkUseLSpellsTH, $GUI_ENABLE)
-		GUICtrlSetState($cmbDetectTrapedTH, $GUI_ENABLE)
-		GUICtrlSetState($lblTsSearchMode, $GUI_ENABLE)
-		GUICtrlSetState($cmbTsSearchMode, $GUI_ENABLE)
 		GUICtrlSetState($chkDrillZapTH, $GUI_ENABLE)
 	Else
 		$OptTrophyMode = 0
@@ -147,9 +144,6 @@ Func chkSnipeMode()
 		GUICtrlSetState($chkUseRSpellsTH, $GUI_DISABLE)
 		GUICtrlSetState($chkUseHSpellsTH, $GUI_DISABLE)
 		GUICtrlSetState($chkUseLSpellsTH, $GUI_DISABLE)
-		GUICtrlSetState($cmbDetectTrapedTH, $GUI_DISABLE)
-		GUICtrlSetState($lblTsSearchMode, $GUI_DISABLE)
-		GUICtrlSetState($cmbTsSearchMode, $GUI_DISABLE)
 		GUICtrlSetState($chkDrillZapTH, $GUI_DISABLE)
 	EndIf
 EndFunc   ;==>chkSnipeMode
@@ -217,13 +211,7 @@ EndFunc   ;==>cmbTSGoldElixir
 Func chkTSMeetDE()
 	If GUICtrlRead($chkTSMeetDE) = $GUI_CHECKED Then
 		_GUICtrlEdit_SetReadOnly($txtTSMinDarkElixir, False)
-		GUICtrlSetState($chkTSMeetOne, $GUI_ENABLE)
 	Else
 		_GUICtrlEdit_SetReadOnly($txtTSMinDarkElixir, True)
-		GUICtrlSetState($chkTSMeetOne, $GUI_DISABLE)
 	EndIf
 EndFunc   ;==>chkTSMeetDE
-
- Func btnConfigureDef()
- 	OpenGUI3()
- EndFunc

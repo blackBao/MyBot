@@ -332,7 +332,7 @@ EndFunc   ;==>SwitchThird
 
 Func SelectThird()
 	If $RunState = False Then Return
-	Local $iSwCount = 0
+	Local $iLoopCount = 0
 	Click(437, 399 + $midOffsetY) ;Click  Disconn
 	Sleep(1000)
 	Click(437, 399 + $midOffsetY) ;Click  Connect

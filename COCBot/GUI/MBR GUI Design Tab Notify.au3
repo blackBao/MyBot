@@ -20,7 +20,7 @@ $tabNotify = GUICtrlCreateTabItem(GetTranslated(9,1, "Notify"))
 	Local $x = 30, $y = 150
 	$grpPushBullet = GUICtrlCreateGroup(GetTranslated(9,2, "PushBullet Alert"), $x - 20, $y - 20, 450, 375)
 	$picPushBullet = GUICtrlCreateIcon ($pIconLib, $eIcnPushBullet, $x, $y, 32, 32)
-	$chkPBenabled = GUICtrlCreateCheckbox(GetTranslated(9,3, "Enable pushbullet"), $x + 40, $y - 10)
+	$chkPBenabled = GUICtrlCreateCheckbox(GetTranslated(9,3, "Enable"), $x + 40, $y)
 		GUICtrlSetOnEvent(-1, "chkPBenabled")
 		GUICtrlSetTip(-1, GetTranslated(9,4, "Enable PushBullet notifications"))
 	$chkPBenabled2 = GUICtrlCreateCheckbox("Enable Telegram", $x + 40, $y +10 )
@@ -108,7 +108,7 @@ $tabNotify = GUICtrlCreateTabItem(GetTranslated(9,1, "Notify"))
 		GUICtrlSetTip(-1, GetTranslated(9,40, "Sent an Alert when your village is connected to from another device."))
 		GUICtrlSetState(-1, $GUI_DISABLE)
 	$y = 350
-	$lblgrppushbullet = GUICtrlCreateGroup(GetTranslated(9,41, "PushBullet Remote Control Functions"), $x - 10, $y - 15, 430, 170)
+	$lblgrppushbullet = GUICtrlCreateGroup(GetTranslated(9,41, "PushBullet Remote Control Functions"), $x - 10, $y - 20, 430, 170)
 		$lblPBdesc = GUICtrlCreateLabel(GetTranslated(9,42, "BOT HELP - send this help message") & @CRLF & GetTranslated(9,43, "BOT DELETE  - delete all your previous PushBullet messages") & @CRLF & _
 			GetTranslated(9,44, "BOT <Village Name> RESTART - restart the bot named <Village Name> and BlueStacks") & @CRLF & GetTranslated(9,45, "BOT <Village Name> STOP - stop the bot named <Village Name>") & @CRLF & _
 			GetTranslated(9,46, "BOT <Village Name> PAUSE - pause the bot named <Village Name>") & @CRLF & GetTranslated(9,47, "BOT <Village Name> RESUME   - resume the bot named <Village Name>") & @CRLF & _

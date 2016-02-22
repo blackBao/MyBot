@@ -77,7 +77,7 @@ _GDIPlus_ImageDispose($bm3)
 _GDIPlus_ImageDispose($bm4)
 _GDIPlus_ImageDispose($bm5)
 		For $i = $FirstControlToHide To $LastControlToHide ; Disable all controls in 1 go on all tabs
-			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i = $tabAttackCSV Or $i = $tabMOD Or $i = $tabOptions Or $i = $tabProfiles Then ContinueLoop ; exclude tabs
+			If $i = $tabGeneral Or $i = $tabSearch Or $i = $tabAttack Or $i = $tabAttackAdv Or $i = $tabDonate Or $i = $tabTroops Or $i = $tabMisc Or $i = $tabNotify Or $i = $tabUpgrades Or $i = $tabEndBattle Or $i = $tabExpert Or $i = $tabAttackCSV Or $i = $tabMOD Or $i = $tabOptions Then ContinueLoop ; exclude tabs
 			If $pEnabled And $i = $btnDeletePBmessages Then ContinueLoop ; exclude the DeleteAllMesages button when PushBullet is enabled
 			If $i = $btnMakeScreenshot Then ContinueLoop ; exclude
 			If $i = $divider Then ContinueLoop ; exclude divider

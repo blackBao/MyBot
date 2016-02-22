@@ -98,12 +98,6 @@ Func ParseAttackCSV_Read_SIDE_variables()
 							$attackcsv_locate_townhall = 0
 						EndIf
 					EndIf
-
-					If StringUpper($value9) = "NO" Then
-						$attackcsv_use_red_line = 0
-					Else
-						$attackcsv_use_red_line = 1
-					EndIf
 					ExitLoop
 				EndIf
 			EndIf
