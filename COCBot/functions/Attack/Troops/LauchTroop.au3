@@ -116,6 +116,7 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 					$nbSides = 1
 				EndIf
 
+				$nbSides = 1
 				$iMatchMode = $LB
 				$iChkDeploySettings[$LB] = 5
 				Local $DElistInfoDeploy[24][5]
