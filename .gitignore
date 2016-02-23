@@ -2,7 +2,7 @@
 
 # Global Files
 /.project
-*.ini
+
 *.log
 *.orig
 *.png
@@ -12,7 +12,7 @@
 # Global Folders
 [Tt]emplates/
 [Tt]emp/
-[Bb]ackup/
+
 
 # Obsolete Files and Folders
 [Ll]oots/
