@@ -1,5 +1,5 @@
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: MBR GUI Controls Others
+; Name ..........: MBR GUI Controls MOD
 ; Description ...: This file Includes GUI Design
 ; Syntax ........:
 ; Parameters ....: None
@@ -13,7 +13,7 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-;MBR GUI_Others CONTROLS
+;MBR GUI_MOD CONTROLS
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Func SwitchAndDonate()
@@ -270,9 +270,9 @@ Func SmartDeadBase()
 		For $i = $cmbSmartDB To $txtSmartNear
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
-		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
-			GUICtrlSetState($i, $GUI_DISABLE)
-		Next
+;~		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
+;~			GUICtrlSetState($i, $GUI_DISABLE)
+;~		Next
 		For $i = $grpDeadBaseDeployCSV To $chkDBHasteSpellCSV
 			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
@@ -280,9 +280,9 @@ Func SmartDeadBase()
 		For $i = $cmbSmartDB To $txtSmartNear
 		GUICtrlSetState($i, $GUI_DISABLE)
 		Next
-		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
-			GUICtrlSetState($i, $GUI_ENABLE)
-		Next
+;~		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
+;~			GUICtrlSetState($i, $GUI_ENABLE)
+;~		Next
 		For $i = $grpDeadBaseDeployCSV To $chkDBHasteSpellCSV
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next

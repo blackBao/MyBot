@@ -193,7 +193,7 @@
     GUICtrlSetOnEvent(-1, "txtDeStyle16")
 
     ; Troop Deploy Column 3
-    $lbltxtWave3 = GUICtrlCreateLabel("0", $x+310, $y+5, -1, -1)
+    $lbltxtWave3 = GUICtrlCreateLabel("No", $x+310, $y+5, -1, -1)
     $lbltxtDeployCol3 = GUICtrlCreateLabel("Deploy", $x+345, $y+5, -1, -1)
     $lbltxtStyleCol3 = GUICtrlCreateLabel("Position", $x+405, $y+5, -1, -1)
 

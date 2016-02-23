@@ -20,7 +20,7 @@ $tabNotify = GUICtrlCreateTabItem(GetTranslated(9,1, "Notify"))
 	Local $x = 30, $y = 150
 	$grpPushBullet = GUICtrlCreateGroup(GetTranslated(9,2, "PushBullet Alert"), $x - 20, $y - 20, 450, 375)
 	$picPushBullet = GUICtrlCreateIcon ($pIconLib, $eIcnPushBullet, $x, $y, 32, 32)
-	$chkPBenabled = GUICtrlCreateCheckbox(GetTranslated(9,3, "Enable"), $x + 40, $y)
+	$chkPBenabled = GUICtrlCreateCheckbox(GetTranslated(9,3, "Enable"), $x + 40, $y - 10)
 		GUICtrlSetOnEvent(-1, "chkPBenabled")
 		GUICtrlSetTip(-1, GetTranslated(9,4, "Enable PushBullet notifications"))
 	$chkPBenabled2 = GUICtrlCreateCheckbox("Enable Telegram", $x + 40, $y +10 )

@@ -73,7 +73,6 @@ $grpOnStartBot = GUICtrlCreateGroup(GetTranslated(10,12, "When Bot Starts"), $x 
 	$y += 22
 	$chkLanguage = GUICtrlCreateCheckbox(GetTranslated(10,15, "Check Game Language (EN)"), $x, $y, -1, -1)
 		GUICtrlSetTip(-1, GetTranslated(10,16, "Check if the Game is set to the correct language (Must be set to English)."))
-		GUICtrlSetState(-1, $GUI_CHECKED)
 	$y += 22
 	$chkDisposeWindows = GUICtrlCreateCheckbox(GetTranslated(10,17, "Auto Align"), $x, $y, -1, -1)
 		$txtTip = GetTranslated(10,18, "Reposition/Align Bluestacks and BOT windows on the screen.")

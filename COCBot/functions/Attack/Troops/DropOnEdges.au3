@@ -36,7 +36,7 @@ Func DropOnEdges($troop, $nbSides, $number, $slotsPerEdge = 0)
 			Next
 		Else
 			For $i = 0 To $nbSides - 5 ;Four Finger Deployment Barch
-				KeepClicks
+				KeepClicks()
 				Local $nbTroopsPerEdge = Round($nbTroopsLeft / (($nbSides-1) - $i * 2))
 				DropOnEdge($troop, $Edges[$i], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i + 2],$i, $nbSides)
 				$nbTroopsLeft -= $nbTroopsPerEdge * 2

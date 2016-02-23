@@ -98,6 +98,7 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 			EndIf
 		Next
 		If $iSmartDeadBase = 1 Then
+			$nbSides = 5
 			Setlog("There are " & $countCollectorexposed & " is (" & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "%) collector(s) near RED LINE of " & Ubound($PixelNearCollector) & " collectors")
 
 			If ($countCollectorexposed/Ubound($PixelNearCollector)*100) <= $SmartCollectors Then
@@ -108,12 +109,13 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 				ElseIf $iChkSmartDB = 1 Then
 					SetLog("Change Side Attack to De side attack!...", $COLOR_BLUE)
 					GetBuildingEdge($eSideBuildingDES)
+					$nbSides = 1
 				ElseIf $iChkSmartDB = 2 Then
 					SetLog("Change Side Attack to TH side attack!...", $COLOR_BLUE)
 					GetBuildingEdge($eSideBuildingTH)
+					$nbSides = 1
 				EndIf
 
-				$nbSides = 1
 				$iMatchMode = $LB
 				$iChkDeploySettings[$LB] = 5
 				Local $DElistInfoDeploy[24][5]
@@ -144,7 +146,7 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 
 			Endif
 			$iChkRedArea[$iMatchMode] = 0
-			$nbSides = 5
+
 		Local $FFlistInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
 			    , [$eBarb, $nbSides, 1, 1, 0] _
 			    , [$eWall, $nbSides, 1, 1, 2] _

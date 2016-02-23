@@ -88,7 +88,7 @@ EndFunc
 
 Func cmbABDeploy()
 	chkDESideEB()
-	If _GUICtrlComboBox_GetCurSel($cmbABDeploy) = 6 Then ; 6 it is milking attack strategy
+	If _GUICtrlComboBox_GetCurSel($cmbABDeploy) = 7 Then ; 7 it is milking attack strategy
 		GUICtrlSetState($btnMilkingOptions, $GUI_ENABLE)
 	Else
 		GUICtrlSetState($btnMilkingOptions, $GUI_DISABLE)

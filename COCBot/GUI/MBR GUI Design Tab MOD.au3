@@ -1,5 +1,5 @@
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: MBR GUI Design Others
+; Name ..........: MBR GUI Design MOD
 ; Description ...: This file Includes GUI Design
 ; Syntax ........:
 ; Parameters ....: None
@@ -13,28 +13,29 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-$tabMOD = GUICtrlCreateTabItem("MOD")
+$tabMOD = GUICtrlCreateTabItem("Mods")
 	;;;;;;;;;;;;;;;;;
     ;;; Mult-Farming
     ;;;;;;;;;;;;;;;;;
 	Local $x = 215, $y = 215
 	$grpMultyFarming = GUICtrlCreateGroup("Multi-Farming", $x - 20, $y - 20, 100, 70)
 	$x -= 10
-		$chkSwitchDonate = GUICtrlCreateCheckbox("Switch and Donate", $x - 5, $y - 5, -1, -1)
-			$txtTip = "Will switch account and Donate, then switch back"
-			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetOnEvent(-1, "SwitchAndDonate")
-			GUICtrlSetState(-1, $GUI_HIDE)
-			$chkMultyFarming = GUICtrlCreateCheckbox("Multi-Farming", $x - 5, $y -5, -1 , -1)
+		$chkMultyFarming = GUICtrlCreateCheckbox("Multi-Farming", $x - 5, $y -7, -1 , -1)
 			$txtTip = "Will switch account and attack, then switch back"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "MultiFarming")
-	$y += 15
-		$Account = GUICtrlCreateInput("4", $x +50, $y +3, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$chkSwitchDonate = GUICtrlCreateCheckbox("Donate", $x - 5, $y + 10, -1, -1)
+			$txtTip = "Will switch account For Donate, then switch back"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetOnEvent(-1, "SwitchAndDonate")
+		$Account = GUICtrlCreateInput("2", $x +50, $y + 28, 15, 15, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			$txtTip = "How many account use"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 4)
-		$lblmultyAcc = GUICtrlCreateLabel("How Many:", $x -5, $y + 5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$lblmultyAcc = GUICtrlCreateLabel("How Many:", $x -5, $y + 29, -1, -1)
 		   	GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetState(-1, $GUI_DISABLE)
 
     Local $x = 215, $y = 150
     $grpStatsMisc = GUICtrlCreateGroup("Smart Zap Drill", $x - 20, $y - 20, 155, 65)
@@ -76,20 +77,26 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 			$txtTip = "Sellect Side attack"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetData(-1,"Mine Side|DE Side|TH Side", "Mine Side")
+			GUICtrlSetState(-1, $GUI_DISABLE)
 
 		$y += 25
 		$lblSmartDBcol = GUICtrlCreateLabel("collector:", $x + 85, $y -5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
 		$txtSmartCollectors = GUICtrlCreateInput("20", $x +130, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$txtTip = "if less % of collectors near RED LINE. change to side attack"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 100)
+			GUICtrlSetState(-1, $GUI_DISABLE)
 			GUICtrlSetOnEvent(-1, "SmartCollectors")
 		$lblSmartDBPerc = GUICtrlCreateLabel("%", $x + 150, $y -5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
 		$lblSmartDBNear = GUICtrlCreateLabel("Near RED Line:", $x -15, $y -5, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
 		$txtSmartNear = GUICtrlCreateInput("51", $x +60, $y -7, 20, 20, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$txtTip = "setting Near RED LINE Of Collector. Default is 51"
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetLimit(-1, 10)
+			GUICtrlSetState(-1, $GUI_DISABLE)
 			GUICtrlSetOnEvent(-1, "SmartNear")
 
 	Local $x = 15, $y = 265
@@ -205,7 +212,7 @@ $tabMOD = GUICtrlCreateTabItem("MOD")
 		$cmbSkipUndetectedDE = GUICtrlCreateCombo("", $x - 15 , $y, 160, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			$txtTip = "Always attack undetected DE storage no filter" & @CRLF & _
 						"Always skip base when DE is not found." & @CRLF & "Only skip undetected DE base if either BK or AQ filter enabled and they are healing."
-			GUICtrlSetData(-1, "Always Attack Undetected DE|Always Skip Undetected DE|Skip When BK/AQ Sleeping", "Always Attack Centre DE")
+			GUICtrlSetData(-1, "Always Attack Undetected DE|Always Skip Undetected DE|Skip When BK/AQ Sleeping", "Always Skip Undetected DE")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState (-1, $GUI_HIDE)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)

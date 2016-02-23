@@ -1719,7 +1719,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	EndIf
 	chkUseAttackABCSV()
 
-	;Others Settings--------------------------------------------------------------------------
+	;MOD Settings--------------------------------------------------------------------------
 	If $ichkSwitchDonate = 1 Then
 		GUICtrlSetState($chkSwitchDonate, $GUI_CHECKED)
 	Else
@@ -1732,6 +1732,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkMultyFarming, $GUI_UNCHECKED)
 	EndIf
 	GUICtrlSetData($Account, $iAccount)
+	MultiFarming()
 
 	If $ichkDrillZapTH = 1 Then
 		GUICtrlSetState($chkDrillZapTH, $GUI_CHECKED)
@@ -1882,10 +1883,10 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	Else
 		GUICtrlSetState($SmartDeadBase, $GUI_UNCHECKED)
 	EndIf
-
 	GUICtrlSetData($txtSmartCollectors, $SmartCollectors)
 	GUICtrlSetData($txtSmartNear, $SmartNear)
 	_GUICtrlComboBox_SetCurSel($cmbSmartDB, $iChkSmartDB)
+	SmartDeadBase()
 
 	; CoCStats
 	If $ichkCoCStats = 1 Then

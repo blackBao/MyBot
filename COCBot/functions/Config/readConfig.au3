@@ -591,7 +591,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		$iValueSinglePBTimeForced = IniRead($config, "other", "ValueSinglePBTimeForced", "18")
 		$iValuePBTimeForcedExit = IniRead($config, "other", "ValuePBTimeForcedExit", "15")
 
-		$ichkLanguage = IniRead($config, "General", "ChkLanguage", "1")
+		$ichkLanguage = IniRead($config, "General", "ChkLanguage", "0")
 		$ichkVersion = IniRead($config, "General", "ChkVersion", "1")
 
 		;Snipe While Train

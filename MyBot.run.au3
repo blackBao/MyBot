@@ -316,9 +316,9 @@ Func runBot() ;Bot that runs everything in order
 				$FirstStart = True
 				$RunState = True
 				$iSwCount = 0
-				If $iVillageName = "Main" Then
+				If $sCurrProfile = "[01] Main" Then
 					SwitchSecond()
-				ElseIf $iVillageName = "Second" Then
+				ElseIf $sCurrProfile = "[02] Second" Then
 					If $iAccount = "3" Or $iAccount = "4" Then
 						SwitchThird()
 ;						DetectAccount()
@@ -326,7 +326,7 @@ Func runBot() ;Bot that runs everything in order
 						SwitchMain()
 ;						DetectAccount()
 					EndIf
-				ElseIf $iVillageName = "Third" Then
+				ElseIf $sCurrProfile = "[03] Third" Then
 					If $iAccount = "4" Then
 						SwitchFourth()
 ;						DetectAccount()
@@ -334,7 +334,7 @@ Func runBot() ;Bot that runs everything in order
 						SwitchMain()
 ;						DetectAccount()
 					EndIf
-				ElseIf $iVillageName = "Fourth" Then
+				ElseIf $sCurrProfile = "[04] Fourth" Then
 					SwitchMain()
 ;					DetectAccount()
 				EndIf

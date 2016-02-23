@@ -18,7 +18,7 @@ Func SwitchDonate()
 	If $ichkSwitchDonate = 1 Then
 		SetLog("Switching account For Donate", $COLOR_blue)
 		DetectAccount()
-		If $iVillageName = "Main" Then
+		If $sCurrProfile = "[01] Main" Then
 			SwitchSecond()
 			$RunState = True
 			While 1
@@ -29,7 +29,7 @@ Func SwitchDonate()
 				ExitLoop
 			WEnd
 			SwitchMain()
-		ElseIf $iVillageName = "Second" Then
+		ElseIf $sCurrProfile = "[02] Second" Then
 			If $iAccount = "3" Or $iAccount = "4" Then
 				SwitchThird()
 			Else
@@ -43,7 +43,7 @@ Func SwitchDonate()
 				ExitLoop
 			WEnd
 			SwitchSecond()
-		ElseIf $iVillageName = "Third" Then
+		ElseIf $sCurrProfile = "[03] Third" Then
 			If $iAccount = "4" Then
 				SwitchFourth()
 			ElseIf $iAccount = "3" Then
@@ -57,7 +57,7 @@ Func SwitchDonate()
 				ExitLoop
 			WEnd
 			SwitchThird()
-		ElseIf $iVillageName = "Fourth" Then
+		ElseIf $sCurrProfile = "[04] Fourth" Then
 			$RunState = True
 			SwitchMain()
 			While 1
