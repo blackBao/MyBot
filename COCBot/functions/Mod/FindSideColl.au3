@@ -108,45 +108,45 @@ Local $InternalArea[8][3] = [[73, 336, "LEFT"], _
 	EndIf
 #comments-end
 	If $SideTopLeft > $SideBottomLeft And $SideTopRight And $SideBottomRight Then
-		If $SideTopLeft = $SideBottomLeft Or $SideTopRight Or $SideBottomRight Then
-			$nbSides = 2
-			$BuildingEdge = 1
-			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-		Else
+;		If $SideTopLeft = $SideBottomLeft Or $SideTopRight Or $SideBottomRight Then
+;			$nbSides = 2
+;			$BuildingEdge = 1
+;			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
+;		Else
 			SetLog($SideTopLeft & " Collector To Side Top Left... Attacking Top Left", $COLOR_BLUE)
 			$BuildingEdge = 1
 			$nbSides = 1
-		EndIf
+;		EndIf
 	ElseIf $SideBottomLeft > $SideTopRight And $SideBottomRight And $SideTopLeft Then
-		If $SideBottomLeft = $SideTopRight Or $SideBottomRight Or $SideTopLeft Then
-			$nbSides = 2
-			$BuildingEdge = 2
-			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-		Else
+;		If $SideBottomLeft = $SideTopRight Or $SideBottomRight Or $SideTopLeft Then
+;			$nbSides = 2
+;			$BuildingEdge = 2
+;			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
+;		Else
 			SetLog($SideBottomLeft & " Collector To Side Bottom Left... Attacking Bottom Left", $COLOR_BLUE)
 			$BuildingEdge = 2
 			$nbSides = 1
-		EndIf
+;		EndIf
 	ElseIf $SideTopRight > $SideBottomLeft And $SideBottomRight And $SideTopLeft Then
-		If $SideTopRight = $SideBottomLeft Or $SideBottomRight Or $SideTopLeft Then
-			$nbSides = 2
-			$BuildingEdge = 3
-			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-		Else
+;		If $SideTopRight = $SideBottomLeft Or $SideBottomRight Or $SideTopLeft Then
+;			$nbSides = 2
+;			$BuildingEdge = 3
+;			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
+;		Else
 			SetLog($SideTopRight & " Collector To Side Top Right ... Attacking Top Right", $COLOR_BLUE)
 			$BuildingEdge = 3
 			$nbSides = 1
-		EndIf
+;		EndIf
 	ElseIf $SideBottomRight > $SideBottomLeft And $SideTopRight And $SideTopLeft Then
-		If $SideBottomRight = $SideBottomLeft Or $SideTopRight Or $SideTopLeft Then
-			$nbSides = 2
-			$BuildingEdge = 0
-			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-		Else
+;		If $SideBottomRight = $SideBottomLeft Or $SideTopRight Or $SideTopLeft Then
+;			$nbSides = 2
+;			$BuildingEdge = 0
+;			SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
+;		Else
 			SetLog($SideBottomRight & " Collector To Side Bottom Right... Attacking Bottom Right", $COLOR_BLUE)
 			$BuildingEdge = 0
 			$nbSides = 1
-		EndIf
+;		EndIf
 	Else
 		SetLog("Random Side ... Attacking Random Side", $COLOR_BLUE)
 		$BuildingEdge = (Random(Round(0, 3)))
