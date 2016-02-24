@@ -1719,6 +1719,14 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	EndIf
 	chkUseAttackABCSV()
 
+	If $iRadClickSpeedFast = 1 Then
+		GUICtrlSetState($radClickSpeedFast, $GUI_CHECKED)
+		GUICtrlSetState($radClickSpeedNormal, $GUI_UNCHECKED)
+	Else
+		GUICtrlSetState($radClickSpeedFast, $GUI_UNCHECKED)
+		GUICtrlSetState($radClickSpeedNormal, $GUI_CHECKED)
+	EndIf
+
 	;MOD Settings--------------------------------------------------------------------------
 	If $ichkSwitchDonate = 1 Then
 		GUICtrlSetState($chkSwitchDonate, $GUI_CHECKED)

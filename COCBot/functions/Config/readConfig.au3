@@ -635,7 +635,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		$ichkEarthquakeSpell[$LB] = IniRead($config, "attackCSV", "ABEarthquakeSpell", "0")
 		$ichkHasteSpell[$DB] = IniRead($config, "attackCSV", "DBHasteSpell", "0")
 		$ichkHasteSpell[$LB] = IniRead($config, "attackCSV", "ABHasteSpell", "0")
-
+		$iRadClickSpeedFast = IniRead($config, "attackCSV", "ClickSpeedFast", "1")
 		;MOD Settings--------------------------------------------------------------------------
 		$ichkSwitchDonate = IniRead($config, "MOD", "SwitchDonate", "0")
 		$ichkMultyFarming = IniRead($config, "MOD", "MultyFarming", "0")

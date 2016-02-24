@@ -1015,6 +1015,10 @@ Global $attackcsv_locate_gold_storage = 0
 Global $attackcsv_locate_elixir_storage = 0
 Global $attackcsv_locate_dark_storage = 0
 Global $attackcsv_locate_townhall = 0
+Global $attackcsv_use_red_line = 1
+Global $iRadClickSpeedFast, $radClickSpeedFast, $radClickSpeedNormal
+Global $TroopDropNumber = 0
+Global $remainingTroops[12][2]
 
 ;Milking Attack
 Global $debugresourcesoffset = 0 ;make images with offset to check correct adjust values

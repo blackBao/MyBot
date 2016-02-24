@@ -29,7 +29,7 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 			Else
 				LiveRoyalFilter()
 		   EndIf
-	  EndIf
+	 EndIf
 
 	If $Is_ClientSyncError = False Then
 		For $i = 0 To $iModeCount - 1
@@ -254,7 +254,7 @@ Func VillageSearch() ;Control for searching a village that meets conditions
 	    ResumeAndroid()
 
 		If _Sleep($iDelayRespond) Then Return
-		If $match[$LB] and $iChkDeploySettings[$LB]= 7  and StringLen($MilkFarmObjectivesSTR) >0  Then
+		If $match[$LB] and $iChkDeploySettings[$LB]= 7 and StringLen($MilkFarmObjectivesSTR) >0 Then
 					SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
 					SetLog("      " & "Milking Attack! ", $COLOR_GREEN, "Lucida Console", 7.5)
 					$logwrited = True
@@ -287,13 +287,13 @@ Func VillageSearch() ;Control for searching a village that meets conditions
                 $iMatchMode = $LB
                 $DESideFound = True
                 ExitLoop
+			 Else
+				SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
+				SetLog("      " & "Live Base Found!", $COLOR_GREEN, "Lucida Console", 7.5)
+				$logwrited = True
+				$iMatchMode = $LB
+				ExitLoop
 			EndIf
-		ElseIf $match[$LB] And Not $dbBase and $iChkDeploySettings[$LB]<>7 Then
-			SetLog($GetResourcesTXT, $COLOR_GREEN, "Lucida Console", 7.5)
-			SetLog("      " & "Live Base Found!", $COLOR_GREEN, "Lucida Console", 7.5)
-			$logwrited = True
-			$iMatchMode = $LB
-			ExitLoop
 		ElseIf $match[$LB] Or $match[$DB]  and $iChkDeploySettings[$LB]<>7 Then
 			If $OptBullyMode = 1 And ($SearchCount >= $ATBullyMode) Then
 				If $SearchTHLResult = 1 Then

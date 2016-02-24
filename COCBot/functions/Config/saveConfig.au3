@@ -1567,7 +1567,12 @@ Func saveConfig() ;Saves the controls settings to the config
 	Else
 		IniWrite($config, "attackCSV", "EnableScriptAB", 0)
 	EndIf
-;MOD Settings--------------------------------------------------------------------------
+	If GUICtrlRead($radClickSpeedFast) = $GUI_CHECKED Then
+		IniWrite($config, "attackCSV", "ClickSpeedFast", 1)
+	Else
+		IniWrite($config, "attackCSV", "ClickSpeedFast", 0)
+	EndIf
+	;MOD Settings--------------------------------------------------------------------------
 	If GUICtrlRead($chkSwitchDonate) = $GUI_CHECKED Then
 		IniWrite($config, "MOD", "SwitchDonate", 1)
 	Else
