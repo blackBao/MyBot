@@ -12,6 +12,176 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
+Func algorithm_SmartDeadBase()
+	Global $nbSides
+	If $debugSetlog = 1 Then Setlog("algorithm_SmartDeadBase", $COLOR_PURPLE)
+		SetSlotSpecialTroops()
+		If _Sleep($iDelayalgorithm_AllTroops1) Then Return
+
+		Local $hTimer = TimerInit()
+		_WinAPI_DeleteObject($hBitmapFirst)
+		$hBitmapFirst = _CaptureRegion2()
+		_GetRedArea()
+
+			SetLog("Locating Mines & Collectors", $COLOR_BLUE)
+			$hTimer = TimerInit()
+			Global $PixelMine[0]
+			Global $PixelElixir[0]
+			Global $PixelDarkElixir[0]
+			Global $SideTopLeft = 0
+			Global $SideBottomLeft = 0
+			Global $SideTopRight = 0
+			Global $SideBottomRight = 0
+
+				$PixelMine = GetLocationMine()
+				If (IsArray($PixelMine)) Then
+					For $i = 0 To UBound($PixelMine) - 1
+						$pixel = $PixelMine[$i]
+						If isInsideDiamond($pixel) Then
+							If $pixel[0] <= $InternalArea[2][0] Then
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopLeft += 1
+								Else
+									$SideBottomLeft += 1
+								EndIf
+							Else
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopRight += 1
+								Else
+									$SideBottomRight += 1
+								EndIf
+							EndIf
+						EndIf
+					Next
+				EndIf
+
+				$PixelElixir = GetLocationElixir()
+				If (IsArray($PixelElixir)) Then
+					For $i = 0 To UBound($PixelElixir) - 1
+						$pixel = $PixelElixir[$i]
+						If isInsideDiamond($pixel) Then
+							If $pixel[0] <= $InternalArea[2][0] Then
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopLeft += 1
+								Else
+									$SideBottomLeft += 1
+								EndIf
+							Else
+								If $pixel[1] <= $InternalArea[0][1] Then
+									$SideTopRight += 1
+								Else
+									$SideBottomRight += 1
+								EndIf
+							EndIf
+						EndIf
+					Next
+				EndIf
+				GetBuildingEdge($eSideBuildingDES)
+				GetBuildingEdge($eSideBuildingTH)
+
+			SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
+			SetLog("[" & UBound($PixelMine) & "] Gold Mines")
+			SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
+			$iNbrOfDetectedMines[$iMatchMode] += UBound($PixelMine)
+			$iNbrOfDetectedCollectors[$iMatchMode] += UBound($PixelElixir)
+			UpdateStats()
+
+	SetLog("Please Wait!... Choose Side With Collector ", $COLOR_BLUE)
+	FindSideColl()
+	SetLog("Number of Side " & $nbSides, $COLOR_BLUE)
+	If $nbSides = 0 Then Return
+	If $nbSides = 1 Then ; Customise DE side wave deployment here
+		Local $listInfoDeploy[20][5] = [["EARTH", 1, 1, 1, 1] _
+				, [$eGiant, $nbSides, 1, 1, 2] _
+				, [$eWall, $nbSides, 1, 4, 1] _
+				, [$eBarb, $nbSides, 1, 3, 0] _
+				, [$eArch, $nbSides, 1, 3, 0] _
+				, [$eWall, $nbSides, 2, 4, 1] _
+				, [$eWall, $nbSides, 3, 4, 1] _
+				, ["RAGE", 1, 1, 1, 1] _
+				, [$eBarb, $nbSides, 2, 3, 0] _
+				, [$eArch, $nbSides, 2, 3, 0] _
+				, [$eWall, $nbSides, 4, 4, 1] _
+				, ["CC", 1, 1, 1, 1] _
+				, ["HEROES", 1, 2, 1, 0] _
+				, ["HEAL", 1, 1, 1, 1] _
+				, [$eHogs, $nbSides, 2, 2, 1] _
+				, [$eWiza, $nbSides, 1, 1, 0] _
+				, [$eMini, $nbSides, 1, 1, 0] _
+				, [$eBarb, $nbSides, 3, 3, 1] _
+				, [$eArch, $nbSides, 3, 3, 1] _
+				, [$eGobl, $nbSides, 1, 1, 1] _
+				]
+	ElseIf $nbSides = 5 Then
+		If $debugSetlog = 1 Then SetLog("List Deploy for Four Fingger attack", $COLOR_PURPLE)
+		Local $listInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+			    , [$eBarb, $nbSides, 1, 1, 0] _
+			    , [$eWall, $nbSides, 1, 1, 2] _
+			    , [$eArch, $nbSides, 1, 1, 0] _
+			    , [$eGobl, $nbSides, 1, 2, 0] _
+			    , ["CC", 1, 1, 1, 1] _
+			    , [$eHogs, $nbSides, 1, 1, 1] _
+			    , [$eWiza, $nbSides, 1, 1, 0] _
+			    , [$eMini, $nbSides, 1, 1, 0] _
+			    , [$eGobl, $nbSides, 2, 2, 0] _
+			    , ["HEROES", 1, 2, 1, 1] _
+			    ]
+	Else
+		If $debugSetlog = 1 Then SetLog("listdeploy standard for attack", $COLOR_PURPLE)
+		Local $listInfoDeploy[13][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+				, [$eBarb, $nbSides, 1, 2, 0] _
+				, [$eWall, $nbSides, 1, 1, 1] _
+				, [$eArch, $nbSides, 1, 2, 0] _
+				, [$eBarb, $nbSides, 2, 2, 0] _
+				, [$eGobl, $nbSides, 1, 2, 0] _
+				, ["CC", 1, 1, 1, 1] _
+				, [$eHogs, $nbSides, 1, 1, 1] _
+				, [$eWiza, $nbSides, 1, 1, 0] _
+				, [$eMini, $nbSides, 1, 1, 0] _
+				, [$eArch, $nbSides, 2, 2, 0] _
+				, [$eGobl, $nbSides, 2, 2, 0] _
+				, ["HEROES", 1, 2, 1, 1] _
+				]
+	EndIf
+
+	$isCCDropped = False
+	$DeployCCPosition[0] = -1
+	$DeployCCPosition[1] = -1
+	$isHeroesDropped = False
+	$DeployHeroesPosition[0] = -1
+	$DeployHeroesPosition[1] = -1
+
+	LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
+
+
+	If _Sleep($iDelayalgorithm_AllTroops4) Then Return
+			SetLog("Dropping left over troops", $COLOR_BLUE)
+			For $x = 0 To 1
+				PrepareAttack($DB, True)
+				For $i = $eBarb To $eLava
+					LauchTroop($i, $nbSides, 0, 1)
+					CheckHeroesHealth()
+					If _Sleep($iDelayalgorithm_AllTroops5) Then Return
+				Next
+			Next
+	;Activate KQ's power
+	If ($checkKPower Or $checkQPower) And $iActivateKQCondition = "Manual" Then
+		SetLog("Waiting " & $delayActivateKQ / 1000 & " seconds before activating Hero abilities", $COLOR_BLUE)
+		If _Sleep($delayActivateKQ) Then Return
+		If $checkKPower Then
+			SetLog("Activating King's power", $COLOR_BLUE)
+			SelectDropTroop($King)
+			$checkKPower = False
+		EndIf
+		If $checkQPower Then
+			SetLog("Activating Queen's power", $COLOR_BLUE)
+			SelectDropTroop($Queen)
+			$checkQPower = False
+		EndIf
+	EndIf
+	SetLog("Finished Attacking, waiting for the battle to end")
+EndFunc
+
 Func Algorithm_FourFingger()
 	Global $countFindPixCloser = 0
 	Global $countCollectorexposed = 0
