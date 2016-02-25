@@ -689,6 +689,7 @@ Func readConfig() ;Reads config and sets it to the variables
 		; CoCStats
 		$ichkCoCStats = IniRead($config, "MOD", "chkCoCStats", "0")
 		$stxtAPIKey = IniRead($config, "MOD", "txtAPIKey", "")
+		$ichkDBAutoChoose = IniRead($config, "MOD", "DBAutoChoose", "0")
 
 		;Options Settings--------------------------------------------------------------------------
 		For $i = 1 to 24
@@ -696,36 +697,35 @@ Func readConfig() ;Reads config and sets it to the variables
 		   $DeDeployPosition[$i-1] = IniRead($config, "options", "DeDeployPosition" & $i, "0")
 		Next
 
-		;Profile Switch
-		$ichkGoldSwitchMax = IniRead($config, "profiles", "chkGoldSwitchMax", "0")
-		$icmbGoldMaxProfile = IniRead($config, "profiles", "cmbGoldMaxProfile", "0")
-		$itxtMaxGoldAmount = IniRead($config, "profiles", "txtMaxGoldAmount", "6000000")
-		$ichkGoldSwitchMin = IniRead($config, "profiles", "chkGoldSwitchMin", "0")
-		$icmbGoldMinProfile = IniRead($config, "profiles", "cmbGoldMinProfile", "0")
-		$itxtMinGoldAmount = IniRead($config, "profiles", "txtMinGoldAmount", "500000")
-
-		$ichkElixirSwitchMax = IniRead($config, "profiles", "chkElixirSwitchMax", "0")
-		$icmbElixirMaxProfile = IniRead($config, "profiles", "cmbElixirMaxProfile", "0")
-		$itxtMaxElixirAmount = IniRead($config, "profiles", "txtMaxElixirAmount", "6000000")
-		$ichkElixirSwitchMin = IniRead($config, "profiles", "chkElixirSwitchMin", "0")
-		$icmbElixirMinProfile = IniRead($config, "profiles", "cmbElixirMinProfile", "0")
-		$itxtMinElixirAmount = IniRead($config, "profiles", "txtMinElixirAmount", "500000")
-
-		$ichkDESwitchMax = IniRead($config, "profiles", "chkDESwitchMax", "0")
-		$icmbDEMaxProfile = IniRead($config, "profiles", "cmbDEMaxProfile", "0")
-		$itxtMaxDEAmount = IniRead($config, "profiles", "txtMaxDEAmount", "200000")
-		$ichkDESwitchMin = IniRead($config, "profiles", "chkDESwitchMin", "0")
-		$icmbDEMinProfile = IniRead($config, "profiles", "cmbDEMinProfile", "0")
-		$itxtMinDEAmount = IniRead($config, "profiles", "txtMinDEAmount", "10000")
-
-		$ichkTrophySwitchMax = IniRead($config, "profiles", "chkTrophySwitchMax", "0")
-		$icmbTrophyMaxProfile = IniRead($config, "profiles", "cmbTrophyMaxProfile", "0")
-		$itxtMaxTrophyAmount = IniRead($config, "profiles", "txtMaxTrophyAmount", "3000")
-		$ichkTrophySwitchMin = IniRead($config, "profiles", "chkTrophySwitchMin", "0")
-		$icmbTrophyMinProfile = IniRead($config, "profiles", "cmbTrophyMinProfile", "0")
-		$itxtMinTrophyAmount = IniRead($config, "profiles", "txtMinTrophyAmount", "1000")
-;;;;;builder idle
+	;;;;;builder idle
 		$ichkAlertBuilderIdle = IniRead($config, "pushbullet", "AlertBuilderIdle", "0")
+		;MilkingAttack
+		$MilkFarmLocateMine = IniRead($config,"MilkingAttack","LocateMine","1")
+	    $MilkFarmLocateElixir = IniRead($config,"MilkingAttack","LocateElixir","1")
+		$MilkFarmLocateDrill = IniRead($config,"MilkingAttack","LocateDrill","1")
+		$MilkFarmElixirParam = StringSplit(IniRead($config,"MilkingAttack","LocateElixirLevel","-1|-1|-1|-1|-1|-1|2|2|2"),"|",2)
+		If Ubound($MilkFarmElixirParam) <> 9 Then $MilkFarmElixirParam = StringSplit("-1|-1|-1|-1|-1|-1|2|2|2","|",2)
+		$MilkFarmMineParam = IniRead($config,"MilkingAttack","MineParam","5")
+		$MilkFarmDrillParam = IniRead($config,"MilkingAttack","DrillParam","1")
+
+	    $MilkFarmAttackElixirExtractors = IniRead($config,"MilkingAttack","AttackElixir","1")
+		$MilkFarmAttackGoldMines =  IniRead($config,"MilkingAttack","AttackMine","1")
+		$MilkFarmAttackDarkDrills = IniRead($config,"MilkingAttack","AttackDrill","1")
+		$MilkFarmLimitGold = IniRead($config,"MilkingAttack","LimitGold","9950000")
+		$MilkFarmLimitElixir = IniRead($config,"MilkingAttack","LimitElixir","9950000")
+		$MilkFarmLimitDark = IniRead($config,"MilkingAttack","LimitDark","199000")
+		$MilkFarmResMaxTilesFromBorder = IniRead($config,"MilkingAttack","MaxTiles","0")
+
+		$MilkFarmTroopForWaveMin = IniRead($config,"MilkingAttack","TroopForWaveMin","4")
+		$MilkFarmTroopForWaveMax = IniRead($config,"MilkingAttack","TroopForWaveMax","6")
+		$MilkFarmTroopMaxWaves = IniRead($config,"MilkingAttack","MaxWaves","4")
+		$MilkFarmDelayFromWavesMin = IniRead($config,"MilkingAttack","DelayBetweenWavesMin","3000")
+		$MilkFarmDelayFromWavesMax = IniRead($config,"MilkingAttack","DelayBetweenWavesMax","5000")
+;~ 		$MilkFarmSnipeTh = IniRead($config,"MilkingAttack","SnipeTownHall","5000")
+;~ 		$MilkFarmTHMaxTilesFromBorder = IniRead($config,"MilkingAttack","TownhallTiles","1")
+;~ 		$MilkFarmAlgorithmTh = IniRead($config,"MilkingAttack","TownHallAlgorithm","Bam")
+;~ 		$MilkFarmSnipeEvenIfNoExtractorsFound = IniRead($config,"MilkingAttack","TownHallHitAnyway","1")
+
 	Else
 		Return False
 	EndIf

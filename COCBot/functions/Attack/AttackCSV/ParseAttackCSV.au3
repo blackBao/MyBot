@@ -5,7 +5,7 @@
 ; Parameters ....: $debug               - [optional]
 ; Return values .: None
 ; Author ........: Sardo (2016)
-; Modified ......: AwesomeGamer (Feb. 11th 2016)
+; Modified ......:
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2016
 ;                  MyBot is distributed under the terms of the GNU GPL
 ; Related .......:
@@ -13,7 +13,7 @@
 ; Example .......: No
 ; ===============================================================================================================================
 Global $remainingTroops[12][2]
-	
+
 Func ParseAttackCSV($debug = False)
 	Global $ATTACKVECTOR_A, $ATTACKVECTOR_B, $ATTACKVECTOR_C, $ATTACKVECTOR_D, $ATTACKVECTOR_E, $ATTACKVECTOR_F
 	Global $ATTACKVECTOR_G, $ATTACKVECTOR_H, $ATTACKVECTOR_I, $ATTACKVECTOR_J, $ATTACKVECTOR_K, $ATTACKVECTOR_L
@@ -25,9 +25,9 @@ Func ParseAttackCSV($debug = False)
 		$remainingTroops[$i][0] = $atkTroops[$i][0]
 		$remainingTroops[$i][1] = $atkTroops[$i][1]
 		;Setlog($remainingTroops[$i][0] & " " & $remainingTroops[$i][1])
-	Next 
+	Next
 	$TroopDropNumber = 0
-	
+
 	Local $rownum = 0
 
 	;Local $filename = "attack1"
@@ -55,14 +55,14 @@ Func ParseAttackCSV($debug = False)
 			If $debug = True Then Setlog("parse line:<<" & $line & ">>")
 			debugAttackCSV("line content: " & $line)
 			$acommand = StringSplit($line, "|")
-			
+
 			If StringStripWS(StringUpper($acommand[1]), 2) = "MOD" Then
 				$modName = StringStripWS(StringUpper($acommand[2]), 2)
 				Switch $modName
 					Case "SMARTZAP"
 						$itxtDBLightMinDark = Int(StringStripWS(StringUpper($acommand[3]), 2))
-						Setlog($modName & " elabled with min dark setting=" & $itxtDBLightMinDark)
-						;DEDropSmartSpell() ;called in returnHome
+						Setlog($modName & " enable with min dark setting=" & $itxtDBLightMinDark)
+						DEDropSmartSpell() ;called in returnHome
 						$csvDropDE = 1
 					Case Else
 						Setlog("MOD " & $modName & "is not supported.", $COLOR_RED)

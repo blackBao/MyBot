@@ -48,7 +48,7 @@ If $aCmdLine[0] < 2 Then
 	If Not $FoundRunningAndroid Then DetectInstalledAndroid()
 EndIf
 ; Update Bot title
-$sBotTitle = $sBotTitle & "(" & ($AndroidInstance <> "" ? $AndroidInstance : $Android) & ") Mod v1.4.1"
+$sBotTitle = $sBotTitle & "(" & ($AndroidInstance <> "" ? $AndroidInstance : $Android) & ") Modv1.4.2-1"
 
 If $bBotLaunchOption_Restart = True Then
    If CloseRunningBot($sBotTitle) = True Then
@@ -513,6 +513,8 @@ Func Attack() ;Selects which algorithm
 
     ElseIf $iMatchMode = $DB And $iSmartDeadBase = 1 Then
         Algorithm_FourFingger()
+	ElseIf $iMatchMode = $DB And $ichkDBAutoChoose = 1 Then
+		algorithm_SmartDeadBase()
     Else
 		algorithm_AllTroops()
 	EndIf

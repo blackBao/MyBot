@@ -98,14 +98,14 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 			EndIf
 		Next
 		If $iSmartDeadBase = 1 Then
-			$nbSides = 5
 			Setlog("There are " & $countCollectorexposed & " is (" & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "%) collector(s) near RED LINE of " & Ubound($PixelNearCollector) & " collectors")
 
 			If ($countCollectorexposed/Ubound($PixelNearCollector)*100) <= $SmartCollectors Then
 				If $debugSetlog = 1 Then SetLog("( " & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "<" & $SmartCollectors & " )", $COLOR_PURPLE)
 				If $iChkSmartDB < 1 Then
 					SetLog("Change Side Attack to Collector side attack!...", $COLOR_BLUE)
-					FindSideColl()
+					FindDESideColl()
+					$nbSides = 1
 				ElseIf $iChkSmartDB = 1 Then
 					SetLog("Change Side Attack to De side attack!...", $COLOR_BLUE)
 					GetBuildingEdge($eSideBuildingDES)
@@ -116,53 +116,54 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 					$nbSides = 1
 				EndIf
 
-				$nbSides = 1
-				$iMatchMode = $LB
-				$iChkDeploySettings[$LB] = 5
-				Local $DElistInfoDeploy[24][5]
-				Local $waveCount,$waveNumber
-				Local $deploystring
+				If $nbSides = 1 Then
+					$iMatchMode = $LB
+					$iChkDeploySettings[$LB] = 5
+					Local $DElistInfoDeploy[24][5]
+					Local $waveCount,$waveNumber
+					Local $deploystring
 
-				for $i = 0 to 23
-					$DElistInfoDeploy[$i][0] = String($DeDeployType[$i])
-					$DElistInfoDeploy[$i][1] = $nbSides
-						$waveCount = 0
-					$waveNumber = 0
-					for $j = 0 to 23
-					If string($DeDeployType[$i])=string($DeDeployType[$j]) Then
-						$waveCount = $waveCount + 1
-						If $j<=$i Then
-							$waveNumber = $waveNumber +1
+					for $i = 0 to 23
+						$DElistInfoDeploy[$i][0] = String($DeDeployType[$i])
+						$DElistInfoDeploy[$i][1] = $nbSides
+							$waveCount = 0
+						$waveNumber = 0
+						for $j = 0 to 23
+						If string($DeDeployType[$i])=string($DeDeployType[$j]) Then
+							$waveCount = $waveCount + 1
+							If $j<=$i Then
+								$waveNumber = $waveNumber +1
+							EndIf
 						EndIf
-					EndIf
+						Next
+						$DElistInfoDeploy[$i][2] = $waveNumber
+						$DElistInfoDeploy[$i][3] = $waveCount
+						$DElistInfoDeploy[$i][4] = $DeDeployPosition[$i]
 					Next
-					$DElistInfoDeploy[$i][2] = $waveNumber
-					$DElistInfoDeploy[$i][3] = $waveCount
-					$DElistInfoDeploy[$i][4] = $DeDeployPosition[$i]
-				Next
 
-				LaunchSideAttack($DElistInfoDeploy, $CC, $King, $Queen, $Warden)
-
-			Return
+					LaunchSideAttack($DElistInfoDeploy, $CC, $King, $Queen, $Warden)
+					Return
+				EndIf
 
 			Endif
-			$iChkRedArea[$iMatchMode] = 0
+				$nbSides = 5
+				$iChkRedArea[$iMatchMode] = 0
 
-		Local $FFlistInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
-			    , [$eBarb, $nbSides, 1, 1, 0] _
-			    , [$eWall, $nbSides, 1, 1, 2] _
-			    , [$eArch, $nbSides, 1, 1, 0] _
-			    , [$eGobl, $nbSides, 1, 2, 0] _
-			    , ["CC", 1, 1, 1, 1] _
-			    , [$eHogs, $nbSides, 1, 1, 1] _
-			    , [$eWiza, $nbSides, 1, 1, 0] _
-			    , [$eMini, $nbSides, 1, 1, 0] _
-			    , [$eGobl, $nbSides, 2, 2, 0] _
-			    , ["HEROES", 1, 2, 1, 1] _
-			    ]
+			Local $FFlistInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+					, [$eBarb, $nbSides, 1, 1, 0] _
+					, [$eWall, $nbSides, 1, 1, 2] _
+					, [$eArch, $nbSides, 1, 1, 0] _
+					, [$eGobl, $nbSides, 1, 2, 0] _
+					, ["CC", 1, 1, 1, 1] _
+					, [$eHogs, $nbSides, 1, 1, 1] _
+					, [$eWiza, $nbSides, 1, 1, 0] _
+					, [$eMini, $nbSides, 1, 1, 0] _
+					, [$eGobl, $nbSides, 2, 2, 0] _
+					, ["HEROES", 1, 2, 1, 1] _
+					]
 
-			LaunchTroop2($FFlistInfoDeploy, $CC, $King, $Queen, $Warden)
-		Return
+				LaunchTroop2($FFlistInfoDeploy, $CC, $King, $Queen, $Warden)
+			Return
 
 		EndIf
 

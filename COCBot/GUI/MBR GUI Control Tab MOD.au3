@@ -270,23 +270,17 @@ Func SmartDeadBase()
 		For $i = $cmbSmartDB To $txtSmartNear
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
-;~		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
-;~			GUICtrlSetState($i, $GUI_DISABLE)
-;~		Next
-		For $i = $grpDeadBaseDeployCSV To $chkDBHasteSpellCSV
-			GUICtrlSetState($i, $GUI_DISABLE)
-		Next
+		GUICtrlSetState($chkDBAutoChoose, $GUI_DISABLE)
+		If GUICtrlRead($chkDBAutoChoose) = $GUI_CHECKED Then
+			GUICtrlSetState($chkDBAutoChoose, $GUI_UNCHECKED)
+		EndIf
 	Else
 		For $i = $cmbSmartDB To $txtSmartNear
-		GUICtrlSetState($i, $GUI_DISABLE)
+			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
-;~		For $i = $grpDeadBaseDeploy To $picDBAttackNearDarkElixirDrill
-;~			GUICtrlSetState($i, $GUI_ENABLE)
-;~		Next
-		For $i = $grpDeadBaseDeployCSV To $chkDBHasteSpellCSV
-			GUICtrlSetState($i, $GUI_ENABLE)
-		Next
+		GUICtrlSetState($chkDBAutoChoose, $GUI_ENABLE)
 	EndIf
+	chkDBAutoChoose()
 EndFunc ;====> SmartDeadBase
 Func SmartNear()
 	$SmartNear = GUICtrlRead($txtSmartNear)
