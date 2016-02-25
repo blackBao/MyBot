@@ -352,7 +352,7 @@ Func PopulateDeployConfig()
 	While True
 		$NewFile = FileFindNextFile($FileSearch)
 		If @error Then ExitLoop
-		$output = $output & StringLeft($NewFile, StringLen($NewFile) - 4) & ","
+		$output = $output & StringLeft($NewFile, StringLen($NewFile) - 4) & "|"
 	WEnd
 	FileClose($FileSearch)
 	;remove last |
@@ -367,7 +367,7 @@ Func PopulateDeployConfig()
 EndFunc   ;==>PopulateABComboScriptsFiles
 Func UpdateDeployConfig()
 	PopulateDeployConfig() ; recreate combo box values
-	_GUICtrlComboBox_SetCurSel($cmbDeployConfig, _GUICtrlComboBox_FindStringExact($cmbDeployConfig, $scmbDeployConfig))
+	_GUICtrlComboBox_SetCurSel($cmbDeployConfig, _GUICtrlComboBox_FindStringExact($cmbDeployConfig, $cmbDeployConfig))
 	cmbDeployConfig()
 EndFunc   ;==>UpdateComboScriptName
 
