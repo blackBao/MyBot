@@ -48,7 +48,7 @@ If $aCmdLine[0] < 2 Then
 	If Not $FoundRunningAndroid Then DetectInstalledAndroid()
 EndIf
 ; Update Bot title
-$sBotTitle = $sBotTitle & "(" & ($AndroidInstance <> "" ? $AndroidInstance : $Android) & ") Mod v1.4"
+$sBotTitle = $sBotTitle & "(" & ($AndroidInstance <> "" ? $AndroidInstance : $Android) & ") Mod v1.4.1"
 
 If $bBotLaunchOption_Restart = True Then
    If CloseRunningBot($sBotTitle) = True Then

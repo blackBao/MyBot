@@ -18,8 +18,32 @@
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;; SIDE ATTACK TROOP Deployment ;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	Local $x = 10, $y = 130
+	$grpDeployConfig = GUICtrlCreateGroup("Troop Deployment", $x, $y, 445, 40)
+	$x += 20
+	$y += 10
+	$lblDeployConfig = GUICtrlCreateLabel("Choose : ", $x-10, $y+5, -1, -1)
+		$txtTip = GetTranslated(14,5, "Choose the script; You can edit/add new scripts located in folder: 'CSV/Attack'")
+		GUICtrlSetTip(-1, $txtTip)
+	$x += 47
+	$cmbDeployConfig = GUICtrlCreateCombo("", $x-10 , $y + 5, 185, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $ES_CENTER))
+		GUICtrlSetTip(-1, $txtTip)
+		GUICtrlSetState(-1, $GUI_UNCHECKED)
+		GUICtrlSetOnEvent(-1, "cmbDeployConfig")
 
-    Local $x = 10, $y = 130
+	$btnReload = GUICtrlCreateButton("Reload", $x + 182, $y + 3, -1, -1)
+		$txtTip =  GetTranslated(14,6, "Reload Script Files")
+		GUICtrlSetTip(-1, $txtTip)
+		GUICtrlSetOnEvent(-1, "UpdateDeployconfig")
+
+		PopulateDeployconfig() ; populate
+	$btnEdit = GUICtrlCreateButton("Edit", $x + 230, $y + 3, -1, -1)
+		$txtTip =  GetTranslated(14,15, "Show/Edit current Attack Script")
+		GUICtrlSetTip(-1, $txtTip)
+		GUICtrlSetOnEvent(-1, "EditDeployconfig")
+	$btnSave = GUICtrlCreateButton("Save", $x + 260, $y + 3, -1, -1)
+		GUICtrlSetOnEvent(-1, "btnSave")
+    Local $x = 10, $y = 170
 	Local $aDeployTroopArray[$eHaSpell + 2]
 
 	For $i = $eBarb To $eHaSpell + 1
@@ -27,14 +51,15 @@
 	Next
 
 	; Convert the array into a string
+
     Local $troopString = _ArrayToString($aDeployTroopArray, "|")
 
-  	$grpToolboxOptions = GUICtrlCreateGroup("Troop Deployment", $x, $y, 445, 275)
+  	$grpToolboxOptions = GUICtrlCreateGroup("Troop Deployment", $x, $y, 445, 240)
 
-	$btnSave = GUICtrlCreateButton("Save", $x + 370, $y + 245, 60, 20 + 5)
-		GUICtrlSetOnEvent(-1, "btnSave")
-	$btnLoad = GUICtrlCreateButton("Load", $x + 300, $y + 245, 60, 20 + 5)
-		GUICtrlSetOnEvent(-1, "btnLoad")
+;	$btnSave = GUICtrlCreateButton("Save", $x + 370, $y + 245, 60, 20 + 5)
+;		GUICtrlSetOnEvent(-1, "btnSave")
+;	$btnLoad = GUICtrlCreateButton("Load", $x + 300, $y + 245, 60, 20 + 5)
+;		GUICtrlSetOnEvent(-1, "btnLoad")
 
     $y = $y + 15
 

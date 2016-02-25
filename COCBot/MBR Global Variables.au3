@@ -240,6 +240,7 @@ Global $pIconLib = $LibDir & "\MBRBOT.dll" ; icon library
 Global Const $dirTHSnipesAttacks = @ScriptDir & "\CSV\THSnipe"
 Global Const $dirAttacksCSV = @ScriptDir & "\CSV\Attack"
 
+
 ; Improve GUI interations by disabling bot window redraw
 Global $bRedrawBotWindow[3] = [True, False, False] ; [0] = window redraw enabled, [1] = window redraw required, [2] = window redraw requird by some controls, see CheckRedrawControls()
 
@@ -944,9 +945,6 @@ Global $DarkLow
 Global $DESideEB, $DELowEndMin, $DisableOtherEBO
 Global $DEEndAq, $DEEndBk, $DEEndOneStar
 Global $SpellDP[2] = [0, 0]; Spell drop point for DE attack
-Global $DeDeployType[24],$DeDeployPosition[24]
-Global $DeDeployEmptyString = "--------------------" ;20 -'s
-global $kind, $aDeployButtonPositions, $unitText
 
 ;Attack SCV
 Global $PixelMine[0]
@@ -1098,6 +1096,13 @@ If $aCmdLine[0] > 1 Then
 		EndIf
 	Next
 EndIf
+
+;Deploy Config
+Global $scmbDeployConfig = "Empty_Deployment"
+Global Const $dirDeployconfig = @ScriptDir & "\CSV\SideAttack"
+Global $DeDeployType[24],$DeDeployPosition[24]
+Global $DeDeployEmptyString = "--------------------" ;20 -'s
+Global $kind, $aDeployButtonPositions, $unitText
 
 ;Multy Farming
 Global $iSwCount

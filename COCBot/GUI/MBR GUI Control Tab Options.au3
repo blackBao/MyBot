@@ -18,160 +18,160 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Func cmbDeDeploy01()
-   cmbDeDeploy("01")
+	cmbDeDeploy("01")
 EndFunc
 Func cmbDeDeploy02()
-   cmbDeDeploy("02")
+	cmbDeDeploy("02")
 EndFunc
 Func cmbDeDeploy03()
-   cmbDeDeploy("03")
+	cmbDeDeploy("03")
 EndFunc
 Func cmbDeDeploy04()
-   cmbDeDeploy("04")
+	cmbDeDeploy("04")
 EndFunc
 Func cmbDeDeploy05()
-   cmbDeDeploy("05")
+	cmbDeDeploy("05")
 EndFunc
 Func cmbDeDeploy06()
-   cmbDeDeploy("06")
+	cmbDeDeploy("06")
 EndFunc
 Func cmbDeDeploy07()
-   cmbDeDeploy("07")
+	cmbDeDeploy("07")
 EndFunc
 Func cmbDeDeploy08()
-   cmbDeDeploy("08")
+	cmbDeDeploy("08")
 EndFunc
 Func cmbDeDeploy09()
-   cmbDeDeploy("09")
+	cmbDeDeploy("09")
 EndFunc
 Func cmbDeDeploy10()
-   cmbDeDeploy("10")
+	cmbDeDeploy("10")
 EndFunc
 Func cmbDeDeploy11()
-   cmbDeDeploy("11")
+	cmbDeDeploy("11")
 EndFunc
 Func cmbDeDeploy12()
-   cmbDeDeploy("12")
+	cmbDeDeploy("12")
 EndFunc
 Func cmbDeDeploy13()
-   cmbDeDeploy("13")
+	cmbDeDeploy("13")
 EndFunc
 Func cmbDeDeploy14()
-   cmbDeDeploy("14")
+	cmbDeDeploy("14")
 EndFunc
 Func cmbDeDeploy15()
-   cmbDeDeploy("15")
+	cmbDeDeploy("15")
 EndFunc
 Func cmbDeDeploy16()
-   cmbDeDeploy("16")
+	cmbDeDeploy("16")
 EndFunc
 Func cmbDeDeploy17()
-   cmbDeDeploy("17")
+	cmbDeDeploy("17")
 EndFunc
 Func cmbDeDeploy18()
-   cmbDeDeploy("18")
+	cmbDeDeploy("18")
 EndFunc
 Func cmbDeDeploy19()
-   cmbDeDeploy("19")
+	cmbDeDeploy("19")
 EndFunc
 Func cmbDeDeploy20()
-   cmbDeDeploy("20")
+	cmbDeDeploy("20")
 EndFunc
 Func cmbDeDeploy21()
-   cmbDeDeploy("21")
+	cmbDeDeploy("21")
 EndFunc
 Func cmbDeDeploy22()
-   cmbDeDeploy("22")
+	cmbDeDeploy("22")
 EndFunc
 Func cmbDeDeploy23()
-   cmbDeDeploy("23")
+	cmbDeDeploy("23")
 EndFunc
 Func cmbDeDeploy24()
-   cmbDeDeploy("24")
+	cmbDeDeploy("24")
 EndFunc
 Func txtDeStyle01()
-   txtDeStyle("01")
+	txtDeStyle("01")
 EndFunc
 Func txtDeStyle02()
-   txtDeStyle("02")
+	txtDeStyle("02")
 EndFunc
 Func txtDeStyle03()
-   txtDeStyle("03")
+	txtDeStyle("03")
 EndFunc
 Func txtDeStyle04()
-   txtDeStyle("04")
+	txtDeStyle("04")
 EndFunc
 Func txtDeStyle05()
-   txtDeStyle("05")
+	txtDeStyle("05")
 EndFunc
 Func txtDeStyle06()
-   txtDeStyle("06")
+	txtDeStyle("06")
 EndFunc
 Func txtDeStyle07()
-   txtDeStyle("07")
+	txtDeStyle("07")
 EndFunc
 Func txtDeStyle08()
-   txtDeStyle("08")
+	txtDeStyle("08")
 EndFunc
 Func txtDeStyle09()
-   txtDeStyle("09")
+	txtDeStyle("09")
 EndFunc
 Func txtDeStyle10()
-   txtDeStyle("10")
+	txtDeStyle("10")
 EndFunc
 Func txtDeStyle11()
-   txtDeStyle("11")
+	txtDeStyle("11")
 EndFunc
 Func txtDeStyle12()
-   txtDeStyle("12")
+	txtDeStyle("12")
 EndFunc
 Func txtDeStyle13()
-   txtDeStyle("13")
+	txtDeStyle("13")
 EndFunc
 Func txtDeStyle14()
-   txtDeStyle("14")
+	txtDeStyle("14")
 EndFunc
 Func txtDeStyle15()
-   txtDeStyle("15")
+	txtDeStyle("15")
 EndFunc
 Func txtDeStyle16()
-   txtDeStyle("16")
+	txtDeStyle("16")
 EndFunc
 Func txtDeStyle17()
-   txtDeStyle("17")
+	txtDeStyle("17")
 EndFunc
 Func txtDeStyle18()
-   txtDeStyle("18")
+	txtDeStyle("18")
 EndFunc
 Func txtDeStyle19()
-   txtDeStyle("19")
+	txtDeStyle("19")
 EndFunc
 Func txtDeStyle20()
-   txtDeStyle("20")
+	txtDeStyle("20")
 EndFunc
 Func txtDeStyle21()
-   txtDeStyle("21")
+	txtDeStyle("21")
 EndFunc
 Func txtDeStyle22()
-   txtDeStyle("22")
+	txtDeStyle("22")
 EndFunc
 Func txtDeStyle23()
-   txtDeStyle("23")
+	txtDeStyle("23")
 EndFunc
 Func txtDeStyle24()
-   txtDeStyle("24")
+	txtDeStyle("24")
 EndFunc
 
 Func cmbDeDeploy($troopSlot)
-   If GUICtrlRead(@GUI_CtrlId) <> $DeDeployEmptyString Then
-      $DeDeployType[$troopSlot - 1] = _GUICtrlComboBox_GetCurSel(@GUI_CtrlId) - 1
-   Else
-	  $DeDeployType[$troopSlot - 1] = $DeDeployEmptyString
-   EndIf
+	If GUICtrlRead(@GUI_CtrlId) <> $DeDeployEmptyString Then
+		$DeDeployType[$troopSlot - 1] = _GUICtrlComboBox_GetCurSel(@GUI_CtrlId) - 1
+	Else
+		$DeDeployType[$troopSlot - 1] = $DeDeployEmptyString
+	EndIf
 EndFunc   ;==>cmbDeDeploy
 
 Func txtDeStyle($troopSlot)
-   $DeDeployPosition[$troopSlot - 1] = GUICtrlRead(@GUI_CtrlId)
+	$DeDeployPosition[$troopSlot - 1] = GUICtrlRead(@GUI_CtrlId)
 EndFunc   ;==>cmbDeDeploy
 
 Func TroopNumberToEnum($TroopEnumValue)
@@ -181,59 +181,59 @@ CASE 0
 CASE 1
    return "$eArch"
 CASE 2
-   return "$eGiant"
+	return "$eGiant"
 CASE 3
-   return "$eGobl"
+	return "$eGobl"
 CASE 4
-   return "$eWall"
+	return "$eWall"
 CASE 5
-   return "$eBall"
+	return "$eBall"
 CASE 6
-   return "$eWiza"
+	return "$eWiza"
 CASE 7
-   return "$eHeal"
+	return "$eHeal"
 CASE 8
-   return "$eDrag"
+	return "$eDrag"
 CASE 9
-   return "$ePekk"
+	return "$ePekk"
 CASE 10
-   return "$eMini"
+	return "$eMini"
 CASE 11
-   return "$eHogs"
+	return "$eHogs"
 CASE 12
-   return "$eValk"
+	return "$eValk"
 CASE 13
-   return "$eGole"
+	return "$eGole"
 CASE 14
-   return "$eWitc"
+	return "$eWitc"
 CASE 15
-   return "$eLava"
+	return "$eLava"
 CASE 16
-   return "$eKing"
+	return "$eKing"
 CASE 17
-   return "$eQueen"
+	return "$eQueen"
 CASE 18
-   return "$eWarden"
+	return "$eWarden"
 CASE 19
-   return "$eCastle"
+	return "$eCastle"
 CASE 20
-   return "$eLSpell"
+	return "$eLSpell"
 CASE 21
-   return "$eHSpell"
+	return "$eHSpell"
 CASE 22
-   return "$eRSpell"
+	return "$eRSpell"
 CASE 23
-   return "$eJSpell"
+	return "$eJSpell"
 CASE 24
-   return "$eFSpell"
+	return "$eFSpell"
 CASE 25
-   return "$ePSpell"
+	return "$ePSpell"
 CASE 26
-   return "$eESpell"
+	return "$eESpell"
 CASE 27
-   return "$eHaSpell"
+	return "$eHaSpell"
 CASE Else
-   return $TroopEnumValue
+	return $TroopEnumValue
 EndSwitch
 EndFunc ;==> TroopNumberToEnum
 
@@ -299,62 +299,88 @@ CASE "$eHaSpell"
 EndSwitch
 EndFunc ;==> TroopEnumToNumber
 
-Func btnLoad()
-   ; Create a constant variable in Local scope of the message to display in FileOpenDialog.
-    Local Const $sMessage = "Select the deployment file to load."
+Func cmbDeployConfig()
 
-    ; Display an open dialog to select a list of file(s).
-    Local $loadFileName = FileOpenDialog($sMessage, "..\CSV\SideAttack", "csv (*.csv)", $FD_FILEMUSTEXIST )
-    If @error Then
-        ; Display the error message.
-        MsgBox($MB_SYSTEMMODAL, "", "No file was selected.")
-        Return
-    Else
-        ;MsgBox($MB_SYSTEMMODAL, "", "Loading deployment file:" & @CRLF & $loadFileName)
-	EndIf
+	Local $tempvect1 = _GUICtrlComboBox_GetListArray($cmbDeployConfig)
+	Local $filename = $tempvect1[_GUICtrlComboBox_GetCurSel($cmbDeployConfig) + 1]
+	Local $f, $result = ""
+	Local $tempvect, $line, $t
 
-    Local $loadFile = FileOpen($loadFileName, 0)
-	If $loadFile = -1 Then
-       MsgBox(0, "error", "File doesn't exist or can't be read")
-       Return
-    EndIf
+	$scmbDeployConfig = $filename
 
-   ;Ignore headers
-   Local $line = FileReadLine($loadFile)
+	If FileExists($dirDeployconfig & "\" & $filename & ".csv") Then
+		$f = FileOpen($dirDeployconfig & "\" & $filename & ".csv", 0)
+		; Read in lines of text until the EOF is reached
+		Local $line = FileReadLine($f)
 
 	; Read in lines of text until the EOF is reached
-	Local $lineNumber = 0
-   While 1
-      Local $line = FileReadLine($loadFile)
-      If @error = -1 Or $lineNumber > 23 Then ExitLoop
-	  $input = StringSplit($line, ",")
-	  If StringIsDigit($input[1]) Or $input[1] = $DeDeployEmptyString Then
-		 $DeDeployType[$lineNumber] = $input[1]
-	  Else
-		 $DeDeployType[$lineNumber] = TroopEnumToNumber($input[1])
-		 ;$DeDeployType[$lineNumber] = $DeDeployEmptyString
-	  EndIf
-	  $DeDeployPosition[$lineNumber] = $input[2]
-	  $lineNumber = $lineNumber +1
-   WEnd
-   While $lineNumber <= 23
-      $DeDeployType[$lineNumber] = $DeDeployEmptyString
-	  $DeDeployPosition[$lineNumber] = 0
-	  $lineNumber = $lineNumber +1
-   Wend
-
-   FileClose($loadFile)
-
-   For $i = 1 to 24
-	 GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])
-	 If $DeDeployType[$i-1] <> $DeDeployEmptyString Then
-		 _GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployType[$i-1]+1)
-	  Else
-		 _GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployEmptyString)
-	  EndIf
+		Local $lineNumber = 0
+		While 1
+			Local $line = FileReadLine($f)
+			If @error = -1 Or $lineNumber > 23 Then ExitLoop
+			$input = StringSplit($line, ",")
+			If StringIsDigit($input[1]) Or $input[1] = $DeDeployEmptyString Then
+				$DeDeployType[$lineNumber] = $input[1]
+			Else
+				$DeDeployType[$lineNumber] = TroopEnumToNumber($input[1])
+				;$DeDeployType[$lineNumber] = $DeDeployEmptyString
+			EndIf
+			$DeDeployPosition[$lineNumber] = $input[2]
+			$lineNumber = $lineNumber +1
+		WEnd
+		While $lineNumber <= 23
+			$DeDeployType[$lineNumber] = $DeDeployEmptyString
+			$DeDeployPosition[$lineNumber] = 0
+			$lineNumber = $lineNumber +1
+		Wend
+		FileClose($f)
+	For $i = 1 to 24
+		GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])
+		If $DeDeployType[$i-1] <> $DeDeployEmptyString Then
+			_GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployType[$i-1]+1)
+		Else
+			_GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployEmptyString)
+		EndIf
     Next
+	EndIf
 
-EndFunc
+EndFunc   ;==>cmbABScriptName
+Func PopulateDeployConfig()
+	Dim $FileSearch, $NewFile
+	$FileSearch = FileFindFirstFile($dirDeployconfig & "\*.csv")
+	Dim $output = ""
+	While True
+		$NewFile = FileFindNextFile($FileSearch)
+		If @error Then ExitLoop
+		$output = $output & StringLeft($NewFile, StringLen($NewFile) - 4) & ","
+	WEnd
+	FileClose($FileSearch)
+	;remove last |
+	$output = StringLeft($output, StringLen($output) - 1)
+	;reset combo box
+	_GUICtrlComboBox_ResetContent($cmbDeployConfig)
+	;set combo box
+	GUICtrlSetData($cmbDeployConfig, $output)
+
+	_GUICtrlComboBox_SetCurSel($cmbDeployConfig, _GUICtrlComboBox_FindStringExact($cmbDeployConfig, ""))
+
+EndFunc   ;==>PopulateABComboScriptsFiles
+Func UpdateDeployConfig()
+	PopulateDeployConfig() ; recreate combo box values
+	_GUICtrlComboBox_SetCurSel($cmbDeployConfig, _GUICtrlComboBox_FindStringExact($cmbDeployConfig, $scmbDeployConfig))
+	cmbDeployConfig()
+EndFunc   ;==>UpdateComboScriptName
+
+Func EditDeployConfig()
+	Local $tempvect1 = _GUICtrlComboBox_GetListArray($cmbDeployConfig)
+	Local $filename = $tempvect1[_GUICtrlComboBox_GetCurSel($cmbDeployConfig) + 1]
+	Local $f, $result = ""
+	Local $tempvect, $line, $t
+	If FileExists($dirDeployconfig & "\" & $filename & ".csv") Then
+		ShellExecute("notepad.exe", $dirDeployconfig & "\" & $filename & ".csv")
+	EndIf
+EndFunc   ;==>EditDBScript
+
 Func btnSave()
     ; Create a constant variable in Local scope of the message to display in FileSaveDialog.
     Local Const $sMessage = "Choose a filename."
@@ -400,3 +426,4 @@ Func btnSave()
 
     EndIf
 EndFunc
+
