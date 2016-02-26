@@ -47,7 +47,7 @@ Func TestSmartDeadBase()
 					Next
 					For $i = 0 To UBound($PixelElixirTrue) - 1
 						$pixel = $PixelElixirTrue[$i]
-						If isResourceDiamond($pixel) Then
+						If isInsideDiamond($pixel) Then
 							If $pixel[0] <= $InternalArea[2][0] Then
 								If $pixel[1] <= $InternalArea[0][1] Then
 									$SideTopLeft += 1

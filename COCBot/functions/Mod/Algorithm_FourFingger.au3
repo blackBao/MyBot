@@ -91,27 +91,29 @@ Func algorithm_SmartDeadBase()
 	SetLog("Number of Side " & $nbSides, $COLOR_BLUE)
 	If $nbSides = 0 Then Return
 	If $nbSides = 1 Then ; Customise DE side wave deployment here
-		Local $listInfoDeploy[20][5] = [["EARTH", 1, 1, 1, 1] _
-				, [$eGiant, $nbSides, 1, 1, 2] _
-				, [$eWall, $nbSides, 1, 4, 1] _
-				, [$eBarb, $nbSides, 1, 3, 0] _
-				, [$eArch, $nbSides, 1, 3, 0] _
-				, [$eWall, $nbSides, 2, 4, 1] _
-				, [$eWall, $nbSides, 3, 4, 1] _
-				, ["RAGE", 1, 1, 1, 1] _
-				, [$eBarb, $nbSides, 2, 3, 0] _
-				, [$eArch, $nbSides, 2, 3, 0] _
-				, [$eWall, $nbSides, 4, 4, 1] _
-				, ["CC", 1, 1, 1, 1] _
-				, ["HEROES", 1, 2, 1, 0] _
-				, ["HEAL", 1, 1, 1, 1] _
-				, [$eHogs, $nbSides, 2, 2, 1] _
-				, [$eWiza, $nbSides, 1, 1, 0] _
-				, [$eMini, $nbSides, 1, 1, 0] _
-				, [$eBarb, $nbSides, 3, 3, 1] _
-				, [$eArch, $nbSides, 3, 3, 1] _
-				, [$eGobl, $nbSides, 1, 1, 1] _
-				]
+		If $debugSetlog = 1 Then SetLog("List Deploy for Customized Side attack", $COLOR_PURPLE)
+
+        Local $listInfoDeploy[24][5]
+        Local $waveCount,$waveNumber
+        Local $deploystring
+
+        for $i = 0 to 23
+            $listInfoDeploy[$i][0] = String($DeDeployType[$i])
+            $listInfoDeploy[$i][1] = $nbSides
+                $waveCount = 0
+            $waveNumber = 0
+            for $j = 0 to 23
+               If string($DeDeployType[$i])=string($DeDeployType[$j]) Then
+                  $waveCount = $waveCount + 1
+                  If $j<=$i Then
+                     $waveNumber = $waveNumber +1
+                  EndIf
+               EndIf
+            Next
+            $listInfoDeploy[$i][2] = $waveNumber
+            $listInfoDeploy[$i][3] = $waveCount
+            $listInfoDeploy[$i][4] = $DeDeployPosition[$i]
+        Next
 	ElseIf $nbSides = 5 Then
 		If $debugSetlog = 1 Then SetLog("List Deploy for Four Fingger attack", $COLOR_PURPLE)
 		Local $listInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
@@ -228,7 +230,7 @@ Func Algorithm_FourFingger()
 					Next
 					For $i = 0 To UBound($PixelElixirTrue) - 1
 						$pixel = $PixelElixirTrue[$i]
-						If isResourceDiamond($pixel) Then
+						If isInsideDiamond($pixel) Then
 							If $pixel[0] <= $InternalArea[2][0] Then
 								If $pixel[1] <= $InternalArea[0][1] Then
 									$SideTopLeft += 1
