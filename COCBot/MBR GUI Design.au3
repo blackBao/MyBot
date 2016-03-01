@@ -45,6 +45,7 @@ GUICtrlSetOnEvent(-1, "")
 #include "GUI\MBR GUI Design Tab Donate.au3"
 #include "GUI\MBR GUI Design Tab Misc.au3"
 #include "GUI\MBR GUI Design Tab Upgrade.au3"
+#include "GUI\MBR GUI Design Tab Profiles.au3"
 #include "GUI\MBR GUI Design Tab Notify.au3"
 #include "GUI\MBR GUI Design Tab Expert.au3"
 #include "GUI\MBR GUI Design Tab MOD.au3"

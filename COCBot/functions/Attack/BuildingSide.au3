@@ -30,27 +30,23 @@ Func GetBuildingEdge($TypeBuilding = $eSideBuildingDES) ;Using $BuildingLoc x y 
 	If $BuildingLoc = 1 Then
 		If ($BuildingLocx = 430) And ($BuildingLocy = 313) Then
 			SetLog($TypeBuildingName & " Located in Middle... Attacking Random Side", $COLOR_BLUE)
-			$BuildingEdge = (Random(Round(0, 3)))
+			$BuildingEdge = (Random(Round(0, 3),1))
 		ElseIf ($BuildingLocx >= 430) And ($BuildingLocy >= 313) Then
 			SetLog($TypeBuildingName & " Located Bottom Right... Attacking Bottom Right", $COLOR_BLUE)
 			$BuildingEdge = 0
-			$SideBottomRight += 3
 		ElseIf ($BuildingLocx > 430) And ($BuildingLocy < 313) Then
 			SetLog($TypeBuildingName & " Located Top Right... Attacking Top Right", $COLOR_BLUE)
 			$BuildingEdge = 3
-			$SideTopRight += 3
 		ElseIf ($BuildingLocx <= 430) And ($BuildingLocy <= 313) Then
 			SetLog($TypeBuildingName & " Located Top Left... Attacking Top Left", $COLOR_BLUE)
 			$BuildingEdge = 1
-			$SideTopLeft += 3
 		ElseIf ($BuildingLocx < 430) And ($BuildingLocy > 313) Then
 			SetLog($TypeBuildingName & " Located Bottom Left... Attacking Bottom Left", $COLOR_BLUE)
 			$BuildingEdge = 2
-			$SideBottomLeft += 3
 		EndIf
 	ElseIf $BuildingLoc = 0 Then
 		SetLog($TypeBuildingName & " Not Located... Attacking Random Side", $COLOR_BLUE)
-		$BuildingEdge = (Random(Round(0, 3)))
+		$BuildingEdge = (Random(Round(0, 3),1))
 	EndIf
 EndFunc   ;==>GetBuildingEdge
 

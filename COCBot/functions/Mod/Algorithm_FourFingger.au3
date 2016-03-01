@@ -28,15 +28,27 @@ Func algorithm_SmartDeadBase()
 			Global $PixelMine[0]
 			Global $PixelElixir[0]
 			Global $PixelDarkElixir[0]
+			Global $PixelNearCollector[0]
+			Global $PixelNearCollectorx[0]
+			Global $PixelElixirTrue[0]
 			Global $SideTopLeft = 0
 			Global $SideBottomLeft = 0
 			Global $SideTopRight = 0
 			Global $SideBottomRight = 0
+			Local $PixelMinex = 0
 
 				$PixelMine = GetLocationMine()
 				If (IsArray($PixelMine)) Then
 					For $i = 0 To UBound($PixelMine) - 1
-						$pixel = $PixelMine[$i]
+						$PixelElixircheck = $PixelMine[$i]
+						If isInsideDiamond($PixelElixircheck) Then
+							$PixelMinex +=1
+							ReDim $PixelElixirTrue[$PixelMinex]
+							$PixelElixirTrue[$PixelMinex - 1] = $PixelElixircheck
+						EndIf
+					Next
+					For $i = 0 To UBound($PixelElixirTrue) - 1
+						$pixel = $PixelElixirTrue[$i]
 						If isInsideDiamond($pixel) Then
 							If $pixel[0] <= $InternalArea[2][0] Then
 								If $pixel[1] <= $InternalArea[0][1] Then
@@ -53,6 +65,8 @@ Func algorithm_SmartDeadBase()
 							EndIf
 						EndIf
 					Next
+					_ArrayAdd($PixelNearCollector, $PixelElixirTrue)
+					_ArrayAdd($PixelNearCollectorx, $PixelElixirTrue)
 				EndIf
 
 				$PixelElixir = GetLocationElixir()
@@ -76,13 +90,11 @@ Func algorithm_SmartDeadBase()
 						EndIf
 					Next
 				EndIf
-				GetBuildingEdge($eSideBuildingDES)
-				GetBuildingEdge($eSideBuildingTH)
 
 			SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")
-			SetLog("[" & UBound($PixelMine) & "] Gold Mines")
+			SetLog("[" & UBound($PixelNearCollectorx) & "] Gold Mines")
 			SetLog("[" & UBound($PixelElixir) & "] Elixir Collectors")
-			$iNbrOfDetectedMines[$iMatchMode] += UBound($PixelMine)
+			$iNbrOfDetectedMines[$iMatchMode] += UBound($PixelElixirTrue)
 			$iNbrOfDetectedCollectors[$iMatchMode] += UBound($PixelElixir)
 			UpdateStats()
 
@@ -91,6 +103,8 @@ Func algorithm_SmartDeadBase()
 	SetLog("Number of Side " & $nbSides, $COLOR_BLUE)
 	If $nbSides = 0 Then Return
 	If $nbSides = 1 Then ; Customise DE side wave deployment here
+		$iMatchMode = $LB
+		$iChkDeploySettings[$LB] = 5
 		If $debugSetlog = 1 Then SetLog("List Deploy for Customized Side attack", $COLOR_PURPLE)
 
         Local $listInfoDeploy[24][5]

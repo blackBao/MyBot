@@ -330,13 +330,13 @@ $tabAttackCSV = GUICtrlCreateTabItem(GetTranslated(14,1, "Attack Scripted"))
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	Local $x = 260, $y = 496
-	$grpDeploySpeed = GUICtrlCreateGroup("Deploy Speed", $x - 20, $y - 20, 220, 30)
-		$radClickSpeedFast = GUICtrlCreateRadio("Fast", $x + 65, $y - 13, -1, -1)
-			$txtTip = "Click as fast as possible when deploying troops."
+	$grpDeploySpeed = GUICtrlCreateGroup(GetTranslated(14,55, "Deploy Speed"), $x - 20, $y - 20, 220, 30)
+		$radClickSpeedFast = GUICtrlCreateRadio(GetTranslated(14,56, "Fast"), $x + 65, $y - 13, -1, -1)
+			$txtTip = GetTranslated(14,58, "Click as fast as possible when deploying troops.")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState(-1, $GUI_CHECKED)
-		$radClickSpeedNormal = GUICtrlCreateRadio("Normal", $x + 120, $y - 13, -1, -1)
-			$txtTip = "Click at normal speed when deploying troops."
+		$radClickSpeedNormal = GUICtrlCreateRadio(GetTranslated(14,57, "Normal"), $x + 120, $y - 13, -1, -1)
+			$txtTip = GetTranslated(14,59, "Click at normal speed when deploying troops.")
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState(-1, $GUI_UNCHECKED)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)

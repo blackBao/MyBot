@@ -4,7 +4,7 @@
 ; Syntax ........:
 ; Parameters ....: None
 ; Return values .: None
-; Author ........: Lakereng (2016)
+; Author ........: Lakereng(2016)
 ; Modified ......:
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2016
 ;                  MyBot is distributed under the terms of the GNU GPL
@@ -13,89 +13,83 @@
 ; Example .......: No
 ; ===============================================================================================================================
 Func FindSideColl()
+	Local $TL = $SideTopLeft
+	Local $TR = $SideTopRight
+	Local $BL = $SideBottomLeft
+	Local $BR = $SideBottomRight
 
-	If $SideTopLeft > $SideBottomLeft And $SideTopRight And $SideBottomRight Then
-		If $SideTopLeft = $SideBottomLeft Or $SideTopRight Or $SideBottomRight Then
-			If $SideTopLeft = ($SideBottomLeft And $SideTopRight) Or ($SideBottomLeft And $SideBottomRight) Or ($SideTopRight And $SideBottomRight) Then
-				$nbSides = 3
-				SetLog(" Found 3 Side. have same many Collector....Change attack to 3 side attack ", $COLOR_BLUE)
-			Else
-				$nbSides = 2
-				SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-			EndIf
+	If (($TL = $BL) And ($TL = ($TR Or $BR)) And (($BR OR $TR) < 3)) Or (($TR = $BR) And ($TR = ($TL Or $BL)) And (($TL Or $BL) < 3)) Then
+		SetLog($BL & " Collector To Side Bottom Left", $COLOR_PURPLE)
+		SetLog($TR & " Collector To Side Top Right", $COLOR_PURPLE)
+		SetLog($BR & " Collector To Side Bottom Right", $COLOR_PURPLE)
+		SetLog($TL & " Collector To Side Top Left", $COLOR_PURPLE)
+		SetLog("Attacking Use FourFingger", $COLOR_BLUE)
+		If ($iChkRedArea[$iMatchMode]) Then
+			$nbSides = 4
 		Else
-			SetLog($SideTopLeft & " Collector To Side Top Left... Attacking Top Left", $COLOR_BLUE)
-			$BuildingEdge = 1
-			$nbSides = 1
+			$nbSides = 5
 		EndIf
-	ElseIf $SideBottomLeft > $SideTopRight And $SideBottomRight And $SideTopLeft Then
-		If $SideBottomLeft = $SideTopRight Or $SideBottomRight Or $SideTopLeft Then
-			If $SideBottomLeft = ($SideTopLeft And $SideTopRight) Or ($SideTopLeft And $SideBottomRight) Or ($SideTopRight And $SideBottomRight) Then
-				$nbSides = 3
-				SetLog(" Found 3 Side. have same many Collector....Change attack to 3 side attack ", $COLOR_BLUE)
-			Else
-				$nbSides = 2
-				SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-			EndIf
-		Else
-			SetLog($SideBottomLeft & " Collector To Side Bottom Left... Attacking Bottom Left", $COLOR_BLUE)
+	ElseIf (($TL < 3) And (($TR < 3) Or ($BL < 3) Or ($BR < 3))) Or (($TR < 3) And (($TL < 3) Or ($BL < 3) Or ($BR < 3))) Or (($BR < 3) And (($TL < 3) Or ($BL < 3) Or ($TR < 3))) Or (($BL < 3) And (($TL < 3) Or ($TR < 3) Or ($BR < 3))) Then
+		SetLog($BL & " Collector To Side Bottom Left", $COLOR_PURPLE)
+		SetLog($TR & " Collector To Side Top Right", $COLOR_PURPLE)
+		SetLog($BR & " Collector To Side Bottom Right", $COLOR_PURPLE)
+		SetLog($TL & " Collector To Side Top Left", $COLOR_PURPLE)
+		SetLog("Attacking Use TWO Side", $COLOR_BLUE)
+		$nbSides = 2
+		If ($BL > $TL) And ($BL > $TR) And ($BL > $BR) Then
 			$BuildingEdge = 2
-			$nbSides = 1
-		EndIf
-	ElseIf $SideTopRight > $SideBottomLeft And $SideBottomRight And $SideTopLeft Then
-		If $SideTopRight = $SideBottomLeft Or $SideBottomRight Or $SideTopLeft Then
-			If $SideTopRight = ($SideTopLeft And $SideBottomLeft) Or ($SideTopLeft And $SideBottomRight) Or ($SideBottomLeft And $SideBottomRight) Then
-				$nbSides = 3
-				SetLog(" Found 3 Side. have same many Collector....Change attack to 3 side attack ", $COLOR_BLUE)
-			Else
-				$nbSides = 2
-				SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-			EndIf
-		Else
-			SetLog($SideTopRight & " Collector To Side Top Right ... Attacking Top Right", $COLOR_BLUE)
+			$BuildingEdge2 = 3
+		ElseIf ($TR > $TL) And ($TR > $BL) And ($TR > $BR) Then
 			$BuildingEdge = 3
-			$nbSides = 1
-		EndIf
-	ElseIf $SideBottomRight > $SideBottomLeft And $SideTopRight And $SideTopLeft Then
-		If $SideBottomRight = $SideBottomLeft Or $SideTopRight Or $SideTopLeft Then
-			If $SideBottomRight = ($SideTopLeft And $SideBottomLeft) Or ($SideTopLeft And $SideTopRight) Or ($SideBottomLeft And $SideTopRight) Then
-				$nbSides = 3
-				SetLog(" Found 3 Side. have same many Collector....Change attack to 3 side attack ", $COLOR_BLUE)
-			Else
-				$nbSides = 2
-				SetLog(" Found 2 Side. have same many Collector....Change attack to 2 side attack ", $COLOR_BLUE)
-			EndIf
-		Else
-			SetLog($SideBottomRight & " Collector To Side Bottom Right... Attacking Bottom Right", $COLOR_BLUE)
+			$BuildingEdge2 = 2
+		ElseIf ($BR > $TL) And ($BR > $BL) And ($BR > $TR) Then
 			$BuildingEdge = 0
-			$nbSides = 1
+			$BuildingEdge2 = 1
+		Else
+			$BuildingEdge = 1
+			$BuildingEdge2 = 0
 		EndIf
-	Else
-		SetLog("Not Found Side.. force Four Fingger", $COLOR_BLUE)
-		$BuildingEdge = (Random(Round(0, 3)))
-		$BuildingLoc = 0
-		$nbSides = 5
-	EndIf
-
-EndFunc
-Func FindDESideColl()
-
-	If $SideTopLeft > $SideBottomLeft And $SideTopRight And $SideBottomRight Then
-		SetLog($SideTopLeft & " Collector To Side Top Left... Attacking Top Left", $COLOR_BLUE)
+	ElseIf ($TL > $BL) And ($TL > $TR) And ($TL > $BR) Then
+		SetLog($BL & " Collector To Side Bottom Left", $COLOR_PURPLE)
+		SetLog($TR & " Collector To Side Top Right", $COLOR_PURPLE)
+		SetLog($BR & " Collector To Side Bottom Right", $COLOR_PURPLE)
+		SetLog($TL & " Collector To Side Top Left... Attacking Top Left", $COLOR_BLUE)
 		$BuildingEdge = 1
-	ElseIf $SideBottomLeft > $SideTopRight And $SideBottomRight And $SideTopLeft Then
-		SetLog($SideBottomLeft & " Collector To Side Bottom Left... Attacking Bottom Left", $COLOR_BLUE)
+		$nbSides = 1
+	ElseIf ($BL > $TR) And ($BL > $BR) And ($BL > $TL) Then
+		SetLog($TL & " Collector To Side Top Left", $COLOR_PURPLE)
+		SetLog($TR & " Collector To Side Top Right", $COLOR_PURPLE)
+		SetLog($BR & " Collector To Side Bottom Right", $COLOR_PURPLE)
+		SetLog($BL & " Collector To Side Bottom Left... Attacking Bottom Left", $COLOR_BLUE)
 		$BuildingEdge = 2
-	ElseIf $SideTopRight > $SideBottomLeft And $SideBottomRight And $SideTopLeft Then
-		SetLog($SideTopRight & " Collector To Side Top Right ... Attacking Top Right", $COLOR_BLUE)
+		$nbSides = 1
+	ElseIf ($TR > $BL) And ($TR > $BR) And ($TR > $TL) Then
+		SetLog($TL & " Collector To Side Top Left", $COLOR_PURPLE)
+		SetLog($BL & " Collector To Side Bottom Left", $COLOR_PURPLE)
+		SetLog($BR & " Collector To Side Bottom Right", $COLOR_PURPLE)
+		SetLog($TR & " Collector To Side Top Right ... Attacking Top Right", $COLOR_BLUE)
 		$BuildingEdge = 3
-	ElseIf $SideBottomRight > $SideBottomLeft And $SideTopRight And $SideTopLeft Then
-		SetLog($SideBottomRight & " Collector To Side Bottom Right... Attacking Bottom Right", $COLOR_BLUE)
+		$nbSides = 1
+	ElseIf ($BR > $BL) And ($BR > $TR) And ($BR > $TL) Then
+		SetLog($TL & " Collector To Side Top Left", $COLOR_PURPLE)
+		SetLog($BL & " Collector To Side Bottom Left", $COLOR_PURPLE)
+		SetLog($TR & " Collector To Side Top Right", $COLOR_PURPLE)
+		SetLog($BR & " Collector To Side Bottom Right... Attacking Bottom Right", $COLOR_BLUE)
 		$BuildingEdge = 0
+		$nbSides = 1
 	Else
-		SetLog("Not Found Side.. force Four Fingger", $COLOR_BLUE)
-		$BuildingEdge = (Random(Round(0, 3)))
+		SetLog($TL & " Collector To Side Top Left", $COLOR_PURPLE)
+		SetLog($BL & " Collector To Side Bottom Left", $COLOR_PURPLE)
+		SetLog($TR & " Collector To Side Top Right", $COLOR_PURPLE)
+		SetLog($BR & " Collector To Side Bottom Right", $COLOR_PURPLE)
+		SetLog("Not Found Side.. force Four Side attack", $COLOR_BLUE)
+		$BuildingEdge = (Random(Round(0, 3), 1))
 		$BuildingLoc = 0
+		If ($iChkRedArea[$iMatchMode]) Then
+			$nbSides = 4
+		Else
+			$nbSides = 5
+		EndIf
 	EndIf
 
-EndFunc
+EndFunc   ;==>FindSideColl

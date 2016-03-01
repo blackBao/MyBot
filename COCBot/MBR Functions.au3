@@ -265,7 +265,7 @@
 #include "functions\Mod\SideAttack.au3"
 #include "functions\Mod\dropUnit.au3"
 #include "functions\Mod\unitInfo.au3"
-;#include "functions\Mod\ProfileSwitch.au3"
+#include "functions\Mod\ProfileSwitch.au3"
 #include "functions\Mod\FindSideColl.au3"
 #include "functions\Mod\Algorithm_FourFingger.au3"
 #include "functions\Mod\TestSmartDeadBase.au3"

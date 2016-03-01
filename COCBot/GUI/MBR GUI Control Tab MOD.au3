@@ -280,7 +280,6 @@ Func SmartDeadBase()
 		Next
 		GUICtrlSetState($chkDBAutoChoose, $GUI_ENABLE)
 	EndIf
-	chkDBAutoChoose()
 EndFunc ;====> SmartDeadBase
 Func SmartNear()
 	$SmartNear = GUICtrlRead($txtSmartNear)

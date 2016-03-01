@@ -1142,11 +1142,18 @@ Global $iSmartDeadBase, $SmartCollectors, $SmartNear
 Global $iChkSmartDB, $ichkDBAutoChoose
 Global $SideTopLeft, $SideBottomLeft, $SideTopRight, $SideBottomRight
 Global $countFindPixCloser, $countCollectorexposed
+Global $BuildingEdge2
 
 ; CoCStats
 Global $ichkCoCStats = 0
 Global $stxtAPIKey = ""
 Global $MyApiKey = ""
+
+;Profile Switch
+Global $ichkGoldSwitchMax, $itxtMaxGoldAmount, $icmbGoldMaxProfile, $ichkGoldSwitchMin, $itxtMinGoldAmount, $icmbGoldMinProfile
+Global $ichkElixirSwitchMax, $itxtMaxElixirAmount, $icmbElixirMaxProfile, $ichkElixirSwitchMin, $itxtMinElixirAmount, $icmbElixirMinProfile
+Global $ichkDESwitchMax, $itxtMaxDEAmount, $icmbDEMaxProfile, $ichkDESwitchMin, $itxtMinDEAmount, $icmbDEMinProfile
+Global $ichkTrophySwitchMax, $itxtMaxTrophyAmount, $icmbTrophyMaxProfile, $ichkTrophySwitchMin, $itxtMinTrophyAmount, $icmbTrophyMinProfile
 
 ; DO NOT ENABLE ! ! ! Only for testing Error behavior ! ! !
 Global $__TEST_ERROR_ADB_DEVICE_NOT_FOUND = False

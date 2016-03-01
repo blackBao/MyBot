@@ -45,7 +45,7 @@ Local $x = 30, $y = 150
 			GUICtrlSetData(-1, "-|1 " & GetTranslated(7,24, "Hour") & "|2 " & $sTxtHours & "|3 " & $sTxtHours & "|4 " & $sTxtHours & "|5 " & $sTxtHours & "|6 " & $sTxtHours & "|7 " & $sTxtHours & "|8 " & $sTxtHours & "|9 " & $sTxtHours & "|10 " & $sTxtHours & "|11 " & $sTxtHours & "|12 " & $sTxtHours& "|13 " & $sTxtHours & "|14 " & $sTxtHours & "|15 " & $sTxtHours & "|16 " & $sTxtHours & "|17 " & $sTxtHours & "|18 " & $sTxtHours & "|19 " & $sTxtHours & "|20 " & $sTxtHours & "|21 " & $sTxtHours & "|22 " & $sTxtHours & "|23 " & $sTxtHours & "|24 " & $sTxtHours, "-")
 			GUICtrlSetState (-1, $GUI_DISABLE)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
+#cs ; MOVE To PRofiles tabs
 Local $x = 30, $y = 205
 	$grpProfiles = GUICtrlCreateGroup(GetTranslated(7,26, "Switch Profiles"), $x - 20, $y - 20, 250, 45)
 		$y -= 5
@@ -73,7 +73,7 @@ Local $x = 30, $y = 205
 				GUICtrlSetState(-1, $GUI_ENABLE)
 			EndIf
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
+#ce
 Local $x = 285, $y = 205
 	$grpLanguages = GUICtrlCreateGroup(GetTranslated(7,32, "GUI Language"), $x - 20, $y - 20, 195, 45)
 		$cmbLanguage = GUICtrlCreateCombo("", $x - 10 , $y - 5, 177, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))

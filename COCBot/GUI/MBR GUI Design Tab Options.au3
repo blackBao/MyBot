@@ -13,17 +13,17 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-	$tabOptions = GUICtrlCreateTabItem("Options")
+	$tabOptions = GUICtrlCreateTabItem(GetTranslated(18,1, "Options"))
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;; SIDE ATTACK TROOP Deployment ;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	Local $x = 10, $y = 130
-	$grpDeployConfig = GUICtrlCreateGroup("Troop Deployment", $x, $y, 445, 40)
+	$grpDeployConfig = GUICtrlCreateGroup(GetTranslated(18,2, "Troop Deployment"), $x, $y, 445, 40)
 	$x += 20
 	$y += 10
-	$lblDeployConfig = GUICtrlCreateLabel("Choose : ", $x-10, $y+5, -1, -1)
-		$txtTip = GetTranslated(14,5, "Choose the script; You can edit/add new scripts located in folder: 'CSV/Attack'")
+	$lblDeployConfig = GUICtrlCreateLabel(GetTranslated(18,3, "Choose : "), $x-10, $y+5, -1, -1)
+		$txtTip = GetTranslated(18,4, "Choose the script; You can edit/add new scripts located in folder: 'CSV/Side Attack'")
 		GUICtrlSetTip(-1, $txtTip)
 	$x += 47
 	$cmbDeployConfig = GUICtrlCreateCombo("", $x-10 , $y + 5, 185, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL, $ES_CENTER))
@@ -31,17 +31,17 @@
 		GUICtrlSetState(-1, $GUI_UNCHECKED)
 		GUICtrlSetOnEvent(-1, "cmbDeployConfig")
 
-	$btnReload = GUICtrlCreateButton("Reload", $x + 182, $y + 3, -1, -1)
+	$btnReload = GUICtrlCreateButton(GetTranslated(18,5, "Reload"), $x + 182, $y + 3, -1, -1)
 		$txtTip =  GetTranslated(14,6, "Reload Script Files")
 		GUICtrlSetTip(-1, $txtTip)
 		GUICtrlSetOnEvent(-1, "UpdateDeployconfig")
 
 		PopulateDeployconfig() ; populate
-	$btnEdit = GUICtrlCreateButton("Edit", $x + 230, $y + 3, -1, -1)
+	$btnEdit = GUICtrlCreateButton(GetTranslated(18,6, "Edit"), $x + 230, $y + 3, -1, -1)
 		$txtTip =  GetTranslated(14,15, "Show/Edit current Attack Script")
 		GUICtrlSetTip(-1, $txtTip)
 		GUICtrlSetOnEvent(-1, "EditDeployconfig")
-	$btnSave = GUICtrlCreateButton("Save", $x + 260, $y + 3, -1, -1)
+	$btnSave = GUICtrlCreateButton(GetTranslated(18,7, "Save"), $x + 260, $y + 3, -1, -1)
 		GUICtrlSetOnEvent(-1, "btnSave")
     Local $x = 10, $y = 170
 	Local $aDeployTroopArray[$eHaSpell + 2]
@@ -54,7 +54,7 @@
 
     Local $troopString = _ArrayToString($aDeployTroopArray, "|")
 
-  	$grpToolboxOptions = GUICtrlCreateGroup("Troop Deployment", $x, $y, 445, 240)
+  	$grpToolboxOptions = GUICtrlCreateGroup(GetTranslated(18,2, "Troop Deployment"), $x, $y, 445, 240)
 
 ;	$btnSave = GUICtrlCreateButton("Save", $x + 370, $y + 245, 60, 20 + 5)
 ;		GUICtrlSetOnEvent(-1, "btnSave")
@@ -65,8 +65,8 @@
 
     ; Troop Deploy Column 1
     $lbltxtWave1 = GUICtrlCreateLabel("No", $x+5, $y+5, -1, -1)
-    $lbltxtDeployCol1 = GUICtrlCreateLabel("Deploy", $x+50, $y+5, -1, -1)
-    $lbltxtStyleCol1 = GUICtrlCreateLabel("Position", $x+110, $y+5, -1, -1)
+    $lbltxtDeployCol1 = GUICtrlCreateLabel(GetTranslated(18,8, "Deploy"), $x+50, $y+5, -1, -1)
+    $lbltxtStyleCol1 = GUICtrlCreateLabel(GetTranslated(18,9, "Position"), $x+110, $y+5, -1, -1)
 
     $lbltxtWave01 = GUICtrlCreateLabel("01", $x+5, $y+25, -1, -1)
     $cmbDeDeploy01 = GUICtrlCreateCombo($DeDeployEmptyString, $x + 20, $y+25, 90, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
@@ -142,8 +142,8 @@
 
     ; Troop Deploy Column 2
     $lbltxtWaveCol2 = GUICtrlCreateLabel("No", $x+160, $y+5, -1, -1)
-    $lbltxtDeployCol2 = GUICtrlCreateLabel("Deploy", $x+200, $y+5, -1, -1)
-    $lbltxtStyleCol2 = GUICtrlCreateLabel("Position", $x+260, $y+5, -1, -1)
+    $lbltxtDeployCol2 = GUICtrlCreateLabel(GetTranslated(18,8, "Deploy"), $x+200, $y+5, -1, -1)
+    $lbltxtStyleCol2 = GUICtrlCreateLabel(GetTranslated(18,9, "Position"), $x+260, $y+5, -1, -1)
 
     $lbltxtWave09 = GUICtrlCreateLabel("09", $x+155, $y+25, -1, -1)
     $cmbDeDeploy09 = GUICtrlCreateCombo($DeDeployEmptyString, $x + 170, $y+25, 90, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
@@ -219,8 +219,8 @@
 
     ; Troop Deploy Column 3
     $lbltxtWave3 = GUICtrlCreateLabel("No", $x+310, $y+5, -1, -1)
-    $lbltxtDeployCol3 = GUICtrlCreateLabel("Deploy", $x+345, $y+5, -1, -1)
-    $lbltxtStyleCol3 = GUICtrlCreateLabel("Position", $x+405, $y+5, -1, -1)
+    $lbltxtDeployCol3 = GUICtrlCreateLabel(GetTranslated(18,8, "Deploy"), $x+345, $y+5, -1, -1)
+    $lbltxtStyleCol3 = GUICtrlCreateLabel(GetTranslated(18,9, "Position"), $x+405, $y+5, -1, -1)
 
     $lbltxtWave17 = GUICtrlCreateLabel("17", $x+305, $y+25, -1, -1)
     $cmbDeDeploy17 = GUICtrlCreateCombo($DeDeployEmptyString, $x + 320, $y+25, 90, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))

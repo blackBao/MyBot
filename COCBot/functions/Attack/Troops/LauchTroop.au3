@@ -104,8 +104,7 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 				If $debugSetlog = 1 Then SetLog("( " & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "<" & $SmartCollectors & " )", $COLOR_PURPLE)
 				If $iChkSmartDB < 1 Then
 					SetLog("Change Side Attack to Collector side attack!...", $COLOR_BLUE)
-					FindDESideColl()
-					$nbSides = 1
+					FindSideColl()
 				ElseIf $iChkSmartDB = 1 Then
 					SetLog("Change Side Attack to De side attack!...", $COLOR_BLUE)
 					GetBuildingEdge($eSideBuildingDES)
@@ -142,6 +141,26 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 					Next
 
 					LaunchSideAttack($DElistInfoDeploy, $CC, $King, $Queen, $Warden)
+					Return
+
+				ElseIf $nbSides	= 2 Or $nbSides	= 3 Or $nbSides = 4 Then
+					$iChkRedArea[$iMatchMode] = 0
+					If $debugSetlog = 1 Then SetLog("listdeploy standard for attack", $COLOR_PURPLE)
+					Local $NBlistInfoDeploy[13][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+						, [$eBarb, $nbSides, 1, 2, 0] _
+						, [$eWall, $nbSides, 1, 1, 1] _
+						, [$eArch, $nbSides, 1, 2, 0] _
+						, [$eBarb, $nbSides, 2, 2, 0] _
+						, [$eGobl, $nbSides, 1, 2, 0] _
+						, ["CC", 1, 1, 1, 1] _
+						, [$eHogs, $nbSides, 1, 1, 1] _
+						, [$eWiza, $nbSides, 1, 1, 0] _
+						, [$eMini, $nbSides, 1, 1, 0] _
+						, [$eArch, $nbSides, 2, 2, 0] _
+						, [$eGobl, $nbSides, 2, 2, 0] _
+						, ["HEROES", 1, 2, 1, 1] _
+						]
+					LaunchTroop2($NBlistInfoDeploy, $CC, $King, $Queen, $Warden)
 					Return
 				EndIf
 
@@ -318,8 +337,8 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 					Local $RandomEdge = $Edges[$BuildingEdge]
 					Local $RandomXY = 2
 				Else
-					Local $RandomEdge = $Edges[Round(Random(0, 3))]
-					Local $RandomXY = Round(Random(1, 3))
+					Local $RandomEdge = $Edges[Round(Random(0, 3, 1))]
+					Local $RandomXY = Round(Random(1, 3, 1))
 				EndIf
 				If ($listInfoDeploy[$i][0] = "CC") Then
 					dropCC($RandomEdge[$RandomXY][0], $RandomEdge[$RandomXY][1], $CC)

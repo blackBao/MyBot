@@ -68,7 +68,11 @@ Func DropOnEdges($troop, $nbSides, $number, $slotsPerEdge = 0)
 			$nbTroopsLeft -= $nbTroopsPerEdge
 		ElseIf ($nbSides = 2 And $i = 0) Or ($nbSides = 3 And $i <> 1) Then
 			Local $nbTroopsPerEdge = Round($nbTroopsLeft / ($nbSides - $i * 2))
-			DropOnEdge($troop, $Edges[$i + 3], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i + 1])
+			If ($iMatchMode = $DB) And (($ichkDBAutoChoose = 1) Or ($iSmartDeadBase = 1)) Then
+				DropOnEdge($troop, $Edges[$BuildingEdge], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$BuildingEdge2])
+			Else
+				DropOnEdge($troop, $Edges[$i + 3], $nbTroopsPerEdge, $slotsPerEdge, $Edges[$i + 1])
+			EndIf
 			$nbTroopsLeft -= $nbTroopsPerEdge * 2
 		EndIf
 		ReleaseClicks()

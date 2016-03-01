@@ -1922,6 +1922,68 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 			_GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployEmptyString)
 		 EndIf
 	Next
+
+	;Profile Switch
+	If $ichkGoldSwitchMax = 1 Then
+		GUICtrlSetState($chkGoldSwitchMax, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkGoldSwitchMax, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbGoldMaxProfile, $icmbGoldMaxProfile)
+	GUICtrlSetData($txtMaxGoldAmount, $itxtMaxGoldAmount)
+	If $ichkGoldSwitchMin = 1 Then
+		GUICtrlSetState($chkGoldSwitchMin, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkGoldSwitchMin, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbGoldMinProfile, $icmbGoldMinProfile)
+	GUICtrlSetData($txtMinGoldAmount, $itxtMinGoldAmount)
+
+	If $ichkElixirSwitchMax = 1 Then
+		GUICtrlSetState($chkElixirSwitchMax, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkElixirSwitchMax, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbElixirMaxProfile, $icmbElixirMaxProfile)
+	GUICtrlSetData($txtMaxElixirAmount, $itxtMaxElixirAmount)
+	If $ichkElixirSwitchMin = 1 Then
+		GUICtrlSetState($chkElixirSwitchMin, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkElixirSwitchMin, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbElixirMinProfile, $icmbElixirMinProfile)
+	GUICtrlSetData($txtMinElixirAmount, $itxtMinElixirAmount)
+
+	If $ichkDESwitchMax = 1 Then
+		GUICtrlSetState($chkDESwitchMax, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDESwitchMax, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbDEMaxProfile, $icmbDEMaxProfile)
+	GUICtrlSetData($txtMaxDEAmount, $itxtMaxDEAmount)
+	If $ichkDESwitchMin = 1 Then
+		GUICtrlSetState($chkDESwitchMin, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDESwitchMin, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbDEMinProfile, $icmbDEMinProfile)
+	GUICtrlSetData($txtMinDEAmount, $itxtMinDEAmount)
+
+	If $ichkTrophySwitchMax = 1 Then
+		GUICtrlSetState($chkTrophySwitchMax, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrophySwitchMax, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbTrophyMaxProfile, $icmbTrophyMaxProfile)
+	GUICtrlSetData($txtMaxTrophyAmount, $itxtMaxTrophyAmount)
+	If $ichkTrophySwitchMin = 1 Then
+		GUICtrlSetState($chkTrophySwitchMin, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkTrophySwitchMin, $GUI_UNCHECKED)
+	EndIf
+	_GUICtrlComboBox_SetCurSel($cmbTrophyMinProfile, $icmbTrophyMinProfile)
+	GUICtrlSetData($txtMinTrophyAmount, $itxtMinTrophyAmount)
+
 ;;;;;builder idle
 	If $ichkAlertBuilderIdle = 1 Then
 		GUICtrlSetState($chkAlertBuilderIdle, $GUI_CHECKED)

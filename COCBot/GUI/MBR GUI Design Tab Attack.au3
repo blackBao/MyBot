@@ -77,8 +77,8 @@ $tabAttack = GUICtrlCreateTabItem(GetTranslated(3,1, "Attack"))
  			GUICtrlSetTip(-1, $txtTip)
 	$x = 35
 	$y = 335
-		$chkDBAutoChoose = GUICtrlCreateCheckbox("Auto Select Side", $x, $y -15, -1, -1)
-			$txtTip = "Auto Select Side With Collector"
+		$chkDBAutoChoose = GUICtrlCreateCheckbox(GetTranslated(3,84, "Auto Select Side"), $x, $y -15, -1, -1)
+			$txtTip = GetTranslated(3,85, "Auto Select Side With Collector")
  			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "chkDBAutoChoose")
 		$lblUseInBattleDB = GUICtrlCreateLabel(GetTranslated(3,68, "Hero and CC Deploy") & ":", $x, $y + 5, -1, -1)

@@ -196,12 +196,10 @@ Func chkDBAutoChoose()
 			GUICtrlSetState($SmartDeadBase, $GUI_UNCHECKED)
 		EndIf
 			GUICtrlSetState($SmartDeadBase, $GUI_DISABLE)
-		$ichkDBAutoChoose = 1
 	Else
 		For $i = $lblDBDeploy To $cmbDBSelectTroop
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
 		GUICtrlSetState($SmartDeadBase, $GUI_ENABLE)
-		$ichkDBAutoChoose = 0
 	EndIf
 EndFunc
