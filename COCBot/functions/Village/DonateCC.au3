@@ -79,7 +79,12 @@ Func DonateCC($Check = False)
 			;reset every run
 			$bDonate = False
 			$bSkipDonTroops = False
-			$bSkipDonSpells = False
+			If $iTownHallLevel < 8 or $numFactoryDarkSpellAvaiables = 0 Then ; if you are a < TH8 you don't have a Dark Spells Factory OR Dark Spells Factory is Upgrading
+				$bSkipDonSpells = True
+			Else
+				$bSkipDonSpells = False
+			EndIf
+
 
 			;Read chat request for DonateTroop and DonateSpell
 			If $bDonateTroop Or $bDonateSpell Then
@@ -118,7 +123,7 @@ Func DonateCC($Check = False)
 				If $ClanString = "" Or $ClanString = " " Then
 					SetLog("Unable to read Chat Request!", $COLOR_RED)
 					$bDonate = True
-					$y = $DonatePixel[1] + 30
+					$y = $DonatePixel[1] + 10
 					ContinueLoop
 				Else
 					If $ichkExtraAlphabets = 1 Then
@@ -150,7 +155,7 @@ Func DonateCC($Check = False)
 			; open Donate Window
 			If DonateWindow($bOpen) = False Then
 				$bDonate = True
-				$y = $DonatePixel[1] + 30
+				$y = $DonatePixel[1] + 10
 				ContinueLoop ; go to next button if donate window did not open
 			EndIf
 
@@ -161,7 +166,7 @@ Func DonateCC($Check = False)
 				DonateWindowCap($bSkipDonTroops, $bSkipDonSpells)
 				If $bSkipDonTroops And $bSkipDonSpells Then
 					$bDonate = True
-					$y = $DonatePixel[1] + 30
+					$y = $DonatePixel[1] + 10
 					ContinueLoop ; go to next button if already donated, maybe this is an impossible case..
 				EndIf
 
@@ -219,7 +224,7 @@ Func DonateCC($Check = False)
 				DonateWindowCap($bSkipDonTroops, $bSkipDonSpells)
 				If $bSkipDonTroops And $bSkipDonSpells Then
 					$bDonate = True
-					$y = $DonatePixel[1] + 30
+					$y = $DonatePixel[1] + 10
 					ContinueLoop ; go to next button if already donated max, maybe this is an impossible case..
 				EndIf
 
@@ -294,7 +299,7 @@ Func DonateCC($Check = False)
 			DonateWindow($bClose)
 
 			$bDonate = True
-			$y = $DonatePixel[1] + 30
+			$y = $DonatePixel[1] + 10
 			ClickP($aAway, 1, 0, "#0171")
 			If _Sleep($iDelayDonateCC2) Then ExitLoop
 		EndIf
@@ -550,8 +555,8 @@ Func DonateWindow($Open = True)
 	EndIf
 
 	; Click on Donate Button and wait for the window
-	If _ColorCheck(_GetPixelColor($DonatePixel[0], $DonatePixel[1], True), Hex(0xc0e460, 6), 20) Then
-		Click($DonatePixel[0] - 30, $DonatePixel[1] + 10, 1, 0, "#0174")
+	If _ColorCheck(_GetPixelColor($DonatePixel[0] - 44 , $DonatePixel[1] + 14 , True), Hex(0xFFFFFF, 6), 5) Then
+		Click($DonatePixel[0] - 40, $DonatePixel[1] + 10, 1, 0, "#0174")
 	Else
 		If $debugSetlog = 1 Then SetLog("Could not find the Donate Button!", $COLOR_PURPLE)
 		Return False

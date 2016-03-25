@@ -30,7 +30,7 @@ Func GetBuildingEdge($TypeBuilding = $eSideBuildingDES) ;Using $BuildingLoc x y 
 	If $BuildingLoc = 1 Then
 		If ($BuildingLocx = 430) And ($BuildingLocy = 313) Then
 			SetLog($TypeBuildingName & " Located in Middle... Attacking Random Side", $COLOR_BLUE)
-			$BuildingEdge = (Random(Round(0, 3)))
+			$BuildingEdge = (Random(Round(0, 3),1))
 		ElseIf ($BuildingLocx >= 430) And ($BuildingLocy >= 313) Then
 			SetLog($TypeBuildingName & " Located Bottom Right... Attacking Bottom Right", $COLOR_BLUE)
 			$BuildingEdge = 0
@@ -46,7 +46,7 @@ Func GetBuildingEdge($TypeBuilding = $eSideBuildingDES) ;Using $BuildingLoc x y 
 		EndIf
 	ElseIf $BuildingLoc = 0 Then
 		SetLog($TypeBuildingName & " Not Located... Attacking Random Side", $COLOR_BLUE)
-		$BuildingEdge = (Random(Round(0, 3)))
+		$BuildingEdge = (Random(Round(0, 3),1))
 	EndIf
 EndFunc   ;==>GetBuildingEdge
 
@@ -85,6 +85,23 @@ Func BuildingXY($TypeBuilding = $eSideBuildingDES)
 		$BuildingLoc = 1
 	EndIf
 EndFunc   ;==>BuildingXY
+
+Func CheckfoundorcoreDE()
+	BuildingXY()
+	If $iSkipUndetectedDE = 1 Or ($iSkipUndetectedDE = 2 And $LBHeroFilter = 1) Then
+		If $BuildingLoc = 0 Then
+			SetLog("DE Storage Not Located, Skipping ", $COLOR_BLUE)
+			Return False
+		EndIf
+	EndIf
+	If $BuildingLoc = 1 And ($iSkipCentreDE = 1 Or ($iSkipCentreDE = 2 And $LBHeroFilter = 1))  Then
+		If $BuildingLocy < ($DECorepix + 313) And $BuildingLocy > ($DECorepix - 313) And $BuildingLocx < ($DECorepix + 430) And $BuildingLocx > ($DECorepix - 430) Then
+			SetLog("DE Storage Located in Core, Skipping", $COLOR_BLUE)
+			Return False
+		EndIf
+	EndIf
+	Return True
+EndFunc	   ;==>CheckfoundorcoreDE
 
 Func DELow()
 	Local $DarkE = ""

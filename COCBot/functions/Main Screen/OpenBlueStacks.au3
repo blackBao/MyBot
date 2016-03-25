@@ -23,7 +23,7 @@ Func OpenBlueStacks($bRestart = False)
 	Local $PID, $ErrorResult
 	SetLog("Starting BlueStacks and Clash Of Clans", $COLOR_GREEN)
 
-    If Not InitBlueStacks() Then Return
+    If Not InitAndroid() Then Return
 
 	$PID = ShellExecute($__BlueStacks_Path & "HD-RunApp.exe", "-p com.supercell.clashofclans -a com.supercell.clashofclans.GameApp")  ;Start BS and CoC with command line
 	If _Sleep(1000) Then Return
@@ -38,7 +38,7 @@ Func OpenBlueStacks($bRestart = False)
 	EndIf
 
 	$hTimer = TimerInit()  ; start a timer for tracking BS start up time
-	SetLog("Please wait while BS/CoC starts....", $COLOR_GREEN)
+	SetLog("Please wait while BS/CoC start....", $COLOR_GREEN)
 	WinGetAndroidHandle()
 	While IsArray(ControlGetPos($Title, $AppPaneName, $AppClassInstance)) = False
 		If _Sleep(1000) Then ExitLoop
@@ -88,9 +88,9 @@ Func OpenBlueStacks2($bRestart = False)
    Local $hTimer, $iCount = 0, $cmdOutput, $process_killed, $i
    SetLog("Starting " & $Android & " and Clash Of Clans", $COLOR_GREEN)
 
-   If Not InitBlueStacks2() Then Return
+   If Not InitAndroid() Then Return
 
-   SetLog("Please wait while " & $Android & " and CoC starts...", $COLOR_GREEN)
+   SetLog("Please wait while " & $Android & " and CoC start...", $COLOR_GREEN)
 
    CloseUnsupportedBlueStacks2()
 
@@ -106,7 +106,7 @@ Func OpenBlueStacks2($bRestart = False)
 	  EndIf
 	  If $pid > 0 Then $pid = ProcessExists("HD-Frontend.exe")
 	  If $pid <= 0 Then
-		 CloseBlueStacks2()
+		 CloseAndroid()
 		 If _Sleep(1000) Then Return
 	  EndIf
 
@@ -129,7 +129,8 @@ Func OpenBlueStacks2($bRestart = False)
    _WinAPI_SetWindowLong($HWnd, $GWL_STYLE, $lCurStyle)
    ;_WinAPI_SetWindowPos($HWnd, 0, 0, 0, 0, 0, BitOr($SWP_NOMOVE, $SWP_NOSIZE, $SWP_FRAMECHANGED)) ; redraw
 
-   If WaitForDeviceBlueStacks2($AndroidLaunchWaitSec - TimerDiff($hTimer) / 1000, $hTimer) Then Return
+   ;If WaitForDeviceBlueStacks2($AndroidLaunchWaitSec - TimerDiff($hTimer) / 1000, $hTimer) Then Return
+   If WaitForAndroidBootCompleted($AndroidLaunchWaitSec - TimerDiff($hTimer) / 1000, $hTimer) Then Return
    If Not $RunState Then Return
 
    If IsArray(ControlGetPos($Title, $AppPaneName, $AppClassInstance)) Then
@@ -183,21 +184,12 @@ Func InitBlueStacksX($bCheckOnly = False, $bAdjustResolution = False)
     ]
     Local $bChanged = False
 
-    $__BlueStacks_Version = RegRead($HKLM & "\SOFTWARE\BlueStacks\", "Version")
+	$__BlueStacks_Version = RegRead($HKLM & "\SOFTWARE\BlueStacks\", "Version")
 	$__BlueStacks_Path = RegRead($HKLM & "\SOFTWARE\BlueStacks\", "InstallDir")
-	Local $BootParameter = RegRead($HKLM & "\SOFTWARE\BlueStacks\Guests\Android\", "BootParameters")
-	Local $OEMFeatures, $ShowsSystemBar = False
-	Local $aRegExResult = StringRegExp($BootParameter, "OEMFEATURES=(\d+)", $STR_REGEXPARRAYGLOBALMATCH)
-    If Not @error Then
-	   ; get last match!
-	   $OEMFeatures = $aRegExResult[UBound($aRegExResult) - 1]
-	   $ShowsSystemBar = BitAND($OEMFeatures, 0x000001) = 0
-    EndIf
-
-    If @error <> 0 Then
+	If @error <> 0 Then
 		$__BlueStacks_Path = @ProgramFilesDir & "\BlueStacks\"
 		SetError(0, 0, 0)
-    EndIf
+	EndIf
 
     For $i = 0 To UBound($aFiles) - 1
 
@@ -214,14 +206,33 @@ Func InitBlueStacksX($bCheckOnly = False, $bAdjustResolution = False)
     Next
 
     If Not $bCheckOnly Then
+	  Local $BootParameter = RegRead($HKLM & "\SOFTWARE\BlueStacks\Guests\Android\", "BootParameters")
+	  Local $OEMFeatures
+	  Local $aRegExResult = StringRegExp($BootParameter, "OEMFEATURES=(\d+)", $STR_REGEXPARRAYGLOBALMATCH)
+	  If Not @error Then
+		 ; get last match!
+		 $OEMFeatures = $aRegExResult[UBound($aRegExResult) - 1]
+		 $AndroidHasSystemBar = BitAND($OEMFeatures, 0x000001) = 0
+	  EndIf
+
 	  ; update global variables
 	  $AndroidProgramPath = $__BlueStacks_Path & "HD-Frontend.exe"
-	  $AndroidAdbPath = $__BlueStacks_Path & "HD-Adb.exe"
+	  $AndroidAdbPath = FindPreferredAdbPath()
+	  If $AndroidAdbPath = "" Then $AndroidAdbPath = $__BlueStacks_Path & "HD-Adb.exe"
 	  $AndroidVersion = $__BlueStacks_Version
+	  For $i = 0 To 5
+		 If RegRead($HKLM & "\SOFTWARE\BlueStacks\Guests\Android\SharedFolder\" & $i & "\", "Name") = "BstSharedFolder" Then
+			$AndroidPicturesPath = "/storage/sdcard/windows/BstSharedFolder/"
+			$AndroidPicturesHostPath = RegRead($HKLM & "\SOFTWARE\BlueStacks\Guests\Android\SharedFolder\" & $i & "\", "Path")
+			ExitLoop
+		 EndIf
+	  Next
+
 	  SetDebugLog($Android & " OEM Features: " & $OEMFeatures)
-	  SetDebugLog($Android & " System Bar is " & ($ShowsSystemBar ? "" : "not ") & "available")
+	  SetDebugLog($Android & " System Bar is " & ($AndroidHasSystemBar ? "" : "not ") & "available")
+	  #cs as of 2016-01-26 CoC release, system bar is transparent and should be closed when bot is running
 	  If $bAdjustResolution Then
-		 If $ShowsSystemBar Then
+		 If $AndroidHasSystemBar Then
 			;$Values[0][2] = $AndroidAppConfig[$AndroidConfig][5]
 			$Values[1][2] = $AndroidAppConfig[$AndroidConfig][6] + $__BlueStacks_SystemBar
 			;$Values[2][2] = $AndroidAppConfig[$AndroidConfig][7]
@@ -237,6 +248,7 @@ Func InitBlueStacksX($bCheckOnly = False, $bAdjustResolution = False)
 	  $AndroidClientHeight = $Values[1][2]
 	  $AndroidWindowWidth =  $Values[2][2]
 	  $AndroidWindowHeight = $Values[3][2]
+	  #ce
 
 	  For $i = 0 To UBound($Values) -1
 		 If $Values[$i][1] <> $Values[$i][2] Then
@@ -257,12 +269,18 @@ Func InitBlueStacks($bCheckOnly = False)
    If $bInstalled And StringInStr($__BlueStacks_Version, "0.8.") <> 1 _
 				  And StringInStr($__BlueStacks_Version, "0.9.") <> 1 _
 				  And StringInStr($__BlueStacks_Version, "0.10.") <> 1 _
+				  And StringInStr($__BlueStacks_Version, "0.11.") <> 1 _ ; user reported that version exists - ha ;)
    Then
 	  If Not $bCheckOnly Then
-		 SetLog("BlueStacks supported version 0.8.x - 0.10.x not found", $COLOR_RED)
+		 SetLog("BlueStacks supported version 0.8.x - 0.11.x not found", $COLOR_RED)
 		 SetError(1, @extended, False)
 	  EndIf
 	  Return False
+   EndIF
+
+   If Not $bCheckOnly Then
+	  ; BS 1 always has system bar
+	  $AndroidHasSystemBar = True
    EndIF
 
    Return $bInstalled
@@ -277,6 +295,11 @@ Func InitBlueStacks2($bCheckOnly = False)
 	  EndIf
 	  Return False
    EndIF
+
+   If Not $bCheckOnly Then
+	  ; nothing special to set yet
+   EndIF
+
    Return $bInstalled
 EndFunc
 
@@ -304,10 +327,10 @@ Func WaitForDeviceBlueStacks2($WaitInSec, $hTimer = 0)
 EndFunc
 
 ; Called from checkMainScreen
-Func RestartBlueStacksCoC()
+Func RestartBlueStacksXCoC()
    If Not $RunState Then Return False
    Local $cmdOutput, $process_killed
-   If Not InitBlueStacks() Then Return False
+   If Not InitAndroid() Then Return False
    $HWnD = WinGetHandle($Title)
    If @error <> 0 Then Return False
    ;WinActivate($HWnD)  	; ensure bot has window focus
@@ -317,17 +340,12 @@ Func RestartBlueStacksCoC()
    Return True
 EndFunc
 
+Func RestartBlueStacksCoC()
+   Return RestartBlueStacksXCoC()
+EndFunc
+
 Func RestartBlueStacks2CoC()
-   If Not $RunState Then Return False
-   Local $cmdOutput, $process_killed
-   If Not InitBlueStacks2() Then Return False
-   $HWnD = WinGetHandle($Title)
-   If @error <> 0 Then Return False
-   ;WinActivate($HWnD)  	; ensure bot has window focus
-   ;WaitForDeviceBlueStacks2(30)
-   $cmdOutput = LaunchConsole($AndroidAdbPath, "-s " & $AndroidAdbDevice & " shell am start -W -S -n com.supercell.clashofclans/.GameApp", $process_killed)
-   SetLog("Please wait for CoC restart......", $COLOR_BLUE)   ; Let user know we need time...
-   Return True
+   Return RestartBlueStacksXCoC()
 EndFunc
 
 Func CheckScreenBlueStacksX($bSetLog = True)
@@ -416,7 +434,7 @@ Func RebootBlueStacks2SetScreen($bOpenAndroid = True)
 
    ;RebootAndroidSetScreenDefault()
 
-   If Not InitBlueStacks2() Then Return False
+   If Not InitAndroid() Then Return False
 
    ConfigeBlueStacks2WindowManager()
 
@@ -436,12 +454,18 @@ Func RebootBlueStacks2SetScreen($bOpenAndroid = True)
 
 EndFunc
 
-Func BlueStacks2IsRunning($bStrictCheck = True)
+Func GetBlueStacksRunningInstance($bStrictCheck = True)
    WinGetAndroidHandle()
-   If $HWnD <> 0 Then Return True
-   If $bStrictCheck Then Return $HWnD <> 0
-   Local $unsupportedWindow = IsArray(ControlGetPos("Bluestacks App Player", "", ""))
-   Return $unsupportedWindow
+   If $HWnD <> 0 Then Return ""
+   Return False
+EndFunc
+
+Func GetBlueStacks2RunningInstance($bStrictCheck = True)
+   WinGetAndroidHandle()
+   If $HWnD <> 0 Then Return ""
+   If $bStrictCheck Then Return False
+   Local $unsupportedWindow = IsArray(ControlGetPos("Bluestacks App Player", "", "")) ; Need fixing as BS2 Emulator can have that title when configured in registry
+   Return ($unsupportedWindow ? "" : False)
 EndFunc
 
 Func GetBlueStacksProgramParameter($bAlternative = False)
@@ -450,6 +474,32 @@ EndFunc
 
 Func GetBlueStacks2ProgramParameter($bAlternative = False)
    Return "Android"
+EndFunc
+
+Func BlueStacksBotStartEvent()
+   Return AndroidCloseSystemBar()
+EndFunc
+
+Func BlueStacksBotStopEvent()
+   Return AndroidOpenSystemBar()
+EndFunc
+
+Func BlueStacks2BotStartEvent()
+   If $AndroidHasSystemBar Then Return AndroidCloseSystemBar()
+   Return False
+EndFunc
+
+Func BlueStacks2BotStopEvent()
+   If $AndroidHasSystemBar Then Return AndroidOpenSystemBar()
+   Return False
+EndFunc
+
+Func BlueStacks2AdjustClickCoordinates(ByRef $x, ByRef $y)
+   $x = Round(32767.0 / $AndroidClientWidth * $x)
+   $y = Round(32767.0 / $AndroidClientHeight * $y)
+   ;Local $Num = 32728
+   ;$x = Int(($Num * $x) / $AndroidClientWidth)
+   ;$y = Int(($Num * $y) / $AndroidClientHeight)
 EndFunc
 
 Func waitMainScreenMini()

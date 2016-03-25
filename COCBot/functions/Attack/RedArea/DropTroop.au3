@@ -17,7 +17,7 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
-Func DropTroop($troop, $nbSides, $number, $slotsPerEdge = 0, $indexToAttack = -1)
+Func DropTroop($troop, $nbSides, $number, $slotsPerEdge = 0, $indexToAttack = -1, $overrideSmartDeploy = -1)
 
 	If isProblemAffect(True) Then Return
 	$nameFunc = "[DropTroop]"
@@ -25,7 +25,7 @@ Func DropTroop($troop, $nbSides, $number, $slotsPerEdge = 0, $indexToAttack = -1
 	debugRedArea("troop : [" & $troop & "] / nbSides : [" & $nbSides & "] / number : [" & $number & "] / slotsPerEdge [" & $slotsPerEdge & "]")
 
 
-	If ($iChkRedArea[$iMatchMode]) Then
+	If ($iChkRedArea[$iMatchMode]) And $overrideSmartDeploy = -1 Then
 		If $slotsPerEdge = 0 Or $number < $slotsPerEdge Then $slotsPerEdge = $number
 		If _Sleep($iDelayDropTroop1) Then Return
 		SelectDropTroop($troop) ;Select Troop
@@ -107,7 +107,6 @@ Func DropTroop2($troop, $nbSides, $number, $slotsPerEdge = 0, $name = "")
 	debugRedArea("troop : [" & $troop & "] / nbSides : [" & $nbSides & "] / number : [" & $number & "] / slotsPerEdge [" & $slotsPerEdge & "]")
 	Local $listInfoPixelDropTroop[0]
 
-
 	If ($iChkRedArea[$iMatchMode]) Then
 		If $slotsPerEdge = 0 Or $number < $slotsPerEdge Then $slotsPerEdge = $number
 		;If _Sleep($iDelayDropTroop1) Then Return
@@ -137,8 +136,6 @@ Func DropTroop2($troop, $nbSides, $number, $slotsPerEdge = 0, $name = "")
 					EndIf
 				Next
 			EndIf
-
-
 
 		Else
 			Local $listEdgesPixelToDrop[0]
@@ -191,8 +188,8 @@ Func DropTroop2($troop, $nbSides, $number, $slotsPerEdge = 0, $name = "")
 		DropOnEdges($troop, $nbSides, $number, $slotsPerEdge)
 	EndIf
 
-	Local $infoDropTroop[6] = [$troop, $listInfoPixelDropTroop, $nbTroopsPerEdge, $slotsPerEdge, $number, $name]
-	Return $infoDropTroop
+    Local $infoDropTroop[6] = [$troop, $listInfoPixelDropTroop, $nbTroopsPerEdge, $slotsPerEdge, $number, $name]
 	debugRedArea($nameFunc & " OUT ")
 
+	Return $infoDropTroop
 EndFunc   ;==>DropTroop2

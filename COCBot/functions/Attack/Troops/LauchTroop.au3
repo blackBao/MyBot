@@ -17,7 +17,7 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
-Func LauchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge = 0)
+Func LauchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge = 0, $overrideSmartDeploy = -1)
 	Local $troop = -1
 	Local $troopNb = 0
 	Local $name = ""
@@ -43,7 +43,7 @@ Func LauchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge = 0)
 	If $waveNb = 0 Then $waveName = "last"
 	SetLog("Dropping " & $waveName & " wave of " & $troopNb & " " & $name, $COLOR_GREEN)
 
-	DropTroop($troop, $nbSides, $troopNb, $slotsPerEdge)
+	DropTroop($troop, $nbSides, $troopNb, $slotsPerEdge, -1, $overrideSmartDeploy)
 	Return True
 EndFunc   ;==>LauchTroop
 
@@ -52,6 +52,8 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 	Local $listListInfoDeployTroopPixel[0]
 	Local $pixelRandomDrop[2]
 	Local $pixelRandomDropcc[2]
+	Global $countFindPixCloser = 0
+	Global $countCollectorexposed = 0
 
 	If ($iChkRedArea[$iMatchMode] = 1) Then
 		For $i = 0 To UBound($listInfoDeploy) - 1
@@ -95,6 +97,94 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 				$listListInfoDeployTroopPixel[$waveNb - 1] = $listInfoDeployTroopPixel
 			EndIf
 		Next
+		If $iSmartDeadBase = 1 Then
+			Setlog("There are " & $countCollectorexposed & " is (" & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "%) collector(s) near RED LINE of " & Ubound($PixelNearCollector) & " collectors")
+
+			If ($countCollectorexposed/Ubound($PixelNearCollector)*100) <= $SmartCollectors Then
+				If $debugSetlog = 1 Then SetLog("( " & ($countCollectorexposed/Ubound($PixelNearCollector)*100) & "<" & $SmartCollectors & " )", $COLOR_PURPLE)
+				If $iChkSmartDB < 1 Then
+					SetLog("Change Side Attack to Collector side attack!...", $COLOR_BLUE)
+					FindSideColl()
+				ElseIf $iChkSmartDB = 1 Then
+					SetLog("Change Side Attack to De side attack!...", $COLOR_BLUE)
+					GetBuildingEdge($eSideBuildingDES)
+					$nbSides = 1
+				ElseIf $iChkSmartDB = 2 Then
+					SetLog("Change Side Attack to TH side attack!...", $COLOR_BLUE)
+					GetBuildingEdge($eSideBuildingTH)
+					$nbSides = 1
+				EndIf
+
+				If $nbSides = 1 Then
+					$iMatchMode = $LB
+					$iChkDeploySettings[$LB] = 5
+					Local $DElistInfoDeploy[24][5]
+					Local $waveCount,$waveNumber
+					Local $deploystring
+
+					for $i = 0 to 23
+						$DElistInfoDeploy[$i][0] = String($DeDeployType[$i])
+						$DElistInfoDeploy[$i][1] = $nbSides
+							$waveCount = 0
+						$waveNumber = 0
+						for $j = 0 to 23
+						If string($DeDeployType[$i])=string($DeDeployType[$j]) Then
+							$waveCount = $waveCount + 1
+							If $j<=$i Then
+								$waveNumber = $waveNumber +1
+							EndIf
+						EndIf
+						Next
+						$DElistInfoDeploy[$i][2] = $waveNumber
+						$DElistInfoDeploy[$i][3] = $waveCount
+						$DElistInfoDeploy[$i][4] = $DeDeployPosition[$i]
+					Next
+
+					LaunchSideAttack($DElistInfoDeploy, $CC, $King, $Queen, $Warden)
+					Return
+
+				ElseIf $nbSides	= 2 Or $nbSides	= 3 Or $nbSides = 4 Then
+					$iChkRedArea[$iMatchMode] = 0
+					If $debugSetlog = 1 Then SetLog("listdeploy standard for attack", $COLOR_PURPLE)
+					Local $NBlistInfoDeploy[13][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+						, [$eBarb, $nbSides, 1, 2, 0] _
+						, [$eWall, $nbSides, 1, 1, 1] _
+						, [$eArch, $nbSides, 1, 2, 0] _
+						, [$eBarb, $nbSides, 2, 2, 0] _
+						, [$eGobl, $nbSides, 1, 2, 0] _
+						, ["CC", 1, 1, 1, 1] _
+						, [$eHogs, $nbSides, 1, 1, 1] _
+						, [$eWiza, $nbSides, 1, 1, 0] _
+						, [$eMini, $nbSides, 1, 1, 0] _
+						, [$eArch, $nbSides, 2, 2, 0] _
+						, [$eGobl, $nbSides, 2, 2, 0] _
+						, ["HEROES", 1, 2, 1, 1] _
+						]
+					LaunchTroop2($NBlistInfoDeploy, $CC, $King, $Queen, $Warden)
+					Return
+				EndIf
+
+			Endif
+				$nbSides = 5
+				$iChkRedArea[$iMatchMode] = 0
+
+			Local $FFlistInfoDeploy[11][5] = [[$eGiant, $nbSides, 1, 1, 2] _
+					, [$eBarb, $nbSides, 1, 1, 0] _
+					, [$eWall, $nbSides, 1, 1, 2] _
+					, [$eArch, $nbSides, 1, 1, 0] _
+					, [$eGobl, $nbSides, 1, 2, 0] _
+					, ["CC", 1, 1, 1, 1] _
+					, [$eHogs, $nbSides, 1, 1, 1] _
+					, [$eWiza, $nbSides, 1, 1, 0] _
+					, [$eMini, $nbSides, 1, 1, 0] _
+					, [$eGobl, $nbSides, 2, 2, 0] _
+					, ["HEROES", 1, 2, 1, 1] _
+					]
+
+				LaunchTroop2($FFlistInfoDeploy, $CC, $King, $Queen, $Warden)
+			Return
+
+		EndIf
 
 		If (($iChkSmartAttack[$iMatchMode][0] = 1 Or $iChkSmartAttack[$iMatchMode][1] = 1 Or $iChkSmartAttack[$iMatchMode][2] = 1) And UBound($PixelNearCollector) = 0) Then
 			SetLog("Error, no pixel found near collector => Normal attack near red line")
@@ -243,12 +333,12 @@ Func LaunchTroop2($listInfoDeploy, $CC, $King, $Queen, $Warden)
 	Else
 		For $i = 0 To UBound($listInfoDeploy) - 1
 			If (IsString($listInfoDeploy[$i][0]) And ($listInfoDeploy[$i][0] = "CC" Or $listInfoDeploy[$i][0] = "HEROES")) Then
-				If $iMatchMode = $LB And $iChkDeploySettings[$LB] >= 4 Then ; Used for DE or TH side attack
+				If $iMatchMode = $LB And $iChkDeploySettings[$LB] = 6 Then ; Used for DE or TH side attack
 					Local $RandomEdge = $Edges[$BuildingEdge]
 					Local $RandomXY = 2
 				Else
-					Local $RandomEdge = $Edges[Round(Random(0, 3))]
-					Local $RandomXY = Round(Random(1, 3))
+					Local $RandomEdge = $Edges[Round(Random(0, 3, 1))]
+					Local $RandomXY = Round(Random(1, 3, 1))
 				EndIf
 				If ($listInfoDeploy[$i][0] = "CC") Then
 					dropCC($RandomEdge[$RandomXY][0], $RandomEdge[$RandomXY][1], $CC)
