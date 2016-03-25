@@ -18,14 +18,11 @@ Func getArmySpellCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 
 	If $debugSetlog = 1 Then SETLOG("Begin getArmySpellCount:", $COLOR_PURPLE)
 
-	If $bOpenArmyWindow = False And IsTrainPage() = False Then ; check for train page
+	If IsTrainPage() = False And $bOpenArmyWindow = False Then ; check for train page
 		SetError(1)
 		Return ; not open, not requested to be open - error.
 	ElseIf $bOpenArmyWindow = True Then
-		If openArmyOverview() = False Then
-			SetError(2)
-			Return ; not open, requested to be open - error.
-		EndIf
+		openArmyOverview()
 		If _Sleep($iDelaycheckArmyCamp5) Then Return
 	EndIf
 

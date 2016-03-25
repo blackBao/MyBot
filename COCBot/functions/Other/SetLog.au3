@@ -19,13 +19,12 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
-Func SetLog($String, $Color = $COLOR_BLACK, $Font = "Verdana", $FontSize = 7.5, $statusbar = 1, $time = Time(), $bConsoleWrite = True, $LogPrefix = "L ") ;Sets the text for the log
-    Local $log = $LogPrefix & TimeDebug() & $String
-    If $bConsoleWrite = True And $String <> "" Then ConsoleWrite($log  & @CRLF) ; Always write any log to console
+Func SetLog($String, $Color = $COLOR_BLACK, $Font = "Verdana", $FontSize = 7.5, $statusbar = 1, $time = Time(), $bConsoleWrite = True) ;Sets the text for the log
 	If $hLogFileHandle = "" Then CreateLogFile()
+    If $bConsoleWrite And $String <> "" Then ConsoleWrite("SetLog: " & $String  & @CRLF) ; Always write any log to console
     If $SilentSetLog = True Then
 	   ; Silent mode is active, only write to log file, not to log control
-	   __FileWriteLog($hLogFileHandle, $log)
+	   _FileWriteLog($hLogFileHandle, $String)
 	   Return
     EndIf
     If IsDeclared("txtLog") Then
@@ -34,9 +33,9 @@ Func SetLog($String, $Color = $COLOR_BLACK, $Font = "Verdana", $FontSize = 7.5, 
 	   _GUICtrlRichEdit_SetFont($txtLog, $FontSize, $Font)
 	   _GUICtrlRichEdit_AppendTextColor($txtLog, $String & @CRLF, _ColorConvert($Color))
 	   If $statusbar = 1 And IsDeclared("statLog") Then _GUICtrlStatusBar_SetText($statLog, "Status : " & $String)
-	   __FileWriteLog($hLogFileHandle, $log)
+	   _FileWriteLog($hLogFileHandle, $String)
     Else
-	    ; log it to RichEdit later...
+	    ; log it to RichEDit later...
 	    Local $iIndex = UBound($aTxtLogInitText)
 	    ReDim $aTxtLogInitText[$iIndex + 1][6]
 		$aTxtLogInitText[$iIndex][0] = $String
@@ -49,14 +48,9 @@ Func SetLog($String, $Color = $COLOR_BLACK, $Font = "Verdana", $FontSize = 7.5, 
 EndFunc   ;==>SetLog
 
 Func SetDebugLog($String, $Color = $COLOR_PURPLE, $Font = "Verdana", $FontSize = 7.5, $statusbar = 1)
-   Local $LogPrefix = "D "
-   Local $log = $LogPrefix & TimeDebug() & $String
-   If $String <> "" Then ConsoleWrite($log  & @CRLF) ; Always write any log to console
+   If $String <> "" Then ConsoleWrite("SetDebugLog: " & $String  & @CRLF) ; Always write any log to console
    If $debugSetlog = 1 Then
-	  SetLog($String, $Color, $Font, $FontSize, $statusbar, Time(), False, $LogPrefix)
-   Else
-	  If $hLogFileHandle = "" Then CreateLogFile()
-	  __FileWriteLog($hLogFileHandle, $log)
+	  SetLog($String, $Color, $Font, $FontSize, $statusbar, Time(), False)
    EndIf
 EndFunc   ;==>SetDebugLog
 
@@ -89,7 +83,3 @@ Func AtkLogHead()
 	SetAtkLog(GetTranslated(0,16, "                   --------  LOOT --------       ----- BONUS ------"),"")
 	SetAtkLog(GetTranslated(0,17, " TIME|TROP.|SEARCH|   GOLD| ELIXIR|DARK EL|TR.|S|  GOLD|ELIXIR|  DE|L."),"")
 EndFunc   ;==>AtkLogHead
-
-Func __FileWriteLog($handle, $text)
-   FileWriteLine($handle, $text)
-EndFunc

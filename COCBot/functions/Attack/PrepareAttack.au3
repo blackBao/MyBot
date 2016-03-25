@@ -24,9 +24,6 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 	_WinAPI_DeleteObject($hBitmapFirst)
 	$hBitmapFirst = _CaptureRegion2(0, 571 + $bottomOffsetY, 859, 671 + $bottomOffsetY)
 	If _Sleep($iDelayPrepareAttack1) Then Return
-
-    SuspendAndroid()
-
 	Local $result = DllCall($hFuncLib, "str", "searchIdentifyTroop", "ptr", $hBitmapFirst)
 	If $debugSetlog = 1 Then Setlog("DLL Troopsbar list: " & $result[0], $COLOR_PURPLE)
 	Local $aTroopDataList = StringSplit($result[0], "|")
@@ -57,12 +54,9 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 			Else
 				$atkTroops[$i][1] = $aTemp[$i][1]
 			EndIf
-			If $troopKind <> -1 Then SetLog("-*-" & $atkTroops[$i][0]& " " & NameOfTroop($atkTroops[$i][0]) & " " & $atkTroops[$i][1], $COLOR_GREEN)
+			If $troopKind <> -1 Then SetLog("-*-" & NameOfTroop($atkTroops[$i][0]) & " " & $atkTroops[$i][1], $COLOR_GREEN)
 		EndIf
-    Next
-
-    ResumeAndroid()
-
+	Next
 EndFunc   ;==>PrepareAttack
 
 Func IsTroopToBeUsed($pMatchMode, $pTroopType)

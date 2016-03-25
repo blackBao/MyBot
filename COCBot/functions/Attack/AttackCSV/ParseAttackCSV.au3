@@ -12,21 +12,12 @@
 ; Link ..........: https://github.com/MyBotRun/MyBot/wiki
 ; Example .......: No
 ; ===============================================================================================================================
-Global $remainingTroops[12][2]
-
 Func ParseAttackCSV($debug = False)
 	Global $ATTACKVECTOR_A, $ATTACKVECTOR_B, $ATTACKVECTOR_C, $ATTACKVECTOR_D, $ATTACKVECTOR_E, $ATTACKVECTOR_F
 	Global $ATTACKVECTOR_G, $ATTACKVECTOR_H, $ATTACKVECTOR_I, $ATTACKVECTOR_J, $ATTACKVECTOR_K, $ATTACKVECTOR_L
 	Global $ATTACKVECTOR_M, $ATTACKVECTOR_N, $ATTACKVECTOR_O, $ATTACKVECTOR_P, $ATTACKVECTOR_Q, $ATTACKVECTOR_R
 	Global $ATTACKVECTOR_S, $ATTACKVECTOR_T, $ATTACKVECTOR_U, $ATTACKVECTOR_V, $ATTACKVECTOR_W, $ATTACKVECTOR_X
 	Global $ATTACKVECTOR_Y, $ATTACKVECTOR_Z
-
-	For $i = 0 to Ubound($atkTroops) - 1
-		$remainingTroops[$i][0] = $atkTroops[$i][0]
-		$remainingTroops[$i][1] = $atkTroops[$i][1]
-		;Setlog($remainingTroops[$i][0] & " " & $remainingTroops[$i][1])
-	Next
-	$TroopDropNumber = 0
 
 	Local $rownum = 0
 
@@ -37,11 +28,6 @@ Func ParseAttackCSV($debug = False)
 		Local $filename = $scmbABScriptName
 	EndIf
 	Setlog("execute " & $filename)
-	If $iRadClickSpeedFast = 1 Then
-		Setlog("Deploy Speed: Fast", $COLOR_BLUE)
-	Else
-		Setlog("Deploy Speed: Normal", $COLOR_BLUE)
-	EndIf
 
 	Local $f, $line, $acommand, $command
 	Local $value1, $value2, $value3, $value4, $value5, $value6, $value7, $value8, $value9
@@ -55,19 +41,7 @@ Func ParseAttackCSV($debug = False)
 			If $debug = True Then Setlog("parse line:<<" & $line & ">>")
 			debugAttackCSV("line content: " & $line)
 			$acommand = StringSplit($line, "|")
-
-			If StringStripWS(StringUpper($acommand[1]), 2) = "MOD" Then
-				$modName = StringStripWS(StringUpper($acommand[2]), 2)
-				Switch $modName
-					Case "SMARTZAP"
-						$itxtDBLightMinDark = Int(StringStripWS(StringUpper($acommand[3]), 2))
-						Setlog($modName & " enable with min dark setting=" & $itxtDBLightMinDark)
-						DEDropSmartSpell() ;called in returnHome
-						$csvDropDE = 1
-					Case Else
-						Setlog("MOD " & $modName & "is not supported.", $COLOR_RED)
-				EndSwitch
-			ElseIf $acommand[0] >= 8 Then
+			If $acommand[0] >= 8 Then
 				$command = StringStripWS(StringUpper($acommand[1]), 2)
 				$value1 = StringStripWS(StringUpper($acommand[2]), 2)
 				$value2 = StringStripWS(StringUpper($acommand[3]), 2)
@@ -118,38 +92,7 @@ Func ParseAttackCSV($debug = False)
 								EndSwitch
 							EndIf
 							If CheckCsvValues("MAKE", 1, $value1) And CheckCsvValues("MAKE", 5, $value5) Then
-								If $value3 = "ALL" Then
-									;Setlog(":" & $value3 & ":")
-									;Setlog(":" & Eval($sidex) & ":")
-									Switch Eval($sidex)
-										Case "TOP-LEFT-DOWN"
-											Local $Vector = $PixelTopLeftDOWNDropLine
-										Case "TOP-LEFT-UP"
-											Local $Vector = $PixelTopLeftUPDropLine
-										Case "TOP-RIGHT-DOWN"
-											Local $Vector = $PixelTopRightDOWNDropLine
-										Case "TOP-RIGHT-UP"
-											Local $Vector = $PixelTopRightUPDropLine
-										Case "BOTTOM-LEFT-UP"
-											Local $Vector = $PixelBottomLeftUPDropLine
-										Case "BOTTOM-LEFT-DOWN"
-											Local $Vector = $PixelBottomLeftDOWNDropLine
-										Case "BOTTOM-RIGHT-UP"
-											Local $Vector = $PixelBottomRightUPDropLine
-										Case "BOTTOM-RIGHT-DOWN"
-											Local $Vector = $PixelBottomRightDOWNDropLine
-										Case Else
-									EndSwitch
-									Switch Eval($sidex) & "|" & $value5
-										Case "TOP-LEFT-DOWN|INT-EXT", "TOP-LEFT-UP|EXT-INT", "TOP-RIGHT-DOWN|EXT-INT", "TOP-RIGHT-UP|INT-EXT", "BOTTOM-LEFT-DOWN|EXT-INT", "BOTTOM-LEFT-UP|INT-EXT", "BOTTOM-RIGHT-DOWN|INT-EXT", "BOTTOM-RIGHT-UP|EXT-INT"
-											_ArrayReverse($Vector) ;reverse array
-										;Case "TOP-LEFT-DOWN|EXT-INT", "TOP-LEFT-UP|INT-EXT", "TOP-RIGHT-DOWN|INT-EXT", "TOP-RIGHT-UP|EXT-INT", "BOTTOM-LEFT-DOWN|INT-EXT", "BOTTOM-LEFT-UP|EXT-INT", "BOTTOM-RIGHT-DOWN|EXT-INT", "BOTTOM-RIGHT-UP|INT-EXT"
-											;don't reverse array
-									EndSwitch
-									Assign("ATTACKVECTOR_" & $value1, $Vector)
-								Else
 								Assign("ATTACKVECTOR_" & $value1, MakeDropPoints(Eval($sidex), $value3, $value4, $value5, $value6, $value7))
-								EndIf
 								For $i = 0 To UBound(Execute("$ATTACKVECTOR_" & $value1)) - 1
 									$pixel = Execute("$ATTACKVECTOR_" & $value1 & "[" & $i & "]")
 									debugAttackCSV($i & " - " & $pixel[0] & "," & $pixel[1])
@@ -164,18 +107,8 @@ Func ParseAttackCSV($debug = False)
 						EndIf
 					Case "DROP"
 						;index...
-						Local $index1, $index2, $indexvect, $isIndexPercent
+						Local $index1, $index2, $indexvect
 						$indexvect = StringSplit($value2, "-", 2)
-						If StringInStr($value2, "%") > 0 Then
-							$isIndexPercent = 1
-							$index1 = Number(StringReplace($indexvect[0], "%", ""), 3)
-							If UBound($indexvect) > 1 Then
-								$index2 = Number(StringReplace($indexvect[1], "%", ""), 3)
-							Else
-								$index2 = $index1
-							EndIf
-						Else
-							$isIndexPercent = 0
 						If UBound($indexvect) > 1 Then
 							If Int($indexvect[0]) > 0 And Int($indexvect[1]) > 0 Then
 								$index1 = Int($indexvect[0])
@@ -193,20 +126,9 @@ Func ParseAttackCSV($debug = False)
 								$index2 = 1
 							EndIf
 						EndIf
-						EndIf
 						;qty...
-						Local $qty1, $qty2, $qtyvect, $isQtyPercent
+						Local $qty1, $qty2, $qtyvect
 						$qtyvect = StringSplit($value3, "-", 2)
-						If StringInStr($value3, "%") > 0 Then
-							$isQtyPercent = 1
-							$qty1 = Number(StringReplace($qtyvect[0], "%", ""), 3)
-							If UBound($qtyvect) > 1 Then
-								$qty2 = Number(StringReplace($qtyvect[1], "%", ""), 3)
-							Else
-								$qty2 = $qty1
-							EndIf
-						Else
-							$isQtyPercent = 0
 						If UBound($qtyvect) > 1 Then
 							If Int($qtyvect[0]) > 0 And Int($qtyvect[1]) > 0 Then
 								$qty1 = Int($qtyvect[0])
@@ -224,8 +146,6 @@ Func ParseAttackCSV($debug = False)
 								$qty2 = 1
 							EndIf
 						EndIf
-						EndIf
-						debugAttackCSV("$qty1=" & $qty1)
 						;delay between points
 						Local $delaypoints1, $delaypoints2, $delaypointsvect
 						$delaypointsvect = StringSplit($value5, "-", 2)
@@ -286,7 +206,7 @@ Func ParseAttackCSV($debug = False)
 								$sleepdrop2 = 1
 							EndIf
 						EndIf
-						DropTroopFromINI($value1, $index1, $index2, $qty1, $qty2, $value4, $delaypoints1, $delaypoints2, $delaydrop1, $delaydrop2, $sleepdrop1, $sleepdrop2, $isQtyPercent, $isIndexPercent, $debug)
+						DropTroopFromINI($value1, $index1, $index2, $qty1, $qty2, $value4, $delaypoints1, $delaypoints2, $delaydrop1, $delaydrop2, $sleepdrop1, $sleepdrop2, $debug)
 					Case "WAIT"
 						;sleep time
 						Local $sleep1, $sleep2, $sleepvect
@@ -467,7 +387,7 @@ Func ParseAttackCSV($debug = False)
 							$MAINSIDE = $sidename
 						EndIf
 						Switch $MAINSIDE
-							Case "BOTTOM-RIGHT"
+							Case "DOWN-RIGHT"
 								$FRONT_LEFT = "BOTTOM-RIGHT-DOWN"
 								$FRONT_RIGHT = "BOTTOM-RIGHT-UP"
 								$RIGHT_FRONT = "TOP-RIGHT-DOWN"
@@ -476,7 +396,7 @@ Func ParseAttackCSV($debug = False)
 								$LEFT_BACK = "BOTTOM-LEFT-UP"
 								$BACK_LEFT = "TOP-LEFT-DOWN"
 								$BACK_RIGHT = "TOP-LEFT-UP"
-							Case "BOTTOM-LEFT"
+							Case "DOWN-LEFT"
 								$FRONT_LEFT = "BOTTOM-LEFT-UP"
 								$FRONT_RIGHT = "BOTTOM-LEFT-DOWN"
 								$RIGHT_FRONT = "BOTTOM-RIGHT-DOWN"

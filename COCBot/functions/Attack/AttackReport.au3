@@ -142,13 +142,6 @@ Func AttackReport()
 	If _ColorCheck(_GetPixelColor($aWonThreeStarAtkRprt[0], $aWonThreeStarAtkRprt[1], True), Hex($aWonThreeStarAtkRprt[2], 6), $aWonThreeStarAtkRprt[3]) Then $starsearned += 1
 	SetLog("Stars earned: " & $starsearned)
 
-	Local $HeroFilterUsed
-	If $LBHeroFilter = 1 Then
-		$HeroFilterUsed = " Y"
-	Else
-		$HeroFilterUsed = " N"
-	EndIf
-
 	Local $AtkLogTxt
 	$AtkLogTxt = "" & _NowTime(4) & "|"
 	$AtkLogTxt &= StringFormat("%5d", $iTrophyCurrent) & "|"
@@ -182,8 +175,6 @@ Func AttackReport()
 			$iShareAttackNow = 0
 		EndIf
 	EndIf
-
-	CoCStats($starsearned)
 
 	If $FirstAttack = 0 Then $FirstAttack = 1
 	$iGoldTotal += $iGoldLast + $iGoldLastBonus

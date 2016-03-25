@@ -13,7 +13,6 @@
 ; Example .......: No
 ; ===============================================================================================================================
 Func getBSPos()
-    Local $SuspendMode = ResumeAndroid()
     Local $Changed = False, $aOldValues[4]
 	$HWnd = WinGetHandle($Title)
 	ControlGetPos($hWnd, $AppPaneName, $AppClassInstance)
@@ -79,7 +78,6 @@ Func getBSPos()
 	    If $debugClick = 1 Or $debugSetlog = 1 And $Changed Then Setlog("$BSpos X,Y = " & $BSpos[0] & "," & $BSpos[1] & "; BSrpos X,Y = " & $BSrpos[0] & "," & $BSrpos[1], $COLOR_RED, "Verdana", "7.5", 0)
 	EndIf
 
-    SuspendAndroid($SuspendMode, False)
 EndFunc   ;==>getBSPos
 
 Func getAndroidPos()

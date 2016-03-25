@@ -77,25 +77,19 @@ Func ProcessExists2($ProgramPath, $ProgramParameter = "", $CompareMode = 0, $str
 	 Return 0
   EndIf
 
-  Local $exe = $ProgramPath
-  Local $iLastBS = StringInStr($exe, "\", 0, -1)
-  If $iLastBS > 0 Then $exe = StringMid($exe, $iLastBS + 1)
   ; Win32_Process: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394372(v=vs.85).aspx
   Local $commandLine = ($ProgramPath <> "" ? ('"' & $ProgramPath & '"' & ($ProgramParameter = "" ? "" : " " & $ProgramParameter)) : "")
-  Local $commandLineCompare = StringReplace(StringReplace(StringReplace(StringReplace($commandLine, ".exe", "" , 1), " ", ""), '"', ""), "'", "")
-  Local $query = "Select * from Win32_Process where ExecutablePath like ""%" & StringReplace($ProgramPath,"\","\\") & "%""" ; replaced CommandLine with ExecutablePath
+  Local $commandLineCompare = StringReplace(StringReplace(StringReplace($commandLine, " ", ""), '"', ""), "'", "")
+  Local $query = "Select * from Win32_Process where CommandLine like ""%" & StringReplace($ProgramPath,"\","\\") & "%"""
   SetDebugLog("WMI Query: " & $query)
   Local $oProcessColl = $oWMI.ExecQuery($query)
   Local $Process, $PID = 0, $i = 0
 
   For $Process In $oProcessColl
-    SetDebugLog($Process.Handle & " = " & $Process.ExecutablePath)
+    SetDebugLog($Process.Handle & " = " & $Process.CommandLine)
 	If $PID = 0 Then
-	   Local $processCommandLineCompare = StringReplace(StringReplace(StringReplace(StringReplace($Process.CommandLine, ".exe", "" , 1), " ", ""), '"', ""), "'", "")
-	   If ($CompareMode = 0 And $commandLineCompare = $processCommandLineCompare) Or _
-		  ($CompareMode = 0 And StringRight($commandLineCompare, StringLen($processCommandLineCompare)) = $processCommandLineCompare) Or _
-		   $CompareMode = 1 Then
-		 $PID = Number($Process.Handle)
+	   If ($CompareMode = 0 And $commandLineCompare = StringReplace(StringReplace(StringReplace($Process.CommandLine, " ", ""), '"', ""), "'", "")) Or $CompareMode = 1 Then
+		 $PID = $Process.Handle
 		 ;ExitLoop
 	   EndIf
     EndIf
@@ -125,26 +119,20 @@ Func ProcessesExist($ProgramPath, $ProgramParameter = "", $CompareMode = 0, $str
 	 Return $a
   EndIf
 
-  Local $exe = $ProgramPath
-  Local $iLastBS = StringInStr($exe, "\", 0, -1)
-  If $iLastBS > 0 Then $exe = StringMid($exe, $iLastBS + 1)
   ; Win32_Process: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394372(v=vs.85).aspx
   Local $commandLine = ($ProgramPath <> "" ? ('"' & $ProgramPath & '"' & ($ProgramParameter = "" ? "" : " " & $ProgramParameter)) : "")
-  Local $commandLineCompare = StringReplace(StringReplace(StringReplace(StringReplace($commandLine, ".exe", "" , 1), " ", ""), '"', ""), "'", "")
-  Local $query = "Select * from Win32_Process where ExecutablePath like ""%" & StringReplace($ProgramPath,"\","\\") & "%""" ; replaced CommandLine with ExecutablePath
+  Local $commandLineCompare = StringReplace(StringReplace(StringReplace($commandLine, " ", ""), '"', ""), "'", "")
+  Local $query = "Select * from Win32_Process where CommandLine like ""%" & StringReplace($ProgramPath,"\","\\") & "%"""
   SetDebugLog("WMI Query: " & $query)
   Local $oProcessColl = $oWMI.ExecQuery($query)
   Local $Process, $PID = 0, $i = 0
   Local $PIDs[0]
 
   For $Process In $oProcessColl
-    SetDebugLog($Process.Handle & " = " & $Process.ExecutablePath)
-	Local $processCommandLineCompare = StringReplace(StringReplace(StringReplace(StringReplace($Process.CommandLine, ".exe", "" , 1), " ", ""), '"', ""), "'", "")
-	If ($CompareMode = 0 And $commandLineCompare = $processCommandLineCompare) Or _
-	   ($CompareMode = 0 And StringRight($commandLineCompare, StringLen($processCommandLineCompare)) = $processCommandLineCompare) Or _
-		$CompareMode = 1 Then
+    SetDebugLog($Process.Handle & " = " & $Process.CommandLine)
+	If ($CompareMode = 0 And $commandLineCompare = StringReplace(StringReplace(StringReplace($Process.CommandLine, " ", ""), '"', ""), "'", "")) Or $CompareMode = 1 Then
 	   ReDim $PIDs[$i + 1]
-	   $PIDs[$i] = Number($Process.Handle)
+	   $PIDs[$i] = $Process.Handle
 	   $i += 1
     EndIf
   Next

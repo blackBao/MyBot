@@ -115,8 +115,8 @@ Func BarracksStatus($showlog = false)
 			$Trainavailable[$i] = 0
 		Else
 			if $debugSetlog= 1 Then Setlog("Dark Factory spell NO found, color = " & _GetPixelColor($btnpos[$i][0], $btnpos[$i][1], True), $COLOR_PURPLE)
-			$numFactoryDarkSpell += 0
-			$numFactoryDarkSpellAvaiables += 0
+			$numFactorySpell += 0
+			$numFactorySpellAvaiables += 0
 			$Trainavailable[$i] = 0
 		EndIf
 

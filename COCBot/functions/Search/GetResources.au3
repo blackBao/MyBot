@@ -42,8 +42,6 @@ Func GetResources($bLog = True, $pMatchMode = -1) ;Reads resources
 		If $debugSetlog = 1 Then SetLog("Loop to clean screen without Clouds , nº :" & $i, $COLOR_PURPLE)
 	WEnd
 
-    SuspendAndroid()
-
 	$i = 0
 	While (getGoldVillageSearch(48, 69) = "") Or (getElixirVillageSearch(48, 69 + 29) = "") ; Wait 7.5 seconds max to read resources
 		$i += 1
@@ -101,7 +99,7 @@ Func GetResources($bLog = True, $pMatchMode = -1) ;Reads resources
 			;2nd attempt
 			If $searchTH = "-" Then ; retry with autoit search after $iDelayVillageSearch5 seconds
 				If _Sleep($iDelayGetResources5) Then Return
-				If $debugsetlog=1 Then SetLog("2nd attempt to detect the TownHall!", $COLOR_RED)
+				SetLog("2nd attempt to detect the TownHall!", $COLOR_RED)
 				$searchTH = THSearch()
 			EndIf
 
@@ -122,7 +120,5 @@ Func GetResources($bLog = True, $pMatchMode = -1) ;Reads resources
 	$SearchCount += 1 ; Counter for number of searches
 	If $bLog = True Then SetLog(StringFormat("%3s", $SearchCount) & "> [G]:" & StringFormat("%7s", $searchGold) & " [E]:" & StringFormat("%7s", $searchElixir) & " [D]:" & StringFormat("%5s", $searchDark) & " [T]:" & StringFormat("%2s", $searchTrophy) & $THString, $COLOR_BLACK, "Lucida Console", 7.5)
 	$GetResourcesTXT = StringFormat("%3s", $SearchCount) & "> [G]:" & StringFormat("%7s", $searchGold) & " [E]:" & StringFormat("%7s", $searchElixir) & " [D]:" & StringFormat("%5s", $searchDark) & " [T]:" & StringFormat("%2s", $searchTrophy) & $THString
-
-    ResumeAndroid()
 
 EndFunc   ;==>GetResources

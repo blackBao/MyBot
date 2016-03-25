@@ -189,7 +189,6 @@
 ;~ 			$txtTip = GetTranslated(4,44, "Select your strategy to deploy troops when the TH is detected on the Bottom of the screen!") & @CRLF & GetTranslated(4,45, "Zoomed in • Zoom in first, then Attack from bottom.") & @CRLF & GetTranslated(4,46, "On Sides • Try to get the TH from the left and right without zooming in, your troops may pick another target!")
 ;~ 			GUICtrlSetTip(-1, $txtTip)
 ;~ 			GUICtrlSetState(-1, $GUI_DISABLE)
-		$y -= 30
 		$y += 30
 		GUICtrlCreateIcon($pIconLib, $eIcnKing, $x - 16 , $y, 24, 24)
 		$chkUseKingTH = GUICtrlCreateCheckbox(GetTranslated(4,47, "Use King"), $x + 12 , $y+1, -1, -1)
@@ -226,12 +225,6 @@
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetState(-1, $GUI_DISABLE)
 
-		$y += 27
-		GUICtrlCreateIcon($pIconLib, $eIcnDrill, $x - 16, $y, 24, 24)
-		$chkDrillZapTH = GUICtrlCreateCheckbox("Zap De Drills", $x + 12, $y+1, -1, -1)
-		$txtTip = "Use This If You Want To Zap Drill When TH Snipping"
-		GUICtrlSetTip(-1, $txtTip)
-		GUICtrlSetState(-1, $GUI_DISABLE)
 
 		$y+= 30
 

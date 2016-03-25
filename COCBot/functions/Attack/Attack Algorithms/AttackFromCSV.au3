@@ -13,7 +13,7 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-Global $MAINSIDE = "BOTTOM-RIGHT"
+Global $MAINSIDE = "DOWN-RIGHT"
 Global $FRONT_LEFT = "BOTTOM-RIGHT-DOWN"
 Global $FRONT_RIGHT = "BOTTOM-RIGHT-UP"
 Global $RIGHT_FRONT = "TOP-RIGHT-DOWN"
@@ -185,16 +185,15 @@ Func Algorithm_AttackCSV($testattack = False)
 	$PixelBottomRightUPDropLine = GetListPixel($tempvectstr2)
 	Setlog("> Drop Lines located in  " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds", $COLOR_BLUE)
 
+
 	; 03 - TOWNHALL ------------------------------------------------------------------------
 	If $searchTH = "" Then
-
 		If $attackcsv_locate_townhall = 1 Then
-		    SuspendAndroid()
 			$hTimer = TimerInit()
 			Local $searchTH = checkTownHallADV2(0, 0, False)
 			If $searchTH = "-" Then ; retry with autoit search after $iDelayVillageSearch5 seconds
 				If _Sleep($iDelayAttackCSV1) Then Return
-				If $debugsetlog=1 Then SetLog("2nd attempt to detect the TownHall!", $COLOR_RED)
+				SetLog("2nd attempt to detect the TownHall!", $COLOR_RED)
 				$searchTH = checkTownhallADV2()
 			EndIf
 			If $searchTH = "-" Then ; retry with c# search, matching could not have been caused by heroes that partially hid the townhall
@@ -203,7 +202,6 @@ Func Algorithm_AttackCSV($testattack = False)
 				THSearch()
 			EndIf
 			Setlog("> Townhall located in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds", $COLOR_BLUE)
-			ResumeAndroid()
 		Else
 			Setlog("> Townhall search not needed, skip")
 		EndIf
@@ -212,6 +210,7 @@ Func Algorithm_AttackCSV($testattack = False)
 	EndIf
 
 	_CaptureRegion() ;
+
 
 	;04 - MINES, COLLECTORS, DRILLS -----------------------------------------------------------------------------------------------------------------------
 
@@ -231,9 +230,7 @@ Func Algorithm_AttackCSV($testattack = False)
 	If $attackcsv_locate_mine = 1 Then
 		;SetLog("Locating mines")
 		$hTimer = TimerInit()
-		SuspendAndroid()
 		$PixelMine = GetLocationMine()
-		ResumeAndroid()
 		CleanRedArea($PixelMine)
 		Local $htimerMine = Round(TimerDiff($hTimer) / 1000, 2)
 		If (IsArray($PixelMine)) Then
@@ -266,13 +263,12 @@ Func Algorithm_AttackCSV($testattack = False)
 		Setlog("> Mines detection not needed, skip", $COLOR_BLUE)
 	EndIf
 
+
 	;04.02  If drop troop near elisir
 	If $attackcsv_locate_elixir = 1 Then
 		;SetLog("Locating elixir")
 		$hTimer = TimerInit()
-		SuspendAndroid()
 		$PixelElixir = GetLocationElixir()
-		ResumeAndroid()
 		CleanRedArea($PixelElixir)
 		Local $htimerMine = Round(TimerDiff($hTimer) / 1000, 2)
 		If (IsArray($PixelElixir)) Then
@@ -305,13 +301,12 @@ Func Algorithm_AttackCSV($testattack = False)
 		Setlog("> Elixir collectors detection not needed, skip", $COLOR_BLUE)
 	EndIf
 
+
 	;04.03 If drop troop near drill
 	If $attackcsv_locate_drill = 1 Then
 		;SetLog("Locating drills")
 		$hTimer = TimerInit()
-		SuspendAndroid()
 		$PixelDarkElixir = GetLocationDarkElixir()
-		ResumeAndroid()
 		CleanRedArea($PixelDarkElixir)
 		Local $htimerMine = Round(TimerDiff($hTimer) / 1000, 2)
 		If (IsArray($PixelDarkElixir)) Then
@@ -344,6 +339,7 @@ Func Algorithm_AttackCSV($testattack = False)
 		Setlog("> Drills detection not needed, skip", $COLOR_BLUE)
 	EndIf
 
+
 	If StringLen($PixelNearCollectorTopLeftSTR) > 0 Then $PixelNearCollectorTopLeftSTR = StringLeft($PixelNearCollectorTopLeftSTR, StringLen($PixelNearCollectorTopLeftSTR) - 1)
 	If StringLen($PixelNearCollectorTopRightSTR) > 0 Then $PixelNearCollectorTopRightSTR = StringLeft($PixelNearCollectorTopRightSTR, StringLen($PixelNearCollectorTopRightSTR) - 1)
 	If StringLen($PixelNearCollectorBottomLeftSTR) > 0 Then $PixelNearCollectorBottomLeftSTR = StringLeft($PixelNearCollectorBottomLeftSTR, StringLen($PixelNearCollectorBottomLeftSTR) - 1)
@@ -357,9 +353,7 @@ Func Algorithm_AttackCSV($testattack = False)
 	; 05 - DARKELIXIRSTORAGE ------------------------------------------------------------------------
 	If $attackcsv_locate_dark_storage = 1 Then
 		$hTimer = TimerInit()
-		SuspendAndroid()
 		Local $PixelDarkElixir = GetLocationDarkElixirStorageWithLevel()
-		ResumeAndroid()
 		CleanRedArea($PixelDarkElixir)
 		;SetLog("Locating Dark Elixir Storage")
 		;SetLog("Located  (in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds) :")

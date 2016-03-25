@@ -47,10 +47,6 @@ Func cmbSearchMode()
 				If ($i = $cmbDBWeakMortar Or $i = $cmbDBWeakWizTower) And GUICtrlRead($chkDBWeakBase) = $GUI_UNCHECKED Then $i += 1
 				GUICtrlSetState($i, $GUI_ENABLE)
 			Next
-			For $i = $grpDesideFilter to $chkDeWardenFilter
-				GUICtrlSetState($i, $GUI_DISABLE)
-				GUICtrlSetState($i, $GUI_UNCHECKED)
-			Next
 		Case 1
 			For $i = $chkABEnableAfter To $lblABEnableAfter
 				GUICtrlSetState($i, $GUI_HIDE)
@@ -81,9 +77,6 @@ Func cmbSearchMode()
 			For $i = $cmbDBMeetGE To $chkDBMeetOne
 				If $i = $cmbDBTH And GUICtrlRead($chkDBMeetTH) = $GUI_UNCHECKED Then $i += 1
 				If ($i = $cmbDBWeakMortar Or $i = $cmbDBWeakWizTower) And GUICtrlRead($chkDBWeakBase) = $GUI_UNCHECKED Then $i += 1
-				GUICtrlSetState($i, $GUI_ENABLE)
-			Next
-			For $i = $grpDesideFilter to $chkDeWardenFilter
 				GUICtrlSetState($i, $GUI_ENABLE)
 			Next
 	EndSwitch

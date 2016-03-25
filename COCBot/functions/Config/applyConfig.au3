@@ -22,14 +22,12 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	; Move with redraw disabled causes ghost window in VMWare, so move first then disable redraw
 	SetRedrawBotWindow(False)
 
-#cs Not needed with new profile system
 	If $iVillageName = "" Then
 		GUICtrlSetData($txtVillageName, "MyVillage")
 	Else
 		GUICtrlSetData($txtVillageName, $iVillageName)
 	EndIf
 	txtVillageName()
-#ce
 
 	_GUICtrlComboBox_SetCurSel($cmbLog, $iCmbLog)
 	cmbLogImpl(True)
@@ -53,8 +51,6 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	Else
 		GUICtrlSetState($chkBotStop, $GUI_UNCHECKED)
 	EndIf
-	chkBotStop()
-
 	_GUICtrlComboBox_SetCurSel($cmbBotCommand, $icmbBotCommand)
 	_GUICtrlComboBox_SetCurSel($cmbBotCond, $icmbBotCond)
 	_GUICtrlComboBox_SetCurSel($cmbHoursStop, $icmbHoursStop)
@@ -306,48 +302,26 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkABAttackNearDarkElixirDrill, $GUI_UNCHECKED)
 	EndIf
 
-	If BitAND($iHeroAttack[$DB], $HERO_KING) = $HERO_KING Then
+	If $KingAttack[$DB] = 1 Then
 		GUICtrlSetState($chkDBKingAttack, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkDBKingAttack, $GUI_UNCHECKED)
 	EndIf
-	If BitAND($iHeroAttack[$LB], $HERO_KING) = $HERO_KING Then
+	If $KingAttack[$LB] = 1 Then
 		GUICtrlSetState($chkABKingAttack, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkABKingAttack, $GUI_UNCHECKED)
 	EndIf
 
-	If BitAND($iHeroWait[$DB], $HERO_KING) = $HERO_KING Then
-		GUICtrlSetState($chkDBKingWait, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDBKingWait, $GUI_UNCHECKED)
-	EndIf
-	If BitAND($iHeroWait[$LB], $HERO_KING) = $HERO_KING Then
-		GUICtrlSetState($chkABKingWait, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABKingWait, $GUI_UNCHECKED)
-	EndIf
-
-	If BitAND($iHeroAttack[$DB], $HERO_QUEEN) = $HERO_QUEEN Then
+	If $QueenAttack[$DB] = 1 Then
 		GUICtrlSetState($chkDBQueenAttack, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkDBQueenAttack, $GUI_UNCHECKED)
 	EndIf
-	If BitAND($iHeroAttack[$LB], $HERO_QUEEN) = $HERO_QUEEN Then
+	If $QueenAttack[$LB] = 1 Then
 		GUICtrlSetState($chkABQueenAttack, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkABQueenAttack, $GUI_UNCHECKED)
-	EndIf
-
-	If BitAND($iHeroWait[$DB], $HERO_QUEEN) = $HERO_QUEEN Then
-		GUICtrlSetState($chkDBQueenWait, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDBQueenWait, $GUI_UNCHECKED)
-	EndIf
-	If BitAND($iHeroWait[$LB], $HERO_QUEEN) = $HERO_QUEEN Then
-		GUICtrlSetState($chkABQueenWait, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABQueenWait, $GUI_UNCHECKED)
 	EndIf
 
 	If $iDropCC[$DB] = 1 Then
@@ -355,35 +329,24 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	Else
 		GUICtrlSetState($chkDBDropCC, $GUI_UNCHECKED)
 	EndIf
+
 	If $iDropCC[$LB] = 1 Then
 		GUICtrlSetState($chkABDropCC, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkABDropCC, $GUI_UNCHECKED)
 	EndIf
 
-	If BitAND($iHeroAttack[$DB], $HERO_WARDEN) = $HERO_WARDEN Then
+	If $WardenAttack[$DB] = 1 Then
 		GUICtrlSetState($chkDBWardenAttack, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkDBWardenAttack, $GUI_UNCHECKED)
 	EndIf
-	If BitAND($iHeroAttack[$LB], $HERO_WARDEN) = $HERO_WARDEN Then
+
+	If $WardenAttack[$LB] = 1 Then
 		GUICtrlSetState($chkABWardenAttack, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkABWardenAttack, $GUI_UNCHECKED)
 	EndIf
-
-	If BitAND($iHeroWait[$DB], $HERO_WARDEN) = $HERO_WARDEN Then
-		GUICtrlSetState($chkDBWardenWait, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDBWardenWait, $GUI_UNCHECKED)
-	EndIf
-	If BitAND($iHeroWait[$LB], $HERO_WARDEN) = $HERO_WARDEN Then
-		GUICtrlSetState($chkABWardenWait, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABWardenWait, $GUI_UNCHECKED)
-	EndIf
-	chkDBHeroWait()
-	chkABHeroWait()
 
 	If $iChkUseCCBalanced = 1 Then
 		GUICtrlSetState($chkUseCCBalanced, $GUI_CHECKED)
@@ -468,12 +431,6 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkTSEnableAfter, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkTSEnableAfter, $GUI_UNCHECKED)
-	EndIf
-
-	If $iChkMeetDE[$TS] = 1 Then
-		GUICtrlSetState($chkTSMeetDE, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTSMeetDE, $GUI_UNCHECKED)
 	EndIf
 	chkTSEnableAfter()
 	GUICtrlSetData($txtTSEnableAfter, $iEnableAfterCount[$TS])
@@ -985,7 +942,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 
 	;Troop Settings--------------------------------------------------------------------------
 	_GUICtrlComboBox_SetCurSel($cmbTroopComp, $iCmbTroopComp)
-	_GUICtrlComboBox_SetCurSel($cmbDarkTroopComp, $iCmbDarkTroopComp)
+
 	For $i = 0 To UBound($TroopName) - 1
 		GUICtrlSetData(Eval("txtNum" & $TroopName[$i]), Eval($TroopName[$i] & "Comp"))
 	Next
@@ -993,7 +950,6 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetData(Eval("txtNum" & $TroopDarkName[$i]), Eval($TroopDarkName[$i] & "Comp"))
 	Next
 	SetComboTroopComp()
-	SetComboDarkTroopComp()
 	lblTotalCount()
 
 	_GUICtrlComboBox_SetCurSel($cmbBarrack1, $barrackTroop[0])
@@ -1001,38 +957,30 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	_GUICtrlComboBox_SetCurSel($cmbBarrack3, $barrackTroop[2])
 	_GUICtrlComboBox_SetCurSel($cmbBarrack4, $barrackTroop[3])
 
-	_GUICtrlComboBox_SetCurSel($cmbDarkBarrack1, $darkBarrackTroop[0])
-	_GUICtrlComboBox_SetCurSel($cmbDarkBarrack2, $darkBarrackTroop[1])
-
 	GUICtrlSetData($txtFullTroop, $fulltroop)
 	GUICtrlSetData($sldTrainITDelay, $isldTrainITDelay)
 	GUICtrlSetData($lbltxtTrainITDelay, "delay " & $isldTrainITDelay & " ms.")
 	;barracks boost not saved (no use)
 
 	; Spells Creation  ---------------------------------------------------------------------
-	GUICtrlSetData($txtNumLightningSpell, $iLightningSpellComp)
-	GUICtrlSetData($txtNumRageSpell, $iRageSpellComp)
-	GUICtrlSetData($txtNumHealSpell, $iHealSpellComp)
-	GUICtrlSetData($txtNumJumpSpell, $iJumpSpellComp)
-	GUICtrlSetData($txtNumFreezeSpell, $iFreezeSpellComp)
-	GUICtrlSetData($txtNumPoisonSpell, $iPoisonSpellComp)
-	GUICtrlSetData($txtNumEarthSpell, $iEarthSpellComp)
-	GUICtrlSetData($txtNumHasteSpell, $iHasteSpellComp)
+	GUICtrlSetData($txtNumLightningSpell, $LightningSpellComp)
+	GUICtrlSetData($txtNumRageSpell, $RageSpellComp)
+	GUICtrlSetData($txtNumHealSpell, $HealSpellComp)
+	GUICtrlSetData($txtNumPoisonSpell, $PoisonSpellComp)
+	GUICtrlSetData($txtNumHasteSpell, $HasteSpellComp)
 	GUICtrlSetData($txtTotalCountSpell, $iTotalCountSpell)
 	lblTotalCountSpell()
-	btnHideElixir()
 
 	;PushBullet-----------------------------------------------------------------------------
 
 	GUICtrlSetData($PushBTokenValue, $PushToken)
-	GUICtrlSetData($PushBTokenValue2, $PushToken2)
 	GUICtrlSetData($OrigPushB, $iOrigPushB)
 
- 	If $iOrigPushB = "" Then
- 		GUICtrlSetData($OrigPushB, $sCurrProfile)
-	Else
- 		GUICtrlSetData($OrigPushB, $iOrigPushB)
- 	EndIf
+;~ 	If $iOrigPushB = "" Then
+;~ 		GUICtrlSetData($OrigPushB, $txtVillageName)
+;~ 	Else
+;~ 		GUICtrlSetData($OrigPushB, $iOrigPushB)
+;~ 	EndIf
 
 	If $iAlertPBVillage = 1 Then
 		GUICtrlSetState($chkAlertPBVillage, $GUI_CHECKED)
@@ -1052,13 +1000,6 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	ElseIf $pEnabled = 0 Then
 		GUICtrlSetState($chkPBenabled, $GUI_UNCHECKED)
 		chkPBenabled()
-	 EndIf
-	 	If $pEnabled2 = 1 Then
-		GUICtrlSetState($chkPBenabled2, $GUI_CHECKED)
-		chkPBenabled2()
-	ElseIf $pEnabled2 = 0 Then
-		GUICtrlSetState($chkPBenabled2, $GUI_UNCHECKED)
-		chkPBenabled2()
 	EndIf
 
 	If $pRemote = 1 Then
@@ -1140,43 +1081,19 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	;Heroes upgrade
 	If $ichkUpgradeKing = 1 Then
 		GUICtrlSetState($chkUpgradeKing, $GUI_CHECKED)
-		GUICtrlSetState($chkDBKingWait, $GUI_UNCHECKED)
-		GUICtrlSetState($chkABKingWait, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBKingWait, $GUI_DISABLE)
-		GUICtrlSetState($chkABKingWait, $GUI_DISABLE)
 	Else
 		GUICtrlSetState($chkUpgradeKing, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBKingWait, $GUI_ENABLE)
-		GUICtrlSetState($chkABKingWait, $GUI_ENABLE)
 	EndIf
-	chkUpgradeKing()
-
 	If $ichkUpgradeQueen = 1 Then
 		GUICtrlSetState($chkUpgradeQueen, $GUI_CHECKED)
-		GUICtrlSetState($chkDBQueenWait, $GUI_UNCHECKED)
-		GUICtrlSetState($chkABQueenWait, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBQueenWait, $GUI_DISABLE)
-		GUICtrlSetState($chkABQueenWait, $GUI_DISABLE)
 	Else
 		GUICtrlSetState($chkUpgradeQueen, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBQueenWait, $GUI_ENABLE)
-		GUICtrlSetState($chkABQueenWait, $GUI_ENABLE)
 	EndIf
-	chkUpgradeQueen()
-
 	If $ichkUpgradeWarden = 1 Then
 		GUICtrlSetState($chkUpgradeWarden, $GUI_CHECKED)
-		GUICtrlSetState($chkDBWardenWait, $GUI_UNCHECKED)
-		GUICtrlSetState($chkABWardenWait, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBWardenWait, $GUI_DISABLE)
-		GUICtrlSetState($chkABWardenWait, $GUI_DISABLE)
 	Else
 		GUICtrlSetState($chkUpgradeWarden, $GUI_UNCHECKED)
-		GUICtrlSetState($chkDBWardenWait, $GUI_ENABLE)
-		GUICtrlSetState($chkABWardenWait, $GUI_ENABLE)
 	EndIf
-	chkUpgradeWarden()
-
 	_GUICtrlComboBox_SetCurSel($cmbWalls, $icmbWalls)
 	Switch $iUseStorage
 		Case 0
@@ -1260,12 +1177,6 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 		GUICtrlSetState($chkTombstones, $GUI_CHECKED)
 	Else
 		GUICtrlSetState($chkTombstones, $GUI_UNCHECKED)
-	EndIf
-
-	If $ichkCleanYard = 1 Then
-		GUICtrlSetState($chkCleanYard, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkCleanYard, $GUI_UNCHECKED)
 	EndIf
 
 	GUICtrlSetData($txtTimeWakeUp, $sTimeWakeUp)
@@ -1473,14 +1384,7 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	GUICtrlSetData($txtTotalCampForced, $iValueTotalCampForced)
 	chkTotalCampForced()
 
-	If $ichkSinglePBTForced = 1 Then
-		GUICtrlSetState($chkSinglePBTForced, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkSinglePBTForced, $GUI_UNCHECKED)
-	EndIf
-	GUICtrlSetData($txtSinglePBTimeForced, $iValueSinglePBTimeForced)
-	GUICtrlSetData($txtPBTimeForcedExit , $iValuePBTimeForcedExit)
-	chkSinglePBTForced()
+
 
 	If $ichkLanguage = 1 Then
 		GUICtrlSetState($chkLanguage, $GUI_CHECKED)
@@ -1719,277 +1623,6 @@ Func applyConfig($bRedrawAtExit = True) ;Applies the data from config to the con
 	EndIf
 	chkUseAttackABCSV()
 
-	If $iRadClickSpeedFast = 1 Then
-		GUICtrlSetState($radClickSpeedFast, $GUI_CHECKED)
-		GUICtrlSetState($radClickSpeedNormal, $GUI_UNCHECKED)
-	Else
-		GUICtrlSetState($radClickSpeedFast, $GUI_UNCHECKED)
-		GUICtrlSetState($radClickSpeedNormal, $GUI_CHECKED)
-	EndIf
-
-	;MOD Settings--------------------------------------------------------------------------
-	If $ichkSwitchDonate = 1 Then
-		GUICtrlSetState($chkSwitchDonate, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkSwitchDonate, $GUI_UNCHECKED)
-	EndIf
-
-	If $ichkMultyFarming = 1 Then
-		GUICtrlSetState($chkMultyFarming, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkMultyFarming, $GUI_UNCHECKED)
-	EndIf
-	GUICtrlSetData($Account, $iAccount)
-	MultiFarming()
-
-	If $ichkDrillZapTH = 1 Then
-		GUICtrlSetState($chkDrillZapTH, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDrillZapTH, $GUI_UNCHECKED)
-	EndIf
-
-	If $ichkSmartLightSpell = 1 Then
-		GUICtrlSetState($chkSmartLightSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkSmartLightSpell, $GUI_UNCHECKED)
-	EndIf
-	SmartLightSpell()
-
-	GUICtrlSetData($txtMinDark, $itxtMinDark)
-
-	If $ichkDeKingFilter = 1 Then
-		GUICtrlSetState($chkDeKingFilter, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDeKingFilter, $GUI_UNCHECKED)
-	EndIf
-
-	If $ichkDeWardenFilter = 1 Then
-		GUICtrlSetState($chkDeWardenFilter, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDeWardenFilter, $GUI_UNCHECKED)
-	EndIf
-
-	If $ichkDeQueenFilter = 1 Then
-		GUICtrlSetState($chkDeQueenFilter, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDeQueenFilter, $GUI_UNCHECKED)
-	EndIf
-
-	;;;Auto train
-	If $ichkTrainLightSpell = 1 Then
-		GUICtrlSetState($chkTrainLightSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainLightSpell, $GUI_UNCHECKED)
-	EndIf
-	AutoTrainSpell()
-	If $ichkTrainHealSpell = 1 Then
-		GUICtrlSetState($chkTrainHealSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainHealSpell, $GUI_UNCHECKED)
-	EndIf
-	If $ichkTrainRageSpell = 1 Then
-		GUICtrlSetState($chkTrainRageSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainRageSpell, $GUI_UNCHECKED)
-	EndIf
-;~	If $ichkTrainJumpSpell = 1 Then
-;~		GUICtrlSetState($chkTrainJumpSpell, $GUI_CHECKED)
-;~	Else
-;~		GUICtrlSetState($chkTrainJumpSpell, $GUI_UNCHECKED)
-;~	EndIf
-	If $ichkTrainFreezeSpell =  1 Then
-		  GUICtrlSetState($chkTrainFreezeSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainFreezeSpell, $GUI_UNCHECKED)
-	EndIf
-	If $ichkTrainPoisonSpell = 1 Then
-		GUICtrlSetState($chkTrainPoisonSpell, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrainPoisonSpell, $GUI_UNCHECKED)
-	EndIf
-	If $ichkTrainEarthquakeSpell = 1 Then
-		GUICtrlSetState($chkTrainEarthquakeSpell, $GUI_CHECKED)
-	Else
-      GUICtrlSetState($chkTrainEarthquakeSpell, $GUI_UNCHECKED)
-	EndIf
-;~	If $ichkTrainHasteSpell = 1 Then
-;~		GUICtrlSetState($chkTrainHasteSpell, $GUI_CHECKED)
-;~	Else
-;~		GUICtrlSetState($chkTrainHasteSpell, $GUI_UNCHECKED)
-;~	EndIf
-
-	;Hero Filters
-	_GUICtrlComboBox_SetCurSel($cmbSkipCentreDE, $iSkipCentreDE)
-	_GUICtrlComboBox_SetCurSel($cmbSkipUndetectedDE, $iSkipUndetectedDE)
-
-	_GUICtrlComboBox_SetCurSel($cmbABMeetGEHero, $iCmbMeetGEHero)
-
-	If $iChkMeetDEHero = 1 Then
-		GUICtrlSetState($chkABMeetDEHero, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABMeetDEHero, $GUI_UNCHECKED)
-	EndIf
-	chkABMeetDEHero()
-
-	If $iChkMeetTrophyHero = 1 Then
-		GUICtrlSetState($chkABMeetTrophyHero, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABMeetTrophyHero, $GUI_UNCHECKED)
-	EndIf
-	chkABMeetTrophyHero()
-
-	If $iChkMeetTHHero = 1 Then
-		GUICtrlSetState($chkABMeetTHHero, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABMeetTHHero, $GUI_UNCHECKED)
-	EndIf
-	chkABMeetTHHero()
-
-	If $iChkMeetTHOHero = 1 Then
-		GUICtrlSetState($chkABMeetTHOHero, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABMeetTHOHero, $GUI_UNCHECKED)
-	EndIf
-
-	If $iChkWeakBaseHero = 1 Then
-		GUICtrlSetState($chkABWeakBaseHero, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABWeakBaseHero, $GUI_UNCHECKED)
-	EndIf
-	chkABWeakBaseHero()
-
-	If $iChkMeetOneHero = 1 Then
-		GUICtrlSetState($chkABMeetOneHero, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkABMeetOneHero, $GUI_UNCHECKED)
-	EndIf
-
-	GUICtrlSetData($txtABMinGoldHero, $iMinGoldHero)
-	GUICtrlSetData($txtABMinElixirHero, $iMinElixirHero)
-	GUICtrlSetData($txtABMinGoldPlusElixirHero, $iMinGoldPlusElixirHero)
-	GUICtrlSetData($txtABMinDarkElixirHero, $iMinDarkHero)
-	GUICtrlSetData($txtABMinTrophyHero, $iMinTrophyHero)
-
-	_GUICtrlComboBox_SetCurSel($cmbABTHHero, $iCmbTHHero)
-	$iMaxTHHero = $THText[$iCmbTHHero]
-	_GUICtrlComboBox_SetCurSel($cmbABWeakMortarHero, $iCmbWeakMortarHero)
-	_GUICtrlComboBox_SetCurSel($cmbABWeakWizTowerHero, $iCmbWeakWizTowerHero)
-
-	If $LBBKFilter = 1 Then
-		GUICtrlSetState($chkLBBKFilter, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkLBBKFilter, $GUI_UNCHECKED)
-	EndIf
-	If $LBAQFilter = 1 Then
-		GUICtrlSetState($chkLBAQFilter, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkLBAQFilter, $GUI_UNCHECKED)
-	EndIf
-
-	If $iSmartDeadBase = 1 Then
-		GUICtrlSetState($SmartDeadBase, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($SmartDeadBase, $GUI_UNCHECKED)
-	EndIf
-	GUICtrlSetData($txtSmartCollectors, $SmartCollectors)
-	GUICtrlSetData($txtSmartNear, $SmartNear)
-	_GUICtrlComboBox_SetCurSel($cmbSmartDB, $iChkSmartDB)
-	SmartDeadBase()
-
-	; CoCStats
-	If $ichkCoCStats = 1 Then
-		GUICtrlSetState($chkCoCStats, $GUI_CHECKED)
-		GUICtrlSetState($txtAPIKey, $GUI_ENABLE)
-	Else
-		GUICtrlSetState($chkCoCStats, $GUI_UNCHECKED)
-		GUICtrlSetState($txtAPIKey, $GUI_DISABLE)
-	EndIf
-	GUICtrlSetData($txtAPIKey, $stxtAPIKey)
-	chkCoCStats()
-	txtAPIKey()
-	If $ichkDBAutoChoose = 1 Then
-		GUICtrlSetState($chkDBAutoChoose, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDBAutoChoose, $GUI_UNCHECKED)
-	EndIf
-	 chkDBAutoChoose()
-	;Options Settings--------------------------------------------------------------------------
-	For $i = 1 to 24
-	  	GUICtrlSetData(Eval("txtDeStyle" & StringRight("0" & $i,2)), $DeDeployPosition[$i-1])
-		If $DeDeployType[$i-1] <> $DeDeployEmptyString Then
-			_GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployType[$i-1]+1)
-		 Else
-			_GUICtrlComboBox_SetCurSel(Eval("cmbDeDeploy" & StringRight("0" & $i,2)), $DeDeployEmptyString)
-		 EndIf
-	Next
-
-	;Profile Switch
-	If $ichkGoldSwitchMax = 1 Then
-		GUICtrlSetState($chkGoldSwitchMax, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkGoldSwitchMax, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbGoldMaxProfile, $icmbGoldMaxProfile)
-	GUICtrlSetData($txtMaxGoldAmount, $itxtMaxGoldAmount)
-	If $ichkGoldSwitchMin = 1 Then
-		GUICtrlSetState($chkGoldSwitchMin, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkGoldSwitchMin, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbGoldMinProfile, $icmbGoldMinProfile)
-	GUICtrlSetData($txtMinGoldAmount, $itxtMinGoldAmount)
-
-	If $ichkElixirSwitchMax = 1 Then
-		GUICtrlSetState($chkElixirSwitchMax, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkElixirSwitchMax, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbElixirMaxProfile, $icmbElixirMaxProfile)
-	GUICtrlSetData($txtMaxElixirAmount, $itxtMaxElixirAmount)
-	If $ichkElixirSwitchMin = 1 Then
-		GUICtrlSetState($chkElixirSwitchMin, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkElixirSwitchMin, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbElixirMinProfile, $icmbElixirMinProfile)
-	GUICtrlSetData($txtMinElixirAmount, $itxtMinElixirAmount)
-
-	If $ichkDESwitchMax = 1 Then
-		GUICtrlSetState($chkDESwitchMax, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDESwitchMax, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbDEMaxProfile, $icmbDEMaxProfile)
-	GUICtrlSetData($txtMaxDEAmount, $itxtMaxDEAmount)
-	If $ichkDESwitchMin = 1 Then
-		GUICtrlSetState($chkDESwitchMin, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkDESwitchMin, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbDEMinProfile, $icmbDEMinProfile)
-	GUICtrlSetData($txtMinDEAmount, $itxtMinDEAmount)
-
-	If $ichkTrophySwitchMax = 1 Then
-		GUICtrlSetState($chkTrophySwitchMax, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrophySwitchMax, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbTrophyMaxProfile, $icmbTrophyMaxProfile)
-	GUICtrlSetData($txtMaxTrophyAmount, $itxtMaxTrophyAmount)
-	If $ichkTrophySwitchMin = 1 Then
-		GUICtrlSetState($chkTrophySwitchMin, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkTrophySwitchMin, $GUI_UNCHECKED)
-	EndIf
-	_GUICtrlComboBox_SetCurSel($cmbTrophyMinProfile, $icmbTrophyMinProfile)
-	GUICtrlSetData($txtMinTrophyAmount, $itxtMinTrophyAmount)
-
-;;;;;builder idle
-	If $ichkAlertBuilderIdle = 1 Then
-		GUICtrlSetState($chkAlertBuilderIdle, $GUI_CHECKED)
-	Else
-		GUICtrlSetState($chkAlertBuilderIdle, $GUI_UNCHECKED)
-	EndIf
 
 	; Reenabling window redraw
 	If $bRedrawAtExit Then SetRedrawBotWindow(True)
